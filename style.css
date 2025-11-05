@@ -146,8 +146,8 @@ body {
   color: #475569;
 }
 
-/* --- SECTION ECONOCOM --- */
-.econocom-intro {
+/* --- SECTION entreprise --- */
+.entreprise-intro {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -156,13 +156,13 @@ body {
   margin-bottom: 3rem;
 }
 
-.econocom-logo {
+.entreprise-logo {
   width: 180px;
   height: auto;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
-.econocom-intro p {
+.entreprise-intro p {
   max-width: 600px;
   color: #475569;
   line-height: 1.7;
@@ -170,14 +170,14 @@ body {
 }
 
 /* --- GRID --- */
-.econocom-grid {
+.entreprise-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 2rem;
   text-align: center;
 }
 
-.econocom-card {
+.entreprise-card {
   background: white;
   padding: 2rem;
   border-radius: 12px;
@@ -185,34 +185,34 @@ body {
   transition: 0.3s;
 }
 
-.econocom-card:hover {
+.entreprise-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 8px 20px rgba(14, 165, 233, 0.15);
 }
 
-.econocom-card i {
+.entreprise-card i {
   font-size: 2.5rem;
   color: #0ea5e9;
   margin-bottom: 0.8rem;
 }
 
-.econocom-card h3 {
+.entreprise-card h3 {
   font-size: 1.6rem;
   color: #0f172a;
 }
 
-.econocom-card p {
+.entreprise-card p {
   color: #475569;
   font-size: 0.95rem;
   margin-top: 0.3rem;
 }
 
-.econocom-button {
+.entreprise-button {
   margin-top: 3rem;
   text-align: center;
 }
 
-.econocom-button .btn-secondary {
+.entreprise-button .btn-secondary {
   font-size: 1rem;
   padding: 0.8rem 1.6rem;
   display: inline-flex;
@@ -222,13 +222,17 @@ body {
 
 /* --- Responsive --- */
 @media (max-width: 768px) {
-  .econocom-intro {
+  .entreprise-intro {
     text-align: center;
   }
 
-  .econocom-intro p {
+  .entreprise-intro p {
     text-align: center;
   }
+}
+
+.entreprise-intro.vnf {
+  margin-top: 5rem;
 }
 
 
