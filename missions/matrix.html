@@ -1,1 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Traitement des Tickets Freshdesk</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: #f9fafb;
+      color: #1e293b;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 60px auto;
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    /* --- HEADER --- */
+    header {
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    padding: 60px 60px;
+    text-align: left;
+    gap: 30px;
+    }
+
+    .header-text {
+    flex: 1;
+    min-width: 60%;
+    }
+
+
+    .header-text h1 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .header-text p {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    /* --- COMPÉTENCES BOX --- */
+    .competences-box {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 12px;
+      padding: 18px 22px;
+      backdrop-filter: blur(8px);
+      min-width: 270px;
+      margin-top: 15px;
+    }
+
+    .competences-box h3 {
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .competence-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+
+    .badge {
+      background: white;
+      color: #166534;
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .competence-content span {
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    /* --- SECTIONS --- */
+    section {
+      padding: 60px 40px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: #064e3b;
+      font-weight: 600;
+      text-align: center;
+      position: relative;
+      margin-bottom: 1.8rem;
+    }
+
+    h2::after {
+      content: "";
+      display: block;
+      width: 55px;
+      height: 3px;
+      background: #16a34a;
+      margin: 0.6rem auto 0;
+      border-radius: 2px;
+    }
+
+    p {
+      color: #475569;
+      text-align: center;
+      margin-bottom: 1.3rem;
+      max-width: 850px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* --- INFO CARD --- */
+    .info-card {
+      background: #ecfdf5;
+      border-left: 5px solid #16a34a;
+      border-radius: 10px;
+      padding: 1.3rem 1.8rem;
+      margin: 2rem auto 2.8rem;
+      max-width: 850px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    .info-card h3 {
+      color: #15803d;
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    /* --- SLA GRID --- */
+    .sla-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.3rem;
+      margin-top: 1.8rem;
+    }
+
+    .sla-card {
+      background: white;
+      border: 1px solid #d1fae5;
+      border-radius: 10px;
+      padding: 1.3rem;
+      text-align: center;
+      transition: 0.3s;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .sla-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .sla-card h4 {
+      color: #065f46;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .sla-time {
+      font-size: 1.5rem;
+      color: #16a34a;
+      font-weight: 700;
+    }
+
+    /* --- HIGHLIGHT --- */
+    .highlight {
+      background: #f0fdf4;
+      border-left: 4px solid #16a34a;
+      padding: 1rem 1.3rem;
+      border-radius: 8px;
+      margin: 2rem auto;
+      max-width: 850px;
+      color: #065f46;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    /* --- STEPS --- */
+    .step {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.3rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      max-width: 850px;
+      margin-left: auto;
+      margin-right: auto;
+      border-left: 4px solid #16a34a;
+      transition: 0.3s;
+    }
+
+    .step:hover {
+      transform: translateY(-3px);
+    }
+
+    .step-number {
+      background: #16a34a;
+      color: white;
+      font-weight: 600;
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 28px;
+      margin-right: 8px;
+      font-size: 0.85rem;
+    }
+
+    .step h3 {
+      display: inline-block;
+      color: #064e3b;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      font-size: 1rem;
+    }
+
+    .step p {
+      text-align: left;
+      margin: 0;
+      font-size: 0.93rem;
+    }
+
+    .image-container {
+      text-align: center;
+      margin-top: 0.8rem;
+    }
+
+    .image-container img {
+      width: 100%;
+      max-width: 580px;
+      border-radius: 8px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    }
+
+    .image-caption {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-top: 5px;
+      font-style: italic;
+    }
+
+    ul.kpi {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0.8rem;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    ul.kpi li {
+      padding: 7px 0;
+      color: #047857;
+    }
+
+    footer {
+      background: #f0fdf4;
+      text-align: center;
+      padding: 1.3rem;
+      color: #166534;
+      font-size: 0.85rem;
+      border-top: 2px solid #bbf7d0;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+      }
+
+      section {
+        padding: 40px 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div class="header-text">
+        <h1>🎫 Traitement des Tickets Freshdesk</h1>
+        <p>Procédure de Respect des SLA – Support IT Novares</p>
+      </div>
+      <div class="competences-box">
+        <h3>🎯 Compétences E4</h3>
+        <div class="competence-content">
+          <div class="badge">B1, B2, B3</div>
+          <span>Traitement tickets et respect SLA</span>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <h2>Contexte</h2>
+      <div class="info-card">
+        <h3>Objectif</h3>
+        <p>Garantir un traitement rapide et conforme des tickets Freshdesk selon les SLA définis, afin d’assurer la satisfaction des utilisateurs et le bon fonctionnement du support IT.</p>
+      </div>
+
+      <h2>Niveaux de Priorité (SLA)</h2>
+      <div class="sla-grid">
+        <div class="sla-card"><h4>🔴 Critique</h4><div class="sla-time">1h</div><p>Première réponse<br><small>Résolution : 4h</small></p></div>
+        <div class="sla-card"><h4>🟠 Élevé</h4><div class="sla-time">4h</div><p>Première réponse<br><small>Résolution : 8h</small></p></div>
+        <div class="sla-card"><h4>🟡 Moyen</h4><div class="sla-time">8h</div><p>Première réponse<br><small>Résolution : 24h</small></p></div>
+        <div class="sla-card"><h4>🟢 Faible</h4><div class="sla-time">24h</div><p>Première réponse<br><small>Résolution : 72h</small></p></div>
+      </div>
+
+      <div class="highlight">
+        ⚠️ Le respect des délais SLA impacte directement la satisfaction utilisateur et la performance du service IT.
+      </div>
+
+      <h2>Procédure de traitement</h2>
+
+      <div class="step"><span class="step-number">1</span><h3>Réception et qualification</h3><p>Chaque ticket est évalué dès sa création pour déterminer la priorité et le SLA applicable.</p></div>
+      <div class="step"><span class="step-number">2</span><h3>Attribution du SLA</h3><p>Le ticket est assigné selon les critères de gravité et le nombre d’utilisateurs concernés.</p></div>
+      <div class="step"><span class="step-number">3</span><h3>Première réponse</h3><p>Un accusé de réception clair et professionnel est envoyé dans les délais.</p></div>
+      <div class="step"><span class="step-number">4</span><h3>Diagnostic et résolution</h3><p>Analyse du problème, application de la solution et suivi avec l’utilisateur.</p></div>
+      <div class="step"><span class="step-number">5</span><h3>Clôture</h3><p>Vérification avec l’utilisateur, documentation et archivage du ticket dans Freshdesk.</p></div>
+
+      <h2>Indicateurs de Performance</h2>
+      <ul class="kpi">
+        <li>✅ Respect des SLA : Objectif > 95%</li>
+        <li>⚙️ Temps moyen de résolution : à optimiser</li>
+        <li>⭐ Satisfaction utilisateur : > 90%</li>
+        <li>💼 Tickets résolus au 1er niveau : > 70%</li>
+      </ul>
+    </section>
+
+    <footer>
+      © 2025 Econocom / Novares — Mission Helpdesk SLA
+    </footer>
+  </div>
+</body>
+</html>
