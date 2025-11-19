@@ -304,7 +304,7 @@ footer {
 
     <h2>Niveaux de Priorité (SLA)</h2>
     <div class="sla-grid">
-      <div class="sla-card"><h4>🔴 Critique</h4><div class="sla-time">15min</div><p>Cas : 1%<br><small>Impact toute l'entreprise et bloquant</small></p></div>
+      <div class="sla-card"><h4>🔴 Critique</h4><div class="sla-time">15min</div><p>Cas : > 1%<br><small>Impact toute l'entreprise et bloquant</small></p></div>
       <div class="sla-card"><h4>🟠 Élevé</h4><div class="sla-time">2h</div><p>Cas : 4%<br><small>Impact plusieurs utilisateurs et bloquant</small></p></div>
       <div class="sla-card"><h4>🟡 Moyen</h4><div class="sla-time">4h</div><p>Cas : 10%<br><small>Impact un utilisateur et bloquant</small></p></div>
       <div class="sla-card"><h4>🟢 Faible</h4><div class="sla-time">6h</div><p>Cas : 85%<br><small>Impact un utilisateur et non bloquant</small></p></div>
@@ -319,21 +319,24 @@ footer {
       <br> Il faut ensuite le qualifier avec le sujet, nom utilisateur, description et priorité.</p></div>
     <div class="step"><span class="step-number">2</span><h3>Attribution des SLA</h3><p>Les SLA se calculent automatiquement en fonction des champs entrés à la création du ticket. 
       <br> Cela nous permet de savoir quel ticket rappeler en priorité si nous le pouvons.</p></div>
-    <div class="step"><span class="step-number">3</span><h3>Première réponse</h3><p>Un accusé de réception clair et professionnel est envoyé dans les délais.</p></div>
-    <div class="step"><span class="step-number">4</span><h3>Diagnostic et résolution</h3><p>Analyse du problème, application de la solution et suivi avec l’utilisateur.</p></div>
-    <div class="step"><span class="step-number">5</span><h3>Clôture</h3><p>Vérification avec l’utilisateur, documentation et archivage du ticket dans Matrix42.</p></div>
+    <div class="step"><span class="step-number">3</span><h3>Diagnostic</h3><p>En fonction du problème rencontré, il se peut que l'on doit rappeler l'utilisateur pour en savoir plus si le problème n'est pas assez clair.</p></div>
+    <div class="step"><span class="step-number">4</span><h3>Résolution ou Escalade</h3><p>Si le problème peut etre résolu directent à distance par le N1, nous devons rappeler la personne et voir avec elle directement.
+      <br> Dans le cas échéant, il faut escalader le ticket au service concerné.
+    </p></div>
+    <div class="step"><span class="step-number">5</span><h3>Clôture</h3><p>Une fois le problème résolu, l'utilisateur recoit un mail automatique avec la solution du problème.
+    </p></div>
 
-    <h2>Indicateurs de Performance</h2>
+    <h2>Indicateurs de Performance (Objectifs)</h2>
     <ul class="kpi">
-      <li>✅ Respect des SLA : Objectif > 95%</li>
-      <li>⚙️ Temps moyen de résolution : à optimiser</li>
-      <li>⭐ Satisfaction utilisateur : > 90%</li>
-      <li>💼 Tickets résolus au 1er niveau : > 70%</li>
+      <li>📞 Taux de décroché en -20sec : <b> ≥ 95% </b></li>
+      <li>⚠️ Taux dissuasion : <b> ≤ 5% </b> </li>
+      <li>🚫 Taux Hors Process : <b> ≤ 1% </b></li>
+      <li>✅ Tickets résolus au 1er niveau : <b> ≥ 60% </b></li>
     </ul>
   </section>
 
   <footer>
-    © 2025 Econocom / Novares — Mission Helpdesk SLA
+    © 2025 Econocom / VNF — Mission Helpdesk Ticketing
   </footer>
 </body>
 </html>
