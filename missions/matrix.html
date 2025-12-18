@@ -252,6 +252,16 @@ p {
   font-size: 1rem;
 }
 
+.step-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 20px auto 0 auto; /* 20px en haut, auto sur les côtés pour centrer */
+  display: block; /* Indispensable pour que le centrage par marge fonctionne */
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
 /* --- KPI --- */
 ul.kpi {
   list-style: none;
@@ -315,16 +325,47 @@ footer {
     </div>
 
     <h2>Procédure de traitement</h2>
-    <div class="step"><span class="step-number">1</span><h3>Réception et qualification</h3><p>Chaque ticket est soit créé manuellement si cela est un appel ou créé automatiquement par un robot si c'est un mail. 
-      <br> Il faut ensuite le qualifier avec le sujet, nom utilisateur, description et priorité.</p></div>
-    <div class="step"><span class="step-number">2</span><h3>Attribution des SLA</h3><p>Les SLA se calculent automatiquement en fonction des champs entrés à la création du ticket. 
-      <br> Cela nous permet de savoir quel ticket rappeler en priorité si nous le pouvons.</p></div>
-    <div class="step"><span class="step-number">3</span><h3>Diagnostic</h3><p>En fonction du problème rencontré, il se peut que l'on doit rappeler l'utilisateur pour en savoir plus si le problème n'est pas assez clair.</p></div>
-    <div class="step"><span class="step-number">4</span><h3>Résolution ou Escalade</h3><p>Si le problème peut etre résolu directent à distance par le N1, nous devons rappeler la personne et voir avec elle directement.
-      <br> Dans le cas échéant, il faut escalader le ticket au service concerné.
-    </p></div>
-    <div class="step"><span class="step-number">5</span><h3>Clôture</h3><p>Une fois le problème résolu, l'utilisateur recoit un mail automatique avec la solution du problème.
-    </p></div>
+    <div class="step">
+      <span class="step-number">1</span>
+      <h3>Réception et qualification</h3>
+      <p>Chaque ticket est soit créé manuellement si cela est un appel ou créé automatiquement par un robot si c'est un mail. 
+      <br> Il faut ensuite le qualifier avec le sujet, nom utilisateur, description et priorité.</p>
+      
+      <img src="images_missions/creation_ticket.png" class="step-image">
+    </div>
+    <div class="step">
+      <span class="step-number">2</span>
+      <h3>Attribution des SLA</h3>
+      <p>Les SLA se calculent automatiquement en fonction des champs entrés à la création du ticket. 
+      <br> Cela nous permet de savoir quel ticket rappeler en priorité si nous le pouvons.</p>
+      
+      <img src="images_missions/sla.png" class="step-image">
+    </div>
+    <div class="step">
+      <span class="step-number">3</span>
+      <h3>Diagnostic</h3>
+      <p>En fonction du problème rencontré, il se peut que l'on doit rappeler l'utilisateur pour en savoir plus si le problème n'est pas assez clair.
+        <br>Si l'utilisateur ne répond pas, on peut alors mettre le ticket "En attente" jusqu'au prochain rappel.
+      </p>
+      
+      <img src="images_missions/attente.png" class="step-image">
+      <img src="images_missions/Etats.png" class="step-image">
+    </div>
+    <div class="step">
+      <span class="step-number">4</span>
+      <h3>Résolution ou Escalade</h3>
+      <p>Si le problème peut etre résolu directent à distance par le N1, nous devons rappeler la personne et voir avec elle directement.
+      <br> Dans le cas échéant, il faut escalader le ticket au service concerné.</p>
+      
+      <img src="images_missions/journal.png" class="step-image">
+    </div>
+    <div class="step">
+      <span class="step-number">5</span>
+      <h3>Clôture</h3>
+      <p>Une fois le problème résolu, l'utilisateur recoit un mail automatique avec la solution du problème.</p>
+      
+      <img src="images_missions/mail.png" class="step-image">
+    </div>
 
     <h2>Indicateurs de Performance (Objectifs)</h2>
     <ul class="kpi">
@@ -336,7 +377,7 @@ footer {
   </section>
 
   <footer>
-    © 2025 Econocom / VNF — Mission Helpdesk Ticketing
+    Marius DUYCK — Econocom / VNF — Mission Helpdesk Ticketing
   </footer>
 </body>
 </html>
