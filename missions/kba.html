@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rédaction de base de connaissance</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #f0f6ff;
+  color: #1e293b;
+  line-height: 1.7;
+  font-size: 16px; /* légèrement agrandi */
+}
+
+/* --- HEADER --- */
+header {
+  background: linear-gradient(135deg, #0284c7, #38bdf8, #0ea5e9);
+  color: white;
+  text-align: center;
+  padding: 65px 30px; /* réduit (avant 90px) */
+  position: relative;
+  overflow: hidden;
+}
+
+header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top right, rgba(255,255,255,0.2), transparent 60%);
+  z-index: 0;
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
+}
+
+header h1 {
+  font-size: 2.5rem; /* légèrement réduit pour s’adapter à la bannière plus fine */
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+
+header p {
+  font-size: 1.15rem;
+  opacity: 0.95;
+}
+
+/* --- SECTION --- */
+section {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 70px 35px; /* un peu plus d’espace */
+}
+
+h2 {
+  font-size: 1.9rem; /* agrandi */
+  color: #0f172a;
+  font-weight: 700;
+  text-align: center;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: #0ea5e9;
+  margin: 0.6rem auto 0;
+  border-radius: 3px;
+}
+
+p {
+  color: #475569;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  max-width: 850px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.05rem;
+}
+
+/* --- INFO CARD --- */
+.info-card {
+  background: #e0f2fe;
+  border-left: 5px solid #0284c7;
+  border-radius: 12px;
+  padding: 1.8rem 2.2rem;
+  margin: 2.5rem auto 3rem;
+  max-width: 880px;
+  text-align: center;
+}
+
+.info-card h3 {
+  color: #075985;
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+}
+
+/* --- COMPÉTENCES BOX --- */
+.competences-box {
+  background: #bae6fd;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.competences-box h3 {
+  color: #075985;
+  font-size: 1.05rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.competence-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: #7dd3fc;
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+
+.badge {
+  background: white;
+  color: #0369a1;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 5px 9px;
+  border-radius: 4px;
+}
+
+.competence-content span {
+  color: #0f172a;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* --- SLA GRID --- */
+.sla-grid {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 2.2rem;
+}
+
+.sla-card {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 1.6rem;
+  text-align: center;
+  transition: 0.3s;
+  border: 1px solid #cbd5e1;
+  width: 220px;
+}
+
+.sla-card:hover {
+  transform: translateY(-5px);
+}
+
+.sla-card h4 {
+  color: #0369a1;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.sla-time {
+  font-size: 1.6rem;
+  color: #0ea5e9;
+  font-weight: 700;
+}
+
+/* --- HIGHLIGHT --- */
+.highlight {
+  background: #e0f2fe;
+  border-left: 5px solid #0ea5e9;
+  padding: 1.2rem 1.5rem;
+  border-radius: 10px;
+  margin: 2.5rem auto;
+  max-width: 880px;
+  color: #075985;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* --- STEPS --- */
+.step {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 1.8rem;
+  margin-bottom: 1.5rem;
+  max-width: 880px;
+  margin-left: auto;
+  margin-right: auto;
+  border-left: 5px solid #0ea5e9;
+  transition: 0.3s;
+}
+
+.step:hover {
+  transform: translateY(-4px);
+}
+
+.step-number {
+  background: #0284c7;
+  color: white;
+  font-weight: 600;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  margin-right: 10px;
+  font-size: 0.9rem;
+}
+
+.step h3 {
+  display: inline-block;
+  color: #0f172a;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  font-size: 1.1rem;
+}
+
+.step p {
+  text-align: left;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.step-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 20px auto 0 auto; /* 20px en haut, auto sur les côtés pour centrer */
+  display: block; /* Indispensable pour que le centrage par marge fonctionne */
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* --- KPI --- */
+ul.kpi {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1rem;
+}
+
+ul.kpi li {
+  padding: 8px 0;
+  color: #0369a1;
+}
+
+/* --- FOOTER --- */
+footer {
+  background: #f0f9ff;
+  text-align: center;
+  padding: 1.4rem;
+  color: #075985;
+  font-size: 0.95rem;
+  border-top: 1px solid #bae6fd;
+}
+
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-content">
+      <h1>📝 Rédaction de base de connaissance</h1>
+      <p>Procédure rédaction d'une base de connaissance - VNF</p>
+    </div>
+  </header>
+
+  <section>
+    <h2>Contexte</h2>
+    <div class="info-card">
+      <h3>Objectif</h3>
+      <p>Rédiger une base de connaissance sur un incident ou une demande afin de faciliter le traitement par les autres techniciens.</p>
+
+      <div class="competences-box">
+        <h3>🎯 Compétences E4</h3>
+        <div class="competence-content">
+          <div class="badge">A définir</div>
+          <span>Rédaction de procédures</span>
+        </div>
+      </div>
+    </div>
+
+    <h2>Procédure de rédaction</h2>
+    <div class="step">
+      <span class="step-number">1</span>
+      <h3>Identification de l'incident ou de la demande</h3>
+      <p>A la réception du ticket, il faut d'abord vérifier dans la banque à base de connaissances (KB) voir si une procédure n'existe pas déjà.</p>
+      
+      <img src="#" class="step-image">
+    </div>
+    <div class="step">
+      <span class="step-number">2</span>
+      <h3>Rédaction de la KB</h3>
+      <p>Une fois le ticket résolu, le technicien se doit de lister toutes les étapes à faire en y apportant le plus de préicision que possible avec des captures d'écran si nécessaire.
+      <br>Afin de respecter une mise en forme entre toutes les KB, des templates sont à utilisés pour séparer chaque étape.</p>
+      
+      <img src="#" class="step-image">
+    </div>
+    <div class="step">
+      <span class="step-number">3</span>
+      <h3>Validation de la KB</h3>
+      <p>Après avoir rédigé la KB, le technicien référent doit envoyer un mail au Pole National Support afin de faire valider ou non cette base de connaissance.
+        <br>Si la KB est validée alors le statut de celle-ci évoluera en "Validée". (Ces statuts sont uniquement modifiés par le Pole National Support).
+      </p>
+      
+      <img src="#" class="step-image">
+      <img src="#" class="step-image">
+    </div>
+    <div class="step">
+      <span class="step-number">4</span>
+      <h3>Communication aux techniciens</h3>
+      <p>Lorsqu'une KB est validée, l'information doit être transmise à tous les techniciens pour prise en compte et mise en application.
+      <br>Si un ticket concernant un incident ou une demande similaire, et que la KB n'est pas appliquée, le Pole National Support se reserve le droit de déclarer un Hors Process sur le ticket.</p>
+      
+      <img src="#" class="step-image">
+    </div>
+
+
+  </section>
+
+  <footer>
+    Marius DUYCK — Econocom / VNF — Mission Rédaction KB
+  </footer>
+</body>
+</html>
