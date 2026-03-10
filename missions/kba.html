@@ -286,6 +286,12 @@ footer {
   border-top: 1px solid #bae6fd;
 }
 
+.pdf-embed {
+  width: 100%;
+  height: 500px; /* Ajuste la hauteur selon tes préférences */
+  border: none;
+}
+
   </style>
 </head>
 
@@ -318,7 +324,7 @@ footer {
       <h3>Identification de l'incident ou de la demande</h3>
       <p>A la réception du ticket, il faut d'abord vérifier dans la banque à base de connaissances (KB) voir si une procédure n'existe pas déjà.</p>
       
-      <img src="#" class="step-image">
+      <img src="images_missions/base_co.png" class="step-image">
     </div>
     <div class="step">
       <span class="step-number">2</span>
@@ -326,7 +332,8 @@ footer {
       <p>Une fois le ticket résolu, le technicien se doit de lister toutes les étapes à faire en y apportant le plus de préicision que possible avec des captures d'écran si nécessaire.
       <br>Afin de respecter une mise en forme entre toutes les KB, des templates sont à utilisés pour séparer chaque étape.</p>
       
-      <img src="#" class="step-image">
+      <embed src="images_missions/kba_mdp.pdf" type="application/pdf" class="step-image pdf-embed">
+        <embed src="images_missions/kba_scan.pdf" type="application/pdf" class="step-image pdf-embed">
     </div>
     <div class="step">
       <span class="step-number">3</span>
@@ -334,9 +341,7 @@ footer {
       <p>Après avoir rédigé la KB, le technicien référent doit envoyer un mail au Pole National Support afin de faire valider ou non cette base de connaissance.
         <br>Si la KB est validée alors le statut de celle-ci évoluera en "Validée". (Ces statuts sont uniquement modifiés par le Pole National Support).
       </p>
-      
-      <img src="#" class="step-image">
-      <img src="#" class="step-image">
+    
     </div>
     <div class="step">
       <span class="step-number">4</span>
@@ -344,7 +349,6 @@ footer {
       <p>Lorsqu'une KB est validée, l'information doit être transmise à tous les techniciens pour prise en compte et mise en application.
       <br>Si un ticket concernant un incident ou une demande similaire, et que la KB n'est pas appliquée, le Pole National Support se reserve le droit de déclarer un Hors Process sur le ticket.</p>
       
-      <img src="#" class="step-image">
     </div>
 
 
