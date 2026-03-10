@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Veille : Billetterie Dématérialisée Ski</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+    body { background: #f0f6ff; color: #1e293b; line-height: 1.7; font-size: 16px; }
+    header { background: linear-gradient(135deg, #075985, #0ea5e9, #7dd3fc); color: white; text-align: center; padding: 65px 30px; position: relative; overflow: hidden; }
+    .header-content { position: relative; z-index: 1; }
+    header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+    section { max-width: 1050px; margin: 0 auto; padding: 70px 35px; }
+    h2 { font-size: 1.9rem; color: #0f172a; font-weight: 700; text-align: center; margin-bottom: 2rem; }
+    h2::after { content: ""; display: block; width: 60px; height: 4px; background: #0ea5e9; margin: 0.6rem auto 0; border-radius: 3px; }
+    .step { background: #f8fafc; border-radius: 12px; padding: 1.8rem; margin-bottom: 1.5rem; max-width: 880px; margin-left: auto; margin-right: auto; border-left: 5px solid #0ea5e9; }
+    .step-number { background: #0284c7; color: white; font-weight: 600; display: inline-block; width: 30px; height: 30px; border-radius: 50%; text-align: center; line-height: 30px; margin-right: 10px; }
+    .step h3 { display: inline-block; color: #0f172a; font-weight: 600; margin-bottom: 0.6rem; }
+    .highlight-box { background: #e0f2fe; border-radius: 10px; padding: 15px; margin-top: 10px; color: #075985; font-weight: 500; }
+    footer { background: #f0f9ff; text-align: center; padding: 1.4rem; color: #075985; border-top: 1px solid #bae6fd; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1>⛷️ Veille : Sécurité & Billetterie Dématérialisée</h1>
+      <p>Infrastructures IoT et authentification en station de ski</p>
+    </div>
+  </header>
+
+  <section>
+    <h2>1. Protocoles de proximité (IoT)</h2>
+    <div class="step">
+      <span class="step-number">1</span>
+      <h3>NFC vs BLE (Bluetooth Low Energy)</h3>
+      <p>Le <b>NFC</b> est utilisé pour le contact direct (13.56 MHz), tandis que le <b>BLE</b> permet une détection "mains libres". L'enjeu réseau est de calibrer la puissance du signal (RSSI) pour éviter les ouvertures de portillons accidentelles.</p>
+
+    </div>
+
+    <h2>2. Sécurisation et Intégrité</h2>
+    <div class="step">
+      <span class="step-number">2</span>
+      <h3>Authentification par PKI et Tokens</h3>
+      <p>Pour éviter le clonage de forfaits, on utilise une <b>Infrastructure à Clés Publiques (PKI)</b>. Chaque titre est signé numériquement. Les QR Codes sont dits "dynamiques" (ils changent toutes les 30s) pour empêcher les captures d'écran frauduleuses.</p>
+      
+    </div>
+
+    <h2>3. Résilience et Haute Disponibilité</h2>
+    <div class="step">
+      <span class="step-number">3</span>
+      <h3>Mode dégradé et Edge Computing</h3>
+      <p>Les bornes de remontées doivent fonctionner même en cas de coupure réseau. Elles embarquent une base de données locale synchronisée (Edge) qui stocke les <b>Blacklists</b> des forfaits volés en temps réel.</p>
+    </div>
+
+    <div class="highlight-box">
+      <b>Focus SISR :</b> Utilisation du SD-WAN pour basculer automatiquement sur une liaison satellite (Starlink) si le lien fibre inter-station est rompu à cause des conditions climatiques.
+    </div>
+    
+  </section>
+
+  <footer>
+    Marius DUYCK — Portfolio BTS SIO SISR — Veille Technologique #2
+  </footer>
+</body>
+</html>

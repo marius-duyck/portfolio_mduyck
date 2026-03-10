@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Veille Approfondie : Cybersécurité & Télémétrie F1</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    :root {
+      --accent: #0284c7;
+      --accent-light: #38bdf8;
+      --accent-soft: #e0f2fe;
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --bg-base: #f0f6ff;
+      --border-card: rgba(226, 232, 240, 0.8);
+      --radius: 16px;
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg-base); color: var(--text-secondary); line-height: 1.7; }
+
+    header { 
+        background: linear-gradient(135deg, #0284c7, #38bdf8, #0ea5e9); 
+        color: white; text-align: center; padding: 80px 20px; 
+        box-shadow: 0 4px 20px rgba(2, 132, 199, 0.2);
+    }
+    header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+
+    section { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+
+    .toc { background: white; border-radius: var(--radius); padding: 25px; margin-bottom: 30px; border: 1px solid var(--border-card); box-shadow: var(--shadow); }
+    .toc h3 { font-size: 1.1rem; margin-bottom: 15px; color: var(--text-primary); border-left: 4px solid var(--accent); padding-left: 10px; }
+    .toc-list { display: flex; flex-wrap: wrap; gap: 12px; list-style: none; }
+    .toc-list a { text-decoration: none; color: var(--accent); background: var(--accent-soft); padding: 8px 18px; border-radius: 20px; font-size: 0.9rem; font-weight: 500; transition: 0.3s; }
+    .toc-list a:hover { background: var(--accent); color: white; }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 40px; }
+    .stat-box { background: white; padding: 25px; border-radius: var(--radius); text-align: center; border: 1px solid var(--border-card); }
+    .stat-box .number { display: block; font-size: 2.2rem; font-weight: 700; color: var(--accent); }
+    .stat-box .label { font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+    .section-card { background: white; border-radius: var(--radius); padding: 45px; margin-bottom: 35px; box-shadow: var(--shadow); border: 1px solid var(--border-card); }
+    h2 { font-size: 1.8rem; color: var(--text-primary); margin-bottom: 25px; display: flex; align-items: center; gap: 15px; }
+    h2::before { content: ""; width: 6px; height: 35px; background: var(--accent); border-radius: 3px; }
+    h3 { color: var(--accent); margin: 25px 0 15px 0; font-size: 1.3rem; border-bottom: 1px solid var(--accent-soft); padding-bottom: 5px; }
+
+    .dual-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; margin: 25px 0; }
+    .dual-card { padding: 30px; border-radius: var(--radius); border: 1px solid var(--border-card); height: 100%; }
+    .dual-card.blue { background: #f8fafc; border-top: 5px solid var(--accent); }
+    .dual-card.warn { background: #fffbeb; border-top: 5px solid #f59e0b; }
+    
+    .tech-detail { background: #f1f5f9; padding: 20px; border-radius: 12px; margin: 15px 0; font-size: 0.95rem; border-left: 4px solid #cbd5e1; }
+    .badge { background: var(--accent); color: white; padding: 3px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-left: 10px; }
+    .step-image { width: 100%; max-width: 900px; border-radius: 12px; margin: 30px auto; display: block; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+
+    footer { background: white; text-align: center; padding: 40px; color: #64748b; border-top: 1px solid var(--border-card); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <h1>🏎️ Expertise : Télémétrie & Cybersécurité F1</h1>
+      <p>Analyse approfondie des infrastructures réseaux et des enjeux de sécurité des données</p>
+    </div>
+  </header>
+
+  <section>
+    <div class="toc">
+      <h3>📋 Sommaire détaillé</h3>
+      <div class="toc-list">
+        <a href="#flux">1. Écosystème Data & Capteurs</a>
+        <a href="#cloud">2. Cloud Computing & ARM</a>
+        <a href="#reseau">3. Protocoles Sans-fil & 5G</a>
+        <a href="#cyber">4. Menaces & Zero Trust</a>
+        <a href="#ia">5. IA Générative & 2027</a>
+        <a href="#synthese">6. Récapitulatif SISR</a>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-box"><span class="number">300+</span><span class="label">Capteurs par voiture</span></div>
+      <div class="stat-box"><span class="number">1.1M</span><span class="label">Points / seconde</span></div>
+      <div class="stat-box"><span class="number">< 50ms</span><span class="label">Latence critique</span></div>
+      <div class="stat-box"><span class="number">192</span><span class="label">Cœurs / CPU Ampere</span></div>
+    </div>
+
+    <div class="section-card" id="flux">
+      <h2>1. L'Écosystème des Données et la Collecte</h2>
+      <p>La performance en F1 repose sur une boucle de rétroaction ultra-rapide entre la voiture, le muret des stands et l'usine. Chaque composant est instrumenté pour fournir un état de santé en temps réel.</p>
+      
+      <h3>La chaîne d'acquisition : du capteur à l'ECU</h3>
+      <p>Une monoplace est un réseau local mobile. Les capteurs (pression, température, contrainte, optique) génèrent des signaux analogiques convertis en numérique.</p>
+      <div class="tech-detail">
+        <strong>Focus Technique : Le Bus CAN (Controller Area Network)</strong><br>
+        Utilisé pour interconnecter les calculateurs sans ordinateur central. En F1, sa robustesse est capitale : il supporte des environnements à hautes interférences électromagnétiques et des vibrations extrêmes. Les données convergent vers l'<strong>ECU standardisé (fourni par McLaren Applied)</strong> qui sert de passerelle (gateway) vers les systèmes de télémétrie.
+      </div>
+      <img src="images_veilles/data.png" class="step-image" alt="Flux de données">
+    </div>
+
+    <div class="section-card" id="cloud">
+      <h2>2. Cloud Computing et Architecture ARM</h2>
+      <p>Le traitement des données ne se limite pas au bord de piste. L'avantage concurrentiel se gagne par la capacité à simuler des milliards de scénarios de course en quelques minutes.</p>
+
+      <div class="dual-grid">
+        <div class="dual-card blue">
+          <h4>Architecture ARM Ampere (A2/A4)</h4>
+          <p>Les écuries comme Red Bull Racing ont migré leurs calculs CFD (mécanique des fluides) et stratégiques vers les instances OCI basées sur ARM.</p>
+          <ul>
+            <li><strong>Parallélisation :</strong> Jusqu'à 192 cœurs par processeur pour traiter des simulations massives simultanément.</li>
+            <li><strong>Prédictibilité :</strong> Contrairement au x86, l'absence d'hyper-threading sur Ampere évite les variations de performance (jitter).</li>
+            <li><strong>Efficience :</strong> Réduction de la consommation d'énergie, cruciale pour respecter le plafonnement budgétaire (Budget Cap).</li>
+          </ul>
+        </div>
+        <div class="dual-card blue">
+          <h4>La "Panic Room" (Race Support Room)</h4>
+          <p>Située à l'usine (ex: Milton Keynes pour Red Bull), cette salle reçoit les flux de télémétrie via des liaisons fibre transcontinentales avec une latence < 100ms.</p>
+          <ul>
+            <li>Analyses stratégiques secondaires.</li>
+            <li>Comparaison en temps réel avec les données historiques (Big Data).</li>
+            <li>Aide à la décision pour les ingénieurs de piste.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card" id="reseau">
+      <h2>3. Transport de Données : Sans-fil et Très Haute Disponibilité</h2>
+      <p>Le défi majeur est de maintenir une liaison stable avec un objet se déplaçant à plus de 320 km/h, entouré de structures métalliques et de milliers de spectateurs utilisant le Wi-Fi public.</p>
+
+      <h3>Technologies de transmission circuit</h3>
+      <div class="tech-detail">
+        <strong>802.11r (Fast BSS Transition) :</strong> <br>
+        Pour couvrir un circuit de 5km, plusieurs bornes Wi-Fi sont nécessaires. Le protocole 802.11r permet à la voiture de "switcher" d'une borne à l'autre (handover) en moins de 50ms sans ré-authentification complète, évitant toute rupture du flux de télémétrie.
+      </div>
+      <div class="tech-detail">
+        <strong>5G Privée et Network Slicing :</strong> <br>
+        En utilisant une bande de fréquence dédiée, les écuries s'isolent du bruit numérique. Le <i>Network Slicing</i> permet de créer un tunnel logiciel prioritaire pour la télémétrie critique, garantissant que même si le réseau est saturé par la vidéo 4K, les données de sécurité moteur passent en priorité.
+      </div>
+    </div>
+
+    <div class="section-card" id="cyber">
+      <h2>4. Menaces et Stratégies de Cybersécurité</h2>
+      <p>La F1 est une cible de choix pour l'espionnage industriel. Un accès aux données de télémétrie d'un concurrent permet de comprendre l'usure de ses pneus, sa consommation de carburant et sa stratégie exacte.</p>
+
+      <div class="dual-grid">
+        <div class="dual-card warn">
+          <h4>Surface d'Attaque Étendue</h4>
+          <p>Le "Paddock" est un environnement hostile :</p>
+          <ul>
+            <li><strong>Mobilité :</strong> Montage/démontage hebdomadaire augmentant les risques d'erreurs de configuration (Misconfiguration).</li>
+            <li><strong>Interconnexion :</strong> Partenaires techniques (moteur, pneus) partageant des segments réseaux.</li>
+            <li><strong>Physique :</strong> Accès possible aux garages par des tiers.</li>
+          </ul>
+        </div>
+        <div class="dual-card blue">
+          <h4>Le Modèle Zero Trust</h4>
+          <p>Adopté pour contrer les mouvements latéraux en cas d'intrusion :</p>
+          <ul>
+            <li><strong>Micro-segmentation :</strong> Le réseau de télémétrie est strictement isolé du réseau bureautique de l'hospitalité.</li>
+            <li><strong>Authentification forte :</strong> Chaque capteur ou interface de diagnostic doit être identifié.</li>
+            <li><strong>SoC & SIEM :</strong> Analyse des journaux d'événements en temps réel pour détecter des comportements anormaux (ex: exfiltration de données).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card" id="ia">
+      <h2>5. IA Générative et Vision Agentique : L'horizon 2027</h2>
+      <p>Le règlement 2027 va limiter l'usage de certains capteurs et appendices aérodynamiques. L'IA devient alors le seul moyen de "deviner" ce que l'on ne peut plus mesurer mécaniquement.</p>
+
+      <h3>GenAI et RAG (Retrieval-Augmented Generation)</h3>
+      <p>Lors d'un incident de course, les ingénieurs n'ont que quelques minutes pour décider de porter réclamation. L'IA générative, couplée à une base de données (RAG) contenant l'intégralité du règlement FIA et les jurisprudences des courses passées, permet de générer un argumentaire juridique solide instantanément.</p>
+
+      <h3>Télémétrie Visuelle Agentique</h3>
+      <div class="tech-detail">
+        <strong>Le concept :</strong> Utiliser les caméras haute définition comme des capteurs. En analysant les déformations visuelles de la carrosserie ou les vibrations des pneus à haute fréquence, l'IA détecte des anomalies (chatter) avant que les capteurs physiques (limités par le règlement) ne les voient. C'est une architecture hybride combinant calcul en périphérie (Edge) et modèles de vision par ordinateur.
+      </div>
+    </div>
+
+    <div class="section-card" id="synthese">
+      <h2>6. Synthèse Technique</h2>
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="background: #f1f5f9; text-align: left;">
+              <th style="padding: 15px;">Concept SISR</th>
+              <th style="padding: 15px;">Application F1</th>
+              <th style="padding: 15px;">Objectif Métier</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 15px; border-bottom: 1px solid #eee;"><b>Haute Disponibilité</b></td>
+              <td style="padding: 15px; border-bottom: 1px solid #eee;">Redondance des liaisons Fibre/Satellite</td>
+              <td style="padding: 15px; border-bottom: 1px solid #eee;">Zéro perte de données en course</td>
+            </tr>
+            <tr>
+              <td style="padding: 15px; border-bottom: 1px solid #eee;"><b>Segmentation</b></td>
+              <td style="padding: 15px; border-bottom: 1px solid #eee;">VLANs isolés (Télémétrie vs Public)</td>
+              <td style="padding: 15px; border-bottom: 1px solid #eee;">Protection contre les cyber-attaques</td>
+            </tr>
+            <tr>
+              <td style="padding: 15px; border-bottom: 1px solid #eee;"><b>Edge Computing</b></td>
+              <td style="padding: 15px; border-bottom: 1px solid #eee;">Racks Pure Storage compacts en bord de piste</td>
+              <td style="padding: 15px; border-bottom: 1px solid #eee;">Traitement ultra-rapide sans latence Cloud</td>
+            </tr>
+            <tr>
+              <td style="padding: 15px; border-bottom: 1px solid #eee;"><b>IA & Automatisation</b></td>
+              <td style="padding: 15px; border-bottom: 1px solid #eee;">Scripts de détection d'anomalies (Fail-Silent)</td>
+              <td style="padding: 15px; border-bottom: 1px solid #eee;">Sécurité du pilote et fiabilité moteur</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Marius DUYCK — Portfolio BTS SIO SISR</p>
+    <p style="font-size: 0.8rem; margin-top: 10px;">Veille Technologique : Mise à jour 2025/2026</p>
+  </footer>
+
+</body>
+</html>
