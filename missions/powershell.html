@@ -5,344 +5,320 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Création scripts PowerShell</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
+    :root {
+      --accent: #0284c7;
+      --accent-light: #38bdf8;
+      --accent-soft: #e0f2fe;
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --bg-base: #f0f6ff;
+      --border-card: rgba(226, 232, 240, 0.8);
+      --radius: 16px;
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
 
-body {
-  background: #f0f6ff;
-  color: #1e293b;
-  line-height: 1.7;
-  font-size: 16px; /* légèrement agrandi */
-}
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg-base); color: var(--text-secondary); line-height: 1.7; font-size: 16px; }
 
-/* --- HEADER --- */
-header {
-  background: linear-gradient(135deg, #0284c7, #38bdf8, #0ea5e9);
-  color: white;
-  text-align: center;
-  padding: 65px 30px; /* réduit (avant 90px) */
-  position: relative;
-  overflow: hidden;
-}
+    /* --- HEADER --- */
+    header {
+      background: linear-gradient(135deg, #0284c7, #38bdf8, #0ea5e9);
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      box-shadow: 0 4px 20px rgba(2, 132, 199, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at top right, rgba(255,255,255,0.15), transparent 60%);
+      z-index: 0;
+    }
+    .header-content { position: relative; z-index: 1; }
+    header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+    header p { font-size: 1.05rem; opacity: 0.92; }
 
-header::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at top right, rgba(255,255,255,0.2), transparent 60%);
-  z-index: 0;
-}
+    /* --- LAYOUT --- */
+    section { max-width: 1050px; margin: 0 auto; padding: 60px 25px; }
 
-.header-content {
-  position: relative;
-  z-index: 1;
-}
+    /* --- TITRES --- */
+    h2 {
+      font-size: 1.8rem;
+      color: var(--text-primary);
+      font-weight: 700;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    h2::before {
+      content: "";
+      width: 6px; height: 35px;
+      background: var(--accent);
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    h3 { color: var(--accent); margin: 20px 0 12px; font-size: 1.15rem; }
 
-header h1 {
-  font-size: 2.5rem; /* légèrement réduit pour s’adapter à la bannière plus fine */
-  font-weight: 700;
-  margin-bottom: 10px;
-  letter-spacing: 0.5px;
-}
+    p {
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      font-size: 1rem;
+    }
 
-header p {
-  font-size: 1.15rem;
-  opacity: 0.95;
-}
+    /* --- INFO CARD --- */
+    .info-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 30px 35px;
+      margin-bottom: 35px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-card);
+    }
+    .info-card h3 {
+      color: var(--text-primary);
+      font-size: 1.2rem;
+      border-bottom: 1px solid var(--accent-soft);
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+    }
+    .info-card p { text-align: left; }
 
-/* --- SECTION --- */
-section {
-  max-width: 1050px;
-  margin: 0 auto;
-  padding: 70px 35px; /* un peu plus d’espace */
-}
+    /* --- COMPÉTENCES BOX --- */
+    .competences-box {
+      background: var(--accent-soft);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-top: 20px;
+    }
+    .competences-box h3 {
+      color: #075985;
+      font-size: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 12px;
+      border: none;
+      padding: 0;
+    }
+    .competence-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: white;
+      border-radius: 8px;
+      padding: 12px 16px;
+      border: 1px solid var(--border-card);
+    }
+    .badge {
+      background: var(--accent);
+      color: white;
+      font-weight: 600;
+      font-size: 0.82rem;
+      padding: 4px 12px;
+      border-radius: 12px;
+    }
+    .competence-content span { color: var(--text-primary); font-size: 0.95rem; font-weight: 500; }
 
-h2 {
-  font-size: 1.9rem; /* agrandi */
-  color: #0f172a;
-  font-weight: 700;
-  text-align: center;
-  position: relative;
-  margin-bottom: 2rem;
-}
+    /* --- STEPS --- */
+    .steps-wrapper { display: flex; flex-direction: column; gap: 20px; margin-bottom: 35px; }
+    .step {
+      background: white;
+      border-radius: var(--radius);
+      padding: 28px 30px;
+      border: 1px solid var(--border-card);
+      border-left: 5px solid var(--accent);
+      box-shadow: var(--shadow);
+      transition: 0.3s;
+    }
+    .step:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(14,165,233,0.12); }
+    .step-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .step-number {
+      background: var(--accent);
+      color: white;
+      font-weight: 700;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .step h3 {
+      color: var(--text-primary);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 0;
+      border: none;
+      padding: 0;
+    }
+    .step p { color: var(--text-secondary); font-size: 0.97rem; margin: 0 0 8px; }
 
-h2::after {
-  content: "";
-  display: block;
-  width: 60px;
-  height: 4px;
-  background: #0ea5e9;
-  margin: 0.6rem auto 0;
-  border-radius: 3px;
-}
+    /* --- IMAGES --- */
+    .step-image {
+      max-width: 50%;
+      height: auto;
+      border-radius: 8px;
+      margin: 18px auto 0;
+      display: block;
+      border: 1px solid var(--border-card);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      cursor: zoom-in;
+    }
 
-p {
-  color: #475569;
-  text-align: center;
-  margin-bottom: 1.5rem;
-  max-width: 850px;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 1.05rem;
-}
+    /* --- LIGHTBOX --- */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 22, 40, 0.85);
+      backdrop-filter: blur(6px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      cursor: zoom-out;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 88vh;
+      border-radius: 12px;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+      cursor: default;
+      animation: lbIn 0.25s cubic-bezier(0.16,1,0.3,1);
+    }
+    @keyframes lbIn {
+      from { opacity: 0; transform: scale(0.92); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 1.25rem; right: 1.5rem;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: white;
+      font-size: 1.1rem;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.3); }
 
-/* --- INFO CARD --- */
-.info-card {
-  background: #e0f2fe;
-  border-left: 5px solid #0284c7;
-  border-radius: 12px;
-  padding: 1.8rem 2.2rem;
-  margin: 2.5rem auto 3rem;
-  max-width: 880px;
-  text-align: center;
-}
-
-.info-card h3 {
-  color: #075985;
-  font-size: 1.2rem;
-  margin-bottom: 0.8rem;
-}
-
-/* --- COMPÉTENCES BOX --- */
-.competences-box {
-  background: #bae6fd;
-  border-radius: 10px;
-  padding: 16px 20px;
-  margin-top: 20px;
-  text-align: center;
-}
-
-.competences-box h3 {
-  color: #075985;
-  font-size: 1.05rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  margin-bottom: 12px;
-}
-
-.competence-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  background: #7dd3fc;
-  border-radius: 8px;
-  padding: 12px 16px;
-}
-
-.badge {
-  background: white;
-  color: #0369a1;
-  font-weight: 600;
-  font-size: 0.9rem;
-  padding: 5px 9px;
-  border-radius: 4px;
-}
-
-.competence-content span {
-  color: #0f172a;
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-/* --- SLA GRID --- */
-.sla-grid {
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  margin-top: 2.2rem;
-}
-
-.sla-card {
-  background: #f8fafc;
-  border-radius: 12px;
-  padding: 1.6rem;
-  text-align: center;
-  transition: 0.3s;
-  border: 1px solid #cbd5e1;
-  width: 220px;
-}
-
-.sla-card:hover {
-  transform: translateY(-5px);
-}
-
-.sla-card h4 {
-  color: #0369a1;
-  margin-bottom: 8px;
-  font-weight: 600;
-  font-size: 1rem;
-}
-
-.sla-time {
-  font-size: 1.6rem;
-  color: #0ea5e9;
-  font-weight: 700;
-}
-
-/* --- HIGHLIGHT --- */
-.highlight {
-  background: #e0f2fe;
-  border-left: 5px solid #0ea5e9;
-  padding: 1.2rem 1.5rem;
-  border-radius: 10px;
-  margin: 2.5rem auto;
-  max-width: 880px;
-  color: #075985;
-  font-weight: 500;
-  font-size: 1rem;
-}
-
-/* --- STEPS --- */
-.step {
-  background: #f8fafc;
-  border-radius: 12px;
-  padding: 1.8rem;
-  margin-bottom: 1.5rem;
-  max-width: 880px;
-  margin-left: auto;
-  margin-right: auto;
-  border-left: 5px solid #0ea5e9;
-  transition: 0.3s;
-}
-
-.step:hover {
-  transform: translateY(-4px);
-}
-
-.step-number {
-  background: #0284c7;
-  color: white;
-  font-weight: 600;
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 30px;
-  margin-right: 10px;
-  font-size: 0.9rem;
-}
-
-.step h3 {
-  display: inline-block;
-  color: #0f172a;
-  font-weight: 600;
-  margin-bottom: 0.6rem;
-  font-size: 1.1rem;
-}
-
-.step p {
-  text-align: left;
-  margin: 0;
-  font-size: 1rem;
-}
-
-.step-image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin: 20px auto 0 auto; /* 20px en haut, auto sur les côtés pour centrer */
-  display: block; /* Indispensable pour que le centrage par marge fonctionne */
-  border: 1px solid #cbd5e1;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-/* --- KPI --- */
-ul.kpi {
-  list-style: none;
-  padding-left: 0;
-  margin-top: 1rem;
-  text-align: center;
-  font-size: 1rem;
-}
-
-ul.kpi li {
-  padding: 8px 0;
-  color: #0369a1;
-}
-
-/* --- FOOTER --- */
-footer {
-  background: #f0f9ff;
-  text-align: center;
-  padding: 1.4rem;
-  color: #075985;
-  font-size: 0.95rem;
-  border-top: 1px solid #bae6fd;
-}
-
+    /* --- FOOTER --- */
+    footer {
+      background: white;
+      text-align: center;
+      padding: 35px;
+      color: #64748b;
+      border-top: 1px solid var(--border-card);
+      font-size: 0.9rem;
+    }
   </style>
 </head>
-
 <body>
+
   <header>
     <div class="header-content">
-      <h1>📝 Création de scripts PowerShell</h1>
-      <p>Procédure de création de scripts - VNF</p>
+      <h1>💻 Création de scripts PowerShell</h1>
+      <p>Procédure de création de scripts — VNF</p>
     </div>
   </header>
 
   <section>
+
     <h2>Contexte</h2>
     <div class="info-card">
       <h3>Objectif</h3>
-      <p>Créer un script powershell afin de faciliter la création d'utilisateur ou la réinitialisation du mot de passe.</p>
-
+      <p>Créer un script PowerShell afin de faciliter la création d'utilisateur ou la réinitialisation du mot de passe.</p>
       <div class="competences-box">
         <h3>🎯 Compétences E4</h3>
         <div class="competence-content">
-          <div class="badge">A définir</div>
+          <span class="badge">A définir</span>
           <span>Création de scripts</span>
         </div>
       </div>
     </div>
 
     <h2>Procédure de création</h2>
-    <div class="step">
-      <span class="step-number">1</span>
-      <h3>Identification du besoin</h3>
-      <p>Avant la création du script, il faut tout d'abord identifier un besoin pour lequel un script serait utile.</p>
-    </div>
-    <div class="step">
-      <span class="step-number">2</span>
-      <h3>Création du script via PowerShell ISE</h3>
-      <p>Une fois le besoin identifié, on peut passer à la création du script via le logiciel Windows PowerShell ISE.
-      <br>Voici 2 exemples de scripts que j'ai créé (le premier pour la création d'un utilisateur dans l'AD, et le deuxième pour réinitialiser le mot de passe d'un utilisateur) :</p>
-      
-      <img src="#" class="step-image">
-      <img src="images_missions/script_mdp.png" class="step-image">
-    </div>
-    <div class="step">
-      <span class="step-number">3</span>
-      <h3>Test du script</h3>
-      <p>Après avoir créé le script, on doit tester le script en l'executant afin de vérifier que tout fonctionne correctement.
-        <br>Voici le résultat attendu :
-      </p>
-      
-      <img src="#" class="step-image">
-      <img src="images_missions/test_mdp.png" class="step-image">
-    </div>
+    <div class="steps-wrapper">
 
+      <div class="step">
+        <div class="step-header">
+          <div class="step-number">1</div>
+          <h3>Identification du besoin</h3>
+        </div>
+        <p>Avant la création du script, il faut tout d'abord identifier un besoin pour lequel un script serait utile.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <div class="step-number">2</div>
+          <h3>Création du script via PowerShell ISE</h3>
+        </div>
+        <p>Une fois le besoin identifié, on peut passer à la création du script via le logiciel Windows PowerShell ISE.<br>Voici 2 exemples de scripts que j'ai créé (le premier pour la création d'un utilisateur dans l'AD, et le deuxième pour réinitialiser le mot de passe d'un utilisateur) :</p>
+        <img src="#" class="step-image" alt="Script création utilisateur AD">
+        <img src="images_missions/script_mdp.png" class="step-image" alt="Script réinitialisation mot de passe">
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <div class="step-number">3</div>
+          <h3>Test du script</h3>
+        </div>
+        <p>Après avoir créé le script, on doit le tester en l'exécutant afin de vérifier que tout fonctionne correctement.<br>Voici le résultat attendu :</p>
+        <img src="#" class="step-image" alt="Test script création utilisateur">
+        <img src="images_missions/test_mdp.png" class="step-image" alt="Test script mot de passe">
+      </div>
+
+    </div>
 
   </section>
 
   <footer>
-    Marius DUYCK — Econocom / VNF — Mission Script Powershell
+    Marius DUYCK — Econocom / VNF — Mission Script PowerShell
   </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lb-close">✕</button>
+    <img id="lb-img" src="" alt="">
+  </div>
+
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbClose = document.getElementById('lb-close');
+
+    document.querySelectorAll('.step-image').forEach(img => {
+      if (!img.src || img.src === '#' || img.src.endsWith('#')) return;
+      img.addEventListener('click', () => {
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    lbClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  </script>
+
 </body>
 </html>
