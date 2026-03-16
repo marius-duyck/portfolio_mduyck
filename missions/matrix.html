@@ -169,7 +169,7 @@
     <h2>Contexte</h2>
     <div class="info-card">
       <h3>Objectif de la mission</h3>
-      <p>Dans le cadre de mon alternance chez <strong>Econocom</strong> en prestation pour <strong>VNF (Voies Navigables de France)</strong>, j'assure le traitement quotidien des tickets de support IT via l'outil <strong>Matrix42</strong>. L'objectif est de garantir un traitement rapide et conforme aux SLA définis, afin d'assurer la satisfaction des utilisateurs et le bon fonctionnement du support informatique.</p>
+      <p>Dans le cadre de mon stage chez <strong>Econocom</strong> en prestation pour <strong>VNF (Voies Navigables de France)</strong>, j'assure le traitement quotidien des tickets de support IT via l'outil <strong>Matrix42</strong>. L'objectif est de garantir un traitement rapide et conforme aux SLA définis, afin d'assurer la satisfaction des utilisateurs et le bon fonctionnement du support informatique.</p>
       <p style="margin-top:10px">Le Helpdesk de niveau 1 est le premier point de contact pour tous les incidents et demandes des collaborateurs VNF. Chaque ticket doit être qualifié, traité ou escaladé selon des processus ITSM rigoureux.</p>
       <div class="competences-box">
         <h3>🎯 Compétences E4 mobilisées</h3>
@@ -505,12 +505,14 @@
 
     <!-- KPI -->
     <h2>Indicateurs de Performance</h2>
-    <p style="margin-bottom:16px">Ces KPIs sont mesurés mensuellement et reportés par Econocom dans le cadre du contrat de prestation avec VNF.</p>
+    <p style="margin-bottom:16px">Ces KPIs sont mesurés mensuellement et reportés à Econocom dans le cadre du contrat de prestation avec VNF.</p>
     <div class="kpi-grid">
       <div class="kpi-card"><div class="kpi-icon">📞</div><div class="kpi-value">≥ 95%</div><div class="kpi-label">Appels décrochés en moins de 20 sec</div></div>
       <div class="kpi-card"><div class="kpi-icon">⚠️</div><div class="kpi-value">≤ 5%</div><div class="kpi-label">Taux de dissuasion (abandon)</div></div>
       <div class="kpi-card"><div class="kpi-icon">🚫</div><div class="kpi-value">≤ 1%</div><div class="kpi-label">Taux de tickets hors process</div></div>
       <div class="kpi-card"><div class="kpi-icon">✅</div><div class="kpi-value">≥ 60%</div><div class="kpi-label">Tickets résolus au 1er niveau</div></div>
+      <div class="kpi-card"><div class="kpi-icon">⏱</div><div class="kpi-value">≥ 98%</div><div class="kpi-label">Respect des SLA (toutes priorités)</div></div>
+      <div class="kpi-card"><div class="kpi-icon">⭐</div><div class="kpi-value">≥ 4/5</div><div class="kpi-label">Satisfaction utilisateur (enquête)</div></div>
     </div>
 
   </main>
@@ -539,20 +541,11 @@
     lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
-    // Back button — returns to referrer and restores scroll position
+    // Back button — native history back, restores scroll position automatically
     const backBtn = document.getElementById('back-btn');
-    const referrer = document.referrer;
-    if (referrer) {
-      backBtn.href = referrer;
-    } else {
-      // Fallback: go up one level in the path
-      backBtn.href = '../index.html';
-    }
     backBtn.addEventListener('click', function(e) {
-      if (referrer) {
-        e.preventDefault();
-        window.location.href = referrer;
-      }
+      e.preventDefault();
+      history.back();
     });
   </script>
 
