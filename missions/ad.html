@@ -4,285 +4,101 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Création Active Directory & GPO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
     :root {
-      --accent: #0284c7;
-      --accent-light: #38bdf8;
-      --accent-soft: #e0f2fe;
-      --text-primary: #0f172a;
-      --text-secondary: #334155;
-      --bg-base: #f0f6ff;
-      --border-card: rgba(226, 232, 240, 0.8);
-      --radius: 16px;
-      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --blue:      #0ea5e9;
+      --blue-dark: #0284c7;
+      --blue-pale: #e0f2fe;
+      --blue-soft: #f0f9ff;
+      --ink:       #0a1628;
+      --ink-light: #334155;
+      --muted:     #64748b;
+      --border:    rgba(14,165,233,0.15);
+      --bg:        #f8fbff;
+      --shadow-sm: 0 2px 10px rgba(14,165,233,0.08);
+      --shadow-md: 0 8px 30px rgba(14,165,233,0.12);
+      --r-sm: 8px; --r-md: 14px; --r-lg: 22px;
+      --font: 'DM Sans', sans-serif;
     }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font);background:var(--bg);color:var(--ink-light);line-height:1.7;font-size:16px}
+    a{text-decoration:none;color:inherit}
+    strong{color:var(--ink)}
+    code{font-family:'Courier New',monospace;font-size:0.87em;background:var(--blue-pale);color:var(--blue-dark);padding:2px 7px;border-radius:5px}
+    ::-webkit-scrollbar{width:5px}
+    ::-webkit-scrollbar-track{background:var(--bg)}
+    ::-webkit-scrollbar-thumb{background:var(--blue);border-radius:10px}
 
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg-base); color: var(--text-secondary); line-height: 1.7; font-size: 16px; }
+    header{background:linear-gradient(135deg,#0284c7,#38bdf8,#0ea5e9);color:white;text-align:center;padding:80px 20px;box-shadow:0 4px 20px rgba(2,132,199,0.2);position:relative;overflow:hidden}
+    header::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at top right,rgba(255,255,255,0.15),transparent 60%)}
+    .header-content{position:relative;z-index:1}
+    header h1{font-size:2.4rem;font-weight:700;margin-bottom:10px;letter-spacing:-0.02em}
+    header p{font-size:1rem;opacity:0.9}
 
-    /* --- HEADER --- */
-    header {
-      background: linear-gradient(135deg, #0284c7, #38bdf8, #0ea5e9);
-      color: white;
-      text-align: center;
-      padding: 80px 20px;
-      box-shadow: 0 4px 20px rgba(2, 132, 199, 0.2);
-      position: relative;
-      overflow: hidden;
-    }
-    header::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: radial-gradient(circle at top right, rgba(255,255,255,0.15), transparent 60%);
-      z-index: 0;
-    }
-    .header-content { position: relative; z-index: 1; }
-    header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
-    header p { font-size: 1.05rem; opacity: 0.92; }
+    main{max-width:1050px;margin:0 auto;padding:60px 25px 80px}
 
-    /* --- LAYOUT --- */
-    section { max-width: 1050px; margin: 0 auto; padding: 60px 25px; }
+    h2{font-size:1.6rem;font-weight:700;color:var(--ink);margin:50px 0 22px;display:flex;align-items:center;gap:14px;letter-spacing:-0.02em}
+    h2:first-child{margin-top:0}
+    h2::before{content:"";width:5px;height:30px;background:linear-gradient(to bottom,var(--blue),var(--blue-pale));border-radius:3px;flex-shrink:0}
+    h3{font-size:1rem;font-weight:700;color:var(--blue-dark);margin:0}
+    p{color:var(--ink-light);margin-bottom:10px;font-size:0.97rem}
 
-    /* --- TITRES --- */
-    h2 {
-      font-size: 1.8rem;
-      color: var(--text-primary);
-      font-weight: 700;
-      margin-bottom: 25px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    h2::before {
-      content: "";
-      width: 6px; height: 35px;
-      background: var(--accent);
-      border-radius: 3px;
-      flex-shrink: 0;
-    }
-    h3 { color: var(--accent); margin: 20px 0 12px; font-size: 1.15rem; }
-    p { color: var(--text-secondary); margin-bottom: 12px; font-size: 1rem; }
+    .info-card{background:white;border-radius:var(--r-lg);padding:28px 32px;margin-bottom:30px;box-shadow:var(--shadow-sm);border:1px solid var(--border)}
+    .info-card>h3{color:var(--ink);font-size:1.1rem;border-bottom:1px solid var(--blue-pale);padding-bottom:10px;margin-bottom:14px}
+    .info-card p{text-align:left;margin:0}
 
-    /* --- INFO CARD --- */
-    .info-card {
-      background: white;
-      border-radius: var(--radius);
-      padding: 30px 35px;
-      margin-bottom: 35px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border-card);
-    }
-    .info-card h3 {
-      color: var(--text-primary);
-      font-size: 1.2rem;
-      border-bottom: 1px solid var(--accent-soft);
-      padding-bottom: 8px;
-      margin-bottom: 14px;
-    }
-    .info-card p { text-align: left; }
+    .competences-box{background:var(--blue-soft);border:1px solid var(--border);border-radius:var(--r-md);padding:16px 20px;margin-top:18px}
+    .competences-box>h3{color:var(--blue-dark);font-size:0.82rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px}
+    .competences-list{display:flex;flex-direction:column;gap:8px}
+    .competence-content{display:flex;align-items:center;gap:12px;background:white;border-radius:var(--r-sm);padding:10px 14px;border:1px solid var(--border);font-size:0.93rem;color:var(--ink-light)}
+    .badge{background:var(--blue);color:white;font-weight:600;font-size:0.78rem;padding:3px 11px;border-radius:50px;white-space:nowrap;flex-shrink:0}
 
-    /* --- COMPÉTENCES BOX --- */
-    .competences-box {
-      background: var(--accent-soft);
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin-top: 20px;
-    }
-    .competences-box h3 {
-      color: #075985;
-      font-size: 1rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 12px;
-      border: none;
-      padding: 0;
-    }
-    .competences-list { display: flex; flex-direction: column; gap: 8px; }
-    .competence-content {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: white;
-      border-radius: 8px;
-      padding: 10px 16px;
-      border: 1px solid var(--border-card);
-    }
-    .badge {
-      background: var(--accent);
-      color: white;
-      font-weight: 600;
-      font-size: 0.82rem;
-      padding: 4px 12px;
-      border-radius: 12px;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .competence-content span { color: var(--text-primary); font-size: 0.95rem; font-weight: 500; }
+    .highlight{background:var(--blue-pale);border-left:4px solid var(--blue);padding:14px 20px;border-radius:var(--r-md);margin:0 0 30px;color:#075985;font-size:0.93rem;font-weight:500}
 
-    /* --- HIGHLIGHT --- */
-    .highlight {
-      background: var(--accent-soft);
-      border-left: 5px solid var(--accent);
-      padding: 1.2rem 1.5rem;
-      border-radius: var(--radius);
-      margin: 0 0 35px;
-      color: #075985;
-      font-weight: 500;
-      font-size: 0.97rem;
-    }
+    .ad-schema{background:white;border:1px solid var(--border);border-radius:var(--r-lg);padding:28px;margin-bottom:30px;box-shadow:var(--shadow-sm)}
+    .ad-domain-wrap{text-align:center;margin-bottom:24px}
+    .ad-domain{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:white;padding:10px 24px;border-radius:50px;font-weight:700;font-size:0.95rem;box-shadow:0 4px 14px rgba(14,165,233,0.3)}
+    .ou-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+    .ou-block{background:var(--blue-soft);border:1px solid var(--border);border-radius:var(--r-md);padding:14px 12px;text-align:center;transition:0.25s}
+    .ou-block:hover{background:var(--blue-pale);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+    .ou-title{font-weight:700;color:var(--blue-dark);font-size:0.85rem;margin-bottom:6px}
+    .ou-items{font-size:0.78rem;color:var(--muted);line-height:1.7}
 
-    /* --- STEPS --- */
-    .steps-wrapper { display: flex; flex-direction: column; gap: 20px; margin-bottom: 35px; }
-    .step {
-      background: white;
-      border-radius: var(--radius);
-      padding: 28px 30px;
-      border: 1px solid var(--border-card);
-      border-left: 5px solid var(--accent);
-      box-shadow: var(--shadow);
-      transition: 0.3s;
-    }
-    .step:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(14,165,233,0.12); }
-    .step-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-    .step-number {
-      background: var(--accent);
-      color: white;
-      font-weight: 700;
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      flex-shrink: 0;
-    }
-    .step h3 {
-      color: var(--text-primary);
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin: 0;
-      border: none;
-      padding: 0;
-    }
-    .step p { color: var(--text-secondary); font-size: 0.97rem; margin: 0 0 8px; }
+    .steps-wrapper{display:flex;flex-direction:column;gap:16px;margin-bottom:10px}
+    .step{background:white;border-radius:var(--r-lg);padding:26px 28px;border:1px solid var(--border);border-left:4px solid var(--blue);box-shadow:var(--shadow-sm);transition:all 0.3s}
+    .step:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+    .step-header{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+    .step-number{background:var(--blue);color:white;font-weight:700;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.88rem;flex-shrink:0;box-shadow:0 3px 10px rgba(14,165,233,0.3)}
+    .step p{color:var(--ink-light);font-size:0.95rem;margin:0 0 10px}
 
-    /* --- SOUS-ÉTAPES --- */
-    .substeps { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
-    .substep {
-      background: var(--bg-base);
-      border-radius: 10px;
-      padding: 10px 15px;
-      font-size: 0.93rem;
-      border-left: 3px solid var(--accent-light);
-      color: var(--text-secondary);
-    }
-    .substep strong { color: var(--text-primary); }
+    .substeps{display:flex;flex-direction:column;gap:7px;margin-top:12px}
+    .substep{background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);padding:9px 14px;font-size:0.88rem;color:var(--ink-light);display:flex;align-items:flex-start;gap:8px}
+    .substep::before{content:"→";color:var(--blue);font-weight:700;flex-shrink:0;margin-top:1px}
 
-    /* --- IMAGES --- */
-    .step-image {
-      max-width: 50%;
-      height: auto;
-      border-radius: 8px;
-      margin: 18px auto 0;
-      display: block;
-      border: 1px solid var(--border-card);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      cursor: zoom-in;
-    }
+    .step-image{max-width:55%;height:auto;border-radius:var(--r-md);margin:18px auto 0;display:block;border:1px solid var(--border);box-shadow:var(--shadow-sm);cursor:zoom-in;transition:opacity 0.2s}
+    .step-image:hover{opacity:0.88}
 
-    /* --- SCHEMA AD --- */
-    .ad-schema {
-      background: var(--bg-base);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius);
-      padding: 25px;
-      margin: 20px 0;
-      font-size: 0.93rem;
-    }
-    .ad-schema .domain {
-      background: var(--accent);
-      color: white;
-      padding: 8px 20px;
-      border-radius: 8px;
-      font-weight: 700;
-      display: inline-block;
-      margin-bottom: 16px;
-    }
-    .ou-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
-    .ou-block {
-      background: white;
-      border: 1px solid var(--border-card);
-      border-radius: 10px;
-      padding: 14px;
-      text-align: center;
-    }
-    .ou-block .ou-title { font-weight: 700; color: var(--accent); font-size: 0.88rem; margin-bottom: 6px; }
-    .ou-block .ou-items { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6; }
+    .gpo-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:0.9rem}
+    .gpo-table thead tr{background:var(--blue-soft)}
+    .gpo-table th{padding:12px 16px;text-align:left;font-weight:600;color:var(--ink);border-bottom:2px solid var(--blue-pale);font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em}
+    .gpo-table td{padding:12px 16px;border-bottom:1px solid var(--blue-pale);color:var(--ink-light)}
+    .gpo-table tbody tr:hover{background:var(--blue-soft)}
+    .gpo-table tbody tr:last-child td{border-bottom:none}
+    .gpo-name{font-family:'Courier New',monospace;font-weight:700;color:var(--blue-dark);font-size:0.85rem}
+    .gpo-scope{display:inline-block;font-size:0.75rem;background:var(--blue-pale);color:var(--blue-dark);padding:3px 10px;border-radius:50px;font-weight:600}
 
-    /* --- GPO TABLE --- */
-    .gpo-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9rem; }
-    .gpo-table thead tr { background: #f1f5f9; }
-    .gpo-table th, .gpo-table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid #e2e8f0; }
-    .gpo-table tr:hover { background: #f8fafc; }
-    .gpo-name { font-weight: 700; color: var(--text-primary); }
-    .gpo-scope { font-size: 0.8rem; background: var(--accent-soft); color: var(--accent); padding: 2px 8px; border-radius: 10px; }
+    .lightbox{display:none;position:fixed;inset:0;background:rgba(10,22,40,0.85);backdrop-filter:blur(6px);z-index:9999;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out}
+    .lightbox.open{display:flex}
+    .lightbox img{max-width:90vw;max-height:88vh;border-radius:var(--r-lg);box-shadow:0 25px 80px rgba(0,0,0,0.5);cursor:default;animation:lbIn 0.25s cubic-bezier(0.16,1,0.3,1)}
+    @keyframes lbIn{from{opacity:0;transform:scale(0.92)}to{opacity:1;transform:scale(1)}}
+    .lightbox-close{position:absolute;top:1.25rem;right:1.5rem;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);color:white;font-size:1.1rem;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.2s}
+    .lightbox-close:hover{background:rgba(255,255,255,0.3)}
 
-    /* --- LIGHTBOX --- */
-    .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(10, 22, 40, 0.85);
-      backdrop-filter: blur(6px);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      cursor: zoom-out;
-    }
-    .lightbox.open { display: flex; }
-    .lightbox img {
-      max-width: 90vw;
-      max-height: 88vh;
-      border-radius: 12px;
-      box-shadow: 0 25px 80px rgba(0,0,0,0.5);
-      cursor: default;
-      animation: lbIn 0.25s cubic-bezier(0.16,1,0.3,1);
-    }
-    @keyframes lbIn {
-      from { opacity: 0; transform: scale(0.92); }
-      to   { opacity: 1; transform: scale(1); }
-    }
-    .lightbox-close {
-      position: absolute;
-      top: 1.25rem; right: 1.5rem;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.25);
-      color: white;
-      font-size: 1.1rem;
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .lightbox-close:hover { background: rgba(255,255,255,0.3); }
-
-    /* --- FOOTER --- */
-    footer {
-      background: white;
-      text-align: center;
-      padding: 35px;
-      color: #64748b;
-      border-top: 1px solid var(--border-card);
-      font-size: 0.9rem;
-    }
+    footer{text-align:center;padding:30px;background:linear-gradient(135deg,var(--blue-pale),var(--blue-soft));color:var(--muted);border-top:1px solid var(--border);font-size:0.88rem}
   </style>
 </head>
 <body>
@@ -294,9 +110,8 @@
     </div>
   </header>
 
-  <section>
+  <main>
 
-    <!-- CONTEXTE -->
     <h2>Contexte</h2>
     <div class="info-card">
       <h3>Objectif</h3>
@@ -304,65 +119,32 @@
       <div class="competences-box">
         <h3>🎯 Compétences E4</h3>
         <div class="competences-list">
-          <div class="competence-content">
-            <span class="badge">A définir</span>
-            <span>Installation et configuration d'un Active Directory</span>
-          </div>
-          <div class="competence-content">
-            <span class="badge">A définir</span>
-            <span>Mise en place de GPO et gestion des droits</span>
-          </div>
-          <div class="competence-content">
-            <span class="badge">A définir</span>
-            <span>Jonction de machines au domaine</span>
-          </div>
+          <div class="competence-content"><span class="badge">A définir</span><span>Installation et configuration d'un Active Directory</span></div>
+          <div class="competence-content"><span class="badge">A définir</span><span>Mise en place de GPO et gestion des droits</span></div>
+          <div class="competence-content"><span class="badge">A définir</span><span>Jonction de machines au domaine</span></div>
         </div>
       </div>
     </div>
 
-    <!-- SCHÉMA AD -->
     <h2>Structure de l'Active Directory</h2>
     <div class="ad-schema">
-      <div style="text-align: center;">
-        <div class="domain">🌐 Domaine : vnf.local</div>
-      </div>
+      <div class="ad-domain-wrap"><div class="ad-domain">🌐 Domaine : vnf.local</div></div>
       <div class="ou-grid">
-        <div class="ou-block">
-          <div class="ou-title">📁 OU — Direction</div>
-          <div class="ou-items">Directeurs<br>Secrétaires</div>
-        </div>
-        <div class="ou-block">
-          <div class="ou-title">📁 OU — Informatique</div>
-          <div class="ou-items">Techniciens<br>Administrateurs</div>
-        </div>
-        <div class="ou-block">
-          <div class="ou-title">📁 OU — Exploitation</div>
-          <div class="ou-items">Agents terrain<br>Responsables</div>
-        </div>
-        <div class="ou-block">
-          <div class="ou-title">📁 OU — Postes</div>
-          <div class="ou-items">PC portables<br>PC fixes</div>
-        </div>
-        <div class="ou-block">
-          <div class="ou-title">📁 OU — Serveurs</div>
-          <div class="ou-items">SRV-AD<br>SRV-FICHIERS</div>
-        </div>
+        <div class="ou-block"><div class="ou-title">📁 OU — Direction</div><div class="ou-items">Directeurs<br>Secrétaires</div></div>
+        <div class="ou-block"><div class="ou-title">📁 OU — Informatique</div><div class="ou-items">Techniciens<br>Administrateurs</div></div>
+        <div class="ou-block"><div class="ou-title">📁 OU — Exploitation</div><div class="ou-items">Agents terrain<br>Responsables</div></div>
+        <div class="ou-block"><div class="ou-title">📁 OU — Postes</div><div class="ou-items">PC portables<br>PC fixes</div></div>
+        <div class="ou-block"><div class="ou-title">📁 OU — Serveurs</div><div class="ou-items">SRV-AD<br>SRV-FICHIERS</div></div>
       </div>
     </div>
 
-    <div class="highlight">
-      💡 La structure en Unités d'Organisation (OU) permet d'appliquer des GPO ciblées par département et de déléguer l'administration de manière granulaire.
-    </div>
+    <div class="highlight">💡 La structure en Unités d'Organisation (OU) permet d'appliquer des GPO ciblées par département et de déléguer l'administration de manière granulaire.</div>
 
-    <!-- PROCÉDURE AD -->
     <h2>Procédure — Active Directory</h2>
     <div class="steps-wrapper">
 
       <div class="step">
-        <div class="step-header">
-          <div class="step-number">1</div>
-          <h3>Installation du rôle AD DS</h3>
-        </div>
+        <div class="step-header"><div class="step-number">1</div><h3>Installation du rôle AD DS</h3></div>
         <p>Sur Windows Server, installation du rôle <strong>Active Directory Domain Services (AD DS)</strong> via le Gestionnaire de serveur, puis promotion du serveur en contrôleur de domaine.</p>
         <div class="substeps">
           <div class="substep"><strong>Gestionnaire de serveur</strong> → Ajouter des rôles → AD DS</div>
@@ -373,10 +155,7 @@
       </div>
 
       <div class="step">
-        <div class="step-header">
-          <div class="step-number">2</div>
-          <h3>Création des Unités d'Organisation (OU)</h3>
-        </div>
+        <div class="step-header"><div class="step-number">2</div><h3>Création des Unités d'Organisation (OU)</h3></div>
         <p>Depuis <strong>Utilisateurs et ordinateurs Active Directory (ADUC)</strong>, création d'une arborescence d'OU reflétant l'organisation de VNF.</p>
         <div class="substeps">
           <div class="substep">Clic droit sur le domaine → Nouveau → Unité d'organisation</div>
@@ -387,10 +166,7 @@
       </div>
 
       <div class="step">
-        <div class="step-header">
-          <div class="step-number">3</div>
-          <h3>Création des utilisateurs et groupes</h3>
-        </div>
+        <div class="step-header"><div class="step-number">3</div><h3>Création des utilisateurs et groupes</h3></div>
         <p>Création des comptes utilisateurs dans leur OU respective, puis constitution des groupes de sécurité pour faciliter la gestion des droits d'accès.</p>
         <div class="substeps">
           <div class="substep"><strong>Utilisateur :</strong> Nom, prénom, identifiant (prenom.nom), mot de passe temporaire + changement obligatoire à la 1ère connexion</div>
@@ -401,10 +177,7 @@
       </div>
 
       <div class="step">
-        <div class="step-header">
-          <div class="step-number">4</div>
-          <h3>Jonction des machines au domaine</h3>
-        </div>
+        <div class="step-header"><div class="step-number">4</div><h3>Jonction des machines au domaine</h3></div>
         <p>Depuis chaque poste client Windows, jonction au domaine <code>vnf.local</code> pour centraliser l'authentification et permettre l'application des GPO.</p>
         <div class="substeps">
           <div class="substep">Système → Paramètres avancés → Nom de l'ordinateur → Modifier → Domaine : <code>vnf.local</code></div>
@@ -416,16 +189,11 @@
 
     </div>
 
-    <!-- GPO -->
     <h2>Procédure — Stratégies de Groupe (GPO)</h2>
-
     <div class="steps-wrapper">
 
       <div class="step">
-        <div class="step-header">
-          <div class="step-number">5</div>
-          <h3>Création et liaison des GPO</h3>
-        </div>
+        <div class="step-header"><div class="step-number">5</div><h3>Création et liaison des GPO</h3></div>
         <p>Depuis la <strong>Console de gestion des stratégies de groupe (GPMC)</strong>, création des GPO et liaison à l'OU ciblée.</p>
         <div class="substeps">
           <div class="substep">Gestion des stratégies de groupe → Clic droit sur une OU → Créer un objet GPO et le lier ici</div>
@@ -436,47 +204,17 @@
       </div>
 
       <div class="step">
-        <div class="step-header">
-          <div class="step-number">6</div>
-          <h3>GPO appliquées</h3>
-        </div>
-        <p>Voici les principales stratégies de groupe mises en place dans le cadre de cette mission :</p>
-
-        <div style="overflow-x: auto; margin-top: 15px;">
+        <div class="step-header"><div class="step-number">6</div><h3>GPO appliquées</h3></div>
+        <p>Principales stratégies de groupe mises en place dans le cadre de cette mission :</p>
+        <div style="overflow-x:auto;margin-top:14px">
           <table class="gpo-table">
-            <thead>
-              <tr>
-                <th>Nom GPO</th>
-                <th>OU cible</th>
-                <th>Paramètre configuré</th>
-              </tr>
-            </thead>
+            <thead><tr><th>Nom GPO</th><th>OU cible</th><th>Paramètre configuré</th></tr></thead>
             <tbody>
-              <tr>
-                <td><span class="gpo-name">GPO_MDP_Politique</span></td>
-                <td><span class="gpo-scope">Domaine entier</span></td>
-                <td>Longueur minimale 10 cars, complexité obligatoire, expiration 90j</td>
-              </tr>
-              <tr>
-                <td><span class="gpo-name">GPO_Ecran_Veille</span></td>
-                <td><span class="gpo-scope">OU Postes</span></td>
-                <td>Écran de veille avec mot de passe après 10 min d'inactivité</td>
-              </tr>
-              <tr>
-                <td><span class="gpo-name">GPO_Blocage_USB</span></td>
-                <td><span class="gpo-scope">OU Exploitation</span></td>
-                <td>Désactivation des périphériques de stockage USB amovibles</td>
-              </tr>
-              <tr>
-                <td><span class="gpo-name">GPO_Fond_Ecran</span></td>
-                <td><span class="gpo-scope">Domaine entier</span></td>
-                <td>Fond d'écran VNF imposé, non modifiable par l'utilisateur</td>
-              </tr>
-              <tr>
-                <td><span class="gpo-name">GPO_Panneau_Config</span></td>
-                <td><span class="gpo-scope">OU Direction</span></td>
-                <td>Accès restreint au panneau de configuration</td>
-              </tr>
+              <tr><td><span class="gpo-name">GPO_MDP_Politique</span></td><td><span class="gpo-scope">Domaine entier</span></td><td>Longueur min. 10 cars, complexité obligatoire, expiration 90j</td></tr>
+              <tr><td><span class="gpo-name">GPO_Ecran_Veille</span></td><td><span class="gpo-scope">OU Postes</span></td><td>Écran de veille avec MDP après 10 min d'inactivité</td></tr>
+              <tr><td><span class="gpo-name">GPO_Blocage_USB</span></td><td><span class="gpo-scope">OU Exploitation</span></td><td>Désactivation des périphériques de stockage USB amovibles</td></tr>
+              <tr><td><span class="gpo-name">GPO_Fond_Ecran</span></td><td><span class="gpo-scope">Domaine entier</span></td><td>Fond d'écran VNF imposé, non modifiable par l'utilisateur</td></tr>
+              <tr><td><span class="gpo-name">GPO_Panneau_Config</span></td><td><span class="gpo-scope">OU Direction</span></td><td>Accès restreint au panneau de configuration</td></tr>
             </tbody>
           </table>
         </div>
@@ -484,46 +222,36 @@
       </div>
 
       <div class="step">
-        <div class="step-header">
-          <div class="step-number">7</div>
-          <h3>Vérification et application des GPO</h3>
-        </div>
+        <div class="step-header"><div class="step-number">7</div><h3>Vérification et application des GPO</h3></div>
         <p>Après modification des GPO, vérification de leur bonne application sur les postes clients.</p>
         <div class="substeps">
-          <div class="substep"><strong>Forcer la mise à jour :</strong> <code>gpupdate /force</code> sur le poste client ou via PowerShell depuis l'AD</div>
+          <div class="substep"><strong>Forcer la mise à jour :</strong> <code>gpupdate /force</code> sur le poste client ou depuis l'AD via PowerShell</div>
           <div class="substep"><strong>Vérifier les GPO appliquées :</strong> <code>gpresult /r</code> ou <code>gpresult /h rapport.html</code> pour un rapport complet</div>
-          <div class="substep"><strong>RSOP (Resultant Set of Policy) :</strong> console MMC pour visualiser les politiques effectives par utilisateur/machine</div>
+          <div class="substep"><strong>RSOP :</strong> console MMC → Resultant Set of Policy pour visualiser les politiques effectives</div>
         </div>
         <img src="images_missions/gpo_verification.png" class="step-image" alt="Vérification GPO">
       </div>
 
     </div>
 
-    <!-- DROITS & PERMISSIONS -->
     <h2>Gestion des droits et permissions</h2>
     <div class="steps-wrapper">
       <div class="step">
-        <div class="step-header">
-          <div class="step-number">8</div>
-          <h3>Partages réseau et permissions NTFS</h3>
-        </div>
+        <div class="step-header"><div class="step-number">8</div><h3>Partages réseau et permissions NTFS</h3></div>
         <p>Création de dossiers partagés sur le serveur de fichiers avec des permissions définies par groupes de sécurité AD.</p>
         <div class="substeps">
           <div class="substep"><strong>Partage réseau :</strong> <code>\\SRV-FICHIERS\Direction</code> — accessible uniquement par GRP_Direction</div>
-          <div class="substep"><strong>Permissions NTFS :</strong> Lecture seule pour les utilisateurs standard, Modification pour les responsables, Contrôle total pour les admins</div>
-          <div class="substep"><strong>Règle :</strong> toujours gérer les droits via les <strong>groupes AD</strong>, jamais directement sur les comptes utilisateurs</div>
+          <div class="substep"><strong>Permissions NTFS :</strong> Lecture seule (users), Modification (responsables), Contrôle total (admins)</div>
+          <div class="substep"><strong>Bonne pratique :</strong> toujours gérer les droits via les <strong>groupes AD</strong>, jamais directement sur les comptes utilisateurs</div>
         </div>
         <img src="images_missions/ad_permissions.png" class="step-image" alt="Permissions NTFS">
       </div>
     </div>
 
-  </section>
+  </main>
 
-  <footer>
-    Marius DUYCK — Econocom / VNF — Mission Active Directory & GPO
-  </footer>
+  <footer>Marius DUYCK — Econocom / VNF — Mission Active Directory & GPO</footer>
 
-  <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" id="lb-close">✕</button>
     <img id="lb-img" src="" alt="">
@@ -533,22 +261,15 @@
     const lightbox = document.getElementById('lightbox');
     const lbImg = document.getElementById('lb-img');
     const lbClose = document.getElementById('lb-close');
-
     document.querySelectorAll('.step-image').forEach(img => {
-      if (!img.src || img.src === '#' || img.src.endsWith('#')) return;
+      if (!img.src || img.src.endsWith('#')) return;
       img.addEventListener('click', () => {
-        lbImg.src = img.src;
-        lbImg.alt = img.alt;
+        lbImg.src = img.src; lbImg.alt = img.alt;
         lightbox.classList.add('open');
         document.body.style.overflow = 'hidden';
       });
     });
-
-    function closeLightbox() {
-      lightbox.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
+    function closeLightbox() { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
     lbClose.addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
