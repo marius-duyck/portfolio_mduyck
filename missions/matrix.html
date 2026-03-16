@@ -6,22 +6,24 @@
   <title>Traitement des Tickets Matrix42</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --blue:#0ea5e9;--blue-dark:#0284c7;--blue-pale:#e0f2fe;--blue-soft:#f0f9ff;
       --ink:#0a1628;--ink-light:#334155;--muted:#64748b;--border:rgba(14,165,233,0.15);
       --bg:#f8fbff;--shadow-sm:0 2px 10px rgba(14,165,233,0.08);--shadow-md:0 8px 30px rgba(14,165,233,0.12);
-      --r-sm:8px;--r-md:14px;--r-lg:22px;--font:'DM Sans',sans-serif;
+      --r-sm:8px;--r-md:14px;--r-lg:22px;--font:'DM Sans',sans-serif;--mono:'JetBrains Mono',monospace;
+      --green:#10b981;--orange:#f59e0b;--red:#ef4444;--purple:#8b5cf6;
     }
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{font-family:var(--font);background:var(--bg);color:var(--ink-light);line-height:1.7;font-size:16px}
     a{text-decoration:none;color:inherit}
     strong{color:var(--ink)}
-    code{font-family:'Courier New',monospace;font-size:0.87em;background:var(--blue-pale);color:var(--blue-dark);padding:2px 7px;border-radius:5px}
+    code{font-family:var(--mono);font-size:0.87em;background:var(--blue-pale);color:var(--blue-dark);padding:2px 7px;border-radius:5px}
     ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--blue);border-radius:10px}
 
+    /* HEADER */
     header{position:relative;overflow:hidden;background:linear-gradient(135deg,#0c4a6e 0%,#0284c7 45%,#38bdf8 100%);color:white;padding:70px 40px 60px;box-shadow:0 4px 30px rgba(2,100,180,0.25)}
     header::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 90% 50%,rgba(255,255,255,0.07),transparent),radial-gradient(ellipse 40% 60% at 10% 20%,rgba(255,255,255,0.05),transparent)}
     .header-grid{position:relative;z-index:1;max-width:1050px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:32px}
@@ -36,12 +38,13 @@
     .header-pill span{color:#7dd3fc;font-size:0.9rem}
 
     main{max-width:1050px;margin:0 auto;padding:55px 25px 80px}
-    h2{font-size:1.55rem;font-weight:700;color:var(--ink);margin:48px 0 20px;display:flex;align-items:center;gap:14px;letter-spacing:-0.02em}
+    h2{font-size:1.55rem;font-weight:700;color:var(--ink);margin:52px 0 22px;display:flex;align-items:center;gap:14px;letter-spacing:-0.02em}
     h2:first-child{margin-top:0}
     h2::before{content:"";width:4px;height:26px;background:linear-gradient(to bottom,var(--blue),var(--blue-pale));border-radius:3px;flex-shrink:0}
     h3{font-size:1rem;font-weight:700;color:var(--blue-dark);margin:0}
     p{color:var(--ink-light);margin-bottom:10px;font-size:0.97rem}
 
+    /* INFO CARD */
     .info-card{background:white;border-radius:var(--r-lg);padding:28px 32px;margin-bottom:28px;box-shadow:var(--shadow-sm);border:1px solid var(--border)}
     .info-card>h3{color:var(--ink);font-size:1.1rem;border-bottom:1px solid var(--blue-pale);padding-bottom:10px;margin-bottom:14px}
     .info-card p{text-align:left;margin:0}
@@ -51,32 +54,78 @@
     .competence-content{display:flex;align-items:center;gap:12px;background:white;border-radius:var(--r-sm);padding:10px 14px;border:1px solid var(--border);font-size:0.93rem;color:var(--ink-light)}
     .badge{background:var(--blue);color:white;font-weight:600;font-size:0.75rem;padding:3px 11px;border-radius:50px;white-space:nowrap;flex-shrink:0}
 
+    /* SLA */
     .sla-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.1rem;margin:18px 0 28px}
     .sla-card{background:white;border-radius:var(--r-lg);padding:1.5rem;text-align:center;border:1px solid var(--border);box-shadow:var(--shadow-sm);transition:0.3s}
     .sla-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
     .sla-card h4{color:var(--ink);margin-bottom:8px;font-weight:600;font-size:0.97rem}
-    .sla-time{font-size:1.9rem;color:var(--blue);font-weight:700;margin-bottom:6px}
+    .sla-time{font-size:1.9rem;color:var(--blue);font-weight:700;font-family:var(--mono);margin-bottom:6px}
     .sla-card p{color:var(--muted);font-size:0.85rem;margin:0}
     .sla-card small{font-size:0.76rem;color:#94a3b8}
+    .sla-card.critical .sla-time{color:var(--red)}
+    .sla-card.high .sla-time{color:var(--orange)}
+    .sla-card.medium .sla-time{color:#eab308}
+    .sla-card.low .sla-time{color:var(--green)}
 
     .highlight{background:var(--blue-pale);border-left:4px solid var(--blue);padding:13px 18px;border-radius:0 var(--r-sm) var(--r-sm) 0;margin:0 0 28px;color:#075985;font-size:0.92rem;font-weight:500}
+    .highlight.warn{background:#fff7ed;border-left-color:var(--orange);color:#92400e}
 
-    .steps-wrapper{display:flex;flex-direction:column;gap:14px;margin-bottom:10px}
-    .step{background:white;border-radius:var(--r-lg);padding:24px 26px;border:1px solid var(--border);border-left:4px solid var(--blue);box-shadow:var(--shadow-sm);transition:all 0.3s}
-    .step:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
-    .step-header{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+    /* STEPS */
+    .steps-wrapper{display:flex;flex-direction:column;gap:18px;margin-bottom:10px}
+    .step{background:white;border-radius:var(--r-lg);border:1px solid var(--border);border-left:4px solid var(--blue);box-shadow:var(--shadow-sm);overflow:hidden;transition:all 0.3s}
+    .step:hover{box-shadow:var(--shadow-md)}
+    .step-header-row{display:flex;align-items:center;gap:14px;padding:24px 26px 0}
     .step-number{background:var(--blue);color:white;font-weight:700;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.85rem;flex-shrink:0;box-shadow:0 3px 10px rgba(14,165,233,0.3)}
-    .step p{color:var(--ink-light);font-size:0.95rem;margin:0 0 8px}
+    .step-body{padding:0 26px 24px}
+    .step-desc{color:var(--ink-light);font-size:0.97rem;margin:12px 0 16px}
     .step-image{max-width:55%;height:auto;border-radius:var(--r-md);margin:16px auto 0;display:block;border:1px solid var(--border);box-shadow:var(--shadow-sm);cursor:zoom-in;transition:opacity 0.2s}
     .step-image:hover{opacity:0.88}
 
+    /* SUBSTEPS */
+    .substeps{display:flex;flex-direction:column;gap:10px;margin:14px 0 6px}
+    .substep{display:flex;gap:14px;align-items:flex-start;background:var(--blue-soft);border:1px solid var(--border);border-radius:var(--r-md);padding:13px 16px}
+    .substep-bullet{width:26px;height:26px;border-radius:50%;background:white;border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;color:var(--blue);flex-shrink:0;margin-top:1px}
+    .substep-content{flex:1}
+    .substep-title{font-weight:600;font-size:0.93rem;color:var(--ink);margin-bottom:3px}
+    .substep-desc{font-size:0.88rem;color:var(--muted);margin:0}
+    .substep-tag{display:inline-flex;align-items:center;gap:4px;background:white;border:1px solid var(--border);color:var(--blue-dark);font-size:0.73rem;font-weight:600;padding:2px 9px;border-radius:50px;margin-top:5px;font-family:var(--mono)}
+
+    /* NOTE INLINE */
+    .step-note{display:flex;align-items:flex-start;gap:10px;background:#fff7ed;border:1px solid #fed7aa;border-radius:var(--r-sm);padding:10px 14px;margin-top:10px;font-size:0.87rem;color:#92400e}
+    .step-note span{flex-shrink:0}
+
+    /* TOOLS SECTION */
+    .tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.2rem;margin-bottom:28px}
+    .tool-card{background:white;border-radius:var(--r-lg);padding:24px;border:1px solid var(--border);box-shadow:var(--shadow-sm);transition:all 0.3s;position:relative;overflow:hidden}
+    .tool-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),#38bdf8)}
+    .tool-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+    .tool-card-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+    .tool-icon{width:44px;height:44px;border-radius:12px;background:var(--blue-soft);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+    .tool-name{font-size:1rem;font-weight:700;color:var(--ink)}
+    .tool-type{font-size:0.76rem;color:var(--muted);margin-top:1px}
+    .tool-desc{font-size:0.9rem;color:var(--ink-light);margin-bottom:14px;line-height:1.6}
+    .tool-features{display:flex;flex-direction:column;gap:6px}
+    .tool-feature{display:flex;align-items:center;gap:8px;font-size:0.85rem;color:var(--ink-light)}
+    .tool-feature::before{content:"✓";color:var(--green);font-weight:700;flex-shrink:0;font-size:0.8rem}
+    .tool-fields{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+    .tool-field{background:var(--blue-pale);color:var(--blue-dark);font-size:0.75rem;font-weight:600;padding:3px 10px;border-radius:50px;font-family:var(--mono)}
+
+    /* KPI */
     .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.1rem;margin-top:8px}
     .kpi-card{background:white;border-radius:var(--r-lg);padding:1.4rem 1.2rem;text-align:center;border:1px solid var(--border);box-shadow:var(--shadow-sm);transition:0.3s}
     .kpi-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
     .kpi-icon{font-size:1.5rem;margin-bottom:8px}
-    .kpi-value{font-size:1.45rem;font-weight:700;color:var(--blue)}
+    .kpi-value{font-size:1.45rem;font-weight:700;color:var(--blue);font-family:var(--mono)}
     .kpi-label{font-size:0.8rem;color:var(--muted);margin-top:4px}
 
+    /* FLOW DIAGRAM */
+    .flow-row{display:flex;align-items:center;gap:0;flex-wrap:wrap;margin:18px 0 24px;justify-content:center}
+    .flow-node{background:white;border:1.5px solid var(--blue);border-radius:var(--r-md);padding:10px 18px;font-size:0.85rem;font-weight:600;color:var(--blue-dark);text-align:center;white-space:nowrap;box-shadow:var(--shadow-sm)}
+    .flow-arrow{color:var(--blue);font-size:1.2rem;margin:0 6px;opacity:0.6}
+    .flow-node.decision{border-style:dashed;border-color:var(--orange);color:#92400e;background:#fff7ed}
+    .flow-node.end{border-color:var(--green);color:#065f46;background:#f0fdf4}
+
+    /* LIGHTBOX */
     .lightbox{display:none;position:fixed;inset:0;background:rgba(10,22,40,0.85);backdrop-filter:blur(6px);z-index:9999;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out}
     .lightbox.open{display:flex}
     .lightbox img{max-width:90vw;max-height:88vh;border-radius:var(--r-lg);box-shadow:0 25px 80px rgba(0,0,0,0.5);cursor:default;animation:lbIn 0.25s cubic-bezier(0.16,1,0.3,1)}
@@ -86,7 +135,7 @@
 
     footer{text-align:center;padding:28px;background:linear-gradient(135deg,var(--blue-pale),var(--blue-soft));color:var(--muted);border-top:1px solid var(--border);font-size:0.87rem}
 
-    @media(max-width:600px){.header-grid{flex-direction:column;align-items:center;gap:20px}.header-icon{width:56px;height:56px;font-size:26px}header h1{font-size:1.7rem}}
+    @media(max-width:600px){.header-grid{flex-direction:column;align-items:center;gap:20px}.header-icon{width:56px;height:56px;font-size:26px}header h1{font-size:1.7rem}.flow-row{flex-direction:column}.flow-arrow{transform:rotate(90deg)}}
   </style>
 </head>
 <body>
@@ -102,6 +151,7 @@
           <div class="header-pill"><span>🛠</span> Matrix42</div>
           <div class="header-pill"><span>📋</span> SLA</div>
           <div class="header-pill"><span>🏢</span> Econocom / VNF</div>
+          <div class="header-pill"><span>📞</span> Helpdesk N1</div>
         </div>
       </div>
     </div>
@@ -109,76 +159,359 @@
 
   <main>
 
+    <!-- CONTEXTE -->
     <h2>Contexte</h2>
     <div class="info-card">
-      <h3>Objectif</h3>
-      <p>Garantir un traitement rapide et conforme des tickets Matrix42 selon les SLA définis, afin d'assurer la satisfaction des utilisateurs et le bon fonctionnement du support IT.</p>
+      <h3>Objectif de la mission</h3>
+      <p>Dans le cadre de mon stage chez <strong>Econocom</strong> en prestation pour <strong>VNF (Voies Navigables de France)</strong>, j'assure le traitement quotidien des tickets de support IT via l'outil <strong>Matrix42</strong>. L'objectif est de garantir un traitement rapide et conforme aux SLA définis, afin d'assurer la satisfaction des utilisateurs et le bon fonctionnement du support informatique.</p>
+      <p style="margin-top:10px">Le Helpdesk de niveau 1 est le premier point de contact pour tous les incidents et demandes des collaborateurs VNF. Chaque ticket doit être qualifié, traité ou escaladé selon des processus ITSM rigoureux.</p>
       <div class="competences-box">
-        <h3>🎯 Compétences E4</h3>
+        <h3>🎯 Compétences E4 mobilisées</h3>
         <div class="competences-list">
-          <div class="competence-content"><span class="badge">B1.2</span><span>Répondre aux incidents et aux demandes d'assistance</span></div>
+          <div class="competence-content"><span class="badge">B1.2</span><span>Répondre aux incidents et aux demandes d'assistance et d'évolution</span></div>
           <div class="competence-content"><span class="badge">B1.6</span><span>Organiser son développement professionnel</span></div>
         </div>
       </div>
     </div>
 
+    <!-- SLA -->
     <h2>Niveaux de Priorité (SLA)</h2>
+    <p style="margin-bottom:16px">Les SLA (<em>Service Level Agreement</em>) définissent les délais maximaux de prise en charge d'un ticket selon son niveau de criticité. Ils sont calculés automatiquement par Matrix42 dès la création du ticket.</p>
     <div class="sla-grid">
-      <div class="sla-card"><h4>🔴 Critique</h4><div class="sla-time">15 min</div><p>Cas : &gt; 1%</p><small>Impact toute l'entreprise et bloquant</small></div>
-      <div class="sla-card"><h4>🟠 Élevé</h4><div class="sla-time">2 h</div><p>Cas : 4%</p><small>Impact plusieurs utilisateurs et bloquant</small></div>
-      <div class="sla-card"><h4>🟡 Moyen</h4><div class="sla-time">4 h</div><p>Cas : 10%</p><small>Impact un utilisateur et bloquant</small></div>
-      <div class="sla-card"><h4>🟢 Faible</h4><div class="sla-time">6 h</div><p>Cas : 85%</p><small>Impact un utilisateur et non bloquant</small></div>
+      <div class="sla-card critical"><h4>🔴 Critique</h4><div class="sla-time">15 min</div><p>Cas : &lt; 1% des tickets</p><small>Impact toute l'entreprise, système bloqué</small></div>
+      <div class="sla-card high"><h4>🟠 Élevé</h4><div class="sla-time">2 h</div><p>Cas : ~4% des tickets</p><small>Impact plusieurs utilisateurs, bloquant</small></div>
+      <div class="sla-card medium"><h4>🟡 Moyen</h4><div class="sla-time">4 h</div><p>Cas : ~10% des tickets</p><small>Impact un utilisateur, bloquant</small></div>
+      <div class="sla-card low"><h4>🟢 Faible</h4><div class="sla-time">6 h</div><p>Cas : ~85% des tickets</p><small>Impact un utilisateur, non bloquant</small></div>
     </div>
+    <div class="highlight warn">⚠️ Le non-respect des délais SLA est tracé dans Matrix42 et impacte directement les indicateurs de performance du contrat Econocom / VNF. Une alerte automatique est envoyée si un ticket approche de son échéance.</div>
 
-    <div class="highlight">⚠️ Le respect des délais SLA impacte directement la satisfaction client et le contrat de mission.</div>
+    <!-- FLUX -->
+    <h2>Vue d'ensemble du flux</h2>
+    <div class="flow-row">
+      <div class="flow-node">📥 Réception</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">🏷 Qualification</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">🔍 Diagnostic</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node decision">❓ Résolvable N1 ?</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">🔧 Résolution</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node end">✅ Clôture</div>
+    </div>
+    <div class="highlight">Si le ticket n'est pas résolvable au niveau 1, il est escaladé vers le N2 ou le service concerné (réseau, poste de travail, applicatif…).</div>
 
-    <h2>Procédure de traitement</h2>
+    <!-- PROCÉDURE -->
+    <h2>Procédure détaillée de traitement</h2>
     <div class="steps-wrapper">
 
+      <!-- ÉTAPE 1 -->
       <div class="step">
-        <div class="step-header"><div class="step-number">1</div><h3>Réception et qualification</h3></div>
-        <p>Chaque ticket est soit créé manuellement si cela est un appel, ou créé automatiquement par un robot si c'est un mail. Il faut ensuite le qualifier avec le sujet, nom utilisateur, description et priorité.</p>
-        <img src="images_missions/creation_ticket.png" class="step-image" alt="Création ticket">
+        <div class="step-header-row">
+          <div class="step-number">1</div>
+          <h3>Réception et ouverture du ticket</h3>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Un ticket peut arriver via deux canaux distincts. Dans les deux cas, il doit être ouvert dans Matrix42 le plus tôt possible afin que le compteur SLA démarre immédiatement.</p>
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-bullet">A</div>
+              <div class="substep-content">
+                <div class="substep-title">📞 Appel téléphonique entrant</div>
+                <div class="substep-desc">L'utilisateur appelle le numéro du Helpdesk VNF. Le technicien décroche, recueille les informations et crée manuellement le ticket dans Matrix42 pendant l'appel. Il s'assure de bien noter le nom, le site, le poste de travail concerné et la nature du problème avant de raccrocher.</div>
+                <span class="substep-tag">Création manuelle</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">B</div>
+              <div class="substep-content">
+                <div class="substep-title">📧 Mail entrant (portail ou email)</div>
+                <div class="substep-desc">L'utilisateur envoie un mail à l'adresse de support ou soumet une demande via le portail self-service. Un <strong>robot Matrix42</strong> intercepte le message et crée automatiquement un ticket préqualifié. Le technicien doit ensuite vérifier et compléter les champs manquants.</div>
+                <span class="substep-tag">Création automatique</span>
+              </div>
+            </div>
+          </div>
+          <img src="images_missions/creation_ticket.png" class="step-image" alt="Création ticket Matrix42">
+        </div>
       </div>
 
+      <!-- ÉTAPE 2 -->
       <div class="step">
-        <div class="step-header"><div class="step-number">2</div><h3>Attribution des SLA</h3></div>
-        <p>Les SLA se calculent automatiquement en fonction des champs entrés à la création du ticket. Cela nous permet de savoir quel ticket rappeler en priorité si nous le pouvons.</p>
-        <img src="images_missions/sla.png" class="step-image" alt="SLA">
+        <div class="step-header-row">
+          <div class="step-number">2</div>
+          <h3>Qualification et attribution des SLA</h3>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">La qualification est l'étape la plus critique du processus. Elle conditionne le SLA appliqué et l'orientation du ticket. Chaque champ doit être renseigné avec précision.</p>
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-bullet">1</div>
+              <div class="substep-content">
+                <div class="substep-title">Renseigner le demandeur</div>
+                <div class="substep-desc">Rechercher l'utilisateur dans l'annuaire Matrix42 (synchronisé avec l'Active Directory VNF) pour lier le ticket à son compte. Cela permet de récupérer automatiquement son site, son service et son responsable.</div>
+                <span class="substep-tag">Champ : Demandeur</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">2</div>
+              <div class="substep-content">
+                <div class="substep-title">Catégoriser l'incident ou la demande</div>
+                <div class="substep-desc">Choisir la <strong>catégorie</strong> (ex : Poste de travail, Réseau, Applicatif, Accès…) et la <strong>sous-catégorie</strong> correspondante. Cette arborescence permet de router automatiquement le ticket vers la bonne équipe et d'appliquer les SLA adaptés.</div>
+                <span class="substep-tag">Champ : Catégorie / Sous-catégorie</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">3</div>
+              <div class="substep-content">
+                <div class="substep-title">Définir la priorité manuellement si nécessaire</div>
+                <div class="substep-desc">La priorité est calculée automatiquement selon la matrice impact × urgence. Elle peut être ajustée manuellement si le contexte le justifie (ex : réunion critique à venir, utilisateur VIP). Toute modification doit être justifiée dans le journal.</div>
+                <span class="substep-tag">Champ : Priorité</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">4</div>
+              <div class="substep-content">
+                <div class="substep-title">Rédiger une description claire</div>
+                <div class="substep-desc">La description doit permettre à n'importe quel technicien de comprendre le problème sans contacter l'utilisateur. Elle inclut le symptôme observé, le contexte, les actions déjà tentées et le matériel/logiciel concerné.</div>
+                <span class="substep-tag">Champ : Description</span>
+              </div>
+            </div>
+          </div>
+          <img src="images_missions/sla.png" class="step-image" alt="SLA Matrix42">
+        </div>
       </div>
 
+      <!-- ÉTAPE 3 -->
       <div class="step">
-        <div class="step-header"><div class="step-number">3</div><h3>Diagnostic</h3></div>
-        <p>En fonction du problème rencontré, il se peut que l'on doive rappeler l'utilisateur pour en savoir plus si le problème n'est pas assez clair. Si l'utilisateur ne répond pas, on peut alors mettre le ticket "En attente" jusqu'au prochain rappel.</p>
-        <img src="images_missions/attente.png" class="step-image" alt="Attente">
-        <img src="images_missions/Etats.png" class="step-image" alt="États">
+        <div class="step-header-row">
+          <div class="step-number">3</div>
+          <h3>Diagnostic et investigation</h3>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Le diagnostic consiste à identifier la cause racine du problème afin d'y apporter une solution adaptée. Il peut nécessiter des échanges avec l'utilisateur ou une investigation technique à distance.</p>
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-bullet">1</div>
+              <div class="substep-content">
+                <div class="substep-title">Analyse des informations disponibles</div>
+                <div class="substep-desc">Consulter l'historique des tickets précédents de l'utilisateur dans Matrix42 pour détecter un problème récurrent. Vérifier si d'autres tickets similaires sont ouverts (potentiel incident majeur).</div>
+                <span class="substep-tag">Base de connaissances ITSM</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">2</div>
+              <div class="substep-content">
+                <div class="substep-title">Rappel de l'utilisateur si besoin</div>
+                <div class="substep-desc">Si la description est insuffisante ou le problème difficile à reproduire, le technicien rappelle l'utilisateur pour obtenir des précisions. Les informations recueillies sont immédiatement ajoutées au journal du ticket.</div>
+                <span class="substep-tag">Journal d'activité</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">3</div>
+              <div class="substep-content">
+                <div class="substep-title">Mise en attente si l'utilisateur est injoignable</div>
+                <div class="substep-desc">Si l'utilisateur ne répond pas, le ticket passe en statut <strong>« En attente »</strong>. Le SLA est alors suspendu (temps d'attente non comptabilisé). Un rappel est planifié et noté dans le journal.</div>
+                <span class="substep-tag">Statut : En attente</span>
+              </div>
+            </div>
+          </div>
+          <div class="step-note"><span>💡</span> Le statut <code>En attente</code> stoppe le compteur SLA côté technicien. Il est important de toujours justifier ce changement d'état avec un commentaire dans le journal pour assurer la traçabilité.</div>
+          <img src="images_missions/attente.png" class="step-image" alt="Statut En attente">
+          <img src="images_missions/Etats.png" class="step-image" alt="États du ticket" style="margin-top:12px">
+        </div>
       </div>
 
+      <!-- ÉTAPE 4 -->
       <div class="step">
-        <div class="step-header"><div class="step-number">4</div><h3>Résolution ou Escalade</h3></div>
-        <p>Si le problème peut être résolu directement à distance par le N1, nous devons rappeler la personne et voir avec elle directement. Dans le cas échéant, il faut escalader le ticket au service concerné.</p>
-        <img src="images_missions/journal.png" class="step-image" alt="Journal">
+        <div class="step-header-row">
+          <div class="step-number">4</div>
+          <h3>Résolution (N1) ou Escalade (N2/N3)</h3>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Selon le résultat du diagnostic, deux chemins sont possibles : une résolution directe par le technicien N1, ou une escalade vers un niveau de support supérieur ou un service spécialisé.</p>
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-bullet">A</div>
+              <div class="substep-content">
+                <div class="substep-title">🔧 Résolution directe N1 (à distance)</div>
+                <div class="substep-desc">Le technicien prend la main à distance (via outil de télémaintenance) ou guide l'utilisateur par téléphone. La solution appliquée est documentée en détail dans le journal du ticket pour alimenter la base de connaissances.</div>
+                <span class="substep-tag">Prise en main à distance</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">B</div>
+              <div class="substep-content">
+                <div class="substep-title">📤 Escalade vers N2 / service concerné</div>
+                <div class="substep-desc">Si le problème dépasse les compétences N1 (réseau, serveur, applicatif métier…), le ticket est <strong>réassigné</strong> à la file du groupe compétent. Le technicien rédige un résumé du diagnostic dans le journal avant l'escalade pour éviter que le N2 reparte de zéro.</div>
+                <span class="substep-tag">Réassignation de groupe</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">C</div>
+              <div class="substep-content">
+                <div class="substep-title">📍 Intervention sur site</div>
+                <div class="substep-desc">Pour certains problèmes matériels (remplacement de composant, câblage, configuration physique), une intervention sur site est planifiée. Le ticket reste ouvert et un <strong>bon d'intervention</strong> peut être généré depuis Matrix42.</div>
+                <span class="substep-tag">Bon d'intervention</span>
+              </div>
+            </div>
+          </div>
+          <img src="images_missions/journal.png" class="step-image" alt="Journal des actions">
+        </div>
       </div>
 
+      <!-- ÉTAPE 5 -->
       <div class="step">
-        <div class="step-header"><div class="step-number">5</div><h3>Clôture</h3></div>
-        <p>Une fois le problème résolu, l'utilisateur reçoit un mail automatique avec la solution du problème.</p>
-        <img src="images_missions/mail.png" class="step-image" alt="Mail clôture">
+        <div class="step-header-row">
+          <div class="step-number">5</div>
+          <h3>Clôture et retour utilisateur</h3>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">La clôture du ticket marque la fin du traitement. Elle n'est possible que si la solution a été confirmée et documentée. Un processus de validation utilisateur permet d'assurer la satisfaction avant fermeture définitive.</p>
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-bullet">1</div>
+              <div class="substep-content">
+                <div class="substep-title">Confirmation de la résolution</div>
+                <div class="substep-desc">Le technicien s'assure que la solution est effective (test en direct avec l'utilisateur ou vérification à distance) avant de clôturer le ticket. Si le problème persiste, il reste en statut <strong>En cours</strong>.</div>
+                <span class="substep-tag">Vérification solution</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">2</div>
+              <div class="substep-content">
+                <div class="substep-title">Documentation de la solution</div>
+                <div class="substep-desc">La solution complète est rédigée dans le champ <strong>Solution</strong> du ticket. Cette information alimente la base de connaissances Matrix42 et permet aux autres techniciens de résoudre plus rapidement des problèmes similaires à l'avenir.</div>
+                <span class="substep-tag">Champ : Solution</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">3</div>
+              <div class="substep-content">
+                <div class="substep-title">Mail automatique à l'utilisateur</div>
+                <div class="substep-desc">Au passage au statut <strong>Résolu</strong>, Matrix42 envoie automatiquement un mail à l'utilisateur avec un résumé de la solution et un lien pour rouvrir le ticket s'il estime que son problème n'est pas résolu. Un délai de 72h est accordé avant clôture définitive.</div>
+                <span class="substep-tag">Statut : Résolu → Clôturé</span>
+              </div>
+            </div>
+          </div>
+          <div class="step-note"><span>ℹ️</span> Si l'utilisateur rouvre le ticket dans les 72h suivant la résolution, le technicien doit reprendre le traitement sans recréer un nouveau ticket, pour conserver la traçabilité complète de l'incident.</div>
+          <img src="images_missions/mail.png" class="step-image" alt="Mail de clôture automatique">
+        </div>
       </div>
 
     </div>
 
+    <!-- OUTILS -->
+    <h2>Outils utilisés</h2>
+    <p style="margin-bottom:20px">Le traitement des tickets s'appuie sur un ensemble d'outils intégrés qui forment la chaîne ITSM du helpdesk VNF.</p>
+
+    <div class="tools-grid">
+
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <div class="tool-icon">🎫</div>
+          <div>
+            <div class="tool-name">Matrix42 Service Desk</div>
+            <div class="tool-type">Outil ITSM principal</div>
+          </div>
+        </div>
+        <div class="tool-desc">Plateforme centrale de gestion des tickets, incidents, demandes et changements. Toute l'activité du helpdesk VNF y est tracée. Il est synchronisé avec l'Active Directory et permet la gestion des SLA en temps réel.</div>
+        <div class="tool-features">
+          <div class="tool-feature">Création et gestion des tickets (incidents / demandes)</div>
+          <div class="tool-feature">Calcul et suivi automatique des SLA</div>
+          <div class="tool-feature">Base de connaissances et solutions documentées</div>
+          <div class="tool-feature">Notifications automatiques par mail (ouverture, clôture)</div>
+          <div class="tool-feature">Génération de rapports et tableaux de bord</div>
+        </div>
+        <div class="tool-fields">
+          <span class="tool-field">Incidents</span>
+          <span class="tool-field">Demandes</span>
+          <span class="tool-field">SLA</span>
+          <span class="tool-field">CMDB</span>
+          <span class="tool-field">Base de connaissances</span>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <div class="tool-icon">🗂</div>
+          <div>
+            <div class="tool-name">Active Directory (AD)</div>
+            <div class="tool-type">Annuaire réseau VNF</div>
+          </div>
+        </div>
+        <div class="tool-desc">L'Active Directory de VNF est synchronisé avec Matrix42. Il permet d'identifier automatiquement les utilisateurs lors de la création d'un ticket : site d'affectation, service, adresse mail et responsable hiérarchique.</div>
+        <div class="tool-features">
+          <div class="tool-feature">Identification rapide du demandeur</div>
+          <div class="tool-feature">Attribution automatique du bon groupe de résolution</div>
+          <div class="tool-feature">Gestion des droits et accès (demandes d'accès)</div>
+        </div>
+        <div class="tool-fields">
+          <span class="tool-field">Annuaire</span>
+          <span class="tool-field">Comptes</span>
+          <span class="tool-field">Groupes</span>
+          <span class="tool-field">GPO</span>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <div class="tool-icon">🖥</div>
+          <div>
+            <div class="tool-name">Outil de télémaintenance</div>
+            <div class="tool-type">Prise en main à distance</div>
+          </div>
+        </div>
+        <div class="tool-desc">Solution de prise en main à distance utilisée pour le diagnostic et la résolution d'incidents sur les postes de travail des utilisateurs VNF, sans déplacement physique. Permet de résoudre la majorité des incidents logiciels depuis le helpdesk.</div>
+        <div class="tool-features">
+          <div class="tool-feature">Prise de contrôle du bureau à distance</div>
+          <div class="tool-feature">Transfert de fichiers et installation de logiciels</div>
+          <div class="tool-feature">Diagnostic système et réseau depuis le poste distant</div>
+        </div>
+        <div class="tool-fields">
+          <span class="tool-field">Remote desktop</span>
+          <span class="tool-field">Transfert fichier</span>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <div class="tool-icon">📬</div>
+          <div>
+            <div class="tool-name">Robot de traitement des mails</div>
+            <div class="tool-type">Automatisation Matrix42</div>
+          </div>
+        </div>
+        <div class="tool-desc">Module d'automatisation intégré à Matrix42 qui surveille la boîte mail de support. Dès réception d'un email, il extrait automatiquement les informations (expéditeur, objet, corps) et crée un ticket préqualifié, réduisant le travail manuel de saisie.</div>
+        <div class="tool-features">
+          <div class="tool-feature">Création automatique des tickets depuis les mails entrants</div>
+          <div class="tool-feature">Extraction et pré-remplissage des champs du ticket</div>
+          <div class="tool-feature">Réponses automatiques à l'utilisateur (accusé de réception)</div>
+        </div>
+        <div class="tool-fields">
+          <span class="tool-field">Automation</span>
+          <span class="tool-field">Parsing mail</span>
+          <span class="tool-field">Workflow</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- KPI -->
     <h2>Indicateurs de Performance</h2>
+    <p style="margin-bottom:16px">Ces KPIs sont mesurés mensuellement et reportés à Econocom dans le cadre du contrat de prestation avec VNF.</p>
     <div class="kpi-grid">
-      <div class="kpi-card"><div class="kpi-icon">📞</div><div class="kpi-value">≥ 95%</div><div class="kpi-label">Décroché en moins de 20 sec</div></div>
-      <div class="kpi-card"><div class="kpi-icon">⚠️</div><div class="kpi-value">≤ 5%</div><div class="kpi-label">Taux de dissuasion</div></div>
-      <div class="kpi-card"><div class="kpi-icon">🚫</div><div class="kpi-value">≤ 1%</div><div class="kpi-label">Taux hors process</div></div>
+      <div class="kpi-card"><div class="kpi-icon">📞</div><div class="kpi-value">≥ 95%</div><div class="kpi-label">Appels décrochés en moins de 20 sec</div></div>
+      <div class="kpi-card"><div class="kpi-icon">⚠️</div><div class="kpi-value">≤ 5%</div><div class="kpi-label">Taux de dissuasion (abandon)</div></div>
+      <div class="kpi-card"><div class="kpi-icon">🚫</div><div class="kpi-value">≤ 1%</div><div class="kpi-label">Taux de tickets hors process</div></div>
       <div class="kpi-card"><div class="kpi-icon">✅</div><div class="kpi-value">≥ 60%</div><div class="kpi-label">Tickets résolus au 1er niveau</div></div>
+      <div class="kpi-card"><div class="kpi-icon">⏱</div><div class="kpi-value">≥ 98%</div><div class="kpi-label">Respect des SLA (toutes priorités)</div></div>
+      <div class="kpi-card"><div class="kpi-icon">⭐</div><div class="kpi-value">≥ 4/5</div><div class="kpi-label">Satisfaction utilisateur (enquête)</div></div>
     </div>
 
   </main>
 
-  <footer>Marius DUYCK — Econocom / VNF — Mission Helpdesk Ticketing</footer>
+  <footer>Marius DUYCK — Econocom / VNF — Mission Helpdesk Ticketing · BTS SIO SISR</footer>
 
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" id="lb-close">✕</button>
