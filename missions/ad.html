@@ -33,63 +33,158 @@
     ::-webkit-scrollbar-track{background:var(--bg)}
     ::-webkit-scrollbar-thumb{background:var(--blue);border-radius:10px}
 
-    header{background:linear-gradient(135deg,#0284c7,#38bdf8,#0ea5e9);color:white;text-align:center;padding:80px 20px;box-shadow:0 4px 20px rgba(2,132,199,0.2);position:relative;overflow:hidden}
-    header::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at top right,rgba(255,255,255,0.15),transparent 60%)}
-    .header-content{position:relative;z-index:1}
-    header h1{font-size:2.4rem;font-weight:700;margin-bottom:10px;letter-spacing:-0.02em}
-    header p{font-size:1rem;opacity:0.9}
+    /* ── HEADER ───────────────────────────── */
+    header {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0c4a6e 0%, #0284c7 45%, #38bdf8 100%);
+      color: white;
+      padding: 70px 40px 60px;
+      box-shadow: 0 4px 30px rgba(2,100,180,0.25);
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 90% 50%, rgba(255,255,255,0.07), transparent),
+        radial-gradient(ellipse 40% 60% at 10% 20%, rgba(255,255,255,0.05), transparent);
+    }
+    .header-grid {
+      position: relative;
+      z-index: 1;
+      max-width: 1050px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center; /* C'est cette ligne qui centre le bloc complet */
+      gap: 32px;
+      text-align: left; /* On garde le texte aligné à gauche à l'intérieur du bloc */
+    }
+    .header-icon {
+      width: 72px; height: 72px;
+      background: rgba(255,255,255,0.12);
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      flex-shrink: 0;
+      backdrop-filter: blur(4px);
+    }
+    .header-text { 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .header-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.85);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 50px;
+      margin-bottom: 12px;
+    }
+    .header-eyebrow::before {
+      content: "";
+      width: 6px; height: 6px;
+      background: #7dd3fc;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 0.97rem;
+      color: rgba(255,255,255,0.72);
+      margin: 0;
+    }
+    .header-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center; /* Centre les pilules */
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .header-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.88);
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 50px;
+    }
+    .header-pill span { color: #7dd3fc; font-size: 0.9rem; }
 
-    main{max-width:1050px;margin:0 auto;padding:60px 25px 80px}
+    /* ── LAYOUT ───────────────────────────── */
+    main{max-width:1050px;margin:0 auto;padding:55px 25px 80px}
 
-    h2{font-size:1.6rem;font-weight:700;color:var(--ink);margin:50px 0 22px;display:flex;align-items:center;gap:14px;letter-spacing:-0.02em}
+    h2{font-size:1.55rem;font-weight:700;color:var(--ink);margin:48px 0 20px;display:flex;align-items:center;gap:14px;letter-spacing:-0.02em}
     h2:first-child{margin-top:0}
-    h2::before{content:"";width:5px;height:30px;background:linear-gradient(to bottom,var(--blue),var(--blue-pale));border-radius:3px;flex-shrink:0}
+    h2::before{content:"";width:4px;height:26px;background:linear-gradient(to bottom,var(--blue),var(--blue-pale));border-radius:3px;flex-shrink:0}
     h3{font-size:1rem;font-weight:700;color:var(--blue-dark);margin:0}
     p{color:var(--ink-light);margin-bottom:10px;font-size:0.97rem}
 
-    .info-card{background:white;border-radius:var(--r-lg);padding:28px 32px;margin-bottom:30px;box-shadow:var(--shadow-sm);border:1px solid var(--border)}
+    .info-card{background:white;border-radius:var(--r-lg);padding:28px 32px;margin-bottom:28px;box-shadow:var(--shadow-sm);border:1px solid var(--border)}
     .info-card>h3{color:var(--ink);font-size:1.1rem;border-bottom:1px solid var(--blue-pale);padding-bottom:10px;margin-bottom:14px}
     .info-card p{text-align:left;margin:0}
 
     .competences-box{background:var(--blue-soft);border:1px solid var(--border);border-radius:var(--r-md);padding:16px 20px;margin-top:18px}
-    .competences-box>h3{color:var(--blue-dark);font-size:0.82rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px}
+    .competences-box>h3{color:var(--blue-dark);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px}
     .competences-list{display:flex;flex-direction:column;gap:8px}
     .competence-content{display:flex;align-items:center;gap:12px;background:white;border-radius:var(--r-sm);padding:10px 14px;border:1px solid var(--border);font-size:0.93rem;color:var(--ink-light)}
-    .badge{background:var(--blue);color:white;font-weight:600;font-size:0.78rem;padding:3px 11px;border-radius:50px;white-space:nowrap;flex-shrink:0}
+    .badge{background:var(--blue);color:white;font-weight:600;font-size:0.75rem;padding:3px 11px;border-radius:50px;white-space:nowrap;flex-shrink:0}
 
-    .highlight{background:var(--blue-pale);border-left:4px solid var(--blue);padding:14px 20px;border-radius:var(--r-md);margin:0 0 30px;color:#075985;font-size:0.93rem;font-weight:500}
+    .highlight{background:var(--blue-pale);border-left:4px solid var(--blue);padding:13px 18px;border-radius:0 var(--r-sm) var(--r-sm) 0;margin:0 0 28px;color:#075985;font-size:0.92rem;font-weight:500}
 
-    .ad-schema{background:white;border:1px solid var(--border);border-radius:var(--r-lg);padding:28px;margin-bottom:30px;box-shadow:var(--shadow-sm)}
-    .ad-domain-wrap{text-align:center;margin-bottom:24px}
+    .ad-schema{background:white;border:1px solid var(--border);border-radius:var(--r-lg);padding:28px;margin-bottom:28px;box-shadow:var(--shadow-sm)}
+    .ad-domain-wrap{text-align:center;margin-bottom:22px}
     .ad-domain{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:white;padding:10px 24px;border-radius:50px;font-weight:700;font-size:0.95rem;box-shadow:0 4px 14px rgba(14,165,233,0.3)}
-    .ou-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+    .ou-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
     .ou-block{background:var(--blue-soft);border:1px solid var(--border);border-radius:var(--r-md);padding:14px 12px;text-align:center;transition:0.25s}
     .ou-block:hover{background:var(--blue-pale);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
-    .ou-title{font-weight:700;color:var(--blue-dark);font-size:0.85rem;margin-bottom:6px}
-    .ou-items{font-size:0.78rem;color:var(--muted);line-height:1.7}
+    .ou-title{font-weight:700;color:var(--blue-dark);font-size:0.83rem;margin-bottom:5px}
+    .ou-items{font-size:0.77rem;color:var(--muted);line-height:1.7}
 
-    .steps-wrapper{display:flex;flex-direction:column;gap:16px;margin-bottom:10px}
-    .step{background:white;border-radius:var(--r-lg);padding:26px 28px;border:1px solid var(--border);border-left:4px solid var(--blue);box-shadow:var(--shadow-sm);transition:all 0.3s}
+    .steps-wrapper{display:flex;flex-direction:column;gap:14px;margin-bottom:10px}
+    .step{background:white;border-radius:var(--r-lg);padding:24px 26px;border:1px solid var(--border);border-left:4px solid var(--blue);box-shadow:var(--shadow-sm);transition:all 0.3s}
     .step:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
     .step-header{display:flex;align-items:center;gap:14px;margin-bottom:12px}
-    .step-number{background:var(--blue);color:white;font-weight:700;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.88rem;flex-shrink:0;box-shadow:0 3px 10px rgba(14,165,233,0.3)}
-    .step p{color:var(--ink-light);font-size:0.95rem;margin:0 0 10px}
+    .step-number{background:var(--blue);color:white;font-weight:700;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.85rem;flex-shrink:0;box-shadow:0 3px 10px rgba(14,165,233,0.3)}
+    .step p{color:var(--ink-light);font-size:0.95rem;margin:0 0 8px}
 
-    .substeps{display:flex;flex-direction:column;gap:7px;margin-top:12px}
-    .substep{background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);padding:9px 14px;font-size:0.88rem;color:var(--ink-light);display:flex;align-items:flex-start;gap:8px}
+    .substeps{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+    .substep{background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);padding:8px 13px;font-size:0.87rem;color:var(--ink-light);display:flex;align-items:flex-start;gap:8px}
     .substep::before{content:"→";color:var(--blue);font-weight:700;flex-shrink:0;margin-top:1px}
 
-    .step-image{max-width:55%;height:auto;border-radius:var(--r-md);margin:18px auto 0;display:block;border:1px solid var(--border);box-shadow:var(--shadow-sm);cursor:zoom-in;transition:opacity 0.2s}
+    .step-image{max-width:55%;height:auto;border-radius:var(--r-md);margin:16px auto 0;display:block;border:1px solid var(--border);box-shadow:var(--shadow-sm);cursor:zoom-in;transition:opacity 0.2s}
     .step-image:hover{opacity:0.88}
 
-    .gpo-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:0.9rem}
+    .gpo-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:0.89rem}
     .gpo-table thead tr{background:var(--blue-soft)}
-    .gpo-table th{padding:12px 16px;text-align:left;font-weight:600;color:var(--ink);border-bottom:2px solid var(--blue-pale);font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em}
-    .gpo-table td{padding:12px 16px;border-bottom:1px solid var(--blue-pale);color:var(--ink-light)}
+    .gpo-table th{padding:11px 15px;text-align:left;font-weight:600;color:var(--ink);border-bottom:2px solid var(--blue-pale);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.06em}
+    .gpo-table td{padding:11px 15px;border-bottom:1px solid var(--blue-pale);color:var(--ink-light)}
     .gpo-table tbody tr:hover{background:var(--blue-soft)}
     .gpo-table tbody tr:last-child td{border-bottom:none}
-    .gpo-name{font-family:'Courier New',monospace;font-weight:700;color:var(--blue-dark);font-size:0.85rem}
-    .gpo-scope{display:inline-block;font-size:0.75rem;background:var(--blue-pale);color:var(--blue-dark);padding:3px 10px;border-radius:50px;font-weight:600}
+    .gpo-name{font-family:'Courier New',monospace;font-weight:700;color:var(--blue-dark);font-size:0.83rem}
+    .gpo-scope{display:inline-block;font-size:0.73rem;background:var(--blue-pale);color:var(--blue-dark);padding:3px 9px;border-radius:50px;font-weight:600}
 
     .lightbox{display:none;position:fixed;inset:0;background:rgba(10,22,40,0.85);backdrop-filter:blur(6px);z-index:9999;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out}
     .lightbox.open{display:flex}
@@ -98,15 +193,30 @@
     .lightbox-close{position:absolute;top:1.25rem;right:1.5rem;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);color:white;font-size:1.1rem;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.2s}
     .lightbox-close:hover{background:rgba(255,255,255,0.3)}
 
-    footer{text-align:center;padding:30px;background:linear-gradient(135deg,var(--blue-pale),var(--blue-soft));color:var(--muted);border-top:1px solid var(--border);font-size:0.88rem}
+    footer{text-align:center;padding:28px;background:linear-gradient(135deg,var(--blue-pale),var(--blue-soft));color:var(--muted);border-top:1px solid var(--border);font-size:0.87rem}
+
+    @media(max-width:600px){
+      .header-grid{flex-direction:column;align-items:flex-start;gap:20px}
+      .header-icon{width:56px;height:56px;font-size:26px}
+      header h1{font-size:1.7rem}
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="header-content">
-      <h1>🗂️ Création Active Directory & GPO</h1>
-      <p>Mise en place d'un annuaire Active Directory et de stratégies de groupe — VNF</p>
+    <div class="header-grid">
+      <div class="header-icon">🗂️</div>
+      <div class="header-text">
+        <div class="header-eyebrow">Mission 04 · BTS SIO SISR</div>
+        <h1>Active Directory & GPO</h1>
+        <p>Mise en place d'un annuaire Active Directory et de stratégies de groupe — AFPI</p>
+        <div class="header-pills">
+          <div class="header-pill"><span>⚙</span> Windows Server 2019</div>
+          <div class="header-pill"><span>🌐</span> gc-cicar.es</div>
+          <div class="header-pill"><span>🛡</span> GPO & NTFS</div>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -115,32 +225,34 @@
     <h2>Contexte</h2>
     <div class="info-card">
       <h3>Objectif</h3>
-      <p>Mettre en place un Active Directory fonctionnel avec une structure organisationnelle (OU), des utilisateurs, des groupes, puis appliquer des stratégies de groupe (GPO) pour centraliser la gestion des postes et des droits utilisateurs.</p>
+      <p>Mettre en place un Active Directory fonctionnel avec une structure organisationnelle (OU), des utilisateurs, des groupes, puis appliquer des stratégies de groupe (GPO) pour centraliser la gestion des postes et des droits utilisateurs.
+        <br><code>Mission réalisée lors du projet de fin d'année de mon BTS</code>
+      </p>
       <div class="competences-box">
         <h3>🎯 Compétences E4</h3>
         <div class="competences-list">
-          <div class="competence-content"><span class="badge">A définir</span><span>Installation et configuration d'un Active Directory</span></div>
-          <div class="competence-content"><span class="badge">A définir</span><span>Mise en place de GPO et gestion des droits</span></div>
-          <div class="competence-content"><span class="badge">A définir</span><span>Jonction de machines au domaine</span></div>
+          <div class="competence-content"><span class="badge">B2.1</span><span>Administrer les systèmes informatiques</span></div>
+          <div class="competence-content"><span class="badge">B3.2</span><span>Préserver l'identité numérique de l'organisation</span></div>
+          <div class="competence-content"><span class="badge">B3.3</span><span>Sécuriser les équipements et les usages des utilisateurs</span></div>
         </div>
       </div>
     </div>
 
     <h2>Structure de l'Active Directory</h2>
     <div class="ad-schema">
-      <div class="ad-domain-wrap"><div class="ad-domain">🌐 Domaine : vnf.local</div></div>
+      <div class="ad-domain-wrap"><div class="ad-domain">🌐 Domaine : gc-cicar.es</div></div>
       <div class="ou-grid">
-        <div class="ou-block"><div class="ou-title">📁 OU — Direction</div><div class="ou-items">Directeurs<br>Secrétaires</div></div>
-        <div class="ou-block"><div class="ou-title">📁 OU — Informatique</div><div class="ou-items">Techniciens<br>Administrateurs</div></div>
-        <div class="ou-block"><div class="ou-title">📁 OU — Exploitation</div><div class="ou-items">Agents terrain<br>Responsables</div></div>
-        <div class="ou-block"><div class="ou-title">📁 OU — Postes</div><div class="ou-items">PC portables<br>PC fixes</div></div>
-        <div class="ou-block"><div class="ou-title">📁 OU — Serveurs</div><div class="ou-items">SRV-AD<br>SRV-FICHIERS</div></div>
+        <div class="ou-block"><div class="ou-title">📁 OU — Resp. Agence</div><div class="ou-items">Responsables</div></div>
+        <div class="ou-block"><div class="ou-title">📁 OU — Employés</div><div class="ou-items">Employés</div></div>
+        <div class="ou-block"><div class="ou-title">📁 OU — Groupes</div><div class="ou-items">Groupes globaux<br>Groupes locaux</div></div>
+        <div class="ou-block"><div class="ou-title">📁 OU — Ordinateurs</div><div class="ou-items">PC portables<br>PC fixes</div></div>
       </div>
+      <img src="images_missions/ad.png" class="step-image" alt="Structure AD">
     </div>
 
     <div class="highlight">💡 La structure en Unités d'Organisation (OU) permet d'appliquer des GPO ciblées par département et de déléguer l'administration de manière granulaire.</div>
 
-    <h2>Procédure — Active Directory</h2>
+    <h2>Création — Active Directory</h2>
     <div class="steps-wrapper">
 
       <div class="step">
@@ -148,21 +260,18 @@
         <p>Sur Windows Server, installation du rôle <strong>Active Directory Domain Services (AD DS)</strong> via le Gestionnaire de serveur, puis promotion du serveur en contrôleur de domaine.</p>
         <div class="substeps">
           <div class="substep"><strong>Gestionnaire de serveur</strong> → Ajouter des rôles → AD DS</div>
-          <div class="substep"><strong>Promotion :</strong> Créer une nouvelle forêt → Nom de domaine : <code>vnf.local</code></div>
+          <div class="substep"><strong>Promotion :</strong> Créer une nouvelle forêt → Nom de domaine : <code>gc-cicar.es</code></div>
           <div class="substep"><strong>Niveau fonctionnel :</strong> Windows Server 2019 → Définir le mot de passe DSRM</div>
         </div>
-        <img src="images_missions/ad_install.png" class="step-image" alt="Installation AD DS">
       </div>
 
       <div class="step">
         <div class="step-header"><div class="step-number">2</div><h3>Création des Unités d'Organisation (OU)</h3></div>
-        <p>Depuis <strong>Utilisateurs et ordinateurs Active Directory (ADUC)</strong>, création d'une arborescence d'OU reflétant l'organisation de VNF.</p>
+        <p>Depuis <strong>Utilisateurs et ordinateurs Active Directory (ADUC)</strong>, création d'une arborescence d'OU reflétant l'organisation.</p>
         <div class="substeps">
           <div class="substep">Clic droit sur le domaine → Nouveau → Unité d'organisation</div>
-          <div class="substep">Création des OU : Direction, Informatique, Exploitation, Postes, Serveurs</div>
-          <div class="substep">Option <strong>"Protéger contre la suppression accidentelle"</strong> activée sur chaque OU</div>
+          <div class="substep">Création des OU : Resp. Agence, Employés, Groupes, Ordinateurs</div>
         </div>
-        <img src="images_missions/ad_ou.png" class="step-image" alt="Création OU">
       </div>
 
       <div class="step">
@@ -170,26 +279,24 @@
         <p>Création des comptes utilisateurs dans leur OU respective, puis constitution des groupes de sécurité pour faciliter la gestion des droits d'accès.</p>
         <div class="substeps">
           <div class="substep"><strong>Utilisateur :</strong> Nom, prénom, identifiant (prenom.nom), mot de passe temporaire + changement obligatoire à la 1ère connexion</div>
-          <div class="substep"><strong>Groupes :</strong> GRP_Direction, GRP_Informatique, GRP_Exploitation — type Sécurité, portée Globale</div>
-          <div class="substep">Ajout des utilisateurs dans leur groupe correspondant</div>
+          <div class="substep"><strong>Groupes :</strong> type Sécurité, portée Globale — ajout des utilisateurs dans leur groupe correspondant</div>
         </div>
-        <img src="images_missions/ad_users.png" class="step-image" alt="Création utilisateurs">
+        <img src="images_missions/groupes.png" class="step-image" alt="Groupes">
       </div>
 
       <div class="step">
         <div class="step-header"><div class="step-number">4</div><h3>Jonction des machines au domaine</h3></div>
-        <p>Depuis chaque poste client Windows, jonction au domaine <code>vnf.local</code> pour centraliser l'authentification et permettre l'application des GPO.</p>
+        <p>Depuis chaque poste client Windows, jonction au domaine <code>gc-cicar.es</code> pour centraliser l'authentification et permettre l'application des GPO.</p>
         <div class="substeps">
-          <div class="substep">Système → Paramètres avancés → Nom de l'ordinateur → Modifier → Domaine : <code>vnf.local</code></div>
+          <div class="substep">Système → Paramètres avancés → Nom de l'ordinateur → Modifier → Domaine : <code>gc-cicar.es</code></div>
           <div class="substep">Authentification avec un compte administrateur du domaine</div>
-          <div class="substep">Redémarrage obligatoire — le poste apparaît ensuite dans l'OU <strong>Postes</strong> de l'AD</div>
+          <div class="substep">Redémarrage obligatoire — le poste apparaît ensuite dans l'OU :<strong>OU_Ordinateurs</strong></div>
         </div>
-        <img src="images_missions/ad_jonction.png" class="step-image" alt="Jonction domaine">
       </div>
 
     </div>
 
-    <h2>Procédure — Stratégies de Groupe (GPO)</h2>
+    <h2>Création — Stratégies de Groupe (GPO)</h2>
     <div class="steps-wrapper">
 
       <div class="step">
@@ -197,39 +304,38 @@
         <p>Depuis la <strong>Console de gestion des stratégies de groupe (GPMC)</strong>, création des GPO et liaison à l'OU ciblée.</p>
         <div class="substeps">
           <div class="substep">Gestion des stratégies de groupe → Clic droit sur une OU → Créer un objet GPO et le lier ici</div>
-          <div class="substep">Nommage explicite : <code>GPO_Informatique_Restrictions</code>, <code>GPO_Postes_Securite</code>…</div>
+          <div class="substep">Nommage explicite : <code>Interdiction_personnalisation</code>, <code>Deploiement_Partage_Employes</code>…</div>
           <div class="substep">Modification via l'<strong>Éditeur de gestion des stratégies de groupe</strong></div>
         </div>
-        <img src="images_missions/gpo_creation.png" class="step-image" alt="Création GPO">
+        <img src="images_missions/gpo.png" class="step-image" alt="Création GPO">
       </div>
 
       <div class="step">
         <div class="step-header"><div class="step-number">6</div><h3>GPO appliquées</h3></div>
         <p>Principales stratégies de groupe mises en place dans le cadre de cette mission :</p>
-        <div style="overflow-x:auto;margin-top:14px">
+        <div style="overflow-x:auto;margin-top:12px">
           <table class="gpo-table">
             <thead><tr><th>Nom GPO</th><th>OU cible</th><th>Paramètre configuré</th></tr></thead>
             <tbody>
-              <tr><td><span class="gpo-name">GPO_MDP_Politique</span></td><td><span class="gpo-scope">Domaine entier</span></td><td>Longueur min. 10 cars, complexité obligatoire, expiration 90j</td></tr>
-              <tr><td><span class="gpo-name">GPO_Ecran_Veille</span></td><td><span class="gpo-scope">OU Postes</span></td><td>Écran de veille avec MDP après 10 min d'inactivité</td></tr>
-              <tr><td><span class="gpo-name">GPO_Blocage_USB</span></td><td><span class="gpo-scope">OU Exploitation</span></td><td>Désactivation des périphériques de stockage USB amovibles</td></tr>
-              <tr><td><span class="gpo-name">GPO_Fond_Ecran</span></td><td><span class="gpo-scope">Domaine entier</span></td><td>Fond d'écran VNF imposé, non modifiable par l'utilisateur</td></tr>
-              <tr><td><span class="gpo-name">GPO_Panneau_Config</span></td><td><span class="gpo-scope">OU Direction</span></td><td>Accès restreint au panneau de configuration</td></tr>
+              <tr><td><span class="gpo-name">Green-IT</span></td><td><span class="gpo-scope">OU_Ordinateurs</span></td><td>Extinction des pc à 00h tous les jours.</td></tr>
+              <tr><td><span class="gpo-name">Install_Logiciels_Auto</span></td><td><span class="gpo-scope">OU_Ordinateurs</span></td><td>Installation automatique des logiciels de base.</td></tr>
+              <tr><td><span class="gpo-name">Interdiction_personnalisation</span></td><td><span class="gpo-scope">OU_Utilisateurs</span></td><td>Interdiction de personnaliser le fond d'écran.</td></tr>
+              <tr><td><span class="gpo-name">Deploiement_Partage_Employes</span></td><td><span class="gpo-scope">OU_Employes</span></td><td>Deploiement du lecteurs réseaux.</td></tr>
+              <tr><td><span class="gpo-name">Wallpaper_Employes</span></td><td><span class="gpo-scope">OU_Employes</span></td><td>Définition du fond d'écarn pour les employés.</td></tr>
             </tbody>
           </table>
         </div>
-        <img src="images_missions/gpo_parametres.png" class="step-image" alt="Paramètres GPO">
       </div>
 
       <div class="step">
         <div class="step-header"><div class="step-number">7</div><h3>Vérification et application des GPO</h3></div>
         <p>Après modification des GPO, vérification de leur bonne application sur les postes clients.</p>
         <div class="substeps">
-          <div class="substep"><strong>Forcer la mise à jour :</strong> <code>gpupdate /force</code> sur le poste client ou depuis l'AD via PowerShell</div>
-          <div class="substep"><strong>Vérifier les GPO appliquées :</strong> <code>gpresult /r</code> ou <code>gpresult /h rapport.html</code> pour un rapport complet</div>
-          <div class="substep"><strong>RSOP :</strong> console MMC → Resultant Set of Policy pour visualiser les politiques effectives</div>
+          <div class="substep"><strong>Forcer la mise à jour :</strong> <code>gpupdate /force</code> sur le poste client</div>
+          <div class="substep"><strong>Vérifier les GPO appliquées :</strong> <code>gpresult /r</code></div>
         </div>
-        <img src="images_missions/gpo_verification.png" class="step-image" alt="Vérification GPO">
+        <img src="images_missions/gpresult_1.png" class="step-image" alt="Vérification GPO">
+        <img src="images_missions/gpresult_2.png" class="step-image" alt="Vérification GPO">
       </div>
 
     </div>
@@ -240,11 +346,11 @@
         <div class="step-header"><div class="step-number">8</div><h3>Partages réseau et permissions NTFS</h3></div>
         <p>Création de dossiers partagés sur le serveur de fichiers avec des permissions définies par groupes de sécurité AD.</p>
         <div class="substeps">
-          <div class="substep"><strong>Partage réseau :</strong> <code>\\SRV-FICHIERS\Direction</code> — accessible uniquement par GRP_Direction</div>
-          <div class="substep"><strong>Permissions NTFS :</strong> Lecture seule (users), Modification (responsables), Contrôle total (admins)</div>
-          <div class="substep"><strong>Bonne pratique :</strong> toujours gérer les droits via les <strong>groupes AD</strong>, jamais directement sur les comptes utilisateurs</div>
+          <div class="substep"><strong>Partage réseau :</strong> <code>\\SRV2K19-GC\Partage_Employes</code> — accessible uniquement par GG_Employes</div>
+          <div class="substep"><strong>Permissions NTFS :</strong> Lecture seule (GDL_Partage_Employes_R), Modification (GDL_Partage_Employes_RW), Contrôle total (admins)</div>
+          <div class="substep"><strong>Bonne pratique :</strong> toujours gérer les droits via les <strong>groupes AD</strong>(et locaux de préfèrence), jamais directement sur les comptes utilisateurs</div>
         </div>
-        <img src="images_missions/ad_permissions.png" class="step-image" alt="Permissions NTFS">
+        <img src="images_missions/partage.png" class="step-image" alt="Permissions NTFS">
       </div>
     </div>
 
