@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Veille Approfondie : Cybersécurité & Télémétrie F1</title>
+  <title>Veille : Cybersécurité & Télémétrie F1</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
     
@@ -23,10 +23,10 @@
     html { scroll-behavior: smooth; }
     body { background: var(--bg-base); color: var(--text-secondary); line-height: 1.7; }
 
-    header { 
-        background: linear-gradient(135deg, #0284c7, #38bdf8, #0ea5e9); 
-        color: white; text-align: center; padding: 80px 20px; 
-        box-shadow: 0 4px 20px rgba(2, 132, 199, 0.2);
+    header {
+      background: linear-gradient(135deg, #0284c7, #38bdf8, #0ea5e9);
+      color: white; text-align: center; padding: 80px 20px;
+      box-shadow: 0 4px 20px rgba(2, 132, 199, 0.2);
     }
     header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
     header p { font-size: 1rem; opacity: 0.9; }
@@ -44,507 +44,263 @@
     .stat-box .number { display: block; font-size: 2.2rem; font-weight: 700; color: var(--accent); }
     .stat-box .label { font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
-    .section-card { background: white; border-radius: var(--radius); padding: 45px; margin-bottom: 35px; box-shadow: var(--shadow); border: 1px solid var(--border-card); }
-    h2 { font-size: 1.8rem; color: var(--text-primary); margin-bottom: 25px; display: flex; align-items: center; gap: 15px; }
+    .section-card { background: white; border-radius: var(--radius); padding: 40px; margin-bottom: 30px; box-shadow: var(--shadow); border: 1px solid var(--border-card); }
+    h2 { font-size: 1.8rem; color: var(--text-primary); margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }
     h2::before { content: ""; width: 6px; height: 35px; background: var(--accent); border-radius: 3px; }
-    h3 { color: var(--accent); margin: 25px 0 15px 0; font-size: 1.3rem; border-bottom: 1px solid var(--accent-soft); padding-bottom: 5px; }
+    h3 { color: var(--accent); margin: 20px 0 12px; font-size: 1.15rem; border-bottom: 1px solid var(--accent-soft); padding-bottom: 5px; }
 
-    .dual-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; margin: 25px 0; }
-    .dual-card { padding: 30px; border-radius: var(--radius); border: 1px solid var(--border-card); height: 100%; }
-    .dual-card.blue { background: #f8fafc; border-top: 5px solid var(--accent); }
-    .dual-card.warn { background: #fffbeb; border-top: 5px solid #f59e0b; }
-    .dual-card.green { background: #f0fdf4; border-top: 5px solid #22c55e; }
-    .dual-card.red { background: #fff1f2; border-top: 5px solid #ef4444; }
-    .dual-card h4 { font-size: 1.05rem; color: var(--text-primary); margin-bottom: 12px; }
+    .dual-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin: 20px 0; }
+    .dual-card { padding: 25px; border-radius: var(--radius); border: 1px solid var(--border-card); }
+    .dual-card.blue { background: #f8fafc; border-top: 4px solid var(--accent); }
+    .dual-card.warn { background: #fffbeb; border-top: 4px solid #f59e0b; }
+    .dual-card h4 { font-size: 1rem; color: var(--text-primary); margin-bottom: 10px; }
 
-    .tech-detail { background: #f1f5f9; padding: 20px; border-radius: 12px; margin: 15px 0; font-size: 0.95rem; border-left: 4px solid #cbd5e1; }
+    .tech-detail { background: #f1f5f9; padding: 18px; border-radius: 12px; margin: 12px 0; font-size: 0.95rem; border-left: 4px solid #cbd5e1; }
     .tech-detail.highlight { border-left-color: var(--accent); background: var(--accent-soft); }
-    .tech-detail.danger { border-left-color: #ef4444; background: #fff1f2; }
     .tech-detail.success { border-left-color: #22c55e; background: #f0fdf4; }
 
-    .badge { background: var(--accent); color: white; padding: 3px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-left: 10px; vertical-align: middle; }
-    .badge.green { background: #22c55e; }
+    .badge { background: var(--accent); color: white; padding: 3px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 600; margin-left: 8px; vertical-align: middle; }
     .badge.orange { background: #f59e0b; }
-    .badge.red { background: #ef4444; }
-    .badge.purple { background: #8b5cf6; }
 
-    .team-card {
-      background: white;
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius);
-      padding: 28px;
-      margin: 18px 0;
-      box-shadow: var(--shadow);
-      border-left: 6px solid var(--accent);
-    }
-    .team-card h4 {
-      font-size: 1.15rem;
-      color: var(--text-primary);
-      margin-bottom: 10px;
-    }
-    .team-card ul { padding-left: 20px; margin-top: 8px; }
-    .team-card ul li { margin-bottom: 7px; }
+    .team-card { background: white; border: 1px solid var(--border-card); border-radius: var(--radius); padding: 22px; margin: 15px 0; box-shadow: var(--shadow); border-left: 5px solid var(--accent); }
+    .team-card h4 { font-size: 1.05rem; color: var(--text-primary); margin-bottom: 8px; }
+    .team-card ul { padding-left: 18px; margin-top: 6px; }
+    .team-card ul li { margin-bottom: 5px; font-size: 0.93rem; }
 
-    .timeline { position: relative; padding-left: 30px; margin: 20px 0; }
-    .timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: var(--accent-soft); }
-    .timeline-item { position: relative; margin-bottom: 22px; }
-    .timeline-item::before { content: ''; position: absolute; left: -26px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); }
+    .timeline { position: relative; padding-left: 25px; margin: 15px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: var(--accent-soft); }
+    .timeline-item { position: relative; margin-bottom: 18px; font-size: 0.93rem; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
     .timeline-item strong { color: var(--text-primary); }
 
-    .attack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin: 20px 0; }
-    .attack-item { background: #fff1f2; border-radius: 12px; padding: 22px; border-left: 4px solid #ef4444; }
-    .attack-item h5 { color: #dc2626; font-size: 1rem; margin-bottom: 8px; }
+    .attack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 15px 0; }
+    .attack-item { background: #fff1f2; border-radius: 12px; padding: 18px; border-left: 4px solid #ef4444; }
+    .attack-item h5 { color: #dc2626; font-size: 0.95rem; margin-bottom: 6px; }
+    .attack-item p { font-size: 0.88rem; margin: 0; }
 
-    .data-flow { background: linear-gradient(135deg, #f8fafc, #e0f2fe); border-radius: var(--radius); padding: 30px; margin: 20px 0; border: 1px solid var(--border-card); }
-    .flow-steps { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
-    .flow-step { background: var(--accent); color: white; padding: 12px 20px; border-radius: 10px; font-size: 0.85rem; font-weight: 600; text-align: center; min-width: 120px; }
-    .flow-arrow { font-size: 1.4rem; color: var(--accent); font-weight: 700; }
+    .data-flow { background: linear-gradient(135deg, #f8fafc, #e0f2fe); border-radius: var(--radius); padding: 25px; margin: 15px 0; border: 1px solid var(--border-card); }
+    .flow-steps { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 15px; }
+    .flow-step { background: var(--accent); color: white; padding: 10px 16px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; text-align: center; }
+    .flow-arrow { font-size: 1.2rem; color: var(--accent); font-weight: 700; }
 
-    footer { background: white; text-align: center; padding: 40px; color: #64748b; border-top: 1px solid var(--border-card); }
-    p { margin-bottom: 12px; }
-    ul li { margin-bottom: 6px; }
+    footer { background: white; text-align: center; padding: 35px; color: #64748b; border-top: 1px solid var(--border-card); }
+    p { margin-bottom: 10px; }
+    ul li { margin-bottom: 5px; }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>🏎️ Expertise : Télémétrie & Cybersécurité F1</h1>
-    <p>Analyse approfondie des infrastructures réseaux, partenariats cloud réels et enjeux de sécurité des données</p>
+    <h1>🏎️ Télémétrie & Cybersécurité F1</h1>
+    <p>Veille technologique — Infrastructures réseaux et sécurité des données en Formule 1</p>
   </header>
 
   <section>
 
     <div class="toc">
-      <h3>📋 Sommaire détaillé</h3>
+      <h3>📋 Sommaire</h3>
       <div class="toc-list">
-        <a href="#flux">1. Écosystème Data & Capteurs</a>
-        <a href="#chaine">2. Chaîne de Transmission</a>
-        <a href="#cloud">3. Cloud, ARM & Partenaires Réels</a>
-        <a href="#simulations">4. Simulations & Big Data</a>
-        <a href="#reseau">5. Protocoles Sans-fil & 5G</a>
-        <a href="#cyber">6. Menaces Réelles & Zero Trust</a>
-        <a href="#incidents">7. Incidents Historiques F1</a>
-        <a href="#ia">8. IA Générative & 2026/2027</a>
-        <a href="#synthese">9. Récapitulatif SISR</a>
+        <a href="#flux">1. Capteurs & Données</a>
+        <a href="#cloud">2. Cloud & Partenaires</a>
+        <a href="#reseau">3. Réseau & Protocoles</a>
+        <a href="#cyber">4. Cybersécurité</a>
+        <a href="#incidents">5. Incidents Réels</a>
+        <a href="#ia">6. IA & Futur</a>
+        <a href="#synthese">7. Synthèse SISR</a>
       </div>
     </div>
 
     <div class="stats-grid">
       <div class="stat-box"><span class="number">300+</span><span class="label">Capteurs par voiture</span></div>
-      <div class="stat-box"><span class="number">1,1 M</span><span class="label">Points de données / seconde</span></div>
-      <div class="stat-box"><span class="number">2 To</span><span class="label">Données générées par session</span></div>
-      <div class="stat-box"><span class="number">4 Mrd</span><span class="label">Simulations OCI / jour de course</span></div>
+      <div class="stat-box"><span class="number">1,1 M</span><span class="label">Points de données / sec</span></div>
+      <div class="stat-box"><span class="number">2 To</span><span class="label">Données par session</span></div>
+      <div class="stat-box"><span class="number">4 Mrd</span><span class="label">Simulations OCI / GP</span></div>
     </div>
 
-    <!-- SECTION 1 : ECOSYSTÈME DATA -->
+    <!-- SECTION 1 -->
     <div class="section-card" id="flux">
-      <h2>1. L'Écosystème des Données et la Collecte</h2>
-      <p>La performance en F1 repose sur une boucle de rétroaction ultra-rapide entre la voiture, le muret des stands et l'usine. Chaque composant est instrumenté pour fournir un état de santé en temps réel. Les données générées dépassent tout ce que l'on trouve dans d'autres sports.</p>
-
-      <h3>Ce que mesurent les 300+ capteurs</h3>
-      <div class="dual-grid">
-        <div class="dual-card blue">
-          <h4>🔧 Données mécaniques & moteur</h4>
-          <ul>
-            <li>Pression d'huile et de carburant (bar)</li>
-            <li>Températures moteur (eau, huile, turbo)</li>
-            <li>Régime moteur (tr/min), couple, couple MGU-K</li>
-            <li>Pression de freinage (avant / arrière)</li>
-            <li>Températures de frein disque (via infrarouge)</li>
-            <li>Usure des plaquettes de frein estimée</li>
-          </ul>
-        </div>
-        <div class="dual-card blue">
-          <h4>🏁 Données dynamiques & pneumatiques</h4>
-          <ul>
-            <li>Pression des 4 pneus (mesurée par capteur Pirelli)</li>
-            <li>Température de surface et interne des pneus</li>
-            <li>Accélération latérale & longitudinale (g)</li>
-            <li>Angle de braquage, débattement de suspension</li>
-            <li>Charge aérodynamique (capteurs de pression sur la carrosserie)</li>
-            <li>Gyroscope 3 axes pour le roulis, tangage, lacet</li>
-          </ul>
-        </div>
-      </div>
-
-      <h3>La chaîne d'acquisition : du capteur à l'ECU</h3>
-      <p>Une monoplace est un réseau local mobile embarqué. Les capteurs (pression, température, contrainte, optique) génèrent des signaux analogiques convertis en numérique par des convertisseurs ADC haute fréquence.</p>
+      <h2>1. Capteurs & Écosystème Data</h2>
+      <p>Une monoplace F1 est un réseau local mobile : 300+ capteurs mesurent en permanence les températures moteur, pressions de freinage, état des pneus, accélérations et charges aérodynamiques. Ces signaux analogiques sont convertis en numérique et acheminés vers l'ECU central.</p>
 
       <div class="tech-detail">
-        <strong>Focus Technique : Le Bus CAN (Controller Area Network)</strong><br>
-        Développé initialement par Bosch pour l'automobile de série, le Bus CAN est le protocole de communication interne de la monoplace. Il permet d'interconnecter tous les calculateurs sans avoir besoin d'un ordinateur central (architecture peer-to-peer). En F1, sa robustesse est capitale : il supporte des environnements à très hautes interférences électromagnétiques (allumages, moteur électrique MGU-K et MGU-H) et des vibrations extrêmes pouvant dépasser 50g. Les données convergent vers l'<strong>ECU standardisé McLaren Applied TAG-320</strong> (fourni par McLaren Applied Technologies, anciennement McLaren Electronic Systems), qui sert de passerelle principale vers les systèmes de télémétrie sans-fil.
-      </div>
-
-      <div class="tech-detail highlight">
-        <strong>📌 Règle FIA — ECU standard :</strong> Pour des raisons d'équité sportive, la FIA impose depuis 2008 à toutes les écuries d'utiliser le même ECU de base, fourni par McLaren Applied. Les écuries peuvent cependant connecter des modules supplémentaires propriétaires. Cela garantit que la télémétrie de sécurité (carburant, températures critiques) transite par une plateforme commune et fiable.
+        <strong>Bus CAN (Controller Area Network) :</strong> protocole de communication interne reliant tous les calculateurs de la voiture sans ordinateur central. Très résistant aux interférences électromagnétiques et vibrations (jusqu'à 50g). Les données convergent vers l'<strong>ECU McLaren Applied TAG-320</strong>, imposé par la FIA à toutes les écuries depuis 2008 pour des raisons d'équité sportive.
       </div>
 
       <div class="data-flow">
-        <strong style="color: var(--text-primary);">🔄 Flux simplifié de la donnée en course :</strong>
+        <strong style="color: var(--text-primary);">🔄 Flux de la donnée en course :</strong>
         <div class="flow-steps">
-          <div class="flow-step">300+ Capteurs voiture</div>
+          <div class="flow-step">300+ Capteurs</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">Bus CAN interne</div>
+          <div class="flow-step">Bus CAN</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">ECU McLaren Applied</div>
+          <div class="flow-step">ECU McLaren</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">Émetteur Wi-Fi embarqué</div>
+          <div class="flow-step">Wi-Fi embarqué</div>
           <div class="flow-arrow">→</div>
           <div class="flow-step">Muret des stands</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-step">Fibre / Satellite</div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-step">Cloud (OCI / AWS)</div>
+          <div class="flow-step">Cloud (OCI/AWS)</div>
         </div>
       </div>
     </div>
 
-    <!-- SECTION 2 : CHAÎNE DE TRANSMISSION -->
-    <div class="section-card" id="chaine">
-      <h2>2. La Chaîne de Transmission Circuit → Usine</h2>
-      <p>Transmettre 1,1 million de points de données par seconde depuis une voiture roulant à 320 km/h, sans perte, avec une latence inférieure à 50 ms, est un défi d'ingénierie réseau majeur. C'est l'équivalent d'un streaming 4K permanent depuis un objet en mouvement extrême.</p>
-
-      <h3>Du bord de piste à la "Panic Room"</h3>
-      <div class="dual-grid">
-        <div class="dual-card blue">
-          <h4>📡 Infrastructure de bord de piste</h4>
-          <p>Autour du circuit, les écuries installent leur propre infrastructure radio en complément du Wi-Fi officiel FOM (Formula One Management) :</p>
-          <ul>
-            <li><strong>Antennes directionnelles Wi-Fi :</strong> positionnées en bord de piste tous les 500 m environ, orientées vers la trajectoire de la voiture.</li>
-            <li><strong>Handover automatique :</strong> protocole 802.11r pour passer d'une borne à l'autre en moins de 50 ms sans coupure.</li>
-            <li><strong>Redondance satellite :</strong> liaison VSAT (Very Small Aperture Terminal) de secours en cas de perte de la liaison terrestre.</li>
-            <li><strong>Rack de traitement local :</strong> mini-serveurs (Edge Computing) dans les garages pour les traitements temps réel immédiats.</li>
-          </ul>
-        </div>
-        <div class="dual-card blue">
-          <h4>🏭 Race Support Room (Usine)</h4>
-          <p>Chaque grande écurie possède une salle dédiée à l'usine (ex : Milton Keynes pour Red Bull, Brackley pour Mercedes) :</p>
-          <ul>
-            <li><strong>Liaison fibre intercontinentale :</strong> connexion directe entre le paddock et l'usine via des liaisons MPLS privées à très faible latence (< 100 ms même depuis l'Australie ou le Japon).</li>
-            <li><strong>Ingénieurs supplémentaires :</strong> une équipe entière analyse la télémétrie en parallèle depuis l'usine, sans limite de personnel (le règlement FIA limite le personnel en bord de piste).</li>
-            <li><strong>Big Data historique :</strong> accès immédiat à des années de données pour comparer les tendances en cours de course.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="tech-detail">
-        <strong>Chiffres concrets Oracle Red Bull Racing :</strong><br>
-        Chaque voiture Red Bull génère jusqu'à <strong>2 To de données télémétriques par session</strong> (essais libres, qualifications, course). Ces données incluent les mesures des capteurs, les images embarquées, les données moteur et les logs de l'ECU. Toutes sont transmises en temps réel vers le paddock et la Race Support Room de Milton Keynes, puis traitées sur Oracle Cloud Infrastructure (OCI).
-      </div>
-    </div>
-
-    <!-- SECTION 3 : CLOUD PARTNERS -->
+    <!-- SECTION 2 -->
     <div class="section-card" id="cloud">
-      <h2>3. Cloud Computing, Architecture ARM & Partenaires Réels</h2>
-      <p>Le traitement des données ne se limite pas au bord de piste. Chaque écurie a conclu des partenariats stratégiques avec des géants du cloud. L'avantage concurrentiel se gagne par la capacité à simuler des milliards de scénarios de course en quelques heures.</p>
-
-      <h3>Qui utilise quoi ? — Les partenariats cloud officiels</h3>
+      <h2>2. Cloud Computing & Partenaires Réels</h2>
+      <p>Chaque écurie s'appuie sur un partenaire cloud pour traiter des milliards de simulations. Le Budget Cap F1 (140 M$) rend le modèle pay-as-you-go indispensable : activer 1 000 serveurs une heure coûte autant que 1 serveur 1 000 heures.</p>
 
       <div class="team-card" style="border-left-color: #1c1b1b;">
-        <h4>⚪ Oracle Red Bull Racing — Oracle Cloud Infrastructure (OCI) <span class="badge">Partenariat 2021–2026+</span></h4>
+        <h4>⚪ Red Bull Racing — Oracle Cloud Infrastructure (OCI) <span class="badge">2021–2026+</span></h4>
         <ul>
-          <li><strong>Volume :</strong> Jusqu'à <strong>4 milliards de simulations</strong> exécutées sur OCI lors d'un seul week-end de Grand Prix.</li>
-          <li><strong>Architecture ARM Ampere :</strong> Migration sur les instances OCI Compute A2/A4 Flex basées sur ARM. Gain de <strong>10% de vitesse de simulation supplémentaire</strong> sur les instances précédentes, et déjà +25% de gain depuis la migration de 2021.</li>
-          <li><strong>Pourquoi ARM vs x86 :</strong> L'absence d'hyper-threading sur les CPU Ampere (192 cœurs) élimine le "jitter" (variation de performance), crucial pour la reproductibilité des simulations. De plus, l'efficience énergétique réduit les coûts, essentiels avec le Budget Cap F1 fixé à 140 M$.</li>
-          <li><strong>IA RAG :</strong> Déploiement d'un agent IA sur le muret des stands pouvant interroger l'intégralité du règlement FIA et générer des argumentaires de réclamation en temps réel (Retrieval-Augmented Generation + LLM).</li>
-          <li><strong>Moteur 2026 :</strong> Le nouveau moteur Red Bull Ford Powertrains (réglementation hybride 2026) a été entièrement conçu et simulé sur OCI avant d'exister physiquement.</li>
-        </ul>
-      </div>
-
-      <div class="team-card" style="border-left-color: #00d2be;">
-        <h4>🩵 Mercedes-AMG F1 — HPE (Hewlett Packard Enterprise) <span class="badge" style="background:#00a693;">Partenaire technique</span></h4>
-        <ul>
-          <li>HPE fournit les solutions de <strong>HPC (High Performance Computing)</strong> pour les simulations CFD de Mercedes.</li>
-          <li>Systèmes HPE ProLiant et Cray SuperComputers pour les calculs aérodynamiques.</li>
-          <li>Analyse de millions de points de données pour optimiser les stratégies d'arrêts aux stands, la sélection des pneus et les réglages de suspension.</li>
-          <li>HPE Pointnext pour l'infrastructure IT opérationnelle de l'usine de Brackley.</li>
+          <li>Jusqu'à <strong>4 milliards de simulations Monte Carlo</strong> par Grand Prix.</li>
+          <li>CPU ARM Ampere (192 cœurs) : sans hyper-threading, élimine le "jitter" pour des simulations reproductibles.</li>
+          <li>Agent IA RAG sur le muret des stands pour générer des réclamations FIA en temps réel.</li>
         </ul>
       </div>
 
       <div class="team-card" style="border-left-color: #dc0000;">
-        <h4>🔴 Scuderia Ferrari HP — Amazon Web Services (AWS) <span class="badge orange">Partenariat officiel</span></h4>
+        <h4>🔴 Ferrari — Amazon Web Services (AWS) <span class="badge orange">Partenariat officiel</span></h4>
         <ul>
-          <li>AWS permet à Ferrari d'exécuter des <strong>milliers de simulations en parallèle</strong> sur EC2 (instances c5n), là où les serveurs on-premises ne pourraient en lancer qu'une à la fois.</li>
-          <li>Utilisation d'<strong>Amazon SageMaker</strong> pour l'entraînement de modèles de machine learning sur les données historiques de course.</li>
-          <li>Simulation CFD : modèles de 150 à 600 millions de cellules, résultats retournés en <strong>2,5 heures</strong> grâce au cloud AWS (vs plusieurs jours en local).</li>
+          <li>Simulations CFD sur instances EC2 c5n avec <strong>1 150 cœurs en parallèle</strong>.</li>
+          <li>Modèles de 150 à 600 millions de cellules, résultats en 2,5h (vs plusieurs jours en local).</li>
         </ul>
       </div>
 
-      <div class="team-card" style="border-left-color: #ff8000;">
-        <h4>🟠 Formula One Group — AWS <span class="badge">Infrastructure centrale F1</span></h4>
+      <div class="team-card" style="border-left-color: #00d2be;">
+        <h4>🩵 Mercedes-AMG F1 — HPE (Hewlett Packard Enterprise)</h4>
         <ul>
-          <li>La F1 en tant qu'organisation a migré la quasi-totalité de son infrastructure depuis ses datacenters on-premises vers AWS.</li>
-          <li><strong>Amazon Kinesis</strong> collecte et analyse les flux de données télémétriques en streaming temps réel pour les retransmissions TV mondiales.</li>
-          <li><strong>150 000 heures de contenu</strong> historique (archives photos/vidéo F1 depuis 70 ans) migrées sur AWS S3 via le service AWS Media2Cloud.</li>
-          <li><strong>Amazon SageMaker</strong> traite 300 millions de points de données par course pour alimenter les "F1 Insights" diffusés à la télévision (analyses de freinage, zones de dépassement, comparaisons de trajectoires).</li>
-          <li><strong>McLaren</strong> utilise également Splunk (Data-to-Everything Platform) pour l'analyse des données non structurées de son infrastructure IT.</li>
+          <li>Supercalculateurs Cray pour les simulations CFD aérodynamiques.</li>
+          <li>Analyse des stratégies d'arrêts aux stands et dégradation des pneus.</li>
         </ul>
       </div>
-
-      <div class="tech-detail highlight">
-        <strong>📌 Le Budget Cap et son impact IT :</strong> Depuis 2021, la FIA impose un plafond budgétaire de 140 M$ par équipe. Cela a radicalement changé la stratégie IT : il n'est plus rentable de maintenir des datacenters physiques coûteux. Le cloud (pay-as-you-go) devient le seul modèle viable. Red Bull peut ainsi activer 1 000 serveurs pendant 1 heure pour un Grand Prix, puis les désactiver immédiatement après — pour le même coût que de faire tourner 1 serveur pendant 1 000 heures.
-      </div>
     </div>
 
-    <!-- SECTION 4 : SIMULATIONS -->
-    <div class="section-card" id="simulations">
-      <h2>4. Simulations, Monte Carlo & Big Data</h2>
-      <p>La course se gagne autant en dehors de la piste que dessus. Les simulations permettent aux ingénieurs d'anticiper des milliers de scénarios possibles avant même le départ.</p>
-
-      <h3>Les simulations Monte Carlo en F1</h3>
-      <div class="tech-detail">
-        <strong>Principe :</strong> La méthode Monte Carlo consiste à simuler un grand nombre de scénarios en faisant varier aléatoirement des paramètres incertains (dégradation des pneus, consommation de carburant, météo, safety car, erreurs aux stands, stratégies adverses). En répétant des millions de fois, on obtient une distribution de probabilités des résultats possibles et on identifie la stratégie avec le meilleur ratio risque/récompense.
-        <br><br>
-        <strong>Application Red Bull :</strong> Oracle Red Bull Racing exécute jusqu'à <strong>4 milliards de simulations Monte Carlo</strong> sur OCI lors d'un seul jour de Grand Prix. Max Verstappen déclare : <em>"Grâce à toutes les simulations avant la course, il est très facile d'adapter une stratégie différente pendant la course, car tout est préparé."</em>
-      </div>
-
-      <h3>CFD (Computational Fluid Dynamics) dans le cloud</h3>
-      <div class="tech-detail">
-        <strong>Qu'est-ce que la CFD ?</strong> La mécanique des fluides numérique simule le comportement de l'air autour de la monoplace. Un modèle CFD F1 peut contenir entre <strong>150 et 600 millions de cellules</strong> de calcul représentant l'espace aérodynamique autour de la voiture. En développant les nouvelles réglementations pour la saison 2022, la F1 a utilisé <strong>500 000 Go (soit 0,5 pétaoctet) de données</strong> en simulations CFD sur AWS pour valider les nouvelles règles aérodynamiques.
-        <br><br>
-        <strong>Exemple Ferrari AWS :</strong> Avec les instances EC2 c5n d'AWS, un projet CFD utilisé pour la conception de la F1-23 a tourné pendant 6 mois avec <strong>1 150 cœurs de calcul en parallèle</strong>, analysant plus de 550 millions de points de données pour modéliser l'effet des turbulences d'une voiture sur une autre — ce qui a directement influencé les règles de dépassement 2022.
-      </div>
-
-      <h3>L'historique : 70 ans de données dans le cloud</h3>
-      <div class="tech-detail">
-        AWS stocke plus de <strong>70 ans de données historiques de course F1</strong> sur Amazon S3. Durant chaque Grand Prix, les données télémétriques en direct sont confrontées en permanence à cet historique pour identifier des tendances anormales, prédire les dégradations et calibrer les modèles de simulation. La F1 a migré <strong>150 000 heures de contenu</strong> (films, photos, données de course) depuis des archives sur bande magnétique vers le cloud AWS via le service Media2Cloud — une opération d'archivage numérique de grande envergure.
-      </div>
-    </div>
-
-    <!-- SECTION 5 : RÉSEAU -->
+    <!-- SECTION 3 -->
     <div class="section-card" id="reseau">
-      <h2>5. Transport de Données : Sans-fil et Très Haute Disponibilité</h2>
-      <p>Le défi majeur est de maintenir une liaison stable avec un objet se déplaçant à plus de 320 km/h, entouré de structures métalliques et de milliers de spectateurs utilisant le Wi-Fi public.</p>
+      <h2>3. Réseau & Protocoles Sans-fil</h2>
+      <p>Maintenir une liaison stable avec une voiture à 320 km/h est un défi réseau unique. Les écuries déploient leur propre infrastructure radio sur chaque circuit, en parallèle du réseau officiel FOM.</p>
 
-      <h3>Technologies de transmission circuit</h3>
-      <div class="tech-detail">
-        <strong>802.11r (Fast BSS Transition) :</strong><br>
-        Pour couvrir un circuit de 5 km, plusieurs dizaines de bornes Wi-Fi sont déployées. Le protocole 802.11r permet à la voiture de basculer d'une borne à l'autre (handover) en moins de <strong>50 ms</strong> sans ré-authentification complète, évitant toute rupture du flux de télémétrie. Sans ce protocole, le temps d'handover atteindrait 300 à 500 ms — inacceptable pour une voiture qui parcourt 45 m en 500 ms à 320 km/h.
-      </div>
-      <div class="tech-detail">
-        <strong>5G Privée et Network Slicing :</strong><br>
-        En utilisant une bande de fréquence dédiée (spectre licencié), les écuries s'isolent totalement du réseau public des spectateurs. Le <strong>Network Slicing</strong> (découpage réseau) crée un tunnel logiciel prioritaire : même si le réseau est saturé par les caméras 4K ou les smartphones, les données de sécurité moteur (températures critiques, pression d'huile) passent systématiquement en priorité maximale.
-      </div>
-
-      <h3>Redondance et haute disponibilité du réseau paddock</h3>
       <div class="dual-grid">
         <div class="dual-card blue">
-          <h4>Infrastructure réseau multi-couches</h4>
+          <h4>📡 Protocoles clés</h4>
           <ul>
-            <li><strong>Fibre optique principale :</strong> Réseau backbone fibré déployé temporairement par FOM (Formula One Management) sur chaque circuit.</li>
-            <li><strong>Wi-Fi 802.11ax (Wi-Fi 6) :</strong> Déploiement de bornes Wi-Fi 6 (plus efficace en haute densité) dans les garages et le paddock.</li>
-            <li><strong>4G/5G opérateur privé :</strong> Fréquences dédiées pour les liaisons critiques de télémétrie.</li>
-            <li><strong>VSAT Satellite :</strong> Liaison de secours via satellite géostationnaire pour les circuits isolés (ex : Interlagos, Suzuka).</li>
+            <li><strong>802.11r :</strong> handover entre bornes en &lt; 50 ms sans ré-authentification — indispensable à 320 km/h.</li>
+            <li><strong>Wi-Fi 6 (802.11ax) :</strong> meilleure efficacité en haute densité dans le paddock.</li>
+            <li><strong>5G privée + Network Slicing :</strong> tunnel dédié prioritaire pour la télémétrie critique, isolé du réseau public.</li>
           </ul>
         </div>
         <div class="dual-card blue">
-          <h4>Architecture MPLS inter-site</h4>
+          <h4>🔗 Haute disponibilité</h4>
           <ul>
-            <li><strong>MPLS (Multiprotocol Label Switching) :</strong> Les grandes écuries louent des liaisons MPLS privées reliant en permanence le paddock à leur usine. Ces liaisons garantissent une bande passante dédiée et une latence contrôlée, contrairement à l'Internet public.</li>
-            <li><strong>Latence intercontinentale :</strong> La liaison entre le circuit de Suzuka (Japon) et Brackley (Mercedes, UK) est inférieure à <strong>150 ms</strong> grâce à des routes fibre sous-marines optimisées.</li>
-            <li><strong>Failover automatique :</strong> En cas de perte de la liaison principale, le trafic bascule automatiquement vers la liaison satellite de secours en moins de 500 ms.</li>
+            <li><strong>Fibre MPLS privée :</strong> liaison dédiée paddock → usine, &lt; 150 ms depuis le Japon.</li>
+            <li><strong>VSAT Satellite :</strong> liaison de secours pour les circuits isolés.</li>
+            <li><strong>Failover automatique :</strong> bascule en moins de 500 ms si la liaison principale tombe.</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- SECTION 6 : CYBERSÉCURITÉ -->
+    <!-- SECTION 4 -->
     <div class="section-card" id="cyber">
-      <h2>6. Menaces et Stratégies de Cybersécurité</h2>
-      <p>La F1 est une cible de choix pour l'espionnage industriel. Un accès non autorisé aux données de télémétrie d'un concurrent permettrait de connaître précisément son usure de pneus, sa consommation carburant, ses réglages aérodynamiques et sa stratégie de course — des informations valant des millions d'euros.</p>
+      <h2>4. Cybersécurité & Modèle Zero Trust</h2>
+      <p>La F1 est une cible d'espionnage industriel de premier plan. Accéder à la télémétrie adverse revient à connaître sa stratégie complète en temps réel.</p>
 
-      <h3>La surface d'attaque spécifique au paddock</h3>
       <div class="dual-grid">
         <div class="dual-card warn">
-          <h4>⚠️ Environnement hostile par nature</h4>
+          <h4>⚠️ Surface d'attaque</h4>
           <ul>
-            <li><strong>Mobilité extreme :</strong> L'infrastructure réseau complète est montée et démontée chaque semaine dans un nouveau pays. Chaque remontage est une occasion de misconfiguration.</li>
-            <li><strong>Paddock ouvert :</strong> Journalistes, sponsors, VIP, techniciens de partenaires (Pirelli, motoristes) circulent dans des espaces proches des infrastructures réseau.</li>
-            <li><strong>Réseaux partagés :</strong> Les fournisseurs techniques (Pirelli pour les pneus, Honda/Mercedes pour les moteurs) partagent des segments réseaux avec l'écurie cliente.</li>
-            <li><strong>Personnel temporaire :</strong> Prestataires locaux recrutés sur place pour chaque Grand Prix, accédant à des systèmes informatiques.</li>
+            <li><strong>Infrastructure nomade :</strong> remontée chaque semaine dans un nouveau pays → risques de misconfiguration.</li>
+            <li><strong>Réseaux partagés :</strong> motoristes et équipementiers (Pirelli, Honda…) partagent des segments réseau.</li>
+            <li><strong>Personnel temporaire :</strong> prestataires locaux avec accès aux systèmes.</li>
           </ul>
         </div>
         <div class="dual-card blue">
-          <h4>🛡️ Modèle Zero Trust</h4>
-          <p>Adopté par les grandes écuries pour contrer les mouvements latéraux en cas d'intrusion :</p>
+          <h4>🛡️ Zero Trust</h4>
           <ul>
-            <li><strong>Micro-segmentation :</strong> Le réseau de télémétrie (données voiture) est strictement isolé du réseau bureautique de l'hospitalité VIP et des réseaux partenaires.</li>
-            <li><strong>Authentification forte MFA :</strong> Chaque capteur, interface de diagnostic ou terminal d'ingénieur doit s'authentifier avec un certificat numérique valide.</li>
-            <li><strong>Principe du moindre privilège :</strong> Un ingénieur suspension n'a accès qu'aux données de suspension, pas aux données moteur ou stratégiques.</li>
-            <li><strong>SIEM & SOC :</strong> Centre de surveillance actif analysant les journaux d'événements réseau en temps réel pour détecter exfiltrations ou comportements anormaux.</li>
+            <li><strong>Micro-segmentation :</strong> réseau télémétrie strictement isolé du réseau hospitalité VIP.</li>
+            <li><strong>MFA + certificats :</strong> chaque terminal doit s'authentifier individuellement.</li>
+            <li><strong>SIEM & SOC :</strong> surveillance temps réel des journaux réseau pour détecter les exfiltrations.</li>
           </ul>
         </div>
       </div>
 
-      <h3>Typologie des menaces cyber en F1</h3>
+      <h3>Principales menaces</h3>
       <div class="attack-grid">
-        <div class="attack-item">
-          <h5>🕵️ Espionnage industriel</h5>
-          <p>Interception des données télémétriques pour connaître la stratégie adverse. Ou vol des plans 3D CAO pour copier des pièces aérodynamiques (cas Racing Point / Mercedes 2020).</p>
-        </div>
-        <div class="attack-item">
-          <h5>🎣 Phishing ciblé (Spear Phishing)</h5>
-          <p>Attaques personnalisées contre des ingénieurs clés pour voler leurs identifiants d'accès aux systèmes de simulation ou aux outils cloud (OCI, AWS).</p>
-        </div>
-        <div class="attack-item">
-          <h5>🔒 Ransomware</h5>
-          <p>Chiffrement des systèmes IT pour paralysér les opérations. Williams Racing a subi une cyberattaque majeure ayant perturbé la révélation de sa livrée 2021.</p>
-        </div>
-        <div class="attack-item">
-          <h5>📡 Evil Twin Wi-Fi</h5>
-          <p>Création d'un point d'accès Wi-Fi malveillant imitant le réseau officiel du paddock pour intercepter les communications des ingénieurs.</p>
-        </div>
-        <div class="attack-item">
-          <h5>🔓 Fuite interne</h5>
-          <p>Lewis Hamilton avait publié des données de télémétrie confidentielles de McLaren sur Twitter en 2012, révélant des configurations de voiture privées.</p>
-        </div>
-        <div class="attack-item">
-          <h5>💥 DDoS stratégique</h5>
-          <p>Saturation de l'infrastructure réseau du paddock adversaire pour perturber la réception de la télémétrie en pleine course, moment critique pour la stratégie.</p>
-        </div>
-      </div>
-
-      <div class="tech-detail success">
-        <strong>✅ SSE (Security Service Edge) — L'analogie F1 :</strong><br>
-        Les équipes de F1 s'adaptent en permanence à des conditions changeantes. Une architecture SSE offre la même agilité en cybersécurité : meilleures réponses aux menaces, mises à jour de politiques instantanées. Comme les mécaniciens McLaren qui ont changé 4 pneus en <strong>1,80 seconde</strong> au Qatar 2023, une infrastructure SSE réagit en temps réel aux menaces sans interruption de service.
+        <div class="attack-item"><h5>🕵️ Espionnage industriel</h5><p>Vol de données télémétriques ou de plans CAO 3D de pièces aérodynamiques.</p></div>
+        <div class="attack-item"><h5>🎣 Spear Phishing</h5><p>Attaques ciblées contre des ingénieurs pour voler leurs accès cloud (OCI, AWS).</p></div>
+        <div class="attack-item"><h5>🔒 Ransomware</h5><p>Chiffrement des systèmes IT pour paralyser les opérations en plein week-end de course.</p></div>
+        <div class="attack-item"><h5>📡 Evil Twin Wi-Fi</h5><p>Fausse borne Wi-Fi imitant le réseau officiel du paddock pour intercepter les communications.</p></div>
       </div>
     </div>
 
-    <!-- SECTION 7 : INCIDENTS -->
+    <!-- SECTION 5 -->
     <div class="section-card" id="incidents">
-      <h2>7. Incidents Cyber Réels en Formule 1</h2>
-      <p>Ces incidents historiques illustrent concrètement les risques auxquels font face les écuries. Chacun a conduit à un renforcement significatif des pratiques de sécurité dans tout le paddock.</p>
+      <h2>5. Incidents Cyber Réels en F1</h2>
 
       <div class="timeline">
         <div class="timeline-item">
-          <strong>2007 — Espionnage McLaren / Ferrari ("Spygate")</strong><br>
-          Un ingénieur de Ferrari, Nigel Stepney, a transmis à McLaren des centaines de pages de documentation technique confidentielle de Ferrari. McLaren est disqualifié du Championnat Constructeurs et condamné à une amende record de <strong>100 millions de dollars</strong>. C'est la plus grande sanction de l'histoire du sport automobile et l'un des plus grands scandales d'espionnage industriel dans le sport mondial.
+          <strong>2007 — Spygate McLaren / Ferrari</strong><br>
+          Un ingénieur Ferrari transmet des centaines de pages confidentielles à McLaren. Sanction record : <strong>100 M$ d'amende</strong> et disqualification du championnat constructeurs.
         </div>
         <div class="timeline-item">
-          <strong>2012 — Fuite Lewis Hamilton (Twitter / McLaren)</strong><br>
-          Lewis Hamilton publie sur Twitter des photos des données télémétriques confidentielles de qualifications (les siennes et celles de son coéquipier Jenson Button pour le GP de Belgique). Il souhaitait dénoncer un traitement inégal de la part de McLaren. L'incident démontre que la menace interne (insider threat) est aussi sérieuse que la menace externe.
+          <strong>2012 — Fuite Lewis Hamilton (Twitter)</strong><br>
+          Hamilton publie des données télémétriques confidentielles de qualifications sur Twitter. Illustration concrète de la menace interne (insider threat).
         </div>
         <div class="timeline-item">
-          <strong>2020 — Cyber-espionnage Racing Point / Mercedes</strong><br>
-          Racing Point est accusé d'avoir reproduit illégalement les gaines de frein de la Mercedes championne 2019. L'enquête FIA soulève des questions sur la manière dont Racing Point a pu accéder aux fichiers CAO numériques de Mercedes — certains experts parlant de cyber-espionnage industriel. Racing Point est sanctionné de <strong>427 000 $ d'amende</strong> et 15 points de pénalité au championnat.
+          <strong>2020 — Racing Point / Mercedes</strong><br>
+          Reproduction illégale de pièces Mercedes. Enquête sur un possible accès aux fichiers CAO numériques. Sanction : <strong>427 000 $ d'amende</strong> + 15 pts de pénalité.
         </div>
         <div class="timeline-item">
           <strong>2021 — Cyberattaque Williams Racing</strong><br>
-          Williams Racing subit une cyberattaque majeure lors de la révélation de la livrée de la FW43B. L'attaque cause des perturbations significatives dans les systèmes informatiques de l'écurie. Suite à l'incident, la FIA demande à toutes les écuries de renforcer leurs protocoles de cybersécurité.
+          Perturbation significative des systèmes IT lors de la révélation de la livrée. La FIA demande ensuite à toutes les écuries de renforcer leurs protocoles.
         </div>
         <div class="timeline-item">
-          <strong>2022 — Attaque FIA (Fédération Internationale de l'Automobile)</strong><br>
-          La FIA elle-même est victime d'une cyberattaque. Bien qu'aucune donnée n'ait apparemment filtré, l'incident met en évidence la vulnérabilité de la gouvernance du sport et conduit à une révision complète des pratiques de sécurité de la fédération, avec un renforcement du contrôle d'accès aux systèmes réglementaires.
+          <strong>2022 — Attaque FIA</strong><br>
+          La FIA elle-même est victime d'une cyberattaque, entraînant une révision complète de ses pratiques de sécurité.
         </div>
       </div>
     </div>
 
-    <!-- SECTION 8 : IA -->
+    <!-- SECTION 6 -->
     <div class="section-card" id="ia">
-      <h2>8. IA Générative, Vision Agentique & Horizon 2026/2027</h2>
-      <p>Le règlement technique 2026 introduit de profonds changements (nouveau groupe propulseur hybride, nouvelles règles aérodynamiques). L'IA devient alors l'outil principal pour extraire de la valeur là où les règles limitent les capteurs et les essais.</p>
+      <h2>6. IA & Perspectives 2026/2027</h2>
 
-      <h3>IA Générative sur le muret des stands</h3>
       <div class="tech-detail highlight">
-        <strong>Cas concret Oracle Red Bull Racing (2024/2025) :</strong><br>
-        Red Bull déploie sur le muret des stands un agent IA couplant un modèle de langage (LLM) à une base vectorielle RAG (Retrieval-Augmented Generation) contenant l'intégralité du code sportif FIA, le règlement technique, et les jurisprudences de tous les incidents passés. En quelques secondes après un incident de piste, le système génère un argumentaire de réclamation complet que les ingénieurs peuvent adapter et soumettre à la direction de course — un processus qui prenait auparavant 10 à 15 minutes de relecture manuelle.
+        <strong>Agent IA RAG sur le muret des stands (Red Bull, 2024/2025) :</strong> Un LLM couplé à une base vectorielle contenant tout le règlement FIA génère un argumentaire de réclamation en quelques secondes après un incident — contre 10-15 min manuellement.
       </div>
 
-      <h3>AI Strategy Agent pour 2026</h3>
       <div class="tech-detail">
-        <strong>Oracle et Red Bull ont annoncé en mars 2025</strong> le déploiement d'un <strong>AI Strategy Agent</strong> pour la saison 2026. Cet agent autonome sera capable de :
-        <ul style="margin-top:10px; padding-left:20px;">
-          <li>Analyser en continu les données télémétriques de la voiture et des adversaires.</li>
-          <li>Proposer proactivement des stratégies d'arrêts au stand optimisées en fonction des scénarios Monte Carlo en cours de calcul.</li>
-          <li>S'adapter en temps réel aux événements imprévus (voiture de sécurité, pluie, crevaison).</li>
-          <li>Interroger le règlement FIA et générer des alertes si une décision stratégique risque d'enfreindre les règles.</li>
-        </ul>
+        <strong>AI Strategy Agent (Oracle × Red Bull, annoncé 2025) :</strong> Agent autonome pour la saison 2026, capable d'analyser la télémétrie en continu, proposer des stratégies d'arrêts en temps réel et s'adapter aux imprévus (safety car, météo, crevaison).
       </div>
 
-      <h3>Télémétrie Visuelle Agentique</h3>
-      <div class="tech-detail">
-        <strong>Le concept :</strong> Utiliser les caméras haute définition embarquées comme des capteurs supplémentaires. En analysant par vision par ordinateur les déformations visuelles de la carrosserie, les vibrations à haute fréquence des pneus ou la coloration des disques de frein, l'IA peut détecter des anomalies mécaniques avant que les capteurs physiques (dont le nombre est limité par le règlement FIA) ne les rapportent. C'est une architecture hybride combinant Edge Computing (GPU dans le rack de bord de piste) et modèles de vision par ordinateur (CNN, Vision Transformers).
-      </div>
-
-      <h3>Perspectives technologiques à horizon 2027</h3>
+      <h3>Horizon 2027</h3>
       <div class="timeline">
-        <div class="timeline-item">
-          <strong>Moteur hybride 2026 (entièrement simulé dans le cloud)</strong> — Le nouveau règlement moteur F1 2026 (50% thermique / 50% électrique) impose de développer un groupe propulseur radicalement nouveau. Red Bull Ford Powertrains a utilisé OCI pour modéliser et simuler en entier le nouveau moteur avant sa première allumage physique, réduisant les délais de développement et les coûts matériaux.
-        </div>
-        <div class="timeline-item">
-          <strong>Digital Twin complet de la monoplace</strong> — Vers un jumeau numérique temps réel de la voiture, mis à jour à chaque tour avec les données télémétriques, permettant de prédire les défaillances mécaniques plusieurs tours à l'avance.
-        </div>
-        <div class="timeline-item">
-          <strong>5G SA & Network Slicing généralisé sur les circuits</strong> — Les circuits homologués FIA migreront vers des infrastructures 5G Standalone permanentes, avec des tranches réseau dédiées pour chaque écurie, garantissant l'isolation totale des flux de données.
-        </div>
-        <div class="timeline-item">
-          <strong>Quantum Computing (horizon 2030)</strong> — IBM et Google explorent des partenariats avec le sport automobile pour les problèmes d'optimisation complexes (stratégie multi-voitures, simulation de trafic). Williams Racing étudie des cas d'usage concrets du calcul quantique pour ses simulations aérodynamiques.
-        </div>
+        <div class="timeline-item"><strong>Moteur hybride 2026</strong> — entièrement conçu et simulé sur OCI avant la première allumage physique (Red Bull Ford Powertrains).</div>
+        <div class="timeline-item"><strong>Digital Twin temps réel</strong> — jumeau numérique de la voiture mis à jour à chaque tour pour anticiper les défaillances mécaniques.</div>
+        <div class="timeline-item"><strong>5G SA & Network Slicing généralisé</strong> — tranche réseau dédiée par écurie sur chaque circuit FIA homologué.</div>
       </div>
     </div>
 
-    <!-- SECTION 9 : SYNTHÈSE SISR -->
+    <!-- SECTION 7 -->
     <div class="section-card" id="synthese">
-      <h2>9. Synthèse Technique</h2>
+      <h2>7. Synthèse — Liens SISR</h2>
       <div style="overflow-x: auto;">
-        <table style="width: 100%; border-collapse: collapse;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.93rem;">
           <thead>
             <tr style="background: #f1f5f9; text-align: left;">
-              <th style="padding: 15px; border-bottom: 2px solid var(--accent-soft);">Concept SISR</th>
-              <th style="padding: 15px; border-bottom: 2px solid var(--accent-soft);">Application F1</th>
-              <th style="padding: 15px; border-bottom: 2px solid var(--accent-soft);">Exemple Réel</th>
-              <th style="padding: 15px; border-bottom: 2px solid var(--accent-soft);">Objectif Métier</th>
+              <th style="padding: 13px; border-bottom: 2px solid var(--accent-soft);">Concept SISR</th>
+              <th style="padding: 13px; border-bottom: 2px solid var(--accent-soft);">Application F1</th>
+              <th style="padding: 13px; border-bottom: 2px solid var(--accent-soft);">Exemple concret</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;"><b>Haute Disponibilité</b></td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Fibre MPLS + VSAT satellite + 4G/5G en failover</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Red Bull : liaison Suzuka → Milton Keynes &lt; 150 ms</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Zéro perte de télémétrie en course</td>
-            </tr>
-            <tr>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;"><b>Segmentation réseau</b></td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">VLANs isolés (Télémétrie / Stratégie / VIP / Public)</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Zero Trust : micro-segmentation des flux paddock</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Bloquer l'espionnage et les mouvements latéraux</td>
-            </tr>
-            <tr>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;"><b>Cloud Computing</b></td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">OCI (Red Bull), AWS (Ferrari, F1), HPE (Mercedes)</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">4 Mrd simulations OCI / Grand Prix</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Scalabilité des calculs dans les limites du Budget Cap</td>
-            </tr>
-            <tr>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;"><b>Edge Computing</b></td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Serveurs embarqués dans les garages, traitement local</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">2 To de données traitées localement avant remontée cloud</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Latence &lt; 50 ms pour décisions en bord de piste</td>
-            </tr>
-            <tr>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;"><b>Roaming Wi-Fi</b></td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">802.11r pour handover entre bornes le long du circuit</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Basculement en &lt; 50 ms à 320 km/h</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Continuité du flux de télémétrie sans rupture</td>
-            </tr>
-            <tr>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;"><b>Cybersécurité Zero Trust</b></td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">MFA, certificats, SIEM, moindre privilège</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Post-incidents Williams 2021, FIA 2022</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Protéger la PI (propriété intellectuelle) technique</td>
-            </tr>
-            <tr>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;"><b>Big Data & IA</b></td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Amazon SageMaker, Oracle ML, 70 ans de données AWS S3</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">300 M points de données / course → F1 Insights TV</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Stratégie de course et amélioration continue des modèles</td>
-            </tr>
-            <tr>
-              <td style="padding: 15px;"><b>Protocole industriel (Bus CAN)</b></td>
-              <td style="padding: 15px;">CAN pour la communication interne entre calculateurs</td>
-              <td style="padding: 15px;">ECU McLaren Applied TAG-320 standardisé FIA</td>
-              <td style="padding: 15px;">Fiabilité et interopérabilité des systèmes embarqués</td>
-            </tr>
+            <tr><td style="padding:13px;border-bottom:1px solid #eee;"><b>Haute Disponibilité</b></td><td style="padding:13px;border-bottom:1px solid #eee;">Fibre MPLS + VSAT + 4G/5G failover</td><td style="padding:13px;border-bottom:1px solid #eee;">Suzuka → Milton Keynes &lt; 150 ms</td></tr>
+            <tr><td style="padding:13px;border-bottom:1px solid #eee;"><b>Segmentation réseau</b></td><td style="padding:13px;border-bottom:1px solid #eee;">VLANs isolés Télémétrie / VIP / Public</td><td style="padding:13px;border-bottom:1px solid #eee;">Zero Trust micro-segmentation paddock</td></tr>
+            <tr><td style="padding:13px;border-bottom:1px solid #eee;"><b>Cloud Computing</b></td><td style="padding:13px;border-bottom:1px solid #eee;">OCI (Red Bull), AWS (Ferrari, F1), HPE (Mercedes)</td><td style="padding:13px;border-bottom:1px solid #eee;">4 Mrd simulations OCI / Grand Prix</td></tr>
+            <tr><td style="padding:13px;border-bottom:1px solid #eee;"><b>Edge Computing</b></td><td style="padding:13px;border-bottom:1px solid #eee;">Serveurs embarqués dans les garages</td><td style="padding:13px;border-bottom:1px solid #eee;">Latence &lt; 50 ms pour décisions en bord de piste</td></tr>
+            <tr><td style="padding:13px;border-bottom:1px solid #eee;"><b>Roaming Wi-Fi</b></td><td style="padding:13px;border-bottom:1px solid #eee;">802.11r, handover entre bornes</td><td style="padding:13px;border-bottom:1px solid #eee;">Basculement &lt; 50 ms à 320 km/h</td></tr>
+            <tr><td style="padding:13px;border-bottom:1px solid #eee;"><b>Cybersécurité Zero Trust</b></td><td style="padding:13px;border-bottom:1px solid #eee;">MFA, SIEM, moindre privilège</td><td style="padding:13px;border-bottom:1px solid #eee;">Post-incidents Williams 2021, FIA 2022</td></tr>
+            <tr><td style="padding:13px;"><b>Protocole industriel</b></td><td style="padding:13px;">Bus CAN communication interne</td><td style="padding:13px;">ECU McLaren Applied TAG-320 standardisé FIA</td></tr>
           </tbody>
         </table>
       </div>
@@ -554,7 +310,7 @@
 
   <footer>
     <p>Marius DUYCK — Portfolio BTS SIO SISR</p>
-    <p style="font-size: 0.8rem; margin-top: 10px;">Veille Technologique : Télémétrie F1 & Cybersécurité — Mise à jour 2025/2026</p>
+    <p style="font-size: 0.8rem; margin-top: 8px;">Veille Technologique : Télémétrie F1 & Cybersécurité — 2025/2026</p>
   </footer>
 
 </body>
