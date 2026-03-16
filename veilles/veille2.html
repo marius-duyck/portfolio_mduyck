@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Veille Approfondie : Infrastructures Réseau dans les Stades Connectés</title>
+  <title>Veille : Infrastructures Réseau dans les Stades</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
     
@@ -23,10 +23,10 @@
     html { scroll-behavior: smooth; }
     body { background: var(--bg-base); color: var(--text-secondary); line-height: 1.7; }
 
-    header { 
-        background: linear-gradient(135deg, #0284c7, #38bdf8, #0ea5e9); 
-        color: white; text-align: center; padding: 80px 20px; 
-        box-shadow: 0 4px 20px rgba(2, 132, 199, 0.2);
+    header {
+      background: linear-gradient(135deg, #0284c7, #38bdf8, #0ea5e9);
+      color: white; text-align: center; padding: 80px 20px;
+      box-shadow: 0 4px 20px rgba(2, 132, 199, 0.2);
     }
     header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
     header p { font-size: 1rem; opacity: 0.9; }
@@ -44,524 +44,341 @@
     .stat-box .number { display: block; font-size: 2.2rem; font-weight: 700; color: var(--accent); }
     .stat-box .label { font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
-    .section-card { background: white; border-radius: var(--radius); padding: 45px; margin-bottom: 35px; box-shadow: var(--shadow); border: 1px solid var(--border-card); }
-    h2 { font-size: 1.8rem; color: var(--text-primary); margin-bottom: 25px; display: flex; align-items: center; gap: 15px; }
+    .section-card { background: white; border-radius: var(--radius); padding: 40px; margin-bottom: 30px; box-shadow: var(--shadow); border: 1px solid var(--border-card); }
+    h2 { font-size: 1.8rem; color: var(--text-primary); margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }
     h2::before { content: ""; width: 6px; height: 35px; background: var(--accent); border-radius: 3px; }
-    h3 { color: var(--accent); margin: 25px 0 15px 0; font-size: 1.3rem; border-bottom: 1px solid var(--accent-soft); padding-bottom: 5px; }
+    h3 { color: var(--accent); margin: 20px 0 12px; font-size: 1.15rem; border-bottom: 1px solid var(--accent-soft); padding-bottom: 5px; }
 
-    .dual-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; margin: 25px 0; }
-    .dual-card { padding: 30px; border-radius: var(--radius); border: 1px solid var(--border-card); height: 100%; }
-    .dual-card.blue { background: #f8fafc; border-top: 5px solid var(--accent); }
-    .dual-card.warn { background: #fffbeb; border-top: 5px solid #f59e0b; }
-    .dual-card.green { background: #f0fdf4; border-top: 5px solid #22c55e; }
-    .dual-card.red { background: #fff1f2; border-top: 5px solid #ef4444; }
-    
-    .tech-detail { background: #f1f5f9; padding: 20px; border-radius: 12px; margin: 15px 0; font-size: 0.95rem; border-left: 4px solid #cbd5e1; }
+    .dual-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin: 20px 0; }
+    .dual-card { padding: 25px; border-radius: var(--radius); border: 1px solid var(--border-card); }
+    .dual-card.blue { background: #f8fafc; border-top: 4px solid var(--accent); }
+    .dual-card.warn { background: #fffbeb; border-top: 4px solid #f59e0b; }
+    .dual-card.green { background: #f0fdf4; border-top: 4px solid #22c55e; }
+    .dual-card.red { background: #fff1f2; border-top: 4px solid #ef4444; }
+    .dual-card h4 { font-size: 1rem; color: var(--text-primary); margin-bottom: 10px; }
+
+    .tech-detail { background: #f1f5f9; padding: 18px; border-radius: 12px; margin: 12px 0; font-size: 0.95rem; border-left: 4px solid #cbd5e1; }
     .tech-detail.highlight { border-left-color: var(--accent); background: var(--accent-soft); }
-    .badge { background: var(--accent); color: white; padding: 3px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-left: 10px; vertical-align: middle; }
+
+    .badge { background: var(--accent); color: white; padding: 3px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 600; margin-left: 8px; vertical-align: middle; }
     .badge.green { background: #22c55e; }
     .badge.orange { background: #f59e0b; }
     .badge.red { background: #ef4444; }
 
-    .stadium-card {
-      background: white;
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius);
-      padding: 30px;
-      margin: 20px 0;
-      box-shadow: var(--shadow);
-      border-left: 6px solid var(--accent);
-    }
-    .stadium-card h4 {
-      font-size: 1.2rem;
-      color: var(--text-primary);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .stadium-card .flag { font-size: 1.5rem; }
-    .stadium-card ul { padding-left: 20px; margin-top: 10px; }
-    .stadium-card ul li { margin-bottom: 8px; }
+    .stadium-card { background: white; border: 1px solid var(--border-card); border-radius: var(--radius); padding: 25px; margin: 15px 0; box-shadow: var(--shadow); border-left: 5px solid var(--accent); }
+    .stadium-card h4 { font-size: 1.05rem; color: var(--text-primary); margin-bottom: 8px; }
+    .stadium-card ul { padding-left: 18px; margin-top: 6px; }
+    .stadium-card ul li { margin-bottom: 5px; font-size: 0.93rem; }
 
-    .vlan-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    .vlan-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.88rem; }
     .vlan-table thead tr { background: #f1f5f9; }
-    .vlan-table th, .vlan-table td { padding: 14px 16px; text-align: left; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem; }
+    .vlan-table th, .vlan-table td { padding: 11px 14px; text-align: left; border-bottom: 1px solid #e2e8f0; }
     .vlan-table tr:hover { background: #f8fafc; }
-    .vlan-id { font-family: monospace; font-weight: 700; color: var(--accent); font-size: 1rem; }
+    .vlan-id { font-family: monospace; font-weight: 700; color: var(--accent); }
 
-    .timeline { position: relative; padding-left: 30px; margin: 20px 0; }
-    .timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: var(--accent-soft); }
-    .timeline-item { position: relative; margin-bottom: 25px; }
-    .timeline-item::before { content: ''; position: absolute; left: -26px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); }
+    .timeline { position: relative; padding-left: 25px; margin: 15px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: var(--accent-soft); }
+    .timeline-item { position: relative; margin-bottom: 16px; font-size: 0.93rem; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
     .timeline-item strong { color: var(--text-primary); }
 
-    footer { background: white; text-align: center; padding: 40px; color: #64748b; border-top: 1px solid var(--border-card); }
-
-    p { margin-bottom: 12px; }
-    ul li { margin-bottom: 6px; }
+    footer { background: white; text-align: center; padding: 35px; color: #64748b; border-top: 1px solid var(--border-card); }
+    p { margin-bottom: 10px; }
+    ul li { margin-bottom: 5px; }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>🏟️ Infrastructures Réseau dans les Stades Connectés</h1>
-    <p>Analyse approfondie des technologies réseau, des cas réels et des enjeux SISR dans les Smart Stadiums</p>
+    <h1>🏟️ Infrastructures Réseau dans les Stades</h1>
+    <p>Veille technologique — Wi-Fi haute densité, 5G, VLANs et cybersécurité dans les Smart Stadiums</p>
   </header>
 
   <section>
+
     <div class="toc">
-      <h3>📋 Sommaire détaillé</h3>
+      <h3>📋 Sommaire</h3>
       <div class="toc-list">
         <a href="#contexte">1. Contexte & Enjeux</a>
         <a href="#wifi">2. Wi-Fi Haute Densité</a>
-        <a href="#das">3. DAS & 5G Privée</a>
-        <a href="#vlan">4. Architecture Réseau & VLANs</a>
-        <a href="#exemples">5. Cas Réels & Stades</a>
+        <a href="#das">3. DAS & 5G</a>
+        <a href="#vlan">4. VLANs & Architecture</a>
+        <a href="#exemples">5. Stades Réels</a>
         <a href="#cyber">6. Cybersécurité</a>
-        <a href="#futur">7. Edge Computing & IA</a>
-        <a href="#synthese">8. Récapitulatif SISR</a>
+        <a href="#futur">7. Edge & IA</a>
+        <a href="#synthese">8. Synthèse SISR</a>
       </div>
     </div>
 
-    <!-- STATS -->
     <div class="stats-grid">
       <div class="stat-box"><span class="number">1 641</span><span class="label">Points d'accès Wi-Fi (Tottenham)</span></div>
-      <div class="stat-box"><span class="number">40 Gbit/s</span><span class="label">Bande passante Wi-Fi (Levi's Stadium)</span></div>
+      <div class="stat-box"><span class="number">40 Gbit/s</span><span class="label">Bande passante (Levi's Stadium)</span></div>
       <div class="stat-box"><span class="number">99,999%</span><span class="label">Disponibilité exigée (FIFA)</span></div>
       <div class="stat-box"><span class="number">1 200 km</span><span class="label">Câblage réseau (Tottenham)</span></div>
     </div>
 
-    <!-- SECTION 1 : CONTEXTE -->
+    <!-- SECTION 1 -->
     <div class="section-card" id="contexte">
       <h2>1. Contexte & Enjeux Réseau</h2>
-      <p>Un stade moderne n'est plus simplement une enceinte sportive : c'est une <strong>plateforme informatique à forte densité humaine</strong>, capable d'accueillir 60 000 à 90 000 personnes en un même lieu, chacune avec un ou plusieurs appareils connectés. Ce défi de connectivité est unique au monde.</p>
+      <p>Un stade moderne est une <strong>plateforme informatique à forte densité humaine</strong> : jusqu'à 90 000 personnes connectées simultanément, chacune avec un ou plusieurs appareils. Ce défi de connectivité est unique et implique de gérer plusieurs réseaux en parallèle.</p>
 
-      <h3>Pourquoi les stades sont un défi réseau extrême ?</h3>
       <div class="dual-grid">
         <div class="dual-card warn">
-          <h4>⚠️ Contraintes techniques majeures</h4>
+          <h4>⚠️ Contraintes techniques</h4>
           <ul>
-            <li><strong>Densité humaine extrême :</strong> jusqu'à 1 utilisateur par m² dans les tribunes, chacun avec un smartphone.</li>
-            <li><strong>Interférences RF :</strong> les structures métalliques (ferraillage, toitures) perturbent la propagation radio.</li>
-            <li><strong>Pics de trafic synchronisés :</strong> 80% du trafic se concentre en 5 minutes (but, mi-temps).</li>
-            <li><strong>Mobilité :</strong> les fans bougent, passent d'une zone à l'autre (halls, toilettes, buvettes, tribunes).</li>
+            <li><strong>Densité extrême :</strong> jusqu'à 1 utilisateur/m² en tribunes.</li>
+            <li><strong>Pics synchronisés :</strong> 80% du trafic concentré en 5 min (but, mi-temps).</li>
+            <li><strong>Interférences RF :</strong> structures métalliques perturbant la propagation radio.</li>
           </ul>
         </div>
         <div class="dual-card blue">
-          <h4>📡 Multi-réseaux à gérer simultanément</h4>
+          <h4>📡 Multi-réseaux coexistants</h4>
           <ul>
-            <li><strong>Réseau fan (Guest Wi-Fi) :</strong> streaming, réseaux sociaux, billetterie.</li>
-            <li><strong>Réseau opérationnel :</strong> caisses enregistreuses, CCTV, contrôle d'accès.</li>
-            <li><strong>Réseau broadcast :</strong> flux vidéo HD vers les régies TV mondiales.</li>
-            <li><strong>Réseau de sécurité :</strong> communication d'urgence (TETRA), pompiers, services médicaux.</li>
-            <li><strong>Réseau VIP / presse :</strong> loges, espaces hospitalité, journalistes.</li>
+            <li><strong>Guest Wi-Fi :</strong> fans, streaming, réseaux sociaux.</li>
+            <li><strong>Opérationnel :</strong> caisses, CCTV, contrôle d'accès.</li>
+            <li><strong>Broadcast :</strong> flux vidéo HD vers les régies TV.</li>
+            <li><strong>Sécurité :</strong> TETRA, pompiers, services médicaux.</li>
           </ul>
         </div>
       </div>
 
       <div class="tech-detail highlight">
-        <strong>📌 Exigence FIFA (ISO/IEC 11801) :</strong> La Fédération internationale de football impose une disponibilité réseau de <strong>99,999%</strong> pour les infrastructures des stades accueillant des compétitions officielles. Cela correspond aux standards des datacenters de Tier IV, soit moins de 5 minutes d'interruption par an. Les stades comme l'<strong>Allianz Arena de Munich</strong> ou le <strong>Santiago Bernabéu de Madrid</strong> disposent ainsi de leur propre datacenter on-site.
+        <strong>📌 Exigence FIFA :</strong> Disponibilité réseau de <strong>99,999%</strong> — soit moins de 5 min d'interruption par an — conforme aux standards datacenter Tier IV. L'Allianz Arena et le Santiago Bernabéu disposent de leur propre datacenter on-site pour y répondre.
       </div>
     </div>
 
-    <!-- SECTION 2 : WI-FI HAUTE DENSITÉ -->
+    <!-- SECTION 2 -->
     <div class="section-card" id="wifi">
-      <h2>2. Wi-Fi Haute Densité : Architecture "Pico Cell"</h2>
-      <p>Le Wi-Fi classique déploie de grandes cellules radio pour couvrir un maximum de surface. Dans un stade, cette approche est contre-productive : trop d'utilisateurs par borne = effondrement du débit. La solution est l'architecture <strong>Pico Cell</strong>.</p>
-
-      <h3>Le principe de la Pico Cell</h3>
-      <div class="tech-detail">
-        <strong>Concept :</strong> Au lieu de rares bornes puissantes, on déploie un grand nombre de bornes à faible puissance, placées sous chaque rangée de sièges. Chaque point d'accès ne dessert que 30 à 75 personnes, garantissant un débit stable et élevé. La puissance d'émission réduite limite également les interférences entre cellules adjacentes (co-channel interference).
-        <br><br>
-        <strong>Exemple concret — Tottenham Hotspur Stadium :</strong> HPE Aruba a déployé <strong>1 641 points d'accès Wi-Fi sous les sièges</strong>, soit 1 borne pour 38 supporters, sur un total de 62 062 places. Le tout est relié par <strong>1 200 km de câblage réseau</strong> intégré dans la structure même du bâtiment dès la conception.
-      </div>
-
-      <h3>Protocoles Wi-Fi critiques en environnement stade</h3>
+      <h2>2. Wi-Fi Haute Densité — Architecture Pico Cell</h2>
+      <p>Dans un stade, le Wi-Fi classique (peu de bornes puissantes) s'effondre sous la charge. La solution : déployer de nombreuses bornes à faible puissance sous chaque rangée de sièges — c'est l'architecture <strong>Pico Cell</strong>.</p>
 
       <div class="tech-detail">
-        <strong>802.11r — Fast BSS Transition (Roaming rapide) :</strong><br>
-        Quand un fan se lève pour aller aux buvettes, son smartphone change de borne Wi-Fi. Sans 802.11r, cette opération (handover) prend plusieurs secondes et implique une ré-authentification complète (échange de clés WPA2). Avec 802.11r, le délai est réduit à moins de <strong>50 ms</strong>, imperceptible pour l'utilisateur. Essentiel dans un stade où les fans sont constamment en mouvement.
+        <strong>Exemple — Tottenham Hotspur Stadium :</strong> 1 641 points d'accès HPE Aruba, soit <strong>1 borne pour 38 fans</strong>. Chaque AP dessert 30 à 75 personnes, garantissant un débit stable même lors des pics de trafic.
       </div>
 
-      <div class="tech-detail">
-        <strong>802.11k & 802.11v — Neighbor Reports & BSS Transition :</strong><br>
-        Ces protocoles permettent respectivement au point d'accès de <strong>communiquer à l'appareil la liste des bornes voisines disponibles</strong>, et de <strong>suggérer proactivement à l'appareil de se connecter à une borne moins chargée</strong>. Le résultat : une répartition intelligente de la charge (load balancing) sans intervention humaine. Utilisé notamment dans les solutions <strong>Cisco Connected Stadium</strong>.
-      </div>
-
-      <div class="tech-detail">
-        <strong>802.11ax (Wi-Fi 6) — OFDMA et BSS Coloring :</strong><br>
-        Le Wi-Fi 6 introduit l'OFDMA (Orthogonal Frequency Division Multiple Access), qui divise le canal radio en sous-canaux et permet de servir plusieurs appareils simultanément sur la même bande. Le <strong>BSS Coloring</strong> permet à des bornes adjacentes d'utiliser le même canal sans se brouiller. Des gains de débit de <strong>4× à 10× en environnement dense</strong> ont été mesurés par rapport au Wi-Fi 5.
-      </div>
-
-      <h3>Gestion de la charge : Radio Resource Management (RRM)</h3>
-      <p>La solution Cisco Connected Stadium intègre un moteur RRM qui analyse en temps réel l'occupation de chaque canal radio et ajuste automatiquement la puissance et les canaux de chaque borne pour éviter les collisions et optimiser le débit global. C'est l'équivalent d'un système de gestion de trafic pour les ondes radio.</p>
-    </div>
-
-    <!-- SECTION 3 : DAS & 5G -->
-    <div class="section-card" id="das">
-      <h2>3. DAS (Distributed Antenna System) & 5G Privée</h2>
-      <p>Le Wi-Fi gère les connexions volontaires (connexion manuelle à un réseau). Mais les utilisateurs veulent aussi un <strong>signal mobile (4G/5G) de qualité</strong> sans manipuler leur téléphone. C'est le rôle du DAS.</p>
-
-      <h3>Qu'est-ce qu'un DAS ?</h3>
-      <div class="tech-detail">
-        Un <strong>Distributed Antenna System</strong> est un réseau d'antennes de petite taille, réparties dans tout le bâtiment (sous les gradins, dans les coursives, les parkings, les loges), toutes reliées à une <strong>tête de réseau centrale (Head End)</strong>. Le signal mobile des opérateurs (4G/5G) est distribué via ces antennes, garantissant une couverture uniforme là où les macro-antennes extérieures ne pénètrent pas.
-      </div>
-
-      <h3>Modèle "Neutral Host" — Exemple Tottenham</h3>
-      <div class="tech-detail highlight">
-        <strong>Problème :</strong> Un stade ne peut pas avoir 4 DAS séparés pour les 4 opérateurs mobiles. La solution est le modèle <strong>Neutral Host</strong> (hôte neutre) : une seule infrastructure DAS, gérée par un opérateur tiers indépendant, qui accueille simultanément tous les opérateurs.
-        <br><br>
-        <strong>Cas réel :</strong> Tottenham Hotspur a mandaté <strong>Shared Access Limited</strong> (opérateur neutre) pour concevoir et déployer le DAS accueillant les 4 grands opérateurs britanniques (Vodafone, O2, EE, Three) sur une infrastructure commune. La conception a débuté dès 2013 avec le cabinet <strong>Real Wireless</strong>, intégrant dès les plans d'architectes les gaines techniques, la fibre et les emplacements d'antennes.
-      </div>
-
-      <h3>5G Privée & Network Slicing dans les stades</h3>
+      <h3>Protocoles clés</h3>
       <div class="dual-grid">
         <div class="dual-card blue">
-          <h4>5G Privée dédiée</h4>
-          <p>Certains stades déploient une cellule 5G sur une fréquence licenciée dédiée (bande mmWave ou sub-6 GHz), totalement isolée du réseau public. Les avantages :</p>
+          <h4>Roaming & Load Balancing</h4>
           <ul>
-            <li>Latence garantie (< 5 ms) pour les applications temps réel.</li>
-            <li>Bande passante réservée pour les caméras de broadcast 4K.</li>
-            <li>Contrôle total du trafic et de la sécurité.</li>
+            <li><strong>802.11r :</strong> handover entre bornes en &lt; 50 ms, sans ré-authentification.</li>
+            <li><strong>802.11k & 802.11v :</strong> le réseau suggère proactivement une borne moins chargée à l'appareil (load balancing automatique).</li>
           </ul>
-          <p><strong>Exemple :</strong> L'<strong>Orange Vélodrome de Marseille</strong> est le premier stade français 5G, déployé dès 2019 dans le cadre d'un partenariat Orange Business Services / Olympique de Marseille. Des photographes Sony ont validé l'envoi de photos HD directement depuis leur appareil via 5G sans câble.</p>
+        </div>
+        <div class="dual-card blue">
+          <h4>Wi-Fi 6 (802.11ax)</h4>
+          <ul>
+            <li><strong>OFDMA :</strong> sert plusieurs appareils simultanément sur le même canal.</li>
+            <li><strong>BSS Coloring :</strong> bornes adjacentes utilisent le même canal sans se brouiller.</li>
+            <li>Gains mesurés : <strong>4× à 10×</strong> en débit vs Wi-Fi 5 en environnement dense.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="section-card" id="das">
+      <h2>3. DAS & 5G Privée</h2>
+      <p>Le Wi-Fi couvre les connexions volontaires, mais les fans veulent aussi un signal mobile (4G/5G) fort sans agir. C'est le rôle du <strong>DAS (Distributed Antenna System)</strong> : un réseau d'antennes réparties dans tout le bâtiment, reliées à une tête de réseau centrale.</p>
+
+      <div class="tech-detail highlight">
+        <strong>Modèle Neutral Host (Tottenham) :</strong> Une seule infrastructure DAS gérée par <strong>Shared Access Limited</strong> accueille les 4 opérateurs britanniques (Vodafone, O2, EE, Three) simultanément — évitant de multiplier les installations par opérateur.
+      </div>
+
+      <div class="dual-grid">
+        <div class="dual-card blue">
+          <h4>5G Privée</h4>
+          <ul>
+            <li>Fréquence licenciée dédiée, isolée du réseau public.</li>
+            <li>Latence garantie &lt; 5 ms pour les applications temps réel.</li>
+            <li><strong>Orange Vélodrome :</strong> 1er stade 5G de France (2019). Test Sony : envoi de photos HD directement via 5G sans câble.</li>
+          </ul>
         </div>
         <div class="dual-card blue">
           <h4>Network Slicing</h4>
-          <p>La 5G SA (Standalone) permet de créer des "tranches" logiques du réseau physique, chacune avec ses propres garanties de QoS :</p>
           <ul>
-            <li><strong>Slice "Sécurité" :</strong> latence ultra-faible, priorité maximale pour les communications d'urgence.</li>
-            <li><strong>Slice "Broadcast" :</strong> débit garanti pour les flux vidéo des chaînes TV.</li>
-            <li><strong>Slice "Fan" :</strong> bande passante partagée pour streaming et réseaux sociaux.</li>
-            <li><strong>Slice "IoT" :</strong> faible débit mais pour des milliers de capteurs (capteurs de foule, gestion des flux).</li>
+            <li><strong>Slice Sécurité :</strong> priorité max pour les urgences.</li>
+            <li><strong>Slice Broadcast :</strong> débit garanti pour les flux TV 4K.</li>
+            <li><strong>Slice Fan :</strong> bande passante partagée pour le public.</li>
+            <li><strong>Slice IoT :</strong> milliers de capteurs à faible débit.</li>
           </ul>
         </div>
       </div>
-
-      <div class="tech-detail">
-        <strong>Protocoles de communication d'urgence :</strong><br>
-        Les systèmes de sécurité d'un stade ne peuvent pas dépendre d'un réseau public ou Wi-Fi. Le standard <strong>TETRA (Terrestrial Trunked Radio)</strong> est utilisé pour les communications entre services de sécurité, pompiers et équipes médicales. Il est distribué via le DAS et fonctionne indépendamment d'Internet. Le stade Tottenham a intégré TETRA et PMR (Professional Mobile Radio) dès la conception, distincts des réseaux fans.
-      </div>
     </div>
 
-    <!-- SECTION 4 : ARCHITECTURE VLAN -->
+    <!-- SECTION 4 -->
     <div class="section-card" id="vlan">
-      <h2>4. Architecture Réseau & Segmentation par VLANs</h2>
-      <p>Un stade intelligent est un réseau convergé qui fait cohabiter des dizaines de systèmes hétérogènes : billetterie, CCTV, IPTV, audio, domotique, POS (Points de Vente)... La <strong>segmentation par VLANs</strong> est la clé pour isoler ces flux et garantir sécurité et performance.</p>
+      <h2>4. Architecture Réseau & VLANs</h2>
+      <p>La <strong>segmentation par VLANs</strong> isole les flux hétérogènes d'un stade (billetterie, CCTV, fans, broadcast…) pour garantir sécurité et performance. L'architecture Cisco Connected Stadium repose sur 3 couches : Core, Distribution, Accès.</p>
 
-      <h3>Architecture type d'un stade connecté (modèle Cisco)</h3>
-      <div class="tech-detail">
-        L'infrastructure Cisco Connected Stadium repose sur une architecture en 3 couches :
-        <ul style="margin-top:10px; padding-left:20px;">
-          <li><strong>Cœur (Core Layer) :</strong> Switches Cisco Catalyst 6500 VSS ou Nexus en haute disponibilité, actif-actif avec redondance de lien (LACP). Toutes les VLANs y sont terminées via des SVIs (Switched Virtual Interfaces).</li>
-          <li><strong>Distribution (Distribution Layer) :</strong> Switches de distribution par secteur du stade (tribune Nord, Sud, Est, Ouest). Connexion fibre 10 Gbit/s vers le cœur.</li>
-          <li><strong>Accès (Access Layer) :</strong> Switches PoE (Power over Ethernet) Catalyst 3750-X ou 2960S alimentant les bornes Wi-Fi, caméras IP et téléphones VoIP via le câble réseau. Un câble = courant + données.</li>
-        </ul>
-      </div>
-
-      <h3>Tableau de segmentation VLAN type</h3>
       <div style="overflow-x: auto;">
         <table class="vlan-table">
           <thead>
             <tr>
-              <th>VLAN ID</th>
-              <th>Nom</th>
-              <th>Usages</th>
-              <th>Priorité QoS</th>
-              <th>Accès Internet</th>
+              <th>VLAN</th>
+              <th>Usage</th>
+              <th>QoS</th>
+              <th>Internet</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><span class="vlan-id">VLAN 10</span></td>
-              <td><b>Management</b></td>
-              <td>Administration switches, APs, caméras</td>
-              <td><span class="badge">Haute</span></td>
-              <td>Non</td>
-            </tr>
-            <tr>
-              <td><span class="vlan-id">VLAN 20</span></td>
-              <td><b>Sécurité & CCTV</b></td>
-              <td>Caméras IP, contrôle d'accès, TETRA</td>
-              <td><span class="badge">Critique</span></td>
-              <td>Non</td>
-            </tr>
-            <tr>
-              <td><span class="vlan-id">VLAN 30</span></td>
-              <td><b>POS & Billetterie</b></td>
-              <td>Caisses enregistreuses, terminaux CB, tourniquets</td>
-              <td><span class="badge">Haute</span></td>
-              <td>Restreint (paiement)</td>
-            </tr>
-            <tr>
-              <td><span class="vlan-id">VLAN 40</span></td>
-              <td><b>IPTV & Affichage</b></td>
-              <td>Écrans dynamiques, panneaux LED, régie son</td>
-              <td><span class="badge orange">Moyenne</span></td>
-              <td>Non</td>
-            </tr>
-            <tr>
-              <td><span class="vlan-id">VLAN 50</span></td>
-              <td><b>Guest Wi-Fi Fans</b></td>
-              <td>Smartphones supporters, tablettes</td>
-              <td><span class="badge orange">Basse</span></td>
-              <td>Oui (filtré)</td>
-            </tr>
-            <tr>
-              <td><span class="vlan-id">VLAN 60</span></td>
-              <td><b>Presse & Broadcast</b></td>
-              <td>Flux vidéo 4K, journalistes, régies TV</td>
-              <td><span class="badge">Haute</span></td>
-              <td>Oui (dédié)</td>
-            </tr>
-            <tr>
-              <td><span class="vlan-id">VLAN 70</span></td>
-              <td><b>VIP & Loges</b></td>
-              <td>Wi-Fi loges premium, services hôteliers</td>
-              <td><span class="badge orange">Moyenne</span></td>
-              <td>Oui</td>
-            </tr>
-            <tr>
-              <td><span class="vlan-id">VLAN 80</span></td>
-              <td><b>IoT & BMS</b></td>
-              <td>Capteurs température, éclairage, énergie</td>
-              <td><span class="badge red">Faible</span></td>
-              <td>Non</td>
-            </tr>
+            <tr><td><span class="vlan-id">10</span></td><td>Management (switches, APs, caméras)</td><td><span class="badge">Haute</span></td><td>Non</td></tr>
+            <tr><td><span class="vlan-id">20</span></td><td>Sécurité & CCTV</td><td><span class="badge">Critique</span></td><td>Non</td></tr>
+            <tr><td><span class="vlan-id">30</span></td><td>POS & Billetterie</td><td><span class="badge">Haute</span></td><td>Restreint</td></tr>
+            <tr><td><span class="vlan-id">40</span></td><td>IPTV & Affichage LED</td><td><span class="badge orange">Moyenne</span></td><td>Non</td></tr>
+            <tr><td><span class="vlan-id">50</span></td><td>Guest Wi-Fi Fans</td><td><span class="badge orange">Basse</span></td><td>Oui (filtré)</td></tr>
+            <tr><td><span class="vlan-id">60</span></td><td>Presse & Broadcast 4K</td><td><span class="badge">Haute</span></td><td>Oui (dédié)</td></tr>
+            <tr><td><span class="vlan-id">70</span></td><td>VIP & Loges</td><td><span class="badge orange">Moyenne</span></td><td>Oui</td></tr>
+            <tr><td><span class="vlan-id">80</span></td><td>IoT & BMS (capteurs)</td><td><span class="badge red">Faible</span></td><td>Non</td></tr>
           </tbody>
         </table>
       </div>
 
       <div class="tech-detail">
-        <strong>Qualité de Service (QoS) — DSCP :</strong> La classification DSCP (Differentiated Services Code Point) est appliquée dès l'entrée dans le réseau. Par exemple, les flux CCTV reçoivent la marque <strong>AF41</strong> (Assured Forwarding), garantissant leur acheminement même en cas de saturation. Les flux Guest Wi-Fi sont classés en <strong>Best Effort (BE)</strong> : ils sont les premiers à être dégradés si le réseau est chargé.
+        <strong>QoS — DSCP :</strong> Chaque flux est marqué dès son entrée réseau. Les flux CCTV reçoivent la marque <strong>AF41</strong> (acheminement garanti). Les flux Guest Wi-Fi sont en <strong>Best Effort</strong> : premiers à être dégradés en cas de saturation.
       </div>
     </div>
 
-    <!-- SECTION 5 : CAS RÉELS -->
+    <!-- SECTION 5 -->
     <div class="section-card" id="exemples">
-      <h2>5. Cas Réels & Exemples de Stades Connectés</h2>
+      <h2>5. Stades Réels</h2>
 
       <div class="stadium-card">
-        <h4><span class="flag">🇬🇧</span> Tottenham Hotspur Stadium — Londres <span class="badge green">Référence mondiale</span></h4>
-        <p>Ouvert en 2019, c'est le stade le mieux connecté du Royaume-Uni selon Real Wireless. Sa philosophie : <strong>intégrer la technologie dans la structure même du bâtiment</strong> dès les plans d'architectes (cabinet Populous), pas en rénovation.</p>
+        <h4>🇬🇧 Tottenham Hotspur Stadium — Londres <span class="badge green">Référence mondiale</span></h4>
         <ul>
-          <li><strong>Wi-Fi :</strong> 1 641 points d'accès HPE Aruba (Pico Cell sous les sièges), 1 borne / 38 fans, couverture 100% des 62 062 places. Réseau nommé "Stadium_Guest", connexion libre et gratuite.</li>
-          <li><strong>Câblage :</strong> 1 200 km de câble réseau intégré dans la structure béton lors de la construction.</li>
-          <li><strong>DAS :</strong> Neutral Host par Shared Access Limited — 4 opérateurs (Vodafone, O2, EE, Three) sur une infrastructure commune. Antennes DAS discrètes dans la toiture de la tribune.</li>
-          <li><strong>Bluetooth :</strong> 700 balises HPE Beacon pour le wayfinding (navigation interne via l'app Spurs).</li>
-          <li><strong>POS :</strong> 600 terminaux de vente HPE, système entièrement cashless (paiement CB/NFC uniquement).</li>
-          <li><strong>Urgences :</strong> Réseau TETRA dédié pour police, pompiers, services médicaux — totalement séparé des réseaux civils.</li>
+          <li><strong>1 641 AP</strong> HPE Aruba Pico Cell (1/38 fans), 1 200 km de câblage intégré dès la construction.</li>
+          <li>DAS Neutral Host : 4 opérateurs sur une seule infrastructure (Shared Access Limited).</li>
+          <li>700 balises Bluetooth pour navigation interne, 600 terminaux cashless NFC.</li>
+          <li>Réseau TETRA dédié pour les urgences, totalement séparé des réseaux civils.</li>
         </ul>
       </div>
 
       <div class="stadium-card" style="border-left-color: #f59e0b;">
-        <h4><span class="flag">🇺🇸</span> Levi's Stadium — San Francisco (49ers) <span class="badge orange">Pionnier Wi-Fi</span></h4>
-        <p>Inauguré en 2014, ce stade a défini les standards modernes du Wi-Fi en stade avec une infrastructure qui a stupéfié l'industrie à l'époque.</p>
+        <h4>🇺🇸 Levi's Stadium — San Francisco <span class="badge orange">Pionnier Wi-Fi</span></h4>
         <ul>
-          <li><strong>Wi-Fi :</strong> Bande passante totale de <strong>40 Gbit/s</strong> disponible pour les fans. Plus de 1 200 points d'accès déployés.</li>
-          <li><strong>Bluetooth (iBeacon) :</strong> Balises Bluetooth Low Energy (BLE) réparties dans tout le stade pour indiquer les files d'attente aux toilettes et guider vers les places de parking libres en temps réel.</li>
-          <li><strong>Application mobile :</strong> Permet de revoir un action sous 4 angles de caméra différents en HD directement depuis son siège via le Wi-Fi du stade.</li>
-          <li><strong>Câblage :</strong> Plus de 600 km de câblage réseau interne selon les données de l'exploitant.</li>
+          <li><strong>40 Gbit/s</strong> de bande passante totale, 1 200+ points d'accès.</li>
+          <li>Balises BLE pour indiquer les files d'attente aux toilettes et les places de parking libres.</li>
+          <li>App mobile : replay d'une action sous 4 angles de caméra HD depuis son siège.</li>
         </ul>
       </div>
 
       <div class="stadium-card" style="border-left-color: #8b5cf6;">
-        <h4><span class="flag">🇩🇪</span> Allianz Arena — Munich (Bayern Munich) <span class="badge" style="background:#8b5cf6">Smart Operations</span></h4>
-        <p>L'Allianz Arena est un exemple de stade où l'infrastructure IT sert autant les opérations internes que l'expérience fan. Capacité : 75 000 spectateurs.</p>
+        <h4>🇩🇪 Allianz Arena — Munich <span class="badge" style="background:#8b5cf6">Smart Ops</span></h4>
         <ul>
-          <li><strong>Réseau mobile :</strong> Plus de <strong>40 antennes LTE</strong> installées dans l'enceinte, en partenariat avec Deutsche Telekom (5G depuis 2020).</li>
-          <li><strong>SAP HANA :</strong> La plateforme SAP Process Orchestration consolide les données de toutes les entrées, parkings, billetteries et caisses en temps réel. L'application <em>Allianz Arena Alerting</em> alerte le personnel en cas d'engorgement.</li>
-          <li><strong>Gestion des flux :</strong> Les données temps réel permettent de proposer aux fans arrivant un itinéraire personnalisé pour éviter les embouteillages, et d'optimiser le taux de remplissage des parkings.</li>
-          <li><strong>Datacenter on-site :</strong> L'Allianz Arena dispose de son propre centre de données sur place, conforme aux exigences FIFA de disponibilité 99,999%.</li>
+          <li>40+ antennes LTE, 5G depuis 2020 (Deutsche Telekom).</li>
+          <li>SAP HANA consolide billetterie, parkings et caisses en temps réel. Alertes personnel en cas d'engorgement.</li>
+          <li>Datacenter on-site conforme aux exigences FIFA 99,999%.</li>
         </ul>
       </div>
 
       <div class="stadium-card" style="border-left-color: #22c55e;">
-        <h4><span class="flag">🇫🇷</span> Orange Vélodrome — Marseille (OM) <span class="badge green">1er stade 5G France</span></h4>
-        <p>Premier stade 5G de France, fruit d'un partenariat de co-innovation entre Orange Business Services et l'Olympique de Marseille, démarré en 2019.</p>
+        <h4>🇫🇷 Orange Vélodrome — Marseille <span class="badge green">1er stade 5G France</span></h4>
         <ul>
-          <li><strong>5G expérimentale :</strong> Déployée en avant-première, avant la commercialisation grand public, pour tester des usages concrets en conditions réelles.</li>
-          <li><strong>Photographie pro sans câble :</strong> Test concluant avec Sony — un appareil photo équipé d'une carte SIM 5G envoie des photos HD directement vers les serveurs des agences presse, sans ordinateur ni câble Ethernet.</li>
-          <li><strong>Production vidéo :</strong> Envoi en direct de flux caméra vers des régies situées à des milliers de km, grâce à la très faible latence 5G.</li>
-          <li><strong>Robot connecté :</strong> Test avec Axyn Robotics — un robot 5G piloté par des enfants hospitalisés depuis chez eux pour interagir avec les joueurs en temps réel.</li>
-        </ul>
-      </div>
-
-      <div class="stadium-card" style="border-left-color: #ef4444;">
-        <h4><span class="flag">🇺🇸</span> MetLife Stadium & Cowboys Stadium — USA <span class="badge red">Services Fan Avancés</span></h4>
-        <ul>
-          <li><strong>MetLife Stadium (New York, Giants) :</strong> Informe les fans en temps réel via leur mobile des conditions de trafic routier et des transports en commun pour l'après-match.</li>
-          <li><strong>Marlins Park (Miami, Baseball) :</strong> Déploiement de <strong>225 points d'accès Wi-Fi</strong> couvrant l'ensemble du stade de baseball.</li>
-          <li><strong>Denver Broncos Stadium :</strong> Rénovation à 30 M$, dont 10 M$ pour l'extension du réseau Wi-Fi permettant à <strong>25 000 spectateurs simultanés</strong> de se connecter depuis leurs appareils.</li>
-        </ul>
-      </div>
-
-      <div class="stadium-card" style="border-left-color: #0ea5e9;">
-        <h4><span class="flag">🇫🇷</span> Parc OL — Lyon <span class="badge">Indoor Navigation</span></h4>
-        <ul>
-          <li><strong>GPS 3D intérieur :</strong> Système de navigation intérieure permettant aux spectateurs d'être guidés jusqu'à leur siège précis grâce à une cartographie 3D du stade accessible via l'application mobile.</li>
-          <li><strong>Billetterie dématérialisée :</strong> Intégration complète du parcours client digital, de la réservation à l'entrée au stade.</li>
-          <li><strong>Infrastructure Wi-Fi :</strong> Déployée pour 59 000 spectateurs, avec une infrastructure réseau dimensionnée pour absorber les pics de connexion lors des grandes compétitions européennes.</li>
+          <li>5G déployée en 2019 (Orange Business Services × OM), avant commercialisation grand public.</li>
+          <li>Tests Sony : photos HD envoyées directement via 5G sans ordinateur ni câble.</li>
+          <li>Robot 5G piloté à distance par des enfants hospitalisés pour interagir avec les joueurs.</li>
         </ul>
       </div>
     </div>
 
-    <!-- SECTION 6 : CYBERSÉCURITÉ -->
+    <!-- SECTION 6 -->
     <div class="section-card" id="cyber">
-      <h2>6. Cybersécurité des Stades Connectés</h2>
-      <p>Un stade connecté est une cible attractive pour les cybercriminels : données bancaires des transactions POS, données personnelles des fans, voire sabotage des systèmes d'affichage ou de contrôle d'accès lors d'un grand événement.</p>
+      <h2>6. Cybersécurité des Stades</h2>
 
       <div class="dual-grid">
         <div class="dual-card red">
-          <h4>🎯 Surfaces d'Attaque</h4>
+          <h4>🎯 Surfaces d'attaque</h4>
           <ul>
-            <li><strong>Wi-Fi Guest :</strong> Réseau ouvert pouvant héberger des attaques de type Man-in-the-Middle ou Evil Twin (fausse borne Wi-Fi).</li>
-            <li><strong>POS & paiement :</strong> Terminaux de vente ciblés pour l'interception des données cartes bancaires (skimming réseau).</li>
-            <li><strong>Caméras IP :</strong> Souvent sous-sécurisées, elles peuvent servir de point d'entrée pour pivoter vers d'autres réseaux (mouvement latéral).</li>
-            <li><strong>DDoS lors d'événements :</strong> Saturation du réseau de billetterie ou de contrôle d'accès pour bloquer l'entrée des fans.</li>
-            <li><strong>Ransomware :</strong> Attaque des systèmes d'affichage (scoreboards, IPTV) pour exiger une rançon pendant l'événement.</li>
+            <li><strong>Wi-Fi Guest :</strong> Evil Twin, Man-in-the-Middle.</li>
+            <li><strong>POS :</strong> interception données CB (skimming réseau).</li>
+            <li><strong>Caméras IP :</strong> point d'entrée pour mouvement latéral.</li>
+            <li><strong>DDoS :</strong> saturation du contrôle d'accès pour bloquer l'entrée.</li>
+            <li><strong>Ransomware :</strong> chiffrement des scoreboards pendant l'événement.</li>
           </ul>
         </div>
         <div class="dual-card green">
-          <h4>🛡️ Contre-mesures SISR</h4>
+          <h4>🛡️ Contre-mesures</h4>
           <ul>
-            <li><strong>Isolation VLAN stricte :</strong> Le VLAN Guest ne peut jamais accéder au VLAN POS ou CCTV — politique "deny all" inter-VLAN.</li>
-            <li><strong>Portail captif (Captive Portal) :</strong> Authentification des fans avant accès au Wi-Fi, collecte consentie des données pour analyse.</li>
-            <li><strong>IDS/IPS en temps réel :</strong> Détection d'intrusion sur les flux réseau, alerte immédiate en cas de comportement anormal (ex. scan de ports sur le VLAN POS).</li>
-            <li><strong>802.1X :</strong> Authentification des équipements du personnel sur le réseau opérationnel (chaque appareil doit présenter un certificat valide).</li>
-            <li><strong>SIEM centralisé :</strong> Agrégation et corrélation des journaux de tous les équipements réseau pour détecter les attaques multi-vecteurs.</li>
+            <li><strong>VLAN strict :</strong> Guest ne peut jamais accéder à POS ou CCTV.</li>
+            <li><strong>Portail captif :</strong> authentification avant accès Wi-Fi fan.</li>
+            <li><strong>IDS/IPS :</strong> détection comportements anormaux en temps réel.</li>
+            <li><strong>802.1X :</strong> certificat obligatoire pour le réseau opérationnel.</li>
+            <li><strong>SIEM centralisé :</strong> corrélation des logs de tous les équipements.</li>
           </ul>
         </div>
       </div>
 
       <div class="tech-detail highlight">
-        <strong>💡 Contexte Euro 2016 :</strong> Durant l'Euro 2016, la fibre optique a relié tous les stades français à un <strong>Media Data Center unique</strong> diffusant les images TV dans le monde entier. Ce datacenter central était une cible stratégique prioritaire, protégé par des équipes SOC (Security Operation Center) actives 24h/24 pendant toute la compétition. En 2018 pour la Coupe du Monde, la 4K Ultra HD a imposé de nouvelles contraintes de bande passante, nécessitant des liaisons redondantes de plusieurs dizaines de Gbit/s par stade.
+        <strong>Euro 2016 :</strong> Tous les stades français reliés à un Media Data Center unique via fibre optique. Des équipes SOC ont assuré la surveillance 24h/24 pendant toute la compétition, protégeant un datacenter central stratégique diffusant les images TV au monde entier.
       </div>
     </div>
 
-    <!-- SECTION 7 : FUTUR -->
+    <!-- SECTION 7 -->
     <div class="section-card" id="futur">
-      <h2>7. Edge Computing, IA & Stade de Demain</h2>
+      <h2>7. Edge Computing, IA & Perspectives</h2>
 
-      <h3>Edge Computing : traiter les données au plus près</h3>
       <div class="tech-detail">
-        Envoyer toutes les données vers un Cloud distant introduit de la latence. Pour les applications critiques (contrôle d'accès, CCTV avec détection faciale, gestion des foules), le traitement doit se faire <strong>localement dans le stade</strong>. C'est le principe de l'Edge Computing : un mini-datacenter on-site (baies de serveurs dans les sous-sols du stade) traite les données en temps réel, et ne remonte vers le Cloud que les données agrégées ou archivées.
+        <strong>Edge Computing :</strong> un mini-datacenter on-site traite les données critiques localement (contrôle d'accès, CCTV, gestion de foule) sans passer par le Cloud, réduisant la latence à &lt; 5 ms. Seules les données agrégées remontent vers le Cloud.
       </div>
 
-      <h3>IA & Analyse Vidéo en temps réel</h3>
       <div class="dual-grid">
         <div class="dual-card blue">
-          <h4>🎥 Gestion des foules par caméras IA</h4>
-          <p>Des algorithmes de computer vision analysent en temps réel les flux de caméras CCTV pour :</p>
+          <h4>🎥 IA & Gestion des foules</h4>
           <ul>
-            <li>Détecter les zones de surpopulation et envoyer des push notifications aux fans pour les rediriger.</li>
-            <li>Identifier les comportements anormaux (bagarre, malaise) et alerter automatiquement les agents de sécurité.</li>
-            <li>Cartographier thermiquement les flux de supporters pour optimiser les ouvertures de portes et la distribution des buvettes.</li>
+            <li>Computer vision sur les flux CCTV pour détecter les zones de surpopulation.</li>
+            <li>Alertes automatiques aux agents de sécurité en cas de comportement anormal.</li>
+            <li>Heatmap temps réel des déplacements de supporters.</li>
           </ul>
         </div>
         <div class="dual-card blue">
-          <h4>📊 Data Analytics pour le club</h4>
-          <p>Le Wi-Fi génère des données précieuses sur le comportement des fans :</p>
+          <h4>📊 Data Analytics</h4>
           <ul>
-            <li>Heatmap de déplacement : quelles zones sont les plus fréquentées à quelle heure ?</li>
-            <li>Corrélation entre résultats sportifs et consommation (bière vendue après un but).</li>
-            <li>Personnalisation des push notifications : offre promotionnelle envoyée au fan passant devant une buvette spécifique.</li>
-            <li>Exemple : <strong>Allianz Arena</strong> utilise SAP HANA pour consolider et analyser ces données en temps réel.</li>
+            <li>Analyse des parcours fans via le Wi-Fi pour optimiser les buvettes.</li>
+            <li>Push notifications personnalisées selon la position dans le stade.</li>
+            <li>Allianz Arena : SAP HANA pour consolider toutes ces données en temps réel.</li>
           </ul>
         </div>
       </div>
 
-      <h3>Technologies émergentes à horizon 2027</h3>
+      <h3>Horizon 2027</h3>
       <div class="timeline">
-        <div class="timeline-item">
-          <strong>Wi-Fi 7 (802.11be)</strong> — Débit théorique de 46 Gbit/s, Multi-Link Operation (MLO) pour combiner plusieurs bandes simultanément. Idéal pour le streaming 8K en tribunes.
-        </div>
-        <div class="timeline-item">
-          <strong>5G SA (Standalone) & Network Slicing généralisé</strong> — Déploiement à grande échelle du découpage réseau logiciel, permettant de créer instantanément des tranches réseau dédiées pour chaque type d'événement (concert, sport, e-sport).
-        </div>
-        <div class="timeline-item">
-          <strong>Réalité Augmentée (AR) en tribunes</strong> — Affichage des statistiques des joueurs en temps réel via les lunettes AR des fans. Nécessite une latence < 10 ms fournie par la 5G mmWave locale.
-        </div>
-        <div class="timeline-item">
-          <strong>6G (horizon 2030)</strong> — Les premiers stades pilotes intégreront du 6G pour la communication entre les milliers de capteurs IoT du bâtiment, avec une latence sub-milliseconde.
-        </div>
+        <div class="timeline-item"><strong>Wi-Fi 7 (802.11be)</strong> — 46 Gbit/s théoriques, Multi-Link Operation pour combiner plusieurs bandes simultanément.</div>
+        <div class="timeline-item"><strong>5G SA & Network Slicing généralisé</strong> — tranches réseau dédiées par type d'événement (concert, sport, e-sport).</div>
+        <div class="timeline-item"><strong>Réalité Augmentée en tribunes</strong> — stats joueurs en temps réel via lunettes AR, nécessitant &lt; 10 ms de latence (5G mmWave).</div>
       </div>
     </div>
 
-    <!-- SECTION 8 : SYNTHÈSE SISR -->
+    <!-- SECTION 8 -->
     <div class="section-card" id="synthese">
-      <h2>8. Synthèse Technique</h2>
+      <h2>8. Synthèse — Liens SISR</h2>
       <div style="overflow-x: auto;">
-        <table style="width: 100%; border-collapse: collapse;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.92rem;">
           <thead>
             <tr style="background: #f1f5f9; text-align: left;">
-              <th style="padding: 15px; border-bottom: 2px solid var(--accent-soft);">Concept SISR</th>
-              <th style="padding: 15px; border-bottom: 2px solid var(--accent-soft);">Application dans les Stades</th>
-              <th style="padding: 15px; border-bottom: 2px solid var(--accent-soft);">Exemple Concret</th>
-              <th style="padding: 15px; border-bottom: 2px solid var(--accent-soft);">Objectif Métier</th>
+              <th style="padding: 13px; border-bottom: 2px solid var(--accent-soft);">Concept SISR</th>
+              <th style="padding: 13px; border-bottom: 2px solid var(--accent-soft);">Application Stade</th>
+              <th style="padding: 13px; border-bottom: 2px solid var(--accent-soft);">Exemple Concret</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;"><b>Wi-Fi haute densité</b></td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Architecture Pico Cell, 802.11ax, RRM</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">1 641 AP HPE Aruba (Tottenham)</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Connectivité pour 62 000 fans simultanés</td>
-            </tr>
-            <tr>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;"><b>Segmentation VLAN</b></td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">8+ VLANs isolés (POS, Guest, CCTV…)</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Architecture Cisco Connected Stadium</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Sécurité & Isolation des flux critiques</td>
-            </tr>
-            <tr>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;"><b>Haute Disponibilité</b></td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Redondance actif-actif, LACP, fibre redondée</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Exigence FIFA 99,999% (Allianz Arena)</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Zéro panne lors des compétitions officielles</td>
-            </tr>
-            <tr>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;"><b>QoS & Priorisation</b></td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">DSCP, Network Slicing 5G</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Orange Vélodrome (5G privée)</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Garantir la sécurité même sous charge maximale</td>
-            </tr>
-            <tr>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;"><b>DAS & Roaming</b></td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">802.11r, Neutral Host, antennes discrètes</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Shared Access (Tottenham)</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Couverture 4G/5G de tous les opérateurs</td>
-            </tr>
-            <tr>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;"><b>Cybersécurité</b></td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">IDS/IPS, 802.1X, SIEM, Portail Captif</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">SOC actif durant Euro 2016</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Protéger les données bancaires et personnelles</td>
-            </tr>
-            <tr>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;"><b>Edge Computing</b></td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Serveurs on-site, traitement local vidéo IA</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Datacenter Allianz Arena / Bernabéu</td>
-              <td style="padding: 15px; border-bottom: 1px solid #eee;">Latence < 5ms pour contrôle d'accès & sécurité</td>
-            </tr>
-            <tr>
-              <td style="padding: 15px;"><b>IoT & Monitoring</b></td>
-              <td style="padding: 15px;">Capteurs BLE, balises Bluetooth, BMS</td>
-              <td style="padding: 15px;">700 beacons HPE (Tottenham), balises Levi's Stadium</td>
-              <td style="padding: 15px;">Navigation interne, gestion énergie, comfort fans</td>
-            </tr>
+            <tr><td style="padding:12px;border-bottom:1px solid #eee;"><b>Wi-Fi haute densité</b></td><td style="padding:12px;border-bottom:1px solid #eee;">Pico Cell, 802.11ax, RRM</td><td style="padding:12px;border-bottom:1px solid #eee;">1 641 AP HPE Aruba (Tottenham)</td></tr>
+            <tr><td style="padding:12px;border-bottom:1px solid #eee;"><b>Segmentation VLAN</b></td><td style="padding:12px;border-bottom:1px solid #eee;">8 VLANs isolés (POS, Guest, CCTV…)</td><td style="padding:12px;border-bottom:1px solid #eee;">Architecture Cisco Connected Stadium</td></tr>
+            <tr><td style="padding:12px;border-bottom:1px solid #eee;"><b>Haute Disponibilité</b></td><td style="padding:12px;border-bottom:1px solid #eee;">Redondance actif-actif, LACP, fibre</td><td style="padding:12px;border-bottom:1px solid #eee;">Exigence FIFA 99,999% — Allianz Arena</td></tr>
+            <tr><td style="padding:12px;border-bottom:1px solid #eee;"><b>QoS & Priorisation</b></td><td style="padding:12px;border-bottom:1px solid #eee;">DSCP, Network Slicing 5G</td><td style="padding:12px;border-bottom:1px solid #eee;">Orange Vélodrome (5G privée)</td></tr>
+            <tr><td style="padding:12px;border-bottom:1px solid #eee;"><b>DAS & Roaming</b></td><td style="padding:12px;border-bottom:1px solid #eee;">Neutral Host, 802.11r</td><td style="padding:12px;border-bottom:1px solid #eee;">Shared Access Limited (Tottenham)</td></tr>
+            <tr><td style="padding:12px;border-bottom:1px solid #eee;"><b>Cybersécurité</b></td><td style="padding:12px;border-bottom:1px solid #eee;">IDS/IPS, 802.1X, SIEM, Portail captif</td><td style="padding:12px;border-bottom:1px solid #eee;">SOC Euro 2016</td></tr>
+            <tr><td style="padding:12px;"><b>Edge Computing</b></td><td style="padding:12px;">Serveurs on-site, traitement local IA</td><td style="padding:12px;">Datacenter Allianz Arena</td></tr>
           </tbody>
         </table>
       </div>
     </div>
+
   </section>
 
   <footer>
     <p>Marius DUYCK — Portfolio BTS SIO SISR</p>
-    <p style="font-size: 0.8rem; margin-top: 10px;">Veille Technologique : Infrastructures Réseau Stades — Mise à jour 2025/2026</p>
+    <p style="font-size: 0.8rem; margin-top: 8px;">Veille Technologique : Infrastructures Réseau Stades — 2025/2026</p>
   </footer>
 
 </body>
 </html>
-
