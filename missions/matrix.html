@@ -91,11 +91,14 @@
     .substep-tag{display:inline-flex;align-items:center;gap:4px;background:white;border:1px solid var(--border);color:var(--blue-dark);font-size:0.73rem;font-weight:600;padding:2px 9px;border-radius:50px;margin-top:5px;font-family:var(--mono)}
 
     /* NOTE INLINE */
-    .step-note{display:flex;align-items:flex-start;gap:10px;background:#fff7ed;border:1px solid #fed7aa;border-radius:var(--r-sm);padding:10px 14px;margin-top:10px;font-size:0.87rem;color:#92400e}
-    .step-note span{flex-shrink:0}
+    .step-note{display:flex;align-items:center;gap:10px;background:#fff7ed;border:1px solid #fed7aa;border-radius:var(--r-sm);padding:10px 14px;margin-top:10px;font-size:0.87rem;color:#92400e;line-height:1.5;flex-wrap:nowrap}
+    .step-note code{white-space:nowrap;background:#fde68a;color:#92400e}
+    .step-note span{flex-shrink:0;line-height:1}
 
     /* TOOLS SECTION */
-    .tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.2rem;margin-bottom:28px}
+    .tools-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:28px;align-items:start}
+    @media(max-width:950px){.tools-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:560px){.tools-grid{grid-template-columns:1fr}}
     .tool-card{background:white;border-radius:var(--r-lg);padding:24px;border:1px solid var(--border);box-shadow:var(--shadow-sm);transition:all 0.3s;position:relative;overflow:hidden}
     .tool-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),#38bdf8)}
     .tool-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
@@ -125,7 +128,10 @@
     .flow-node.decision{border-style:dashed;border-color:var(--orange);color:#92400e;background:#fff7ed}
     .flow-node.end{border-color:var(--green);color:#065f46;background:#f0fdf4}
 
-    /* LIGHTBOX */
+    /* BACK BUTTON */
+    .back-btn{position:fixed;bottom:28px;right:28px;z-index:1000;display:inline-flex;align-items:center;gap:8px;background:white;color:var(--blue-dark);font-family:var(--font);font-size:0.88rem;font-weight:600;padding:11px 18px;border-radius:50px;border:1.5px solid var(--border);box-shadow:0 4px 20px rgba(14,165,233,0.18);cursor:pointer;transition:all 0.22s;text-decoration:none}
+    .back-btn:hover{background:var(--blue);color:white;border-color:var(--blue);box-shadow:0 6px 24px rgba(14,165,233,0.35);transform:translateY(-2px)}
+    .back-btn svg{width:16px;height:16px;flex-shrink:0}
     .lightbox{display:none;position:fixed;inset:0;background:rgba(10,22,40,0.85);backdrop-filter:blur(6px);z-index:9999;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out}
     .lightbox.open{display:flex}
     .lightbox img{max-width:90vw;max-height:88vh;border-radius:var(--r-lg);box-shadow:0 25px 80px rgba(0,0,0,0.5);cursor:default;animation:lbIn 0.25s cubic-bezier(0.16,1,0.3,1)}
@@ -163,7 +169,7 @@
     <h2>Contexte</h2>
     <div class="info-card">
       <h3>Objectif de la mission</h3>
-      <p>Dans le cadre de mon stage chez <strong>Econocom</strong> en prestation pour <strong>VNF (Voies Navigables de France)</strong>, j'assure le traitement quotidien des tickets de support IT via l'outil <strong>Matrix42</strong>. L'objectif est de garantir un traitement rapide et conforme aux SLA définis, afin d'assurer la satisfaction des utilisateurs et le bon fonctionnement du support informatique.</p>
+      <p>Dans le cadre de mon alternance chez <strong>Econocom</strong> en prestation pour <strong>VNF (Voies Navigables de France)</strong>, j'assure le traitement quotidien des tickets de support IT via l'outil <strong>Matrix42</strong>. L'objectif est de garantir un traitement rapide et conforme aux SLA définis, afin d'assurer la satisfaction des utilisateurs et le bon fonctionnement du support informatique.</p>
       <p style="margin-top:10px">Le Helpdesk de niveau 1 est le premier point de contact pour tous les incidents et demandes des collaborateurs VNF. Chaque ticket doit être qualifié, traité ou escaladé selon des processus ITSM rigoureux.</p>
       <div class="competences-box">
         <h3>🎯 Compétences E4 mobilisées</h3>
@@ -499,19 +505,22 @@
 
     <!-- KPI -->
     <h2>Indicateurs de Performance</h2>
-    <p style="margin-bottom:16px">Ces KPIs sont mesurés mensuellement et reportés à Econocom dans le cadre du contrat de prestation avec VNF.</p>
+    <p style="margin-bottom:16px">Ces KPIs sont mesurés mensuellement et reportés par Econocom dans le cadre du contrat de prestation avec VNF.</p>
     <div class="kpi-grid">
       <div class="kpi-card"><div class="kpi-icon">📞</div><div class="kpi-value">≥ 95%</div><div class="kpi-label">Appels décrochés en moins de 20 sec</div></div>
       <div class="kpi-card"><div class="kpi-icon">⚠️</div><div class="kpi-value">≤ 5%</div><div class="kpi-label">Taux de dissuasion (abandon)</div></div>
       <div class="kpi-card"><div class="kpi-icon">🚫</div><div class="kpi-value">≤ 1%</div><div class="kpi-label">Taux de tickets hors process</div></div>
       <div class="kpi-card"><div class="kpi-icon">✅</div><div class="kpi-value">≥ 60%</div><div class="kpi-label">Tickets résolus au 1er niveau</div></div>
-      <div class="kpi-card"><div class="kpi-icon">⏱</div><div class="kpi-value">≥ 98%</div><div class="kpi-label">Respect des SLA (toutes priorités)</div></div>
-      <div class="kpi-card"><div class="kpi-icon">⭐</div><div class="kpi-value">≥ 4/5</div><div class="kpi-label">Satisfaction utilisateur (enquête)</div></div>
     </div>
 
   </main>
 
   <footer>Marius DUYCK — Econocom / VNF — Mission Helpdesk Ticketing · BTS SIO SISR</footer>
+
+  <a class="back-btn" id="back-btn" href="#" title="Retour au site principal">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Retour
+  </a>
 
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" id="lb-close">✕</button>
@@ -529,6 +538,22 @@
     lbClose.addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    // Back button — returns to referrer and restores scroll position
+    const backBtn = document.getElementById('back-btn');
+    const referrer = document.referrer;
+    if (referrer) {
+      backBtn.href = referrer;
+    } else {
+      // Fallback: go up one level in the path
+      backBtn.href = '../index.html';
+    }
+    backBtn.addEventListener('click', function(e) {
+      if (referrer) {
+        e.preventDefault();
+        window.location.href = referrer;
+      }
+    });
   </script>
 
 </body>
