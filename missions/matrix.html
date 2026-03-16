@@ -96,8 +96,8 @@
     .step-note span{flex-shrink:0;line-height:1}
 
     /* TOOLS SECTION */
-    .tools-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:28px;align-items:start}
-    @media(max-width:950px){.tools-grid{grid-template-columns:repeat(2,1fr)}}
+    .tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:28px;align-items:start}
+    @media(max-width:850px){.tools-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:560px){.tools-grid{grid-template-columns:1fr}}
     .tool-card{background:white;border-radius:var(--r-lg);padding:24px;border:1px solid var(--border);box-shadow:var(--shadow-sm);transition:all 0.3s;position:relative;overflow:hidden}
     .tool-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),#38bdf8)}
@@ -480,26 +480,7 @@
         </div>
       </div>
 
-      <div class="tool-card">
-        <div class="tool-card-header">
-          <div class="tool-icon">📬</div>
-          <div>
-            <div class="tool-name">Robot de traitement des mails</div>
-            <div class="tool-type">Automatisation Matrix42</div>
-          </div>
-        </div>
-        <div class="tool-desc">Module d'automatisation intégré à Matrix42 qui surveille la boîte mail de support. Dès réception d'un email, il extrait automatiquement les informations (expéditeur, objet, corps) et crée un ticket préqualifié, réduisant le travail manuel de saisie.</div>
-        <div class="tool-features">
-          <div class="tool-feature">Création automatique des tickets depuis les mails entrants</div>
-          <div class="tool-feature">Extraction et pré-remplissage des champs du ticket</div>
-          <div class="tool-feature">Réponses automatiques à l'utilisateur (accusé de réception)</div>
-        </div>
-        <div class="tool-fields">
-          <span class="tool-field">Automation</span>
-          <span class="tool-field">Parsing mail</span>
-          <span class="tool-field">Workflow</span>
-        </div>
-      </div>
+
 
     </div>
 
