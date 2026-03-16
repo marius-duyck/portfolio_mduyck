@@ -6,326 +6,406 @@
   <title>Marius DUYCK – Portfolio BTS SIO SISR</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="images/server.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body>
-  <header id="hero">
-    <nav class="navbar">
-      <a href="#hero" class="logo">Marius DUYCK</a>
-      <ul class="nav-links">
-        <li><a href="#about">À propos</a></li>
-        <li><a href="#entreprise">Mon Alternance</a></li>
-        <li><a href="#skills">Compétences</a></li>
-        <li><a href="#parcours">Expériences</a></li>
-        <li><a href="#realisations">Réalisations</a></li>
-        <li><a href="#veille">Veilles</a></li>
-        <li><a href="#certifications">Certifications</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
 
-    <div class="hero-content">
-      <img src="images/pp.jpg" alt="Marius DUYCK" class="hero-img" />
-      <h1>Marius DUYCK</h1>
-      <p>Étudiant en BTS SIO – Spécialisation SISR</p>
+  <!-- NAVIGATION -->
+  <nav class="navbar" id="navbar">
+    <a href="#hero" class="logo">M<span>.</span>DUYCK</a>
+    <ul class="nav-links">
+      <li><a href="#about">À propos</a></li>
+      <li><a href="#entreprise">Alternance</a></li>
+      <li><a href="#skills">Compétences</a></li>
+      <li><a href="#parcours">Parcours</a></li>
+      <li><a href="#realisations">Réalisations</a></li>
+      <li><a href="#veille">Veilles</a></li>
+      <li><a href="#certifications">Certifs</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
     </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="hero">
+    <div class="hero-bg">
+      <div class="grid-overlay"></div>
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">BTS SIO · SISR · 2026</div>
+      <div class="hero-avatar-wrap">
+        <img src="images/pp.jpg" alt="Marius DUYCK" class="hero-img" />
+        <div class="avatar-ring"></div>
+      </div>
+      <h1 class="hero-name">Marius<br><span>DUYCK</span></h1>
+      <p class="hero-sub">Technicien Helpdesk N1/N2 · Passionné Réseaux & Cybersécurité</p>
+      <div class="hero-tags">
+        <span>Econocom</span>
+        <span>VNF</span>
+        <span>AFPI Marcq-en-Barœul</span>
+      </div>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Me contacter</a>
+        <a href="images/CV_Marius_Duyck.pdf" download class="btn-ghost"><i class="fas fa-download"></i> Télécharger CV</a>
+      </div>
+    </div>
+    <a href="#about" class="scroll-hint">
+      <span>Découvrir</span>
+      <i class="fas fa-chevron-down"></i>
+    </a>
   </header>
 
-  <section id="about" class="section">
-    <h2>À propos</h2>
-    <p>Je suis Marius Duyck, étudiant en BTS SIO SISR et technicien helpdesk niveau 1 et 2 chez <strong>Econocom</strong>. Passionné par l’informatique et les réseaux, j’aime comprendre, dépanner et faire en sorte que tout fonctionne, toujours avec rigueur et curiosité.</p>
-  </section>
-
-  <section id="entreprise" class="section">
-  <h2>Mon Alternance</h2>
-
-  <!-- Bloc Econocom -->
-  <div class="entreprise-intro">
-    <img src="images/logo_econocom.png" alt="Logo Econocom" class="entreprise-logo" />
-    <p>
-      Depuis 2024, j’effectue mon alternance au sein d’<strong>Econocom</strong> en tant que technicien helpdesk niveau 1 et 2.
-      L’entreprise est spécialisée dans la transformation numérique des organisations, en combinant services IT, infrastructures et accompagnement sur mesure.
-    </p>
-  </div>
-
-  <div class="entreprise-grid">
-    <div class="entreprise-card">
-      <i class="fas fa-users"></i>
-      <h3>8 400+</h3>
-      <p>Collaborateurs en Europe</p>
-    </div>
-    <div class="entreprise-card">
-      <i class="fas fa-euro-sign"></i>
-      <h3>2,7 Mds €</h3>
-      <p>Chiffre d’affaires annuel</p>
-    </div>
-    <div class="entreprise-card">
-      <i class="fas fa-globe"></i>
-      <h3>16</h3>
-      <p>Pays d’implantation</p>
-    </div>
-  </div>
-
-  <div class="entreprise-button">
-    <a href="https://www.econocom.com/fr" target="_blank" class="btn-secondary">Découvrir Econocom</a>
-  </div>
-
-  <!-- Bloc VNF -->
-  <div class="entreprise-intro vnf">
-    <img src="images/vnf_logo.png" alt="Logo VNF" class="entreprise-logo" />
-    <p>
-      Dans le cadre de mon alternance chez <strong>Econocom</strong>, j’interviens pour le client
-      <strong>Voies Navigables de France (VNF)</strong>.
-      Cet établissement public gère, modernise et développe le réseau navigable français, qui comprend plus de
-      <strong>6 700 km de voies d’eau</strong>. VNF contribue activement à la transition écologique et au développement
-      du transport fluvial en France.
-    </p>
-  </div>
-
-  <div class="entreprise-grid">
-    <div class="entreprise-card">
-      <i class="fas fa-users"></i>
-      <h3>4 800</h3>
-      <p>agents en France</p>
-    </div>
-
-    <div class="entreprise-card">
-      <i class="fas fa-sack-dollar"></i>
-      <h3>400 M €</h3>
-      <p>Budget annuel</p>
-    </div>
-    <div class="entreprise-card">
-      <i class="fas fa-water"></i>
-      <h3>6 700 km</h3>
-      <p>de voies navigables</p>
-    </div>
-  </div>
-
-  <div class="entreprise-button">
-    <a href="https://www.vnf.fr" target="_blank" class="btn-secondary">Découvrir VNF</a>
-  </div>
-  </section>
-
-
-  <section id="skills" class="section">
-    <h2>Compétences</h2>
-    <div class="skills-grid">
-      <div class="skill-card">
-        <i class="fas fa-headset"></i>
-        <h3>Support & Helpdesk</h3>
-        <p>Assistance utilisateurs, gestion des incidents, maintenance poste de travail.</p>
+  <!-- À PROPOS -->
+  <section id="about" class="section reveal">
+    <div class="section-inner">
+      <div class="section-label">01 · À propos</div>
+      <h2 class="section-title">Qui suis-je ?</h2>
+      <div class="about-layout">
+        <div class="about-text">
+          <p>Je suis <strong>Marius Duyck</strong>, étudiant en <strong>BTS SIO SISR</strong> et technicien helpdesk niveau 1 et 2 chez <strong>Econocom</strong>, en intervention chez VNF (Voies Navigables de France).</p>
+          <p>Passionné par l'informatique, les réseaux et la cybersécurité, j'aime comprendre, dépanner et faire en sorte que tout fonctionne — toujours avec rigueur et curiosité.</p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-item">
+            <span class="stat-number">2+</span>
+            <span class="stat-label">ans d'expérience</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">N1/N2</span>
+            <span class="stat-label">Helpdesk</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">2</span>
+            <span class="stat-label">certifications</span>
+          </div>
+        </div>
       </div>
-      <div class="skill-card">
-        <i class="fas fa-network-wired"></i>
-        <h3>Administration Réseau</h3>
-        <p>Active Directory, VPN FortiClient</p>
-      </div>
-      <div class="skill-card">
-        <i class="fas fa-code"></i>
-        <h3>Développement</h3>
-        <p>Python, PowerShell, HTML/CSS, SQL.</p>
-      </div>
-    </div>
-
-    <div class="skills-button">
-      <a href="https://docs.google.com/spreadsheets/d/1y_xMlzdh1broCq3jXmz4V8a7SjACe2rr/edit?usp=sharing&ouid=110241914953057258423&rtpof=true&sd=true" target="_blank" class="btn-secondary">Voir le tableau de compétences (E4)</a>
     </div>
   </section>
 
-  <section id="parcours" class="section">
-  <h2>Parcours & Expériences</h2>
+  <!-- ALTERNANCE -->
+  <section id="entreprise" class="section reveal">
+    <div class="section-inner">
+      <div class="section-label">02 · Alternance</div>
+      <h2 class="section-title">Mon Alternance</h2>
 
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-content">
-        <h3>Technicien Helpdesk Niveau 1/2 – Econocom</h3>
-        <span>Depuis 2024 | Villeneuve d’Ascq et Béthune</span>
-        <p>Support utilisateur, diagnostic et résolution d’incidents, maintenance du matériel et gestion des accès.</p>
+      <div class="company-block">
+        <div class="company-header">
+          <img src="images/logo_econocom.png" alt="Econocom" class="company-logo" />
+          <div class="company-desc">
+            <h3>Econocom</h3>
+            <p>Depuis 2024, j'effectue mon alternance au sein d'<strong>Econocom</strong> en tant que technicien helpdesk niveau 1 et 2. L'entreprise est spécialisée dans la transformation numérique des organisations, en combinant services IT, infrastructures et accompagnement sur mesure.</p>
+            <a href="https://www.econocom.com/fr" target="_blank" class="btn-ghost-sm">Découvrir Econocom <i class="fas fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </div>
+        <div class="company-kpis">
+          <div class="kpi"><span class="kpi-val">8 400+</span><span class="kpi-label">Collaborateurs en Europe</span></div>
+          <div class="kpi"><span class="kpi-val">2,7 Mds €</span><span class="kpi-label">Chiffre d'affaires</span></div>
+          <div class="kpi"><span class="kpi-val">16</span><span class="kpi-label">Pays d'implantation</span></div>
+        </div>
       </div>
-    </div>
 
-    <div class="timeline-item">
-      <div class="timeline-content">
-        <h3>BTS SIO – Option SISR</h3>
-        <span>2024 – 2026 | AFPI Marcq-en-Barœul</span>
-        <p>Formation en alternance centrée sur les réseaux, la cybersécurité et l’administration système.</p>
+      <div class="company-block" style="margin-top: 3rem;">
+        <div class="company-header">
+          <img src="images/vnf_logo.png" alt="VNF" class="company-logo" />
+          <div class="company-desc">
+            <h3>Voies Navigables de France</h3>
+            <p>Dans le cadre de mon alternance chez Econocom, j'interviens chez <strong>VNF</strong>. Cet établissement public gère, modernise et développe le réseau navigable français (plus de 6 700 km de voies d'eau) et contribue à la transition écologique.</p>
+            <a href="https://www.vnf.fr" target="_blank" class="btn-ghost-sm">Découvrir VNF <i class="fas fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </div>
+        <div class="company-kpis">
+          <div class="kpi"><span class="kpi-val">4 800</span><span class="kpi-label">Agents en France</span></div>
+          <div class="kpi"><span class="kpi-val">400 M€</span><span class="kpi-label">Budget annuel</span></div>
+          <div class="kpi"><span class="kpi-val">6 700 km</span><span class="kpi-label">Voies navigables</span></div>
+        </div>
       </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-content">
-        <h3>Baccalauréat Général - Notre Dame de la Paix</h3>
-        <span>Juillet 2024 | Lille</span>
-        <p>Bac général avec spécialités Maths et HGGSP</p>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-content">
-        <h3>Job étudiant – Lille Karting</h3>
-        <span>Mars – Avril 2024</span>
-        <p>Commissaire de piste, entretien et gestion du matériel, accueil des clients.</p>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-content">
-        <h3>Stage – Access-IT</h3>
-        <span>Octobre 2021 | Villeneuve d’Ascq</span>
-        <p>Programmation d’un site web et gestion de projets informatiques.</p>
-      </div>
-    </div>
-    
-  </div>
-
-  <div class="cv-button">
-    <a href="images/CV_Marius_Duyck.pdf" download class="btn-secondary">Télécharger mon CV</a>
-  </div>
-
-  </section>
-
-  <section id="realisations" class="section">
-    <h2>Réalisations</h2>
-
-    <div class="cert-grid">
-    <div class="cert-card">
-      <i class="fa fa-ticket"></i>
-      <h4>Mission 1 : Traitement des Tickets</h4>
-      <a href="missions/matrix.html" target="_blank" class="btn-secondary">Voir</a>
-    </div>
-    <div class="cert-card">
-      <i class="fas fa-file-contract"></i>
-      <h4>Mission 2 : Rédaction de Procédures</h4>
-      <a href="missions/kba.html" target="_blank" class="btn-secondary">Voir</a>
-    </div>
-    <div class="cert-card">
-      <i class="fas fa-code"></i>
-      <h4>Mission 3 : Création de scripts PowerShell</h4>
-      <a href="missions/powershell.html" target="_blank" class="btn-secondary">Voir</a>
-    </div>
-    <div class="cert-card">
-      <i class="fas fa-database"></i>
-      <h4>Mission 4 : Création d'un Active Directory + GPO</h4>
-      <a href="missions/ad.html" target="_blank" class="btn-secondary">Voir</a>
-    </div>
-    <div class="cert-card">
-      <i class="fas fa-envelope-square"></i>
-      <h4>Mission 5 : Installation d'un serveur de messagerie MailCow</h4>
-      <a href="missions/mailcow.html" target="_blank" class="btn-secondary">Voir</a>
-    </div>
-    <div class="cert-card">
-      <i class="fas fa-database"></i>
-      <h4>Mission 6 : </h4>
-      <a href="#" target="_blank" class="btn-secondary">Voir</a>
-    </div>
-    </div>
-  </div>
-  </section>
-
-
-  <section id="veille" class="section">
-    <h2>Veilles Technologiques</h2>
-    <div class="veille-grid">
-      <div class="veille-card">
-        <i class=""></i>
-        <h3>L'évolution des protocoles sans fil (5G et Wi-Fi 6)</h3>
-        <p>La télémétrie en temps réel en Formule 1</p>
-        <a href="veilles/veille1.html" target="_blank" class="btn-secondary">Lire</a>
-      </div>
-      <div class="veille-card">
-        <i class=""></i>
-        <h3>Sécurisation des billeteries dématérialisées
-        </h3>
-        <p>Gesiton des accès et cybersécurité en station de ski</p>
-        <a href="veilles/veille2.html" target="_blank" class="btn-secondary">Lire</a>
-      </div>
-    </div>
-
-    <div class="sources">
-    <h3>Sources</h3>
-      <ul>
-        <li><a href="https://www.racecar-engineering.com/articles/how-data-works-in-formula-1/" target="_blank">Racecar-Engineering</a></li>
-        <li><a href="https://www.crowdstrike.com/en-us/resources/customer-stories/mercedes-amg-petronas-f1-team/" target="_blank">CrowdStrike</a></li>
-        <li><a href="https://www.verizon.com/about/our-company/innovation-labs/case-study-f1" target="_blank">Verizon</a></li>
-      </ul>
     </div>
   </section>
 
-  <section id="certifications" class="section">
-  <h2>Certifications & Attestations</h2>
-
-  <h3 class="cert-subtitle"><i class="fas fa-shield-alt"></i> Certifications RGPD</h3>
-
-  <div class="cert-grid">
-    <div class="cert-card">
-      <i class="fas fa-file-contract"></i>
-      <h4>Module 1 : Le RGPD et ses notions clés</h4>
-      <a href="images/certifs/1.pdf" target="_blank" class="btn-secondary">Voir</a>
+  <!-- COMPÉTENCES -->
+  <section id="skills" class="section reveal">
+    <div class="section-inner">
+      <div class="section-label">03 · Compétences</div>
+      <h2 class="section-title">Mes Compétences</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-icon"><i class="fas fa-headset"></i></div>
+          <h3>Support & Helpdesk</h3>
+          <p>Assistance utilisateurs, gestion des incidents, maintenance poste de travail.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon"><i class="fas fa-network-wired"></i></div>
+          <h3>Administration Réseau</h3>
+          <p>Active Directory, DNS/DHCP, gestion des accès et des droits.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon"><i class="fas fa-code"></i></div>
+          <h3>Développement</h3>
+          <p>Python, PowerShell, HTML/CSS, SQL — automatisation et scripts système.</p>
+        </div>
+      </div>
+      <div class="e4-preview">
+        <div class="e4-preview-header">
+          <span><i class="fas fa-table"></i> Tableau de compétences E4</span>
+          <a href="https://docs.google.com/spreadsheets/d/1y_xMlzdh1broCq3jXmz4V8a7SjACe2rr/edit?usp=sharing&ouid=110241914953057258423&rtpof=true&sd=true" target="_blank" class="btn-ghost-sm">Ouvrir <i class="fas fa-arrow-up-right-from-square"></i></a>
+        </div>
+        <iframe
+          src="https://docs.google.com/spreadsheets/d/1y_xMlzdh1broCq3jXmz4V8a7SjACe2rr/preview"
+          class="e4-frame"
+          frameborder="0"
+          allowfullscreen
+          title="Tableau de compétences E4">
+        </iframe>
+      </div>
     </div>
-    <div class="cert-card">
-      <i class="fas fa-lock"></i>
-      <h4>Module 2 : Les principes de la protection des données</h4>
-      <a href="images/certifs/2.pdf" target="_blank" class="btn-secondary">Voir</a>
-    </div>
-    <div class="cert-card">
-      <i class="fas fa-users"></i>
-      <h4>Module 3 : Les responsabilités des acteurs</h4>
-      <a href="images/certifs/3.pdf" target="_blank" class="btn-secondary">Voir</a>
-    </div>
-    <div class="cert-card">
-      <i class="fas fa-user-shield"></i>
-      <h4>Module 4 : Le DPO et les outils de la conformité</h4>
-      <a href="images/certifs/4.pdf" target="_blank" class="btn-secondary">Voir</a>
-    </div>
-    <div class="cert-card">
-      <i class="fas fa-university"></i>
-      <h4>Module 5 : Les collectivités territoriales</h4>
-      <a href="images/certifs/5.pdf" target="_blank" class="btn-secondary">Voir</a>
-    </div>
-    <div class="cert-card">
-      <i class="fas fa-briefcase"></i>
-      <h4>Module 6 : Travail et données personnelles</h4>
-      <a href="images/certifs/6.pdf" target="_blank" class="btn-secondary">Voir</a>
-    </div>
-  </div>
-
-  <h3 class="cert-subtitle"><i class="fas fa-lock"></i> Certification ANSSI</h3>
-
-  <div class="cert-grid">
-    <div class="cert-card">
-      <i class="fas fa-shield-virus"></i>
-      <h4>Cybersécurité - Sensibilisation ANSSI</h4>
-      <a href="images/certifs/anssi.pdf" target="_blank" class="btn-secondary">Voir</a>
-    </div>
-  </div>
   </section>
 
-  
-  <section id="contact" class="section">
-    <h2>Contact</h2>
-    <p>Envie d’échanger sur mes projets ou de collaborer ?</p>
-    <div class="contact-links">
-      <a href="mailto:mariusduyck.pro@gmail.com" class="btn"><i class="fa-solid fa-envelope"></i> Email</a>
-      <a href="https://www.linkedin.com/in/marius-duyck" target="_blank" class="btn-secondary"><i class="fab fa-linkedin"></i> LinkedIn</a>
+  <!-- PARCOURS -->
+  <section id="parcours" class="section reveal">
+    <div class="section-inner">
+      <div class="section-label">04 · Parcours</div>
+      <h2 class="section-title">Expériences & Formation</h2>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <span class="tl-date">Depuis 2024 · Villeneuve d'Ascq & Béthune</span>
+            <h3>Technicien Helpdesk N1/N2 — Econocom</h3>
+            <p>Support utilisateur, diagnostic et résolution d'incidents, maintenance du matériel et gestion des accès.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <span class="tl-date">2024 – 2026 · AFPI Marcq-en-Barœul</span>
+            <h3>BTS SIO – Option SISR</h3>
+            <p>Formation en alternance centrée sur les réseaux, la cybersécurité et l'administration système.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <span class="tl-date">Juillet 2024 · Lille</span>
+            <h3>Baccalauréat Général — Notre Dame de la Paix</h3>
+            <p>Spécialités Mathématiques et HGGSP.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <span class="tl-date">Mars – Avril 2024</span>
+            <h3>Job étudiant — Lille Karting</h3>
+            <p>Commissaire de piste, entretien et gestion du matériel, accueil des clients.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <span class="tl-date">Octobre 2021 · Villeneuve d'Ascq</span>
+            <h3>Stage — Access-IT</h3>
+            <p>Programmation d'un site web et gestion de projets informatiques.</p>
+          </div>
+        </div>
+      </div>
+      <div class="section-cta">
+        <a href="images/CV_Marius_Duyck.pdf" download class="btn-primary"><i class="fas fa-download"></i> Télécharger mon CV</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- RÉALISATIONS -->
+  <section id="realisations" class="section reveal">
+    <div class="section-inner">
+      <div class="section-label">05 · Réalisations</div>
+      <h2 class="section-title">Mes Missions</h2>
+      <div class="missions-grid">
+        <a href="missions/matrix.html" target="_blank" class="mission-card">
+          <div class="mission-num">01</div>
+          <div class="mission-icon"><i class="fa fa-ticket"></i></div>
+          <h4>Traitement des Tickets</h4>
+          <span class="mission-arrow"><i class="fas fa-arrow-right"></i></span>
+        </a>
+        <a href="missions/kba.html" target="_blank" class="mission-card">
+          <div class="mission-num">02</div>
+          <div class="mission-icon"><i class="fas fa-file-contract"></i></div>
+          <h4>Rédaction de Procédures</h4>
+          <span class="mission-arrow"><i class="fas fa-arrow-right"></i></span>
+        </a>
+        <a href="missions/powershell.html" target="_blank" class="mission-card">
+          <div class="mission-num">03</div>
+          <div class="mission-icon"><i class="fas fa-code"></i></div>
+          <h4>Scripts PowerShell</h4>
+          <span class="mission-arrow"><i class="fas fa-arrow-right"></i></span>
+        </a>
+        <a href="missions/ad.html" target="_blank" class="mission-card">
+          <div class="mission-num">04</div>
+          <div class="mission-icon"><i class="fas fa-database"></i></div>
+          <h4>Active Directory + GPO</h4>
+          <span class="mission-arrow"><i class="fas fa-arrow-right"></i></span>
+        </a>
+        <a href="#" target="_blank" class="mission-card mission-wip">
+          <div class="mission-num">05</div>
+          <div class="mission-icon"><i class="fas fa-clock"></i></div>
+          <h4>À venir</h4>
+          <span class="wip-badge">WIP</span>
+        </a>
+        <a href="#" target="_blank" class="mission-card mission-wip">
+          <div class="mission-num">06</div>
+          <div class="mission-icon"><i class="fas fa-clock"></i></div>
+          <h4>À venir</h4>
+          <span class="wip-badge">WIP</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- VEILLES -->
+  <section id="veille" class="section reveal">
+    <div class="section-inner">
+      <div class="section-label">06 · Veilles</div>
+      <h2 class="section-title">Veilles Technologiques</h2>
+      <div class="veilles-grid">
+        <a href="veilles/veille1.html" target="_blank" class="veille-card">
+          <div class="veille-tag">Réseaux · F1 · 5G</div>
+          <h3>Télémétrie & Protocoles sans fil</h3>
+          <p>L'évolution des protocoles sans fil (5G et Wi-Fi 6) appliquée à la télémétrie en temps réel en Formule 1.</p>
+          <span class="veille-link">Lire la veille <i class="fas fa-arrow-right"></i></span>
+        </a>
+        <a href="veilles/veille2.html" target="_blank" class="veille-card">
+          <div class="veille-tag">Cybersécurité · IoT</div>
+          <h3>Billetteries dématérialisées</h3>
+          <p>Sécurisation des billetteries dématérialisées — gestion des accès et cybersécurité en station de ski.</p>
+          <span class="veille-link">Lire la veille <i class="fas fa-arrow-right"></i></span>
+        </a>
+      </div>
+
+      <div class="sources-block">
+        <h3><i class="fas fa-link"></i> Sources</h3>
+        <div class="sources-links">
+          <a href="https://www.racecar-engineering.com/articles/how-data-works-in-formula-1/" target="_blank">Racecar Engineering</a>
+          <a href="https://www.crowdstrike.com/en-us/resources/customer-stories/mercedes-amg-petronas-f1-team/" target="_blank">CrowdStrike × Mercedes AMG F1</a>
+          <a href="https://www.verizon.com/about/our-company/innovation-labs/case-study-f1" target="_blank">Verizon × F1</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications" class="section reveal">
+    <div class="section-inner">
+      <div class="section-label">07 · Certifications</div>
+      <h2 class="section-title">Certifications & Attestations</h2>
+
+      <div class="cert-group">
+        <div class="cert-group-title"><i class="fas fa-shield-alt"></i> Certifications RGPD</div>
+        <div class="cert-grid">
+          <a href="images/certifs/1.pdf" target="_blank" class="cert-card">
+            <i class="fas fa-file-contract"></i>
+            <p>Module 1 : Le RGPD et ses notions clés</p>
+          </a>
+          <a href="images/certifs/2.pdf" target="_blank" class="cert-card">
+            <i class="fas fa-lock"></i>
+            <p>Module 2 : Les principes de la protection des données</p>
+          </a>
+          <a href="images/certifs/3.pdf" target="_blank" class="cert-card">
+            <i class="fas fa-users"></i>
+            <p>Module 3 : Les responsabilités des acteurs</p>
+          </a>
+          <a href="images/certifs/4.pdf" target="_blank" class="cert-card">
+            <i class="fas fa-user-shield"></i>
+            <p>Module 4 : Le DPO et les outils de la conformité</p>
+          </a>
+          <a href="images/certifs/5.pdf" target="_blank" class="cert-card">
+            <i class="fas fa-university"></i>
+            <p>Module 5 : Les collectivités territoriales</p>
+          </a>
+          <a href="images/certifs/6.pdf" target="_blank" class="cert-card">
+            <i class="fas fa-briefcase"></i>
+            <p>Module 6 : Travail et données personnelles</p>
+          </a>
+        </div>
+      </div>
+
+      <div class="cert-group">
+        <div class="cert-group-title"><i class="fas fa-lock"></i> Certification ANSSI</div>
+        <div class="cert-grid cert-grid-single">
+          <a href="images/certifs/anssi.pdf" target="_blank" class="cert-card cert-featured">
+            <i class="fas fa-shield-virus"></i>
+            <p>Cybersécurité — Sensibilisation ANSSI</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section reveal">
+    <div class="section-inner">
+      <div class="section-label">08 · Contact</div>
+      <h2 class="section-title">Travaillons ensemble</h2>
+      <p class="contact-sub">Envie d'échanger sur mes projets ou de collaborer ?</p>
+      <div class="contact-cards">
+        <a href="mailto:mariusduyck.pro@gmail.com" class="contact-card">
+          <i class="fas fa-envelope"></i>
+          <span>mariusduyck.pro@gmail.com</span>
+        </a>
+        <a href="https://www.linkedin.com/in/marius-duyck" target="_blank" class="contact-card">
+          <i class="fab fa-linkedin"></i>
+          <span>linkedin.com/in/marius-duyck</span>
+        </a>
+      </div>
     </div>
   </section>
 
   <footer>
-    <p>&copy; 2026 Marius DUYCK – Portfolio BTS SIO SISR</p>
+    <p>© 2026 <strong>Marius DUYCK</strong> — Portfolio BTS SIO SISR</p>
   </footer>
 
   <script>
-    // Animation de défilement fluide
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
       });
+    });
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Hamburger
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      hamburger.classList.toggle('active');
     });
   </script>
 </body>
 </html>
-
-
