@@ -169,8 +169,8 @@
     <h2>Contexte</h2>
     <div class="info-card">
       <h3>Objectif de la mission</h3>
-      <p>Dans le cadre de mon stage chez <strong>Econocom</strong> en prestation pour <strong>VNF (Voies Navigables de France)</strong>, j'assure le traitement quotidien des tickets de support IT via l'outil <strong>Matrix42</strong>. L'objectif est de garantir un traitement rapide et conforme aux SLA définis, afin d'assurer la satisfaction des utilisateurs et le bon fonctionnement du support informatique.</p>
-      <p style="margin-top:10px">Le Helpdesk de niveau 1 est le premier point de contact pour tous les incidents et demandes des collaborateurs VNF. Chaque ticket doit être qualifié, traité ou escaladé selon des processus ITSM rigoureux.</p>
+      <p>Dans le cadre de mon alternance chez <strong>Econocom</strong> en prestation pour <strong>VNF (Voies Navigables de France)</strong>, j'assure le traitement quotidien des tickets de support IT via l'outil <strong>Matrix42</strong>. L'objectif est de garantir un traitement rapide et conforme aux SLA définis, afin d'assurer la satisfaction des utilisateurs et le bon fonctionnement du support informatique.</p>
+      <p style="margin-top:10px">Le Helpdesk de niveau 1 est le premier point de contact pour tous les incidents et demandes des collaborateurs VNF. Chaque ticket doit être qualifié, traité ou escaladé.</p>
       <div class="competences-box">
         <h3>🎯 Compétences E4 mobilisées</h3>
         <div class="competences-list">
@@ -184,12 +184,12 @@
     <h2>Niveaux de Priorité (SLA)</h2>
     <p style="margin-bottom:16px">Les SLA (<em>Service Level Agreement</em>) définissent les délais maximaux de prise en charge d'un ticket selon son niveau de criticité. Ils sont calculés automatiquement par Matrix42 dès la création du ticket.</p>
     <div class="sla-grid">
-      <div class="sla-card critical"><h4>🔴 Critique</h4><div class="sla-time">15 min</div><p>Cas : &lt; 1% des tickets</p><small>Impact toute l'entreprise, système bloqué</small></div>
-      <div class="sla-card high"><h4>🟠 Élevé</h4><div class="sla-time">2 h</div><p>Cas : ~4% des tickets</p><small>Impact plusieurs utilisateurs, bloquant</small></div>
-      <div class="sla-card medium"><h4>🟡 Moyen</h4><div class="sla-time">4 h</div><p>Cas : ~10% des tickets</p><small>Impact un utilisateur, bloquant</small></div>
-      <div class="sla-card low"><h4>🟢 Faible</h4><div class="sla-time">6 h</div><p>Cas : ~85% des tickets</p><small>Impact un utilisateur, non bloquant</small></div>
+      <div class="sla-card critical"><h4>🔴 Critique</h4><div class="sla-time">15 min</div><p>Cas : &lt; 1% des tickets</p><small>Impact toute l'entreprise et bloquant</small></div>
+      <div class="sla-card high"><h4>🟠 Élevé</h4><div class="sla-time">2 h</div><p>Cas : ~4% des tickets</p><small>Impact plusieurs utilisateurs et bloquant</small></div>
+      <div class="sla-card medium"><h4>🟡 Moyen</h4><div class="sla-time">4 h</div><p>Cas : ~10% des tickets</p><small>Impact un utilisateur et bloquant</small></div>
+      <div class="sla-card low"><h4>🟢 Faible</h4><div class="sla-time">6 h</div><p>Cas : ~85% des tickets</p><small>Impact un utilisateur et non bloquant</small></div>
     </div>
-    <div class="highlight warn">⚠️ Le non-respect des délais SLA est tracé dans Matrix42 et impacte directement les indicateurs de performance du contrat Econocom / VNF. Une alerte automatique est envoyée si un ticket approche de son échéance.</div>
+    <div class="highlight warn">⚠️ Le non-respect des délais SLA est tracé dans Matrix42 et impacte directement les indicateurs de performance (KPI) du contrat Econocom / VNF.</div>
 
     <!-- FLUX -->
     <h2>Vue d'ensemble du flux</h2>
@@ -206,7 +206,7 @@
       <div class="flow-arrow">→</div>
       <div class="flow-node end">✅ Clôture</div>
     </div>
-    <div class="highlight">Si le ticket n'est pas résolvable au niveau 1, il est escaladé vers le N2 ou le service concerné (réseau, poste de travail, applicatif…).</div>
+    <div class="highlight">Si le ticket n'est pas résolvable au niveau 1, il est escaladé vers le N2 ou le service concerné (réseau, env. de travail, applicatif…).</div>
 
     <!-- PROCÉDURE -->
     <h2>Procédure détaillée de traitement</h2>
@@ -225,7 +225,7 @@
               <div class="substep-bullet">A</div>
               <div class="substep-content">
                 <div class="substep-title">📞 Appel téléphonique entrant</div>
-                <div class="substep-desc">L'utilisateur appelle le numéro du Helpdesk VNF. Le technicien décroche, recueille les informations et crée manuellement le ticket dans Matrix42 pendant l'appel. Il s'assure de bien noter le nom, le site, le poste de travail concerné et la nature du problème avant de raccrocher.</div>
+                <div class="substep-desc">L'utilisateur appelle le numéro du Helpdesk VNF. Le technicien décroche, recueille les informations et <strong>crée manuellement</strong> le ticket dans Matrix42 pendant l'appel. Il s'assure de bien noter le nom, le site, le poste de travail concerné et la nature du problème avant de raccrocher.</div>
                 <span class="substep-tag">Création manuelle</span>
               </div>
             </div>
@@ -233,12 +233,12 @@
               <div class="substep-bullet">B</div>
               <div class="substep-content">
                 <div class="substep-title">📧 Mail entrant (portail ou email)</div>
-                <div class="substep-desc">L'utilisateur envoie un mail à l'adresse de support ou soumet une demande via le portail self-service. Un <strong>robot Matrix42</strong> intercepte le message et crée automatiquement un ticket préqualifié. Le technicien doit ensuite vérifier et compléter les champs manquants.</div>
+                <div class="substep-desc">L'utilisateur envoie un mail à l'adresse de support ou soumet une demande via le portail self-service. Un robot Matrix42 intercepte le message et <strong>crée automatiquement</strong> un ticket préqualifié. Le technicien doit ensuite vérifier et compléter les champs manquants.</div>
                 <span class="substep-tag">Création automatique</span>
               </div>
             </div>
           </div>
-          <img src="images_missions/creation_ticket.png" class="step-image" alt="Création ticket Matrix42">
+          
         </div>
       </div>
 
@@ -249,13 +249,13 @@
           <h3>Qualification et attribution des SLA</h3>
         </div>
         <div class="step-body">
-          <p class="step-desc">La qualification est l'étape la plus critique du processus. Elle conditionne le SLA appliqué et l'orientation du ticket. Chaque champ doit être renseigné avec précision.</p>
+          <p class="step-desc">La qualification est l'étape la plus critique du processus. Elle conditionne le SLA appliqué et l'orientation du ticket.</p>
           <div class="substeps">
             <div class="substep">
               <div class="substep-bullet">1</div>
               <div class="substep-content">
                 <div class="substep-title">Renseigner le demandeur</div>
-                <div class="substep-desc">Rechercher l'utilisateur dans l'annuaire Matrix42 (synchronisé avec l'Active Directory VNF) pour lier le ticket à son compte. Cela permet de récupérer automatiquement son site, son service et son responsable.</div>
+                <div class="substep-desc">Rechercher l'utilisateur dans l'annuaire Matrix42 (synchronisé avec l'Active Directory VNF) pour lier le ticket à son compte.</div>
                 <span class="substep-tag">Champ : Demandeur</span>
               </div>
             </div>
@@ -263,14 +263,14 @@
               <div class="substep-bullet">2</div>
               <div class="substep-content">
                 <div class="substep-title">Catégoriser l'incident ou la demande</div>
-                <div class="substep-desc">Choisir la <strong>catégorie</strong> (ex : Poste de travail, Réseau, Applicatif, Accès…) et la <strong>sous-catégorie</strong> correspondante. Cette arborescence permet de router automatiquement le ticket vers la bonne équipe et d'appliquer les SLA adaptés.</div>
-                <span class="substep-tag">Champ : Catégorie / Sous-catégorie</span>
+                <div class="substep-desc">Choisir la <strong>catégorie</strong> (ex : Poste de travail, Réseau, Applicatif, Accès…) et l'<strong>application</strong> (si nécessaire) correspondante. Cette arborescence permet de router automatiquement le ticket vers la bonne équipe.</div>
+                <span class="substep-tag">Champ : Catégorie / Application</span>
               </div>
             </div>
             <div class="substep">
               <div class="substep-bullet">3</div>
               <div class="substep-content">
-                <div class="substep-title">Définir la priorité manuellement si nécessaire</div>
+                <div class="substep-title">Définir la priorité</div>
                 <div class="substep-desc">La priorité est calculée automatiquement selon la matrice impact × urgence. Elle peut être ajustée manuellement si le contexte le justifie (ex : réunion critique à venir, utilisateur VIP). Toute modification doit être justifiée dans le journal.</div>
                 <span class="substep-tag">Champ : Priorité</span>
               </div>
@@ -284,7 +284,8 @@
               </div>
             </div>
           </div>
-          <img src="images_missions/sla.png" class="step-image" alt="SLA Matrix42">
+          <img src="images_missions/creation_ticket.png" class="step-image" alt="Création ticket Matrix42">
+          <img src="#" class="step-image" alt="Description">
         </div>
       </div>
 
@@ -302,7 +303,7 @@
               <div class="substep-content">
                 <div class="substep-title">Analyse des informations disponibles</div>
                 <div class="substep-desc">Consulter l'historique des tickets précédents de l'utilisateur dans Matrix42 pour détecter un problème récurrent. Vérifier si d'autres tickets similaires sont ouverts (potentiel incident majeur).</div>
-                <span class="substep-tag">Base de connaissances ITSM</span>
+                <span class="substep-tag">Historique des tickets</span>
               </div>
             </div>
             <div class="substep">
@@ -322,7 +323,7 @@
               </div>
             </div>
           </div>
-          <div class="step-note"><span>💡</span> Le statut <code>En attente</code> stoppe le compteur SLA côté technicien. Il est important de toujours justifier ce changement d'état avec un commentaire dans le journal pour assurer la traçabilité.</div>
+          <div class="step-note"><span>💡</span> Le statut "En attente" stoppe le compteur SLA côté technicien. Il est important de toujours justifier ce changement d'état avec un commentaire dans le journal pour assurer la traçabilité.</div>
           <img src="images_missions/attente.png" class="step-image" alt="Statut En attente">
           <img src="images_missions/Etats.png" class="step-image" alt="États du ticket" style="margin-top:12px">
         </div>
@@ -341,7 +342,7 @@
               <div class="substep-bullet">A</div>
               <div class="substep-content">
                 <div class="substep-title">🔧 Résolution directe N1 (à distance)</div>
-                <div class="substep-desc">Le technicien prend la main à distance (via outil de télémaintenance) ou guide l'utilisateur par téléphone. La solution appliquée est documentée en détail dans le journal du ticket pour alimenter la base de connaissances.</div>
+                <div class="substep-desc">Le technicien prend la main à distance (via FastViewer) ou guide l'utilisateur par téléphone. La solution appliquée est documentée en détail dans le journal du ticket au cas où un problème similaire revenait.</div>
                 <span class="substep-tag">Prise en main à distance</span>
               </div>
             </div>
@@ -349,16 +350,8 @@
               <div class="substep-bullet">B</div>
               <div class="substep-content">
                 <div class="substep-title">📤 Escalade vers N2 / service concerné</div>
-                <div class="substep-desc">Si le problème dépasse les compétences N1 (réseau, serveur, applicatif métier…), le ticket est <strong>réassigné</strong> à la file du groupe compétent. Le technicien rédige un résumé du diagnostic dans le journal avant l'escalade pour éviter que le N2 reparte de zéro.</div>
-                <span class="substep-tag">Réassignation de groupe</span>
-              </div>
-            </div>
-            <div class="substep">
-              <div class="substep-bullet">C</div>
-              <div class="substep-content">
-                <div class="substep-title">📍 Intervention sur site</div>
-                <div class="substep-desc">Pour certains problèmes matériels (remplacement de composant, câblage, configuration physique), une intervention sur site est planifiée. Le ticket reste ouvert et un <strong>bon d'intervention</strong> peut être généré depuis Matrix42.</div>
-                <span class="substep-tag">Bon d'intervention</span>
+                <div class="substep-desc">Si le problème dépasse les compétences N1 (réseau, serveur, applicatif métier…), le ticket est <strong>escaladé</strong> au groupe concerné. Le technicien rédige un résumé du diagnostic dans le journal avant l'escalade pour éviter que le N2 reparte de zéro.</div>
+                <span class="substep-tag">Escalade du ticket</span>
               </div>
             </div>
           </div>
@@ -373,13 +366,13 @@
           <h3>Clôture et retour utilisateur</h3>
         </div>
         <div class="step-body">
-          <p class="step-desc">La clôture du ticket marque la fin du traitement. Elle n'est possible que si la solution a été confirmée et documentée. Un processus de validation utilisateur permet d'assurer la satisfaction avant fermeture définitive.</p>
+          <p class="step-desc">La clôture du ticket marque la fin du traitement. Elle n'est possible que si la solution a été confirmée et documentée.</p>
           <div class="substeps">
             <div class="substep">
               <div class="substep-bullet">1</div>
               <div class="substep-content">
                 <div class="substep-title">Confirmation de la résolution</div>
-                <div class="substep-desc">Le technicien s'assure que la solution est effective (test en direct avec l'utilisateur ou vérification à distance) avant de clôturer le ticket. Si le problème persiste, il reste en statut <strong>En cours</strong>.</div>
+                <div class="substep-desc">Le technicien s'assure que la solution est effective (test en direct avec l'utilisateur ou vérification à distance) avant de clôturer le ticket.</div>
                 <span class="substep-tag">Vérification solution</span>
               </div>
             </div>
@@ -395,12 +388,11 @@
               <div class="substep-bullet">3</div>
               <div class="substep-content">
                 <div class="substep-title">Mail automatique à l'utilisateur</div>
-                <div class="substep-desc">Au passage au statut <strong>Résolu</strong>, Matrix42 envoie automatiquement un mail à l'utilisateur avec un résumé de la solution et un lien pour rouvrir le ticket s'il estime que son problème n'est pas résolu. Un délai de 72h est accordé avant clôture définitive.</div>
-                <span class="substep-tag">Statut : Résolu → Clôturé</span>
+                <div class="substep-desc">Au passage au statut <strong>Clôturé</strong>, Matrix42 envoie automatiquement un mail à l'utilisateur avec un résumé de la solution. Si le problème n'est pas résolu ou réapparait, l'utilisateur peut répondre à ce mail pour réouvrir le ticket.</div>
+                <span class="substep-tag">Statut : Clôturé</span>
               </div>
             </div>
           </div>
-          <div class="step-note"><span>ℹ️</span> Si l'utilisateur rouvre le ticket dans les 72h suivant la résolution, le technicien doit reprendre le traitement sans recréer un nouveau ticket, pour conserver la traçabilité complète de l'incident.</div>
           <img src="images_missions/mail.png" class="step-image" alt="Mail de clôture automatique">
         </div>
       </div>
@@ -433,7 +425,6 @@
           <span class="tool-field">Incidents</span>
           <span class="tool-field">Demandes</span>
           <span class="tool-field">SLA</span>
-          <span class="tool-field">CMDB</span>
           <span class="tool-field">Base de connaissances</span>
         </div>
       </div>
@@ -464,7 +455,7 @@
         <div class="tool-card-header">
           <div class="tool-icon">🖥</div>
           <div>
-            <div class="tool-name">Outil de télémaintenance</div>
+            <div class="tool-name">FastViewer</div>
             <div class="tool-type">Prise en main à distance</div>
           </div>
         </div>
@@ -486,19 +477,17 @@
 
     <!-- KPI -->
     <h2>Indicateurs de Performance</h2>
-    <p style="margin-bottom:16px">Ces KPIs sont mesurés mensuellement et reportés à Econocom dans le cadre du contrat de prestation avec VNF.</p>
+    <p style="margin-bottom:16px">Ces KPIs sont mesurés mensuellement et reportés par Econocom dans le cadre du contrat de prestation avec VNF.</p>
     <div class="kpi-grid">
       <div class="kpi-card"><div class="kpi-icon">📞</div><div class="kpi-value">≥ 95%</div><div class="kpi-label">Appels décrochés en moins de 20 sec</div></div>
       <div class="kpi-card"><div class="kpi-icon">⚠️</div><div class="kpi-value">≤ 5%</div><div class="kpi-label">Taux de dissuasion (abandon)</div></div>
       <div class="kpi-card"><div class="kpi-icon">🚫</div><div class="kpi-value">≤ 1%</div><div class="kpi-label">Taux de tickets hors process</div></div>
       <div class="kpi-card"><div class="kpi-icon">✅</div><div class="kpi-value">≥ 60%</div><div class="kpi-label">Tickets résolus au 1er niveau</div></div>
-      <div class="kpi-card"><div class="kpi-icon">⏱</div><div class="kpi-value">≥ 98%</div><div class="kpi-label">Respect des SLA (toutes priorités)</div></div>
-      <div class="kpi-card"><div class="kpi-icon">⭐</div><div class="kpi-value">≥ 4/5</div><div class="kpi-label">Satisfaction utilisateur (enquête)</div></div>
     </div>
 
   </main>
 
-  <footer>Marius DUYCK — Econocom / VNF — Mission Helpdesk Ticketing · BTS SIO SISR</footer>
+  <footer>Marius DUYCK — Econocom / VNF — Mission Helpdesk Ticketing</footer>
 
   <a class="back-btn" id="back-btn" href="#" title="Retour au site principal">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
