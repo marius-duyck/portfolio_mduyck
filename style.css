@@ -42,6 +42,8 @@ body {
 a { text-decoration: none; color: inherit; }
 img { display: block; max-width: 100%; }
 
+code{font-family:var(--mono);font-size:0.87em;background:var(--blue-pale);color:var(--blue-dark);padding:2px 7px;border-radius:5px}
+
 /* ─── SCROLLBAR ──────────────────────────── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
@@ -606,7 +608,7 @@ img { display: block; max-width: 100%; }
 .cert-group-title i { color: var(--blue); }
 .cert-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
 }
 .cert-grid-single { grid-template-columns: minmax(230px, 320px); }
