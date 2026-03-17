@@ -3,321 +3,430 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Création scripts PowerShell</title>
+  <title>Création de scripts PowerShell — VNF</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
     :root {
-      --accent: #0284c7;
-      --accent-light: #38bdf8;
-      --accent-soft: #e0f2fe;
-      --text-primary: #0f172a;
-      --text-secondary: #334155;
-      --bg-base: #f0f6ff;
-      --border-card: rgba(226, 232, 240, 0.8);
-      --radius: 16px;
-      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --blue:#0ea5e9;--blue-dark:#0284c7;--blue-pale:#e0f2fe;--blue-soft:#f0f9ff;
+      --ink:#0a1628;--ink-light:#334155;--muted:#64748b;--border:rgba(14,165,233,0.15);
+      --bg:#f8fbff;--shadow-sm:0 2px 10px rgba(14,165,233,0.08);--shadow-md:0 8px 30px rgba(14,165,233,0.12);
+      --r-sm:8px;--r-md:14px;--r-lg:22px;--font:'DM Sans',sans-serif;--mono:'JetBrains Mono',monospace;
+      --green:#10b981;--orange:#f59e0b;--red:#ef4444;--purple:#8b5cf6;
     }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font);background:var(--bg);color:var(--ink-light);line-height:1.7;font-size:16px}
+    a{text-decoration:none;color:inherit}
+    strong{color:var(--ink)}
+    code{font-family:var(--mono);font-size:0.87em;background:var(--blue-pale);color:var(--blue-dark);padding:2px 7px;border-radius:5px}
+    ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--blue);border-radius:10px}
 
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg-base); color: var(--text-secondary); line-height: 1.7; font-size: 16px; }
+    /* HEADER */
+    header{position:relative;overflow:hidden;background:linear-gradient(135deg,#0c4a6e 0%,#0284c7 45%,#38bdf8 100%);color:white;padding:70px 40px 60px;box-shadow:0 4px 30px rgba(2,100,180,0.25)}
+    header::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 90% 50%,rgba(255,255,255,0.07),transparent),radial-gradient(ellipse 40% 60% at 10% 20%,rgba(255,255,255,0.05),transparent)}
+    .header-grid{position:relative;z-index:1;max-width:1050px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:32px}
+    .header-icon{width:72px;height:72px;background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.25);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:32px;flex-shrink:0;backdrop-filter:blur(4px)}
+    .header-text{display:flex;flex-direction:column;align-items:center}
+    .header-eyebrow{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.85);font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:50px;margin-bottom:12px}
+    .header-eyebrow::before{content:"";width:6px;height:6px;background:#7dd3fc;border-radius:50%;flex-shrink:0}
+    header h1{font-size:2.2rem;font-weight:700;letter-spacing:-0.03em;line-height:1.15;margin-bottom:10px;text-align:center}
+    header p{font-size:0.97rem;color:rgba(255,255,255,0.72);margin:0}
+    .header-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:18px}
+    .header-pill{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.88);font-size:0.78rem;font-weight:500;padding:5px 12px;border-radius:50px}
+    .header-pill span{color:#7dd3fc;font-size:0.9rem}
 
-    /* --- HEADER --- */
-    header {
-      background: linear-gradient(135deg, #0284c7, #38bdf8, #0ea5e9);
-      color: white;
-      text-align: center;
-      padding: 80px 20px;
-      box-shadow: 0 4px 20px rgba(2, 132, 199, 0.2);
-      position: relative;
-      overflow: hidden;
-    }
-    header::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: radial-gradient(circle at top right, rgba(255,255,255,0.15), transparent 60%);
-      z-index: 0;
-    }
-    .header-content { position: relative; z-index: 1; }
-    header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
-    header p { font-size: 1.05rem; opacity: 0.92; }
+    /* MAIN */
+    main{max-width:1050px;margin:0 auto;padding:55px 25px 80px}
+    h2{font-size:1.55rem;font-weight:700;color:var(--ink);margin:52px 0 22px;display:flex;align-items:center;gap:14px;letter-spacing:-0.02em}
+    h2:first-child{margin-top:0}
+    h2::before{content:"";width:4px;height:26px;background:linear-gradient(to bottom,var(--blue),var(--blue-pale));border-radius:3px;flex-shrink:0}
+    h3{font-size:1rem;font-weight:700;color:var(--blue-dark);margin:0}
+    p{color:var(--ink-light);margin-bottom:10px;font-size:0.97rem}
 
-    /* --- LAYOUT --- */
-    section { max-width: 1050px; margin: 0 auto; padding: 60px 25px; }
+    /* INFO CARD */
+    .info-card{background:white;border-radius:var(--r-lg);padding:28px 32px;margin-bottom:28px;box-shadow:var(--shadow-sm);border:1px solid var(--border)}
+    .info-card>h3{color:var(--ink);font-size:1.1rem;border-bottom:1px solid var(--blue-pale);padding-bottom:10px;margin-bottom:14px}
+    .info-card p{text-align:left;margin:0 0 8px}
+    .info-card p:last-child{margin:0}
+    .competences-box{background:var(--blue-soft);border:1px solid var(--border);border-radius:var(--r-md);padding:16px 20px;margin-top:18px}
+    .competences-list{display:flex;flex-direction:column;gap:8px}
+    .competences-box>h3{color:var(--blue-dark);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px}
+    .competence-content{display:flex;align-items:center;gap:12px;background:white;border-radius:var(--r-sm);padding:10px 14px;border:1px solid var(--border);font-size:0.93rem;color:var(--ink-light)}
+    .badge{background:var(--blue);color:white;font-weight:600;font-size:0.75rem;padding:3px 11px;border-radius:50px;white-space:nowrap;flex-shrink:0}
 
-    /* --- TITRES --- */
-    h2 {
-      font-size: 1.8rem;
-      color: var(--text-primary);
-      font-weight: 700;
-      margin-bottom: 25px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    h2::before {
-      content: "";
-      width: 6px; height: 35px;
-      background: var(--accent);
-      border-radius: 3px;
-      flex-shrink: 0;
-    }
-    h3 { color: var(--accent); margin: 20px 0 12px; font-size: 1.15rem; }
+    /* HIGHLIGHT */
+    .highlight{background:var(--blue-pale);border-left:4px solid var(--blue);padding:13px 18px;border-radius:0 var(--r-sm) var(--r-sm) 0;margin:0 0 28px;color:#075985;font-size:0.92rem;font-weight:500}
+    .highlight.warn{background:#fff7ed;border-left-color:var(--orange);color:#92400e}
+    .highlight.success{background:#f0fdf4;border-left-color:var(--green);color:#065f46}
 
-    p {
-      color: var(--text-secondary);
-      margin-bottom: 12px;
-      font-size: 1rem;
-    }
+    /* STEPS */
+    .steps-wrapper{display:flex;flex-direction:column;gap:18px;margin-bottom:10px}
+    .step{background:white;border-radius:var(--r-lg);border:1px solid var(--border);border-left:4px solid var(--blue);box-shadow:var(--shadow-sm);overflow:hidden;transition:all 0.3s}
+    .step:hover{box-shadow:var(--shadow-md)}
+    .step-header-row{display:flex;align-items:center;gap:14px;padding:24px 26px 0}
+    .step-number{background:var(--blue);color:white;font-weight:700;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.85rem;flex-shrink:0;box-shadow:0 3px 10px rgba(14,165,233,0.3)}
+    .step-body{padding:0 26px 24px}
+    .step-desc{color:var(--ink-light);font-size:0.97rem;margin:12px 0 16px}
 
-    /* --- INFO CARD --- */
-    .info-card {
-      background: white;
-      border-radius: var(--radius);
-      padding: 30px 35px;
-      margin-bottom: 35px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border-card);
-    }
-    .info-card h3 {
-      color: var(--text-primary);
-      font-size: 1.2rem;
-      border-bottom: 1px solid var(--accent-soft);
-      padding-bottom: 8px;
-      margin-bottom: 14px;
-    }
-    .info-card p { text-align: left; }
+    /* SUBSTEPS */
+    .substeps{display:flex;flex-direction:column;gap:10px;margin:14px 0 6px}
+    .substep{display:flex;gap:14px;align-items:flex-start;background:var(--blue-soft);border:1px solid var(--border);border-radius:var(--r-md);padding:13px 16px}
+    .substep-bullet{width:26px;height:26px;border-radius:50%;background:white;border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;color:var(--blue);flex-shrink:0;margin-top:1px}
+    .substep-content{flex:1}
+    .substep-title{font-weight:600;font-size:0.93rem;color:var(--ink);margin-bottom:3px}
+    .substep-desc{font-size:0.88rem;color:var(--muted);margin:0}
+    .substep-tag{display:inline-flex;align-items:center;gap:4px;background:white;border:1px solid var(--border);color:var(--blue-dark);font-size:0.73rem;font-weight:600;padding:2px 9px;border-radius:50px;margin-top:5px;font-family:var(--mono)}
 
-    /* --- COMPÉTENCES BOX --- */
-    .competences-box {
-      background: var(--accent-soft);
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin-top: 20px;
-    }
-    .competences-box h3 {
-      color: #075985;
-      font-size: 1rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 12px;
-      border: none;
-      padding: 0;
-    }
-    .competence-content {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: white;
-      border-radius: 8px;
-      padding: 12px 16px;
-      border: 1px solid var(--border-card);
-    }
-    .badge {
-      background: var(--accent);
-      color: white;
-      font-weight: 600;
-      font-size: 0.82rem;
-      padding: 4px 12px;
-      border-radius: 12px;
-    }
-    .competence-content span { color: var(--text-primary); font-size: 0.95rem; font-weight: 500; }
+    /* NOTE INLINE */
+    .step-note{display:flex;align-items:center;gap:10px;background:#fff7ed;border:1px solid #fed7aa;border-radius:var(--r-sm);padding:10px 14px;margin-top:10px;font-size:0.87rem;color:#92400e;line-height:1.5;flex-wrap:nowrap}
+    .step-note.info{background:var(--blue-soft);border-color:var(--border);color:var(--blue-dark)}
+    .step-note.success{background:#f0fdf4;border-color:#bbf7d0;color:#065f46}
+    .step-note span{flex-shrink:0;line-height:1}
 
-    /* --- STEPS --- */
-    .steps-wrapper { display: flex; flex-direction: column; gap: 20px; margin-bottom: 35px; }
-    .step {
-      background: white;
-      border-radius: var(--radius);
-      padding: 28px 30px;
-      border: 1px solid var(--border-card);
-      border-left: 5px solid var(--accent);
-      box-shadow: var(--shadow);
-      transition: 0.3s;
-    }
-    .step:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(14,165,233,0.12); }
-    .step-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-    .step-number {
-      background: var(--accent);
-      color: white;
-      font-weight: 700;
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      flex-shrink: 0;
-    }
-    .step h3 {
-      color: var(--text-primary);
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin: 0;
-      border: none;
-      padding: 0;
-    }
-    .step p { color: var(--text-secondary); font-size: 0.97rem; margin: 0 0 8px; }
+    /* IMAGES */
+    .step-image{max-width:60%;height:auto;border-radius:var(--r-md);margin:16px auto 0;display:block;border:1px solid var(--border);box-shadow:var(--shadow-sm);cursor:zoom-in;transition:opacity 0.2s}
+    .step-image:hover{opacity:0.88}
 
-    /* --- IMAGES --- */
-    .step-image {
-      max-width: 50%;
-      height: auto;
-      border-radius: 8px;
-      margin: 18px auto 0;
-      display: block;
-      border: 1px solid var(--border-card);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      cursor: zoom-in;
-    }
+    /* CODE BLOCK */
+    .code-block{background:#0a1628;border-radius:var(--r-md);margin:16px 0 6px;overflow:hidden;box-shadow:var(--shadow-sm)}
+    .code-block-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:#0f2137;border-bottom:1px solid rgba(255,255,255,0.07)}
+    .code-block-title{font-family:var(--mono);font-size:0.78rem;color:#7dd3fc;font-weight:600}
+    .code-block-dots{display:flex;gap:5px}
+    .code-block-dots span{width:10px;height:10px;border-radius:50%}
+    .code-block-dots span:nth-child(1){background:#ef4444}
+    .code-block-dots span:nth-child(2){background:#f59e0b}
+    .code-block-dots span:nth-child(3){background:#10b981}
+    .code-block pre{padding:18px 20px;overflow-x:auto;font-family:var(--mono);font-size:0.82rem;line-height:1.75;color:#e2e8f0}
+    .ps-comment{color:#64748b}
+    .ps-keyword{color:#7dd3fc}
+    .ps-string{color:#86efac}
+    .ps-variable{color:#fca5a5}
+    .ps-cmdlet{color:#c4b5fd}
+    .ps-param{color:#fdba74}
 
-    /* --- LIGHTBOX --- */
-    .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(10, 22, 40, 0.85);
-      backdrop-filter: blur(6px);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      cursor: zoom-out;
-    }
-    .lightbox.open { display: flex; }
-    .lightbox img {
-      max-width: 90vw;
-      max-height: 88vh;
-      border-radius: 12px;
-      box-shadow: 0 25px 80px rgba(0,0,0,0.5);
-      cursor: default;
-      animation: lbIn 0.25s cubic-bezier(0.16,1,0.3,1);
-    }
-    @keyframes lbIn {
-      from { opacity: 0; transform: scale(0.92); }
-      to   { opacity: 1; transform: scale(1); }
-    }
-    .lightbox-close {
-      position: absolute;
-      top: 1.25rem; right: 1.5rem;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.25);
-      color: white;
-      font-size: 1.1rem;
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .lightbox-close:hover { background: rgba(255,255,255,0.3); }
+    /* SCRIPTS TABS */
+    .scripts-tabs{display:flex;gap:8px;margin:16px 0 0}
+    .script-tab{padding:8px 18px;border-radius:50px;font-size:0.83rem;font-weight:600;border:1.5px solid var(--border);background:white;color:var(--muted);cursor:pointer;transition:all 0.2s;font-family:var(--font)}
+    .script-tab.active{background:var(--blue);color:white;border-color:var(--blue)}
+    .script-panel{display:none}
+    .script-panel.active{display:block}
 
-    /* --- FOOTER --- */
-    footer {
-      background: white;
-      text-align: center;
-      padding: 35px;
-      color: #64748b;
-      border-top: 1px solid var(--border-card);
-      font-size: 0.9rem;
-    }
+    /* USE CASES */
+    .usecases-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin:16px 0}
+    .usecase-card{background:white;border-radius:var(--r-lg);padding:20px 22px;border:1px solid var(--border);box-shadow:var(--shadow-sm);transition:all 0.3s}
+    .usecase-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+    .usecase-icon{font-size:1.6rem;margin-bottom:10px}
+    .usecase-title{font-weight:700;font-size:0.95rem;color:var(--ink);margin-bottom:6px}
+    .usecase-desc{font-size:0.87rem;color:var(--muted);line-height:1.6}
+    .usecase-tag{display:inline-flex;margin-top:10px;background:var(--blue-pale);color:var(--blue-dark);font-size:0.73rem;font-weight:600;padding:2px 10px;border-radius:50px;font-family:var(--mono)}
+
+    /* DOWNLOAD BUTTON */
+    .download-btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue-soft);color:var(--blue-dark);font-family:var(--mono);font-size:0.82rem;font-weight:600;padding:9px 18px;border-radius:50px;border:1.5px solid var(--border);box-shadow:var(--shadow-sm);cursor:pointer;transition:all 0.22s;text-decoration:none;margin:14px auto 0;display:flex;width:fit-content}
+    .download-btn:hover{background:var(--blue);color:white;border-color:var(--blue);box-shadow:var(--shadow-md)}
+    .download-btn svg{width:15px;height:15px;flex-shrink:0}
+
+    /* BACK BUTTON */
+    .back-btn{position:fixed;bottom:28px;right:28px;z-index:1000;display:inline-flex;align-items:center;gap:8px;background:white;color:var(--blue-dark);font-family:var(--font);font-size:0.88rem;font-weight:600;padding:11px 18px;border-radius:50px;border:1.5px solid var(--border);box-shadow:0 4px 20px rgba(14,165,233,0.18);cursor:pointer;transition:all 0.22s;text-decoration:none}
+    .back-btn:hover{background:var(--blue);color:white;border-color:var(--blue);box-shadow:0 6px 24px rgba(14,165,233,0.35);transform:translateY(-2px)}
+    .back-btn svg{width:16px;height:16px;flex-shrink:0}
+
+    /* LIGHTBOX */
+    .lightbox{display:none;position:fixed;inset:0;background:rgba(10,22,40,0.85);backdrop-filter:blur(6px);z-index:9999;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out}
+    .lightbox.open{display:flex}
+    .lightbox img{max-width:90vw;max-height:88vh;border-radius:var(--r-lg);box-shadow:0 25px 80px rgba(0,0,0,0.5);cursor:default;animation:lbIn 0.25s cubic-bezier(0.16,1,0.3,1)}
+    @keyframes lbIn{from{opacity:0;transform:scale(0.92)}to{opacity:1;transform:scale(1)}}
+    .lightbox-close{position:absolute;top:1.25rem;right:1.5rem;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);color:white;font-size:1.1rem;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.2s}
+    .lightbox-close:hover{background:rgba(255,255,255,0.3)}
+
+    /* FOOTER */
+    footer{text-align:center;padding:28px;background:linear-gradient(135deg,var(--blue-pale),var(--blue-soft));color:var(--muted);border-top:1px solid var(--border);font-size:0.87rem}
+
+    @media(max-width:600px){.header-grid{flex-direction:column;align-items:center;gap:20px}.header-icon{width:56px;height:56px;font-size:26px}header h1{font-size:1.7rem}.step-image{max-width:100%}.scripts-tabs{flex-wrap:wrap}}
   </style>
 </head>
 <body>
 
   <header>
-    <div class="header-content">
-      <h1>💻 Création de scripts PowerShell</h1>
-      <p>Procédure de création de scripts — VNF</p>
+    <div class="header-grid">
+      <div class="header-icon">💻</div>
+      <div class="header-text">
+        <div class="header-eyebrow">Mission 03 · BTS SIO SISR</div>
+        <h1>Création de scripts PowerShell</h1>
+        <p>Automatisation des tâches d'administration — VNF</p>
+        <div class="header-pills">
+          <div class="header-pill"><span>⚡</span> PowerShell</div>
+          <div class="header-pill"><span>🗂</span> Active Directory</div>
+          <div class="header-pill"><span>🏢</span> Econocom / VNF</div>
+          <div class="header-pill"><span>🤖</span> Automatisation</div>
+        </div>
+      </div>
     </div>
   </header>
 
-  <section>
+  <main>
 
+    <!-- CONTEXTE -->
     <h2>Contexte</h2>
     <div class="info-card">
-      <h3>Objectif</h3>
-      <p>Créer un script PowerShell afin de faciliter la création d'utilisateur ou la réinitialisation du mot de passe.</p>
+      <h3>Objectif de la mission</h3>
+      <p>Dans le cadre du support N1 chez VNF, certaines tâches d'administration répétitives — comme la création de comptes utilisateurs ou la réinitialisation de mots de passe — sont réalisées plusieurs fois par semaine. L'objectif est d'automatiser ces opérations via des <strong>scripts PowerShell</strong> interactifs pour gagner en rapidité, réduire les erreurs de saisie manuelle et standardiser les procédures.</p>
+      <p>Les scripts sont développés et testés sur <strong>Windows PowerShell ISE</strong> puis déployés sur les postes des techniciens du Helpdesk VNF.</p>
+      <p><code>Script de création d'utilisateurs réalisé lors du projet de fin d'année de mon BTS</code></p>
       <div class="competences-box">
-        <h3>🎯 Compétences E4</h3>
-        <div class="competence-content">
-          <span class="badge">A définir</span>
-          <span>Création de scripts</span>
+        <h3>🎯 Compétences E4 mobilisées</h3>
+        <div class="competences-list">
+          <div class="competence-content"><span class="badge">B2.2</span><span>Gérer des comptes utilisateurs et des accès aux ressources</span></div>
+          <div class="competence-content"><span class="badge">B2.3</span><span>Exploiter des outils d'administration du système</span></div>
         </div>
       </div>
     </div>
 
-    <h2>Procédure de création</h2>
+    <!-- CAS D'USAGE -->
+    <h2>Cas d'usage identifiés</h2>
+    <p style="margin-bottom:16px">Les scripts développés répondent à des besoins concrets du quotidien du Helpdesk VNF, liés à la gestion des comptes dans l'Active Directory.</p>
+    <div class="usecases-grid">
+      <div class="usecase-card">
+        <div class="usecase-icon">👤</div>
+        <div class="usecase-title">Création d'un compte utilisateur AD</div>
+        <div class="usecase-desc">Automatise la création d'un nouveau compte dans l'Active Directory : saisie du nom, prénom, service, définition du mot de passe et affectation aux groupes de sécurité.</div>
+        <span class="usecase-tag">New-ADUser</span>
+      </div>
+      <div class="usecase-card">
+        <div class="usecase-icon">🔑</div>
+        <div class="usecase-title">Réinitialisation de mot de passe</div>
+        <div class="usecase-desc">Recherche un utilisateur par son login, réinitialise son mot de passe selon la politique de sécurité VNF et force le changement à la prochaine connexion.</div>
+        <span class="usecase-tag">Set-ADAccountPassword</span>
+      </div>
+      <div class="usecase-card">
+        <div class="usecase-icon">🔒</div>
+        <div class="usecase-title">Déverrouillage de compte</div>
+        <div class="usecase-desc">Déverrouille rapidement un compte bloqué suite à plusieurs tentatives de connexion incorrectes.</div>
+        <span class="usecase-tag">Unlock-ADAccount</span>
+      </div>
+    </div>
+
+    <!-- PROCÉDURE -->
+    <h2>Procédure de création et déploiement</h2>
     <div class="steps-wrapper">
 
+      <!-- ÉTAPE 1 -->
       <div class="step">
-        <div class="step-header">
+        <div class="step-header-row">
           <div class="step-number">1</div>
-          <h3>Identification du besoin</h3>
+          <h3>Identification et analyse du besoin</h3>
         </div>
-        <p>Avant la création du script, il faut tout d'abord identifier un besoin pour lequel un script serait utile.</p>
+        <div class="step-body">
+          <p class="step-desc">Avant d'écrire une seule ligne de code, il est essentiel d'analyser précisément le besoin pour définir ce que le script doit faire, quelles données il doit demander à l'utilisateur et quelles actions il doit effectuer dans l'AD.</p>
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-bullet">1</div>
+              <div class="substep-content">
+                <div class="substep-title">Recenser les tâches répétitives</div>
+                <div class="substep-desc">Identifier les actions réalisées manuellement plusieurs fois par semaine et qui impliquent des étapes identiques à chaque fois (même commande ADUC, mêmes champs à remplir).</div>
+                <span class="substep-tag">Analyse des processus</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">2</div>
+              <div class="substep-content">
+                <div class="substep-title">Définir les entrées et sorties du script</div>
+                <div class="substep-desc">Lister les informations que le technicien devra saisir (inputs) et les actions que le script devra effectuer automatiquement (outputs). Par exemple : saisir le login → script réinitialise le mot de passe et déverrouille le compte.</div>
+                <span class="substep-tag">Spécification fonctionnelle</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">3</div>
+              <div class="substep-content">
+                <div class="substep-title">Vérifier les prérequis techniques</div>
+                <div class="substep-desc">S'assurer que le module <strong>ActiveDirectory</strong> pour PowerShell est installé sur le poste et que le technicien dispose des droits suffisants dans l'AD pour effectuer les actions ciblées.</div>
+                <span class="substep-tag">Module : ActiveDirectory</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
+      <!-- ÉTAPE 2 -->
       <div class="step">
-        <div class="step-header">
+        <div class="step-header-row">
           <div class="step-number">2</div>
-          <h3>Création du script via PowerShell ISE</h3>
+          <h3>Développement via PowerShell ISE</h3>
         </div>
-        <p>Une fois le besoin identifié, on peut passer à la création du script via le logiciel Windows PowerShell ISE.<br>Voici 2 exemples de scripts que j'ai créé (le premier pour la création d'un utilisateur dans l'AD, et le deuxième pour réinitialiser le mot de passe d'un utilisateur) :</p>
-        <img src="#" class="step-image" alt="Script création utilisateur AD">
-        <img src="images_missions/script_mdp.png" class="step-image" alt="Script réinitialisation mot de passe">
+        <div class="step-body">
+          <p class="step-desc">Le développement se fait dans <strong>Windows PowerShell ISE</strong> (Integrated Scripting Environment), qui offre une coloration syntaxique, une console d'exécution intégrée et un débogueur pour faciliter la mise au point.</p>
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-bullet">1</div>
+              <div class="substep-content">
+                <div class="substep-title">Structurer le script avec des commentaires</div>
+                <div class="substep-desc">Chaque script commence par un en-tête commenté indiquant l'auteur, la date, la version et l'objectif. Les sections importantes sont aussi commentées pour faciliter la maintenance.</div>
+                <span class="substep-tag">Bonne pratique</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">2</div>
+              <div class="substep-content">
+                <div class="substep-title">Utiliser Read-Host pour les saisies interactives</div>
+                <div class="substep-desc">Les informations variables (login, nom, prénom…) sont demandées dynamiquement à l'exécution via <code>Read-Host</code>. Le technicien n'a pas à modifier le script pour chaque utilisation.</div>
+                <span class="substep-tag">Read-Host</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">3</div>
+              <div class="substep-content">
+                <div class="substep-title">Gérer les erreurs avec Try / Catch</div>
+                <div class="substep-desc">Chaque appel aux cmdlets AD est encapsulé dans un bloc <code>Try / Catch</code> pour intercepter les erreurs (compte inexistant, droits insuffisants, mot de passe non conforme) et afficher un message explicite au technicien.</div>
+                <span class="substep-tag">Gestion d'erreurs</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-note info" style="margin-top:14px"><span>💡</span> Les onglets ci-dessous permettent de naviguer entre les deux scripts développés.</div>
+
+          <div style="margin-top:14px;display:flex;flex-direction:column;gap:24px">
+
+            <div>
+              <p style="font-weight:600;color:var(--ink);margin-bottom:6px">🔑 Script — Réinitialisation mot de passe</p>
+              <img src="images_missions/script_mdp.png" class="step-image" alt="Script réinitialisation mot de passe" style="margin-top:0">
+              <a class="download-btn" href="#" download>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Télécharger reset_password.ps1
+              </a>
+            </div>
+
+            <div>
+              <p style="font-weight:600;color:var(--ink);margin-bottom:6px">👤 Script — Création utilisateur AD</p>
+              <img src="#" class="step-image" alt="Script création utilisateur AD" style="margin-top:0">
+              <a class="download-btn" href="#" download>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Télécharger create_user.ps1
+              </a>
+            </div>
+
+          </div>
+        </div>
       </div>
 
+      <!-- ÉTAPE 3 -->
       <div class="step">
-        <div class="step-header">
+        <div class="step-header-row">
           <div class="step-number">3</div>
-          <h3>Test du script</h3>
+          <h3>Test et validation du script</h3>
         </div>
-        <p>Après avoir créé le script, on doit le tester en l'exécutant afin de vérifier que tout fonctionne correctement.<br>Voici le résultat attendu :</p>
-        <img src="#" class="step-image" alt="Test script création utilisateur">
-        <img src="images_missions/test_mdp.png" class="step-image" alt="Test script mot de passe">
+        <div class="step-body">
+          <p class="step-desc">Avant tout déploiement, chaque script est rigoureusement testé dans un environnement de test ou sur un compte de test dédié. L'objectif est de vérifier que toutes les branches du code fonctionnent, y compris les cas d'erreur.</p>
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-bullet">1</div>
+              <div class="substep-content">
+                <div class="substep-title">Test du cas nominal</div>
+                <div class="substep-desc">Exécuter le script avec des données valides et vérifier dans la console ADUC que les modifications ont bien été appliquées (compte créé, mot de passe modifié, compte déverrouillé…).</div>
+                <span class="substep-tag">Cas nominal</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">2</div>
+              <div class="substep-content">
+                <div class="substep-title">Test des cas d'erreur</div>
+                <div class="substep-desc">Tester volontairement des cas d'erreur : login inexistant, mot de passe ne respectant pas la politique de complexité VNF, droits insuffisants. Vérifier que le message d'erreur affiché est compréhensible.</div>
+                <span class="substep-tag">Gestion d'erreurs</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">3</div>
+              <div class="substep-content">
+                <div class="substep-title">Validation par le responsable technique</div>
+                <div class="substep-desc">Le script est soumis au responsable technique ou au référent AD pour validation avant déploiement sur les postes des techniciens. Cette étape garantit la conformité avec les règles de sécurité VNF.</div>
+                <span class="substep-tag">Validation avant déploiement</span>
+              </div>
+            </div>
+          </div>
+          <div class="step-note success"><span>✅</span> Une fois validé, le script est sauvegardé sur le partage réseau de l'équipe Helpdesk et accessible à tous les techniciens VNF.</div>
+          <img src="images_missions/test_mdp.png" class="step-image" alt="Test script réinitialisation mot de passe">
+        </div>
+      </div>
+
+      <!-- ÉTAPE 4 -->
+      <div class="step">
+        <div class="step-header-row">
+          <div class="step-number">4</div>
+          <h3>Déploiement et utilisation au quotidien</h3>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Une fois validé, le script est mis à disposition de l'équipe et intégré dans les procédures de traitement des tickets. Son utilisation devient la méthode de référence pour les tâches ciblées.</p>
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-bullet">1</div>
+              <div class="substep-content">
+                <div class="substep-title">Mise à disposition sur le partage réseau</div>
+                <div class="substep-desc">Le fichier <code>.ps1</code> est déposé dans un dossier partagé accessible à tous les techniciens du Helpdesk VNF. Un raccourci est créé sur les bureaux des postes concernés pour un accès rapide.</div>
+                <span class="substep-tag">Partage réseau</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">2</div>
+              <div class="substep-content">
+                <div class="substep-title">Exécution depuis PowerShell avec les droits adéquats</div>
+                <div class="substep-desc">Le script est lancé depuis une console PowerShell ouverte <strong>en tant qu'administrateur</strong>. La politique d'exécution doit être configurée en <code>RemoteSigned</code> ou <code>Unrestricted</code> sur le poste pour autoriser l'exécution de scripts locaux.</div>
+                <span class="substep-tag">Set-ExecutionPolicy</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">3</div>
+              <div class="substep-content">
+                <div class="substep-title">Référence dans le journal Matrix42</div>
+                <div class="substep-desc">Lorsqu'un technicien utilise un script pour résoudre un ticket, il le mentionne dans le journal Matrix42 (ex : "Réinitialisation effectuée via script PowerShell reset_password.ps1"). Cela assure la traçabilité de l'action.</div>
+                <span class="substep-tag">Traçabilité Matrix42</span>
+              </div>
+            </div>
+          </div>
+          <div class="step-note warn"><span>⚠️</span> La politique d'exécution PowerShell doit être vérifiée avant le premier lancement. Une politique trop restrictive bloquera l'exécution du script.</div>
+        </div>
       </div>
 
     </div>
 
-  </section>
+  </main>
 
-  <footer>
-    Marius DUYCK — Econocom / VNF — Mission Script PowerShell
-  </footer>
+  <footer>Marius DUYCK — Econocom / VNF — Mission Scripts PowerShell</footer>
 
-  <!-- LIGHTBOX -->
+  <a class="back-btn" id="back-btn" href="#" title="Retour au site principal">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Retour
+  </a>
+
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" id="lb-close">✕</button>
     <img id="lb-img" src="" alt="">
   </div>
 
   <script>
+    // Lightbox
     const lightbox = document.getElementById('lightbox');
     const lbImg = document.getElementById('lb-img');
     const lbClose = document.getElementById('lb-close');
-
     document.querySelectorAll('.step-image').forEach(img => {
-      if (!img.src || img.src === '#' || img.src.endsWith('#')) return;
-      img.addEventListener('click', () => {
-        lbImg.src = img.src;
-        lbImg.alt = img.alt;
-        lightbox.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      });
+      if (!img.src || img.src.endsWith('#')) return;
+      img.addEventListener('click', () => { lbImg.src = img.src; lbImg.alt = img.alt; lightbox.classList.add('open'); document.body.style.overflow = 'hidden'; });
     });
-
-    function closeLightbox() {
-      lightbox.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
+    function closeLightbox() { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
     lbClose.addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    // Back button
+    const backBtn = document.getElementById('back-btn');
+    backBtn.addEventListener('click', function(e) { e.preventDefault(); history.back(); });
+
+    // Script tabs
+    function showTab(id) {
+      document.querySelectorAll('.script-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.script-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      event.target.classList.add('active');
+    }
   </script>
 
 </body>
