@@ -3,311 +3,411 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rédaction de base de connaissance</title>
+  <title>Rédaction de Base de Connaissance — VNF</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
     :root {
-      --accent: #0284c7;
-      --accent-light: #38bdf8;
-      --accent-soft: #e0f2fe;
-      --text-primary: #0f172a;
-      --text-secondary: #334155;
-      --bg-base: #f0f6ff;
-      --border-card: rgba(226, 232, 240, 0.8);
-      --radius: 16px;
-      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --blue:#0ea5e9;--blue-dark:#0284c7;--blue-pale:#e0f2fe;--blue-soft:#f0f9ff;
+      --ink:#0a1628;--ink-light:#334155;--muted:#64748b;--border:rgba(14,165,233,0.15);
+      --bg:#f8fbff;--shadow-sm:0 2px 10px rgba(14,165,233,0.08);--shadow-md:0 8px 30px rgba(14,165,233,0.12);
+      --r-sm:8px;--r-md:14px;--r-lg:22px;--font:'DM Sans',sans-serif;--mono:'JetBrains Mono',monospace;
+      --green:#10b981;--orange:#f59e0b;--red:#ef4444;--purple:#8b5cf6;
     }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font);background:var(--bg);color:var(--ink-light);line-height:1.7;font-size:16px}
+    a{text-decoration:none;color:inherit}
+    strong{color:var(--ink)}
+    code{font-family:var(--mono);font-size:0.87em;background:var(--blue-pale);color:var(--blue-dark);padding:2px 7px;border-radius:5px}
+    ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--blue);border-radius:10px}
 
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg-base); color: var(--text-secondary); line-height: 1.7; font-size: 16px; }
+    /* HEADER */
+    header{position:relative;overflow:hidden;background:linear-gradient(135deg,#0c4a6e 0%,#0284c7 45%,#38bdf8 100%);color:white;padding:70px 40px 60px;box-shadow:0 4px 30px rgba(2,100,180,0.25)}
+    header::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 90% 50%,rgba(255,255,255,0.07),transparent),radial-gradient(ellipse 40% 60% at 10% 20%,rgba(255,255,255,0.05),transparent)}
+    .header-grid{position:relative;z-index:1;max-width:1050px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:32px}
+    .header-icon{width:72px;height:72px;background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.25);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:32px;flex-shrink:0;backdrop-filter:blur(4px)}
+    .header-text{display:flex;flex-direction:column;align-items:center}
+    .header-eyebrow{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.85);font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:50px;margin-bottom:12px}
+    .header-eyebrow::before{content:"";width:6px;height:6px;background:#7dd3fc;border-radius:50%;flex-shrink:0}
+    header h1{font-size:2.2rem;font-weight:700;letter-spacing:-0.03em;line-height:1.15;margin-bottom:10px;text-align:center}
+    header p{font-size:0.97rem;color:rgba(255,255,255,0.72);margin:0}
+    .header-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:18px}
+    .header-pill{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.88);font-size:0.78rem;font-weight:500;padding:5px 12px;border-radius:50px}
+    .header-pill span{color:#7dd3fc;font-size:0.9rem}
 
-    /* --- HEADER --- */
-    header {
-      background: linear-gradient(135deg, #0284c7, #38bdf8, #0ea5e9);
-      color: white;
-      text-align: center;
-      padding: 80px 20px;
-      box-shadow: 0 4px 20px rgba(2, 132, 199, 0.2);
-      position: relative;
-      overflow: hidden;
-    }
-    header::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: radial-gradient(circle at top right, rgba(255,255,255,0.15), transparent 60%);
-      z-index: 0;
-    }
-    .header-content { position: relative; z-index: 1; }
-    header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
-    header p { font-size: 1.05rem; opacity: 0.92; }
+    /* MAIN */
+    main{max-width:1050px;margin:0 auto;padding:55px 25px 80px}
+    h2{font-size:1.55rem;font-weight:700;color:var(--ink);margin:52px 0 22px;display:flex;align-items:center;gap:14px;letter-spacing:-0.02em}
+    h2:first-child{margin-top:0}
+    h2::before{content:"";width:4px;height:26px;background:linear-gradient(to bottom,var(--blue),var(--blue-pale));border-radius:3px;flex-shrink:0}
+    h3{font-size:1rem;font-weight:700;color:var(--blue-dark);margin:0}
+    p{color:var(--ink-light);margin-bottom:10px;font-size:0.97rem}
 
-    /* --- LAYOUT --- */
-    section { max-width: 1050px; margin: 0 auto; padding: 60px 25px; }
+    /* INFO CARD */
+    .info-card{background:white;border-radius:var(--r-lg);padding:28px 32px;margin-bottom:28px;box-shadow:var(--shadow-sm);border:1px solid var(--border)}
+    .info-card>h3{color:var(--ink);font-size:1.1rem;border-bottom:1px solid var(--blue-pale);padding-bottom:10px;margin-bottom:14px}
+    .info-card p{text-align:left;margin:0 0 8px}
+    .info-card p:last-child{margin:0}
+    .competences-box{background:var(--blue-soft);border:1px solid var(--border);border-radius:var(--r-md);padding:16px 20px;margin-top:18px}
+    .competences-list{display:flex;flex-direction:column;gap:8px}
+    .competences-box>h3{color:var(--blue-dark);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px}
+    .competence-content{display:flex;align-items:center;gap:12px;background:white;border-radius:var(--r-sm);padding:10px 14px;border:1px solid var(--border);font-size:0.93rem;color:var(--ink-light)}
+    .badge{background:var(--blue);color:white;font-weight:600;font-size:0.75rem;padding:3px 11px;border-radius:50px;white-space:nowrap;flex-shrink:0}
 
-    /* --- TITRES --- */
-    h2 {
-      font-size: 1.8rem;
-      color: var(--text-primary);
-      font-weight: 700;
-      margin-bottom: 25px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    h2::before {
-      content: "";
-      width: 6px; height: 35px;
-      background: var(--accent);
-      border-radius: 3px;
-      flex-shrink: 0;
-    }
-    h3 { color: var(--accent); margin: 20px 0 12px; font-size: 1.15rem; }
+    /* HIGHLIGHT */
+    .highlight{background:var(--blue-pale);border-left:4px solid var(--blue);padding:13px 18px;border-radius:0 var(--r-sm) var(--r-sm) 0;margin:0 0 28px;color:#075985;font-size:0.92rem;font-weight:500}
+    .highlight.warn{background:#fff7ed;border-left-color:var(--orange);color:#92400e}
+    .highlight.success{background:#f0fdf4;border-left-color:var(--green);color:#065f46}
 
-    p {
-      color: var(--text-secondary);
-      margin-bottom: 12px;
-      font-size: 1rem;
-    }
+    /* FLOW DIAGRAM */
+    .flow-row{display:flex;align-items:center;flex-wrap:wrap;margin:18px 0 24px;justify-content:center}
+    .flow-node{background:white;border:1.5px solid var(--blue);border-radius:var(--r-md);padding:10px 18px;font-size:0.85rem;font-weight:600;color:var(--blue-dark);text-align:center;white-space:nowrap;box-shadow:var(--shadow-sm)}
+    .flow-arrow{color:var(--blue);font-size:1.2rem;margin:0 6px;opacity:0.6}
+    .flow-node.decision{border-style:dashed;border-color:var(--orange);color:#92400e;background:#fff7ed}
+    .flow-node.end{border-color:var(--green);color:#065f46;background:#f0fdf4}
+    .flow-node.reject{border-color:var(--red);color:#991b1b;background:#fef2f2}
 
-    /* --- INFO CARD --- */
-    .info-card {
-      background: white;
-      border-radius: var(--radius);
-      padding: 30px 35px;
-      margin-bottom: 35px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border-card);
-    }
-    .info-card h3 {
-      color: var(--text-primary);
-      font-size: 1.2rem;
-      border-bottom: 1px solid var(--accent-soft);
-      padding-bottom: 8px;
-      margin-bottom: 14px;
-    }
-    .info-card p { text-align: left; }
+    /* STEPS */
+    .steps-wrapper{display:flex;flex-direction:column;gap:18px;margin-bottom:10px}
+    .step{background:white;border-radius:var(--r-lg);border:1px solid var(--border);border-left:4px solid var(--blue);box-shadow:var(--shadow-sm);overflow:hidden;transition:all 0.3s}
+    .step:hover{box-shadow:var(--shadow-md)}
+    .step-header-row{display:flex;align-items:center;gap:14px;padding:24px 26px 0}
+    .step-number{background:var(--blue);color:white;font-weight:700;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.85rem;flex-shrink:0;box-shadow:0 3px 10px rgba(14,165,233,0.3)}
+    .step-body{padding:0 26px 24px}
+    .step-desc{color:var(--ink-light);font-size:0.97rem;margin:12px 0 16px}
 
-    /* --- COMPÉTENCES BOX --- */
-    .competences-box {
-      background: var(--accent-soft);
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin-top: 20px;
-    }
-    .competences-box h3 {
-      color: #075985;
-      font-size: 1rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 12px;
-      border: none;
-      padding: 0;
-    }
-    .competence-content {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: white;
-      border-radius: 8px;
-      padding: 12px 16px;
-      border: 1px solid var(--border-card);
-    }
-    .badge {
-      background: var(--accent);
-      color: white;
-      font-weight: 600;
-      font-size: 0.82rem;
-      padding: 4px 12px;
-      border-radius: 12px;
-    }
-    .competence-content span { color: var(--text-primary); font-size: 0.95rem; font-weight: 500; }
+    /* SUBSTEPS */
+    .substeps{display:flex;flex-direction:column;gap:10px;margin:14px 0 6px}
+    .substep{display:flex;gap:14px;align-items:flex-start;background:var(--blue-soft);border:1px solid var(--border);border-radius:var(--r-md);padding:13px 16px}
+    .substep-bullet{width:26px;height:26px;border-radius:50%;background:white;border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;color:var(--blue);flex-shrink:0;margin-top:1px}
+    .substep-content{flex:1}
+    .substep-title{font-weight:600;font-size:0.93rem;color:var(--ink);margin-bottom:3px}
+    .substep-desc{font-size:0.88rem;color:var(--muted);margin:0}
+    .substep-tag{display:inline-flex;align-items:center;gap:4px;background:white;border:1px solid var(--border);color:var(--blue-dark);font-size:0.73rem;font-weight:600;padding:2px 9px;border-radius:50px;margin-top:5px;font-family:var(--mono)}
 
-    /* --- STEPS --- */
-    .steps-wrapper { display: flex; flex-direction: column; gap: 20px; margin-bottom: 35px; }
-    .step {
-      background: white;
-      border-radius: var(--radius);
-      padding: 28px 30px;
-      border: 1px solid var(--border-card);
-      border-left: 5px solid var(--accent);
-      box-shadow: var(--shadow);
-      transition: 0.3s;
-    }
-    .step:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(14,165,233,0.12); }
-    .step-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-    .step-number {
-      background: var(--accent);
-      color: white;
-      font-weight: 700;
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      flex-shrink: 0;
-    }
-    .step h3 {
-      color: var(--text-primary);
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin: 0;
-      border: none;
-      padding: 0;
-    }
-    .step p { color: var(--text-secondary); font-size: 0.97rem; margin: 0 0 8px; }
+    /* NOTE INLINE */
+    .step-note{display:flex;align-items:center;gap:10px;background:#fff7ed;border:1px solid #fed7aa;border-radius:var(--r-sm);padding:10px 14px;margin-top:10px;font-size:0.87rem;color:#92400e;line-height:1.5;flex-wrap:nowrap}
+    .step-note.info{background:var(--blue-soft);border-color:var(--border);color:var(--blue-dark)}
+    .step-note.danger{background:#fef2f2;border-color:#fecaca;color:#991b1b}
+    .step-note span{flex-shrink:0;line-height:1}
 
-    /* --- IMAGES --- */
-    .step-image {
-      max-width: 70%;
-      height: auto;
-      border-radius: 8px;
-      margin: 18px auto 0;
-      display: block;
-      border: 1px solid var(--border-card);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      cursor: zoom-in;
-    }
+    /* IMAGES */
+    .step-image{max-width:60%;height:auto;border-radius:var(--r-md);margin:16px auto 0;display:block;border:1px solid var(--border);box-shadow:var(--shadow-sm);cursor:zoom-in;transition:opacity 0.2s}
+    .step-image:hover{opacity:0.88}
 
-    /* --- PDF EMBED --- */
-    .pdf-embed {
-      width: 100%;
-      height: 500px;
-      border: 1px solid var(--border-card);
-      border-radius: 10px;
-      margin-top: 18px;
-      display: block;
-      box-shadow: var(--shadow);
-    }
+    /* PDF */
+    .pdf-container{margin-top:16px;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-sm)}
+    .pdf-label{background:var(--blue-soft);border-bottom:1px solid var(--border);padding:8px 14px;font-size:0.8rem;font-weight:600;color:var(--blue-dark);display:flex;align-items:center;gap:6px}
+    .pdf-embed{width:100%;height:480px;display:block}
 
-    /* --- LIGHTBOX --- */
-    .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(10, 22, 40, 0.85);
-      backdrop-filter: blur(6px);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      cursor: zoom-out;
-    }
-    .lightbox.open { display: flex; }
-    .lightbox img {
-      max-width: 90vw;
-      max-height: 88vh;
-      border-radius: 12px;
-      box-shadow: 0 25px 80px rgba(0,0,0,0.5);
-      cursor: default;
-      animation: lbIn 0.25s cubic-bezier(0.16,1,0.3,1);
-    }
-    @keyframes lbIn {
-      from { opacity: 0; transform: scale(0.92); }
-      to   { opacity: 1; transform: scale(1); }
-    }
-    .lightbox-close {
-      position: absolute;
-      top: 1.25rem; right: 1.5rem;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.25);
-      color: white;
-      font-size: 1.1rem;
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .lightbox-close:hover { background: rgba(255,255,255,0.3); }
+    /* STATUTS */
+    .statuts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin:16px 0 8px}
+    .statut-card{background:white;border-radius:var(--r-md);padding:16px 18px;border:1px solid var(--border);box-shadow:var(--shadow-sm);display:flex;align-items:flex-start;gap:12px}
+    .statut-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:5px}
+    .statut-dot.brouillon{background:#94a3b8}
+    .statut-dot.soumise{background:var(--orange)}
+    .statut-dot.validee{background:var(--green)}
+    .statut-dot.obsolete{background:var(--red)}
+    .statut-name{font-weight:700;font-size:0.9rem;color:var(--ink);margin-bottom:2px}
+    .statut-desc{font-size:0.82rem;color:var(--muted)}
 
-    /* --- FOOTER --- */
-    footer {
-      background: white;
-      text-align: center;
-      padding: 35px;
-      color: #64748b;
-      border-top: 1px solid var(--border-card);
-      font-size: 0.9rem;
-    }
+    /* BONNES PRATIQUES */
+    .pratiques-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin:16px 0}
+    .pratique-card{background:white;border-radius:var(--r-lg);padding:20px 22px;border:1px solid var(--border);box-shadow:var(--shadow-sm);border-top:3px solid var(--blue)}
+    .pratique-card.do{border-top-color:var(--green)}
+    .pratique-card.dont{border-top-color:var(--red)}
+    .pratique-title{font-weight:700;font-size:0.9rem;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+    .pratique-title.do{color:#065f46}
+    .pratique-title.dont{color:#991b1b}
+    .pratique-list{display:flex;flex-direction:column;gap:6px}
+    .pratique-item{font-size:0.87rem;color:var(--ink-light);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+    .pratique-item::before{flex-shrink:0;font-size:0.8rem;margin-top:2px}
+    .pratique-card.do .pratique-item::before{content:"✓";color:var(--green);font-weight:700}
+    .pratique-card.dont .pratique-item::before{content:"✗";color:var(--red);font-weight:700}
+
+    /* BACK BUTTON */
+    .back-btn{position:fixed;bottom:28px;right:28px;z-index:1000;display:inline-flex;align-items:center;gap:8px;background:white;color:var(--blue-dark);font-family:var(--font);font-size:0.88rem;font-weight:600;padding:11px 18px;border-radius:50px;border:1.5px solid var(--border);box-shadow:0 4px 20px rgba(14,165,233,0.18);cursor:pointer;transition:all 0.22s;text-decoration:none}
+    .back-btn:hover{background:var(--blue);color:white;border-color:var(--blue);box-shadow:0 6px 24px rgba(14,165,233,0.35);transform:translateY(-2px)}
+    .back-btn svg{width:16px;height:16px;flex-shrink:0}
+
+    /* LIGHTBOX */
+    .lightbox{display:none;position:fixed;inset:0;background:rgba(10,22,40,0.85);backdrop-filter:blur(6px);z-index:9999;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out}
+    .lightbox.open{display:flex}
+    .lightbox img{max-width:90vw;max-height:88vh;border-radius:var(--r-lg);box-shadow:0 25px 80px rgba(0,0,0,0.5);cursor:default;animation:lbIn 0.25s cubic-bezier(0.16,1,0.3,1)}
+    @keyframes lbIn{from{opacity:0;transform:scale(0.92)}to{opacity:1;transform:scale(1)}}
+    .lightbox-close{position:absolute;top:1.25rem;right:1.5rem;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);color:white;font-size:1.1rem;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.2s}
+    .lightbox-close:hover{background:rgba(255,255,255,0.3)}
+
+    /* FOOTER */
+    footer{text-align:center;padding:28px;background:linear-gradient(135deg,var(--blue-pale),var(--blue-soft));color:var(--muted);border-top:1px solid var(--border);font-size:0.87rem}
+
+    @media(max-width:600px){.header-grid{flex-direction:column;align-items:center;gap:20px}.header-icon{width:56px;height:56px;font-size:26px}header h1{font-size:1.7rem}.flow-row{flex-direction:column}.flow-arrow{transform:rotate(90deg)}.step-image{max-width:100%}}
   </style>
 </head>
 <body>
 
   <header>
-    <div class="header-content">
-      <h1>📝 Rédaction de base de connaissance</h1>
-      <p>Procédure rédaction d'une base de connaissance — VNF</p>
+    <div class="header-grid">
+      <div class="header-icon">📝</div>
+      <div class="header-text">
+        <div class="header-eyebrow">Mission 02 · BTS SIO SISR</div>
+        <h1>Rédaction de Base de Connaissance</h1>
+        <p>Procédure de capitalisation du savoir — VNF</p>
+        <div class="header-pills">
+          <div class="header-pill"><span>📚</span> KBA</div>
+          <div class="header-pill"><span>✍️</span> Documentation</div>
+          <div class="header-pill"><span>🏢</span> Econocom / VNF</div>
+          <div class="header-pill"><span>✅</span> Validation PNS</div>
+        </div>
+      </div>
     </div>
   </header>
 
-  <section>
+  <main>
 
+    <!-- CONTEXTE -->
     <h2>Contexte</h2>
     <div class="info-card">
-      <h3>Objectif</h3>
-      <p>Rédiger une base de connaissance sur un incident ou une demande afin de faciliter le traitement par les autres techniciens.</p>
+      <h3>Objectif de la mission</h3>
+      <p>La rédaction de fiches de base de connaissances (<strong>KBA — Knowledge Base Article</strong>) est une pratique fondamentale dans la gestion ITSM chez VNF. L'objectif est de capitaliser sur les solutions trouvées afin de permettre à n'importe quel technicien du Helpdesk de résoudre un incident connu en suivant une procédure validée.</p>
+      <p>Cela réduit le temps moyen de traitement des tickets, évite les erreurs de manipulation répétées et contribue à l'amélioration continue de la qualité de service. Une KB bien rédigée peut également être utilisée directement par l'utilisateur via le portail self-service.</p>
       <div class="competences-box">
-        <h3>🎯 Compétences E4</h3>
-        <div class="competence-content">
-          <span class="badge">A définir</span>
-          <span>Rédaction de procédures</span>
+        <h3>🎯 Compétences E4 mobilisées</h3>
+        <div class="competences-list">
+          <div class="competence-content"><span class="badge">B1.2</span><span>Collecter, suivre et orienter les demandes</span></div>
+          <div class="competence-content"><span class="badge">B1.3</span><span>Traiter des demandes concernant les applications</span></div>
         </div>
       </div>
     </div>
 
-    <h2>Procédure de rédaction</h2>
+    <!-- CYCLE DE VIE -->
+    <h2>Cycle de vie d'une KB</h2>
+    <p style="margin-bottom:16px">Chaque KB suit un cycle de vie précis dans Matrix42. Le statut évolue au fur et à mesure des actions des techniciens et du Pôle National Support.</p>
+
+    <div class="flow-row">
+      <div class="flow-node">✍️ Rédaction</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">📤 Soumission PNS</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node decision">🔍 Révision PNS</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node end">✅ Validée</div>
+    </div>
+    <div class="highlight warn" style="margin-top:0">Si le Pôle National Support rejette la KB, le technicien doit la corriger et la resoumettre. Une KB rejetée repasse en statut <code>Brouillon</code>.</div>
+
+    <div class="statuts-grid">
+      <div class="statut-card"><div class="statut-dot brouillon"></div><div><div class="statut-name">Brouillon</div><div class="statut-desc">En cours de rédaction par le technicien, en attente validation PNS</div></div></div>
+      <div class="statut-card"><div class="statut-dot validee"></div><div><div class="statut-name">Validée</div><div class="statut-desc">Approuvée, référence officielle appliquée par tous</div></div></div>
+      <div class="statut-card"><div class="statut-dot obsolete"></div><div><div class="statut-name">Obsolète</div><div class="statut-desc">Retirée suite à une évolution du système ou du process</div></div></div>
+    </div>
+
+    <!-- PROCÉDURE -->
+    <h2>Procédure détaillée de rédaction</h2>
     <div class="steps-wrapper">
 
+      <!-- ÉTAPE 1 -->
       <div class="step">
-        <div class="step-header">
+        <div class="step-header-row">
           <div class="step-number">1</div>
-          <h3>Identification de l'incident ou de la demande</h3>
+          <h3>Identification du besoin de KB</h3>
         </div>
-        <p>À la réception du ticket, il faut d'abord vérifier dans la banque à base de connaissances (KB) si une procédure n'existe pas déjà.</p>
-        <img src="images_missions/base_co.png" class="step-image" alt="Base de connaissance">
+        <div class="step-body">
+          <p class="step-desc">Avant de rédiger une nouvelle KB, il faut systématiquement vérifier qu'elle n'existe pas déjà dans Matrix42. Cette consultation évite les doublons et garantit que le technicien utilise bien la procédure officielle si elle existe.</p>
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-bullet">1</div>
+              <div class="substep-content">
+                <div class="substep-title">Recherche dans la base existante</div>
+                <div class="substep-desc">Dans Matrix42, accéder au module <strong>Base de connaissances</strong> et effectuer une recherche par mots-clés (symptôme, logiciel, catégorie). Si une KB validée correspond, l'appliquer directement au ticket.</div>
+                <span class="substep-tag">Module : Base de connaissances</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">2</div>
+              <div class="substep-content">
+                <div class="substep-title">Identifier le déclencheur de rédaction</div>
+                <div class="substep-desc">Une nouvelle KB est nécessaire si la solution est inédite, si le problème est récurrent sans procédure associée, ou si une KB existante est obsolète et doit être remplacée.</div>
+                <span class="substep-tag">Critère de création</span>
+              </div>
+            </div>
+          </div>
+          <img src="images_missions/base_co.png" class="step-image" alt="Consultation de la base de connaissances">
+        </div>
       </div>
 
+      <!-- ÉTAPE 2 -->
       <div class="step">
-        <div class="step-header">
+        <div class="step-header-row">
           <div class="step-number">2</div>
-          <h3>Rédaction de la KB</h3>
+          <h3>Rédaction technique et mise en forme</h3>
         </div>
-        <p>Une fois le ticket résolu, le technicien se doit de lister toutes les étapes à faire en y apportant le plus de précision que possible avec des captures d'écran si nécessaire.<br>Afin de respecter une mise en forme entre toutes les KB, des templates sont à utiliser pour séparer chaque étape.</p>
-        <embed src="images_missions/kba_mdp.pdf" type="application/pdf" class="pdf-embed">
-        <embed src="images_missions/kba_scan.pdf" type="application/pdf" class="pdf-embed">
+        <div class="step-body">
+          <p class="step-desc">La rédaction est l'étape la plus importante. La KB doit être suffisamment précise pour qu'un technicien qui ne connaît pas le problème puisse le résoudre de manière autonome, sans avoir à contacter l'auteur.</p>
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-bullet">1</div>
+              <div class="substep-content">
+                <div class="substep-title">Utiliser le template VNF</div>
+                <div class="substep-desc">Des modèles de mise en forme sont imposés pour uniformiser toutes les KB du helpdesk. Ils incluent des sections obligatoires : <strong>Description du problème</strong>, <strong>Environnement concerné</strong>, <strong>Étapes de résolution</strong> et <strong>Résultat attendu</strong>.</div>
+                <span class="substep-tag">Template obligatoire</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">2</div>
+              <div class="substep-content">
+                <div class="substep-title">Décrire le symptôme avec précision</div>
+                <div class="substep-desc">La description du problème doit reprendre exactement les termes que l'utilisateur emploie (messages d'erreur, comportement observé, contexte d'apparition). Cela facilite la recherche par mots-clés dans Matrix42.</div>
+                <span class="substep-tag">Champ : Symptôme</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">3</div>
+              <div class="substep-content">
+                <div class="substep-title">Détailler les étapes de résolution</div>
+                <div class="substep-desc">Chaque action est numérotée et rédigée à l'infinitif (ex : "Ouvrir le Gestionnaire de périphériques"). Les étapes doivent être testées et reproductibles. Des <strong>captures d'écran annotées</strong> sont fortement recommandées pour les manipulations visuelles.</div>
+                <span class="substep-tag">Étapes numérotées + screenshots</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">4</div>
+              <div class="substep-content">
+                <div class="substep-title">Préciser l'environnement concerné</div>
+                <div class="substep-desc">Indiquer le ou les systèmes d'exploitation, versions de logiciels, types de matériels ou services concernés. Une KB mal ciblée peut conduire à une mauvaise application sur un environnement incompatible.</div>
+                <span class="substep-tag">Champ : Environnement</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-note info"><span>💡</span> Les PDFs ci-dessous sont des exemples de KBA rédigées selon les templates VNF — KBA réinitialisation de mot de passe et KBA configuration scanner.</div>
+
+          <div class="pdf-container">
+            <div class="pdf-label">📄 KBA — Réinitialisation de mot de passe</div>
+            <embed src="images_missions/kba_mdp.pdf" type="application/pdf" class="pdf-embed">
+          </div>
+          <div class="pdf-container" style="margin-top:14px">
+            <div class="pdf-label">📄 KBA — Configuration scanner</div>
+            <embed src="images_missions/kba_scan.pdf" type="application/pdf" class="pdf-embed">
+          </div>
+        </div>
       </div>
 
+      <!-- ÉTAPE 3 -->
       <div class="step">
-        <div class="step-header">
+        <div class="step-header-row">
           <div class="step-number">3</div>
-          <h3>Validation de la KB</h3>
+          <h3>Soumission et validation par le Pôle National Support</h3>
         </div>
-        <p>Après avoir rédigé la KB, le technicien référent doit envoyer un mail au Pôle National Support afin de faire valider ou non cette base de connaissance.<br>Si la KB est validée alors le statut de celle-ci évoluera en "Validée". (Ces statuts sont uniquement modifiés par le Pôle National Support).</p>
+        <div class="step-body">
+          <p class="step-desc">Une KB rédigée n'est pas immédiatement accessible à tous les techniciens. Elle doit obligatoirement passer par une étape de validation par le <strong>Pôle National Support (PNS)</strong> avant d'être considérée comme référence officielle.</p>
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-bullet">1</div>
+              <div class="substep-content">
+                <div class="substep-title">Envoyer un mail de soumission au PNS</div>
+                <div class="substep-desc">Le technicien référent envoie un mail au Pôle National Support en indiquant le numéro et l'intitulé de la KB soumise. La KB passe alors en statut <code>Soumise</code> dans Matrix42.</div>
+                <span class="substep-tag">Statut : Soumise</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">2</div>
+              <div class="substep-content">
+                <div class="substep-title">Révision technique par le PNS</div>
+                <div class="substep-desc">Le PNS vérifie l'exactitude technique de la procédure, sa conformité aux standards de sécurité VNF et la clarté de la rédaction. Il peut demander des corrections avant validation.</div>
+                <span class="substep-tag">Révision PNS</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">3</div>
+              <div class="substep-content">
+                <div class="substep-title">Passage en statut Validée</div>
+                <div class="substep-desc">Si la KB est conforme, le PNS modifie le statut en <code>Validée</code> dans Matrix42. Ce statut ne peut être attribué que par le PNS — les techniciens n'ont pas les droits d'édition pour cette action.</div>
+                <span class="substep-tag">Statut : Validée</span>
+              </div>
+            </div>
+          </div>
+          <div class="step-note warn"><span>⚠️</span> Seul le Pôle National Support possède les droits pour passer une KB en statut <code>Validée</code>. Toute tentative de contournement de ce processus constitue un Hors Process.</div>
+        </div>
       </div>
 
+      <!-- ÉTAPE 4 -->
       <div class="step">
-        <div class="step-header">
+        <div class="step-header-row">
           <div class="step-number">4</div>
-          <h3>Communication aux techniciens</h3>
+          <h3>Communication et application obligatoire</h3>
         </div>
-        <p>Lorsqu'une KB est validée, l'information doit être transmise à tous les techniciens pour prise en compte et mise en application.<br>Si un ticket concernant un incident ou une demande similaire n'applique pas la KB, le Pôle National Support se réserve le droit de déclarer un Hors Process sur le ticket.</p>
+        <div class="step-body">
+          <p class="step-desc">Une KB validée devient immédiatement la procédure de référence pour le type d'incident ou de demande qu'elle traite. Son application est obligatoire pour tous les techniciens du helpdesk.</p>
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-bullet">1</div>
+              <div class="substep-content">
+                <div class="substep-title">Diffusion aux équipes</div>
+                <div class="substep-desc">L'information est transmise par le responsable d'équipe à tous les techniciens, généralement via un mail ou lors du point d'équipe hebdomadaire. Chaque technicien est réputé avoir pris connaissance de la KB.</div>
+                <span class="substep-tag">Communication interne</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">2</div>
+              <div class="substep-content">
+                <div class="substep-title">Application lors des tickets similaires</div>
+                <div class="substep-desc">Dès qu'un ticket correspond au cas décrit dans une KB validée, le technicien doit appliquer la procédure et indiquer dans le journal du ticket le numéro de la KB utilisée.</div>
+                <span class="substep-tag">Référence KB dans le journal</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">3</div>
+              <div class="substep-content">
+                <div class="substep-title">Risque de Hors Process</div>
+                <div class="substep-desc">Si lors d'un audit qualité le PNS constate qu'un ticket a été traité sans respecter une KB validée applicable, il peut déclarer le ticket en <strong>Hors Process</strong>. Ce statut dégrade les indicateurs de performance de l'équipe.</div>
+                <span class="substep-tag">Audit qualité</span>
+              </div>
+            </div>
+          </div>
+          <div class="step-note danger"><span>🚫</span> Le non-respect d'une KB validée est sanctionné par un <strong>Hors Process</strong>, qui impacte directement les KPIs du contrat Econocom / VNF.</div>
+        </div>
       </div>
 
     </div>
 
-  </section>
+    <!-- BONNES PRATIQUES -->
+    <h2>Bonnes pratiques de rédaction</h2>
+    <p style="margin-bottom:18px">La qualité d'une KB dépend autant du fond que de la forme. Voici les règles à respecter pour maximiser les chances de validation par le PNS.</p>
+    <div class="pratiques-grid">
+      <div class="pratique-card do">
+        <div class="pratique-title do">✅ À faire</div>
+        <div class="pratique-list">
+          <div class="pratique-item">Utiliser le template officiel VNF sans le modifier</div>
+          <div class="pratique-item">Numéroter chaque étape et rédiger à l'infinitif</div>
+          <div class="pratique-item">Inclure des captures d'écran annotées pour les étapes visuelles</div>
+          <div class="pratique-item">Tester la procédure avant de la soumettre</div>
+          <div class="pratique-item">Indiquer précisément l'environnement concerné (OS, version logiciel)</div>
+          <div class="pratique-item">Reprendre les messages d'erreur exacts dans le symptôme</div>
+        </div>
+      </div>
+      <div class="pratique-card dont">
+        <div class="pratique-title dont">❌ À éviter</div>
+        <div class="pratique-list">
+          <div class="pratique-item">Soumettre une KB non testée en production</div>
+          <div class="pratique-item">Utiliser un langage trop technique incompréhensible pour un N1 junior</div>
+          <div class="pratique-item">Copier-coller une KB existante sans l'adapter au contexte VNF</div>
+          <div class="pratique-item">Omettre les prérequis nécessaires (droits admin, accès réseau…)</div>
+          <div class="pratique-item">Appliquer une KB en statut Brouillon ou Soumise</div>
+          <div class="pratique-item">Ne pas mentionner la KB utilisée dans le journal du ticket</div>
+        </div>
+      </div>
+    </div>
 
-  <footer>
-    Marius DUYCK — Econocom / VNF — Mission Rédaction KB
-  </footer>
+  </main>
 
-  <!-- LIGHTBOX -->
+  <footer>Marius DUYCK — Econocom / VNF — Mission Rédaction KB · BTS SIO SISR</footer>
+
+  <a class="back-btn" id="back-btn" href="#" title="Retour au site principal">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Retour
+  </a>
+
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" id="lb-close">✕</button>
     <img id="lb-img" src="" alt="">
@@ -317,24 +417,19 @@
     const lightbox = document.getElementById('lightbox');
     const lbImg = document.getElementById('lb-img');
     const lbClose = document.getElementById('lb-close');
-
     document.querySelectorAll('.step-image').forEach(img => {
-      img.addEventListener('click', () => {
-        lbImg.src = img.src;
-        lbImg.alt = img.alt;
-        lightbox.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      });
+      img.addEventListener('click', () => { lbImg.src = img.src; lbImg.alt = img.alt; lightbox.classList.add('open'); document.body.style.overflow = 'hidden'; });
     });
-
-    function closeLightbox() {
-      lightbox.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
+    function closeLightbox() { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
     lbClose.addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    const backBtn = document.getElementById('back-btn');
+    backBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      history.back();
+    });
   </script>
 
 </body>
