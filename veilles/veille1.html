@@ -4,112 +4,166 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Veille : Cybersécurité & Télémétrie F1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-    
     :root {
-      --accent: #0284c7;
-      --accent-light: #38bdf8;
-      --accent-soft: #e0f2fe;
-      --text-primary: #0f172a;
-      --text-secondary: #334155;
-      --bg-base: #f0f6ff;
-      --border-card: rgba(226, 232, 240, 0.8);
-      --radius: 16px;
-      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --blue:#0ea5e9;--blue-dark:#0284c7;--blue-pale:#e0f2fe;--blue-soft:#f0f9ff;
+      --ink:#0a1628;--ink-light:#334155;--muted:#64748b;--border:rgba(14,165,233,0.15);
+      --bg:#f8fbff;--shadow-sm:0 2px 10px rgba(14,165,233,0.08);--shadow-md:0 8px 30px rgba(14,165,233,0.12);
+      --r-sm:8px;--r-md:14px;--r-lg:22px;--font:'DM Sans',sans-serif;--mono:'JetBrains Mono',monospace;
+      --green:#10b981;--orange:#f59e0b;--red:#ef4444;--purple:#8b5cf6;
     }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font);background:var(--bg);color:var(--ink-light);line-height:1.7;font-size:16px}
+    a{text-decoration:none;color:inherit}
+    strong{color:var(--ink)}
+    code{font-family:var(--mono);font-size:0.87em;background:var(--blue-pale);color:var(--blue-dark);padding:2px 7px;border-radius:5px}
+    ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--blue);border-radius:10px}
 
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg-base); color: var(--text-secondary); line-height: 1.7; }
+    /* HEADER */
+    header{position:relative;overflow:hidden;background:linear-gradient(135deg,#0c4a6e 0%,#0284c7 45%,#38bdf8 100%);color:white;padding:70px 40px 60px;box-shadow:0 4px 30px rgba(2,100,180,0.25)}
+    header::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 90% 50%,rgba(255,255,255,0.07),transparent),radial-gradient(ellipse 40% 60% at 10% 20%,rgba(255,255,255,0.05),transparent)}
+    .header-grid{position:relative;z-index:1;max-width:1050px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:32px}
+    .header-icon{width:72px;height:72px;background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.25);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:32px;flex-shrink:0;backdrop-filter:blur(4px)}
+    .header-text{display:flex;flex-direction:column;align-items:center}
+    .header-eyebrow{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.85);font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:50px;margin-bottom:12px}
+    .header-eyebrow::before{content:"";width:6px;height:6px;background:#7dd3fc;border-radius:50%;flex-shrink:0}
+    header h1{font-size:2.2rem;font-weight:700;letter-spacing:-0.03em;line-height:1.15;margin-bottom:10px;text-align:center}
+    header p{font-size:0.97rem;color:rgba(255,255,255,0.72);margin:0}
+    .header-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:18px}
+    .header-pill{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.88);font-size:0.78rem;font-weight:500;padding:5px 12px;border-radius:50px}
+    .header-pill span{color:#7dd3fc;font-size:0.9rem}
 
-    header {
-      background: linear-gradient(135deg, #0284c7, #38bdf8, #0ea5e9);
-      color: white; text-align: center; padding: 80px 20px;
-      box-shadow: 0 4px 20px rgba(2, 132, 199, 0.2);
-    }
-    header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
-    header p { font-size: 1rem; opacity: 0.9; }
+    /* MAIN */
+    main{max-width:1050px;margin:0 auto;padding:55px 25px 80px}
+    h2{font-size:1.55rem;font-weight:700;color:var(--ink);margin:52px 0 22px;display:flex;align-items:center;gap:14px;letter-spacing:-0.02em}
+    h2:first-child{margin-top:0}
+    h2::before{content:"";width:4px;height:26px;background:linear-gradient(to bottom,var(--blue),var(--blue-pale));border-radius:3px;flex-shrink:0}
+    h3{font-size:1rem;font-weight:700;color:var(--blue-dark);margin:22px 0 12px}
+    p{color:var(--ink-light);margin-bottom:10px;font-size:0.97rem}
+    ul{padding-left:20px}
+    ul li{margin-bottom:6px;font-size:0.95rem;color:var(--ink-light)}
 
-    section { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+    /* TOC */
+    .toc{background:white;border-radius:var(--r-lg);padding:24px 28px;margin-bottom:36px;box-shadow:var(--shadow-sm);border:1px solid var(--border)}
+    .toc h3{color:var(--ink);font-size:0.95rem;border-bottom:1px solid var(--blue-pale);padding-bottom:8px;margin-bottom:14px;margin-top:0}
+    .toc-list{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0}
+    .toc-list a{color:var(--blue-dark);background:var(--blue-soft);border:1px solid var(--border);padding:6px 14px;border-radius:50px;font-size:0.82rem;font-weight:600;transition:all 0.2s}
+    .toc-list a:hover{background:var(--blue);color:white;border-color:var(--blue)}
 
-    .toc { background: white; border-radius: var(--radius); padding: 25px; margin-bottom: 30px; border: 1px solid var(--border-card); box-shadow: var(--shadow); }
-    .toc h3 { font-size: 1.1rem; margin-bottom: 15px; color: var(--text-primary); border-left: 4px solid var(--accent); padding-left: 10px; }
-    .toc-list { display: flex; flex-wrap: wrap; gap: 12px; list-style: none; }
-    .toc-list a { text-decoration: none; color: var(--accent); background: var(--accent-soft); padding: 8px 18px; border-radius: 20px; font-size: 0.9rem; font-weight: 500; transition: 0.3s; }
-    .toc-list a:hover { background: var(--accent); color: white; }
+    /* STATS */
+    .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:40px}
+    .stat-box{background:white;border-radius:var(--r-lg);padding:24px 20px;text-align:center;border:1px solid var(--border);box-shadow:var(--shadow-sm);transition:0.3s}
+    .stat-box:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+    .stat-box .number{display:block;font-size:2rem;font-weight:700;color:var(--blue);font-family:var(--mono);line-height:1.2;margin-bottom:6px}
+    .stat-box .label{font-size:0.75rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.08em}
 
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 40px; }
-    .stat-box { background: white; padding: 25px; border-radius: var(--radius); text-align: center; border: 1px solid var(--border-card); box-shadow: var(--shadow); }
-    .stat-box .number { display: block; font-size: 2.2rem; font-weight: 700; color: var(--accent); }
-    .stat-box .label { font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+    /* SECTION CARD */
+    .section-card{background:white;border-radius:var(--r-lg);padding:32px 36px;margin-bottom:24px;box-shadow:var(--shadow-sm);border:1px solid var(--border);transition:box-shadow 0.3s}
+    .section-card:hover{box-shadow:var(--shadow-md)}
 
-    .section-card { background: white; border-radius: var(--radius); padding: 40px; margin-bottom: 30px; box-shadow: var(--shadow); border: 1px solid var(--border-card); }
-    h2 { font-size: 1.8rem; color: var(--text-primary); margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }
-    h2::before { content: ""; width: 6px; height: 35px; background: var(--accent); border-radius: 3px; }
-    h3 { color: var(--accent); margin: 20px 0 12px; font-size: 1.15rem; border-bottom: 1px solid var(--accent-soft); padding-bottom: 5px; }
+    /* TECH DETAIL */
+    .tech-detail{background:var(--blue-soft);border-left:4px solid var(--border);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:14px 18px;margin:14px 0;font-size:0.93rem;color:var(--ink-light)}
+    .tech-detail.highlight{border-left-color:var(--blue);background:var(--blue-pale);color:#075985}
+    .tech-detail.success{border-left-color:var(--green);background:#f0fdf4;color:#065f46}
 
-    .dual-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin: 20px 0; }
-    .dual-card { padding: 25px; border-radius: var(--radius); border: 1px solid var(--border-card); }
-    .dual-card.blue { background: #f8fafc; border-top: 4px solid var(--accent); }
-    .dual-card.warn { background: #fffbeb; border-top: 4px solid #f59e0b; }
-    .dual-card h4 { font-size: 1rem; color: var(--text-primary); margin-bottom: 10px; }
+    /* BADGE */
+    .badge{background:var(--blue);color:white;padding:2px 10px;border-radius:50px;font-size:0.72rem;font-weight:600;margin-left:6px;vertical-align:middle;font-family:var(--mono)}
+    .badge.orange{background:var(--orange)}
 
-    .tech-detail { background: #f1f5f9; padding: 18px; border-radius: 12px; margin: 12px 0; font-size: 0.95rem; border-left: 4px solid #cbd5e1; }
-    .tech-detail.highlight { border-left-color: var(--accent); background: var(--accent-soft); }
-    .tech-detail.success { border-left-color: #22c55e; background: #f0fdf4; }
+    /* TEAM CARD */
+    .team-card{background:white;border:1px solid var(--border);border-radius:var(--r-lg);padding:20px 24px;margin:14px 0;box-shadow:var(--shadow-sm);border-left:4px solid var(--blue);transition:all 0.3s}
+    .team-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+    .team-card h4{font-size:0.97rem;color:var(--ink);margin-bottom:8px;font-weight:700}
 
-    .badge { background: var(--accent); color: white; padding: 3px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 600; margin-left: 8px; vertical-align: middle; }
-    .badge.orange { background: #f59e0b; }
+    /* DUAL GRID */
+    .dual-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;margin:16px 0}
+    .dual-card{padding:22px;border-radius:var(--r-md);border:1px solid var(--border)}
+    .dual-card.blue{background:var(--blue-soft);border-top:3px solid var(--blue)}
+    .dual-card.warn{background:#fff7ed;border-top:3px solid var(--orange)}
+    .dual-card h4{font-size:0.93rem;font-weight:700;color:var(--ink);margin-bottom:10px}
 
-    .team-card { background: white; border: 1px solid var(--border-card); border-radius: var(--radius); padding: 22px; margin: 15px 0; box-shadow: var(--shadow); border-left: 5px solid var(--accent); }
-    .team-card h4 { font-size: 1.05rem; color: var(--text-primary); margin-bottom: 8px; }
-    .team-card ul { padding-left: 18px; margin-top: 6px; }
-    .team-card ul li { margin-bottom: 5px; font-size: 0.93rem; }
+    /* DATA FLOW */
+    .data-flow{background:linear-gradient(135deg,var(--blue-soft),var(--blue-pale));border-radius:var(--r-md);padding:22px;margin:16px 0;border:1px solid var(--border)}
+    .data-flow strong{color:var(--ink)}
+    .flow-steps{display:flex;align-items:center;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:14px}
+    .flow-step{background:var(--blue);color:white;padding:8px 14px;border-radius:var(--r-sm);font-size:0.78rem;font-weight:600;text-align:center;font-family:var(--mono)}
+    .flow-arrow{color:var(--blue);font-size:1.1rem;font-weight:700;opacity:0.6}
 
-    .timeline { position: relative; padding-left: 25px; margin: 15px 0; }
-    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: var(--accent-soft); }
-    .timeline-item { position: relative; margin-bottom: 18px; font-size: 0.93rem; }
-    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
-    .timeline-item strong { color: var(--text-primary); }
+    /* ATTACK GRID */
+    .attack-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:16px 0}
+    .attack-item{background:#fef2f2;border-radius:var(--r-md);padding:16px 18px;border-left:4px solid var(--red)}
+    .attack-item h5{color:#dc2626;font-size:0.9rem;margin-bottom:6px;font-weight:700}
+    .attack-item p{font-size:0.86rem;margin:0;color:var(--ink-light)}
 
-    .attack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 15px 0; }
-    .attack-item { background: #fff1f2; border-radius: 12px; padding: 18px; border-left: 4px solid #ef4444; }
-    .attack-item h5 { color: #dc2626; font-size: 0.95rem; margin-bottom: 6px; }
-    .attack-item p { font-size: 0.88rem; margin: 0; }
+    /* TIMELINE */
+    .timeline{position:relative;padding-left:24px;margin:16px 0}
+    .timeline::before{content:"";position:absolute;left:5px;top:0;bottom:0;width:2px;background:var(--blue-pale)}
+    .timeline-item{position:relative;margin-bottom:18px;font-size:0.93rem;color:var(--ink-light)}
+    .timeline-item::before{content:"";position:absolute;left:-21px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--blue);flex-shrink:0}
+    .timeline-item strong{color:var(--ink)}
 
-    .data-flow { background: linear-gradient(135deg, #f8fafc, #e0f2fe); border-radius: var(--radius); padding: 25px; margin: 15px 0; border: 1px solid var(--border-card); }
-    .flow-steps { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 15px; }
-    .flow-step { background: var(--accent); color: white; padding: 10px 16px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; text-align: center; }
-    .flow-arrow { font-size: 1.2rem; color: var(--accent); font-weight: 700; }
+    /* TABLE */
+    .table-wrapper{overflow-x:auto;border-radius:var(--r-md);border:1px solid var(--border);box-shadow:var(--shadow-sm)}
+    table{width:100%;border-collapse:collapse;font-size:0.91rem}
+    thead tr{background:var(--blue-soft)}
+    thead th{padding:13px 16px;text-align:left;font-weight:700;color:var(--ink);border-bottom:2px solid var(--border);white-space:nowrap}
+    tbody tr{border-bottom:1px solid var(--border);transition:background 0.15s}
+    tbody tr:hover{background:var(--blue-soft)}
+    tbody tr:last-child{border-bottom:none}
+    tbody td{padding:12px 16px;color:var(--ink-light)}
+    tbody td b{color:var(--ink)}
 
-    footer { background: white; text-align: center; padding: 35px; color: #64748b; border-top: 1px solid var(--border-card); }
-    p { margin-bottom: 10px; }
-    ul li { margin-bottom: 5px; }
+    /* BACK BUTTON */
+    .back-btn{position:fixed;bottom:28px;right:28px;z-index:1000;display:inline-flex;align-items:center;gap:8px;background:white;color:var(--blue-dark);font-family:var(--font);font-size:0.88rem;font-weight:600;padding:11px 18px;border-radius:50px;border:1.5px solid var(--border);box-shadow:0 4px 20px rgba(14,165,233,0.18);cursor:pointer;transition:all 0.22s;text-decoration:none}
+    .back-btn:hover{background:var(--blue);color:white;border-color:var(--blue);box-shadow:0 6px 24px rgba(14,165,233,0.35);transform:translateY(-2px)}
+    .back-btn svg{width:16px;height:16px;flex-shrink:0}
+
+    /* FOOTER */
+    footer{text-align:center;padding:28px;background:linear-gradient(135deg,var(--blue-pale),var(--blue-soft));color:var(--muted);border-top:1px solid var(--border);font-size:0.87rem}
+
+    @media(max-width:600px){.header-grid{flex-direction:column;align-items:center;gap:20px}.header-icon{width:56px;height:56px;font-size:26px}header h1{font-size:1.7rem}.flow-steps{flex-direction:column}.section-card{padding:22px 18px}}
   </style>
 </head>
 <body>
 
   <header>
-    <h1>🏎️ Télémétrie & Cybersécurité F1</h1>
-    <p>Veille technologique — Infrastructures réseaux et sécurité des données en Formule 1</p>
-  </header>
-
-  <section>
-
-    <div class="toc">
-      <h3>📋 Sommaire</h3>
-      <div class="toc-list">
-        <a href="#flux">1. Capteurs & Données</a>
-        <a href="#cloud">2. Cloud & Partenaires</a>
-        <a href="#reseau">3. Réseau & Protocoles</a>
-        <a href="#cyber">4. Cybersécurité</a>
-        <a href="#incidents">5. Incidents Réels</a>
-        <a href="#ia">6. IA & Futur</a>
-        <a href="#synthese">7. Synthèse SISR</a>
+    <div class="header-grid">
+      <div class="header-icon">🏎️</div>
+      <div class="header-text">
+        <div class="header-eyebrow">Veille Technologique · BTS SIO SISR</div>
+        <h1>Télémétrie & Cybersécurité F1</h1>
+        <p>Infrastructures réseaux et sécurité des données en Formule 1</p>
+        <div class="header-pills">
+          <div class="header-pill"><span>📡</span> Télémétrie</div>
+          <div class="header-pill"><span>🛡️</span> Cybersécurité</div>
+          <div class="header-pill"><span>☁️</span> Cloud</div>
+          <div class="header-pill"><span>🔒</span> Zero Trust</div>
+        </div>
       </div>
     </div>
+  </header>
 
+  <main>
+
+    <!-- TOC -->
+    <div class="toc">
+      <h3>📋 Sommaire</h3>
+      <ul class="toc-list">
+        <li><a href="#flux">1. Capteurs & Données</a></li>
+        <li><a href="#cloud">2. Cloud & Partenaires</a></li>
+        <li><a href="#reseau">3. Réseau & Protocoles</a></li>
+        <li><a href="#cyber">4. Cybersécurité</a></li>
+        <li><a href="#incidents">5. Incidents Réels</a></li>
+        <li><a href="#ia">6. IA & Futur</a></li>
+        <li><a href="#synthese">7. Synthèse SISR</a></li>
+      </ul>
+    </div>
+
+    <!-- STATS -->
     <div class="stats-grid">
       <div class="stat-box"><span class="number">300+</span><span class="label">Capteurs par voiture</span></div>
       <div class="stat-box"><span class="number">1,1 M</span><span class="label">Points de données / sec</span></div>
@@ -122,12 +176,12 @@
       <h2>1. Capteurs & Écosystème Data</h2>
       <p>Une monoplace F1 est un réseau local mobile : 300+ capteurs mesurent en permanence les températures moteur, pressions de freinage, état des pneus, accélérations et charges aérodynamiques. Ces signaux analogiques sont convertis en numérique et acheminés vers l'ECU central.</p>
 
-      <div class="tech-detail">
+      <div class="tech-detail highlight">
         <strong>Bus CAN (Controller Area Network) :</strong> protocole de communication interne reliant tous les calculateurs de la voiture sans ordinateur central. Très résistant aux interférences électromagnétiques et vibrations (jusqu'à 50g). Les données convergent vers l'<strong>ECU McLaren Applied TAG-320</strong>, imposé par la FIA à toutes les écuries depuis 2008 pour des raisons d'équité sportive.
       </div>
 
       <div class="data-flow">
-        <strong style="color: var(--text-primary);">🔄 Flux de la donnée en course :</strong>
+        <strong>🔄 Flux de la donnée en course :</strong>
         <div class="flow-steps">
           <div class="flow-step">300+ Capteurs</div>
           <div class="flow-arrow">→</div>
@@ -149,7 +203,7 @@
       <h2>2. Cloud Computing & Partenaires Réels</h2>
       <p>Chaque écurie s'appuie sur un partenaire cloud pour traiter des milliards de simulations. Le Budget Cap F1 (140 M$) rend le modèle pay-as-you-go indispensable : activer 1 000 serveurs une heure coûte autant que 1 serveur 1 000 heures.</p>
 
-      <div class="team-card" style="border-left-color: #1c1b1b;">
+      <div class="team-card" style="border-left-color:#1c1b1b">
         <h4>⚪ Red Bull Racing — Oracle Cloud Infrastructure (OCI) <span class="badge">2021–2026+</span></h4>
         <ul>
           <li>Jusqu'à <strong>4 milliards de simulations Monte Carlo</strong> par Grand Prix.</li>
@@ -158,7 +212,7 @@
         </ul>
       </div>
 
-      <div class="team-card" style="border-left-color: #dc0000;">
+      <div class="team-card" style="border-left-color:#dc0000">
         <h4>🔴 Ferrari — Amazon Web Services (AWS) <span class="badge orange">Partenariat officiel</span></h4>
         <ul>
           <li>Simulations CFD sur instances EC2 c5n avec <strong>1 150 cœurs en parallèle</strong>.</li>
@@ -166,7 +220,7 @@
         </ul>
       </div>
 
-      <div class="team-card" style="border-left-color: #00d2be;">
+      <div class="team-card" style="border-left-color:#00d2be">
         <h4>🩵 Mercedes-AMG F1 — HPE (Hewlett Packard Enterprise)</h4>
         <ul>
           <li>Supercalculateurs Cray pour les simulations CFD aérodynamiques.</li>
@@ -236,7 +290,6 @@
     <!-- SECTION 5 -->
     <div class="section-card" id="incidents">
       <h2>5. Incidents Cyber Réels en F1</h2>
-
       <div class="timeline">
         <div class="timeline-item">
           <strong>2007 — Spygate McLaren / Ferrari</strong><br>
@@ -284,34 +337,44 @@
     <!-- SECTION 7 -->
     <div class="section-card" id="synthese">
       <h2>7. Synthèse — Liens SISR</h2>
-      <div style="overflow-x: auto;">
-        <table style="width: 100%; border-collapse: collapse; font-size: 0.93rem;">
+      <div class="table-wrapper">
+        <table>
           <thead>
-            <tr style="background: #f1f5f9; text-align: left;">
-              <th style="padding: 13px; border-bottom: 2px solid var(--accent-soft);">Concept SISR</th>
-              <th style="padding: 13px; border-bottom: 2px solid var(--accent-soft);">Application F1</th>
-              <th style="padding: 13px; border-bottom: 2px solid var(--accent-soft);">Exemple concret</th>
+            <tr>
+              <th>Concept SISR</th>
+              <th>Application F1</th>
+              <th>Exemple concret</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td style="padding:13px;border-bottom:1px solid #eee;"><b>Haute Disponibilité</b></td><td style="padding:13px;border-bottom:1px solid #eee;">Fibre MPLS + VSAT + 4G/5G failover</td><td style="padding:13px;border-bottom:1px solid #eee;">Suzuka → Milton Keynes &lt; 150 ms</td></tr>
-            <tr><td style="padding:13px;border-bottom:1px solid #eee;"><b>Segmentation réseau</b></td><td style="padding:13px;border-bottom:1px solid #eee;">VLANs isolés Télémétrie / VIP / Public</td><td style="padding:13px;border-bottom:1px solid #eee;">Zero Trust micro-segmentation paddock</td></tr>
-            <tr><td style="padding:13px;border-bottom:1px solid #eee;"><b>Cloud Computing</b></td><td style="padding:13px;border-bottom:1px solid #eee;">OCI (Red Bull), AWS (Ferrari, F1), HPE (Mercedes)</td><td style="padding:13px;border-bottom:1px solid #eee;">4 Mrd simulations OCI / Grand Prix</td></tr>
-            <tr><td style="padding:13px;border-bottom:1px solid #eee;"><b>Edge Computing</b></td><td style="padding:13px;border-bottom:1px solid #eee;">Serveurs embarqués dans les garages</td><td style="padding:13px;border-bottom:1px solid #eee;">Latence &lt; 50 ms pour décisions en bord de piste</td></tr>
-            <tr><td style="padding:13px;border-bottom:1px solid #eee;"><b>Roaming Wi-Fi</b></td><td style="padding:13px;border-bottom:1px solid #eee;">802.11r, handover entre bornes</td><td style="padding:13px;border-bottom:1px solid #eee;">Basculement &lt; 50 ms à 320 km/h</td></tr>
-            <tr><td style="padding:13px;border-bottom:1px solid #eee;"><b>Cybersécurité Zero Trust</b></td><td style="padding:13px;border-bottom:1px solid #eee;">MFA, SIEM, moindre privilège</td><td style="padding:13px;border-bottom:1px solid #eee;">Post-incidents Williams 2021, FIA 2022</td></tr>
-            <tr><td style="padding:13px;"><b>Protocole industriel</b></td><td style="padding:13px;">Bus CAN communication interne</td><td style="padding:13px;">ECU McLaren Applied TAG-320 standardisé FIA</td></tr>
+            <tr><td><b>Haute Disponibilité</b></td><td>Fibre MPLS + VSAT + 4G/5G failover</td><td>Suzuka → Milton Keynes &lt; 150 ms</td></tr>
+            <tr><td><b>Segmentation réseau</b></td><td>VLANs isolés Télémétrie / VIP / Public</td><td>Zero Trust micro-segmentation paddock</td></tr>
+            <tr><td><b>Cloud Computing</b></td><td>OCI (Red Bull), AWS (Ferrari, F1), HPE (Mercedes)</td><td>4 Mrd simulations OCI / Grand Prix</td></tr>
+            <tr><td><b>Edge Computing</b></td><td>Serveurs embarqués dans les garages</td><td>Latence &lt; 50 ms pour décisions en bord de piste</td></tr>
+            <tr><td><b>Roaming Wi-Fi</b></td><td>802.11r, handover entre bornes</td><td>Basculement &lt; 50 ms à 320 km/h</td></tr>
+            <tr><td><b>Cybersécurité Zero Trust</b></td><td>MFA, SIEM, moindre privilège</td><td>Post-incidents Williams 2021, FIA 2022</td></tr>
+            <tr><td><b>Protocole industriel</b></td><td>Bus CAN communication interne</td><td>ECU McLaren Applied TAG-320 standardisé FIA</td></tr>
           </tbody>
         </table>
       </div>
     </div>
 
-  </section>
+  </main>
 
-  <footer>
-    <p>Marius DUYCK — Portfolio BTS SIO SISR</p>
-    <p style="font-size: 0.8rem; margin-top: 8px;">Veille Technologique : Télémétrie F1 & Cybersécurité — 2025/2026</p>
-  </footer>
+  <footer>Marius DUYCK — Portfolio BTS SIO SISR · Veille Technologique Télémétrie F1 & Cybersécurité — 2025/2026</footer>
+
+  <a class="back-btn" id="back-btn" href="#" title="Retour au site principal">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Retour
+  </a>
+
+  <script>
+    const backBtn = document.getElementById('back-btn');
+    backBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      history.back();
+    });
+  </script>
 
 </body>
 </html>
