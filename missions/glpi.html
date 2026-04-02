@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GLPI — Helpdesk & Accès Distants</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue:#0ea5e9;--blue-dark:#0284c7;--blue-pale:#e0f2fe;--blue-soft:#f0f9ff;
+      --ink:#0a1628;--ink-light:#334155;--muted:#64748b;--border:rgba(14,165,233,0.15);
+      --bg:#f8fbff;--shadow-sm:0 2px 10px rgba(14,165,233,0.08);--shadow-md:0 8px 30px rgba(14,165,233,0.12);
+      --r-sm:8px;--r-md:14px;--r-lg:22px;--font:'DM Sans',sans-serif;--mono:'JetBrains Mono',monospace;
+      --green:#10b981;--orange:#f59e0b;--red:#ef4444;--purple:#8b5cf6;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font);background:var(--bg);color:var(--ink-light);line-height:1.7;font-size:16px}
+    a{text-decoration:none;color:inherit}
+    strong{color:var(--ink)}
+    code{font-family:var(--mono);font-size:0.87em;background:var(--blue-pale);color:var(--blue-dark);padding:2px 7px;border-radius:5px}
+    ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--blue);border-radius:10px}
+
+    header{position:relative;overflow:hidden;background:linear-gradient(135deg,#0c4a6e 0%,#0284c7 45%,#38bdf8 100%);color:white;padding:70px 40px 60px;box-shadow:0 4px 30px rgba(2,100,180,0.25)}
+    header::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 90% 50%,rgba(255,255,255,0.07),transparent),radial-gradient(ellipse 40% 60% at 10% 20%,rgba(255,255,255,0.05),transparent)}
+    .header-grid{position:relative;z-index:1;max-width:1050px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:32px}
+    .header-icon{width:72px;height:72px;background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.25);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:32px;flex-shrink:0;backdrop-filter:blur(4px)}
+    .header-text{display:flex;flex-direction:column;align-items:center}
+    .header-eyebrow{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.85);font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:50px;margin-bottom:12px}
+    .header-eyebrow::before{content:"";width:6px;height:6px;background:#7dd3fc;border-radius:50%;flex-shrink:0}
+    header h1{font-size:2.2rem;font-weight:700;letter-spacing:-0.03em;line-height:1.15;margin-bottom:10px;text-align:center}
+    header p{font-size:0.97rem;color:rgba(255,255,255,0.72);margin:0;text-align:center}
+    .header-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:18px}
+    .header-pill{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.88);font-size:0.78rem;font-weight:500;padding:5px 12px;border-radius:50px}
+    .header-pill span{color:#7dd3fc;font-size:0.9rem}
+
+    main{max-width:1050px;margin:0 auto;padding:55px 25px 80px}
+    h2{font-size:1.55rem;font-weight:700;color:var(--ink);margin:52px 0 22px;display:flex;align-items:center;gap:14px;letter-spacing:-0.02em}
+    h2:first-child{margin-top:0}
+    h2::before{content:"";width:4px;height:26px;background:linear-gradient(to bottom,var(--blue),var(--blue-pale));border-radius:3px;flex-shrink:0}
+    h3{font-size:1rem;font-weight:700;color:var(--blue-dark);margin:0}
+    p{color:var(--ink-light);margin-bottom:10px;font-size:0.97rem}
+
+    .info-card{background:white;border-radius:var(--r-lg);padding:28px 32px;margin-bottom:28px;box-shadow:var(--shadow-sm);border:1px solid var(--border)}
+    .info-card>h3{color:var(--ink);font-size:1.1rem;border-bottom:1px solid var(--blue-pale);padding-bottom:10px;margin-bottom:14px}
+    .info-card p{text-align:left;margin:0}
+    .competences-box{background:var(--blue-soft);border:1px solid var(--border);border-radius:var(--r-md);padding:16px 20px;margin-top:18px}
+    .competences-box>h3{color:var(--blue-dark);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px}
+    .competences-list{display:flex;flex-direction:column;gap:8px}
+    .competence-content{display:flex;align-items:center;gap:12px;background:white;border-radius:var(--r-sm);padding:10px 14px;border:1px solid var(--border);font-size:0.93rem;color:var(--ink-light)}
+    .badge{background:var(--blue);color:white;font-weight:600;font-size:0.75rem;padding:3px 11px;border-radius:50px;white-space:nowrap;flex-shrink:0}
+
+    .highlight{background:var(--blue-pale);border-left:4px solid var(--blue);padding:13px 18px;border-radius:0 var(--r-sm) var(--r-sm) 0;margin:0 0 28px;color:#075985;font-size:0.92rem;font-weight:500}
+    .highlight.warn{background:#fff7ed;border-left-color:var(--orange);color:#92400e}
+    .highlight.info{background:#eff6ff;border-left-color:var(--blue);color:#1e40af}
+    .highlight.wip{background:#fdf4ff;border-left-color:var(--purple);color:#5b21b6}
+
+    .overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:28px}
+    .overview-card{background:white;border:1px solid var(--border);border-radius:var(--r-md);padding:18px 16px;text-align:center;transition:0.25s;box-shadow:var(--shadow-sm)}
+    .overview-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+    .overview-card-icon{font-size:1.8rem;margin-bottom:8px}
+    .overview-card-title{font-weight:700;font-size:0.85rem;color:var(--ink);margin-bottom:4px}
+    .overview-card-desc{font-size:0.76rem;color:var(--muted);line-height:1.5}
+    .overview-card.wip{opacity:0.65;border-style:dashed}
+
+    .steps-wrapper{display:flex;flex-direction:column;gap:18px;margin-bottom:10px}
+    .step{background:white;border-radius:var(--r-lg);border:1px solid var(--border);border-left:4px solid var(--blue);box-shadow:var(--shadow-sm);overflow:hidden;transition:all 0.3s}
+    .step:hover{box-shadow:var(--shadow-md)}
+    .step.wip{border-left-color:var(--purple);opacity:0.78}
+    .step-header-row{display:flex;align-items:center;gap:14px;padding:24px 26px 0}
+    .step-number{background:var(--blue);color:white;font-weight:700;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.85rem;flex-shrink:0;box-shadow:0 3px 10px rgba(14,165,233,0.3)}
+    .step-number.wip{background:var(--purple)}
+    .step-body{padding:0 26px 24px}
+    .step-desc{color:var(--ink-light);font-size:0.97rem;margin:12px 0 16px}
+    .step-image{max-width:70%;height:auto;border-radius:var(--r-md);margin:16px auto 0;display:block;border:1px solid var(--border);box-shadow:var(--shadow-sm);cursor:zoom-in;transition:opacity 0.2s}
+    .step-image:hover{opacity:0.88}
+    .step-image.wide{max-width:92%}
+
+        /* PDF */
+    .pdf-container{margin-top:16px;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-sm)}
+    .pdf-label{background:var(--blue-soft);border-bottom:1px solid var(--border);padding:8px 14px;font-size:0.8rem;font-weight:600;color:var(--blue-dark);display:flex;align-items:center;gap:6px}
+    .pdf-embed{width:100%;height:480px;display:block}
+
+    .substeps{display:flex;flex-direction:column;gap:10px;margin:14px 0 6px}
+    .substep{display:flex;gap:14px;align-items:flex-start;background:var(--blue-soft);border:1px solid var(--border);border-radius:var(--r-md);padding:13px 16px}
+    .substep-bullet{width:26px;height:26px;border-radius:50%;background:white;border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;color:var(--blue);flex-shrink:0;margin-top:1px}
+    .substep-content{flex:1}
+    .substep-title{font-weight:600;font-size:0.93rem;color:var(--ink);margin-bottom:3px}
+    .substep-desc{font-size:0.88rem;color:var(--muted);margin:0}
+    .substep-tag{display:inline-flex;align-items:center;gap:4px;background:white;border:1px solid var(--border);color:var(--blue-dark);font-size:0.73rem;font-weight:600;padding:2px 9px;border-radius:50px;margin-top:5px;font-family:var(--mono)}
+
+    .stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin:16px 0}
+    .stat-box{background:var(--blue-soft);border:1px solid var(--border);border-radius:var(--r-md);padding:14px;text-align:center}
+    .stat-value{font-size:1.7rem;font-weight:700;color:var(--blue-dark);line-height:1;font-family:var(--mono)}
+    .stat-label{font-size:0.73rem;color:var(--muted);margin-top:4px}
+
+    .log-box{background:#0a1628;border-radius:var(--r-md);padding:16px 20px;margin:16px 0;overflow-x:auto}
+    .log-line{font-family:var(--mono);font-size:0.78rem;line-height:1.9}
+    .log-date{color:#64748b}
+    .log-info{color:#38bdf8}
+    .log-msg{color:#7dd3fc}
+    .log-highlight{color:#fbbf24}
+
+    .wip-badge{display:inline-flex;align-items:center;gap:6px;background:#fdf4ff;border:1px solid #d8b4fe;color:#7c3aed;font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:50px;margin-left:10px;vertical-align:middle}
+
+    .back-btn{position:fixed;bottom:28px;right:28px;z-index:1000;display:inline-flex;align-items:center;gap:8px;background:white;color:var(--blue-dark);font-family:var(--font);font-size:0.88rem;font-weight:600;padding:11px 18px;border-radius:50px;border:1.5px solid var(--border);box-shadow:0 4px 20px rgba(14,165,233,0.18);cursor:pointer;transition:all 0.22s;text-decoration:none}
+    .back-btn:hover{background:var(--blue);color:white;border-color:var(--blue);box-shadow:0 6px 24px rgba(14,165,233,0.35);transform:translateY(-2px)}
+    .back-btn svg{width:16px;height:16px;flex-shrink:0}
+
+    .lightbox{display:none;position:fixed;inset:0;background:rgba(10,22,40,0.85);backdrop-filter:blur(6px);z-index:9999;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out}
+    .lightbox.open{display:flex}
+    .lightbox img{max-width:90vw;max-height:88vh;border-radius:var(--r-lg);box-shadow:0 25px 80px rgba(0,0,0,0.5);cursor:default;animation:lbIn 0.25s cubic-bezier(0.16,1,0.3,1)}
+    @keyframes lbIn{from{opacity:0;transform:scale(0.92)}to{opacity:1;transform:scale(1)}}
+    .lightbox-close{position:absolute;top:1.25rem;right:1.5rem;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);color:white;font-size:1.1rem;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.2s}
+    .lightbox-close:hover{background:rgba(255,255,255,0.3)}
+
+    footer{text-align:center;padding:28px;background:linear-gradient(135deg,var(--blue-pale),var(--blue-soft));color:var(--muted);border-top:1px solid var(--border);font-size:0.87rem}
+
+    @media(max-width:600px){
+      .header-grid{flex-direction:column;align-items:center;gap:20px}
+      header h1{font-size:1.7rem}
+      .step-image,.step-image.wide{max-width:100%}
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-grid">
+      <div class="header-icon">🎫</div>
+      <div class="header-text">
+        <div class="header-eyebrow">Mission 05 · BTS SIO SISR</div>
+        <h1>GLPI — Helpdesk & Accès Distants</h1>
+        <p>Authentification 2FA TOTP sur SNS Stormshield, déploiement GLPI 11.8.6, agent d'inventaire — gc-cicar.es</p>
+        <div class="header-pills">
+          <div class="header-pill"><span>🖥</span> GLPI 11.8.6</div>
+          <div class="header-pill"><span>🔐</span> TOTP / 2FA SNS</div>
+          <div class="header-pill"><span>🌐</span> gc-cicar.es</div>
+          <div class="header-pill"><span>📦</span> GLPI Agent 1.15</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <h2>Contexte</h2>
+    <div class="info-card">
+      <h3>Objectif</h3>
+      <p>Mettre en place les accès distants de l'administrateur, configurer l'authentification à double facteur (<strong>2FA TOTP</strong>) sur le pare-feu <strong>Stormshield SNS</strong>, gérer les flux réseau, déployer la plateforme <strong>GLPI</strong> avec l'agent d'inventaire, tester les remontées d'équipements et les tickets d'incidents, puis rédiger une procédure utilisateur.</p>
+      <p style="margin-top:8px"><code>Domaine : gc-cicar.es · GLPI : 192.168.57.25 · SNS : 192.168.53.254</code></p>
+      <div class="competences-box">
+        <h3>🎯 Compétences E4</h3>
+        <div class="competences-list">
+          <div class="competence-content"><span class="badge">B2.1</span><span>Administrer les systèmes informatiques</span></div>
+          <div class="competence-content"><span class="badge">B2.3</span><span>Exploiter et maintenir les équipements réseau</span></div>
+          <div class="competence-content"><span class="badge">B3.3</span><span>Sécuriser les équipements et les usages des utilisateurs</span></div>
+          <div class="competence-content"><span class="badge">B4.1</span><span>Mettre en place et exploiter des outils de gestion de parc</span></div>
+        </div>
+      </div>
+    </div>
+
+    <h2>Vue d'ensemble</h2>
+    <div class="overview-grid">
+      <div class="overview-card">
+        <div class="overview-card-icon">🔐</div>
+        <div class="overview-card-title">2FA TOTP sur SNS</div>
+        <div class="overview-card-desc">LDAP + TOTP via Microsoft Authenticator — portail captif et interface admin</div>
+      </div>
+      <div class="overview-card">
+        <div class="overview-card-icon">🔑</div>
+        <div class="overview-card-title">Accès distants</div>
+        <div class="overview-card-desc">MobaXterm, SSH, interface web SNS et GLPI</div>
+      </div>
+      <div class="overview-card">
+        <div class="overview-card-icon">🛡</div>
+        <div class="overview-card-title">Gestion des flux</div>
+        <div class="overview-card-desc">Règles de filtrage sur le pare-feu Stormshield SNS</div>
+      </div>
+      <div class="overview-card">
+        <div class="overview-card-icon">🎫</div>
+        <div class="overview-card-title">GLPI 11.8.6</div>
+        <div class="overview-card-desc">Installation complète sur 192.168.57.25 + base glpi_npt</div>
+      </div>
+      <div class="overview-card">
+        <div class="overview-card-icon">📦</div>
+        <div class="overview-card-title">GLPI Agent 1.15</div>
+        <div class="overview-card-desc">Remontée d'inventaire confirmée dans les logs</div>
+      </div>
+      <div class="overview-card wip">
+        <div class="overview-card-icon">📄</div>
+        <div class="overview-card-title">Procédure utilisateur</div>
+        <div class="overview-card-desc">En cours de rédaction</div>
+      </div>
+    </div>
+
+    <!-- =========== 2FA =========== -->
+    <h2>Authentification 2FA sur le SNS Stormshield</h2>
+
+    <div class="steps-wrapper">
+
+      <div class="step">
+        <div class="step-header-row">
+          <div class="step-number">1</div>
+          <h3>Configuration de l'annuaire LDAP et de la politique d'authentification</h3>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Liaison du pare-feu SNS à l'annuaire <strong>Active Directory</strong> du domaine <code>gc-cicar.es</code> pour centraliser l'authentification, puis création de la politique d'authentification associée.</p>
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-bullet">1</div>
+              <div class="substep-content">
+                <div class="substep-title">Ajouter l'annuaire LDAP</div>
+                <div class="substep-desc">Configuration → Utilisateurs → Configuration des annuaires → Ajouter — nom de domaine : <code>gc-cicar.es</code></div>
+                <span class="substep-tag">Annuaires (5 maximum)</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">2</div>
+              <div class="substep-content">
+                <div class="substep-title">Paramètres de connexion LDAP</div>
+                <div class="substep-desc">Serveur : <code>SRV-AD-GC</code> — Port : <code>ldap</code> — Base DN : <code>dc=gc-cicar,dc=es</code> — Identifiant : <code>cn=Administrateur,cn=users</code></div>
+                <span class="substep-tag">LDAP / Active Directory</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">3</div>
+              <div class="substep-content">
+                <div class="substep-title">Politique d'authentification</div>
+                <div class="substep-desc">Nouvelle règle → Source : <code>Administrateur@gc-cicar.es / LAN</code> — Méthode : LDAP — Action : Autoriser — Méthode par défaut : LDAP</div>
+                <span class="substep-tag">Politique d'authentification</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">4</div>
+              <div class="substep-content">
+                <div class="substep-title">Portail captif — Interface LAN</div>
+                <div class="substep-desc">Portail captif → Correspondance : Interface LAN / Profil Internal — Méthode : Annuaire LDAP (gc-cicar.es) — Durée max : 4h</div>
+                <span class="substep-tag">Portail captif / LAN</span>
+              </div>
+            </div>
+          </div>
+          <img src="images_missions/ldap.png" class="step-image" alt="Configuration LDAP SNS">
+          <img src="images_missions/politique_auth.png" class="step-image" alt="Configuration LDAP SNS">
+          <img src="images_missions/portail_captif.png" class="step-image" alt="Configuration LDAP SNS">
+          <img src="images_missions/profil_portail.png" class="step-image" alt="Configuration LDAP SNS">
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header-row">
+          <div class="step-number">2</div>
+          <h3>Activation de la méthode TOTP (2FA SNS)</h3>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Activation et configuration de la méthode <strong>TOTP (2FA SNS)</strong> dans les méthodes disponibles du SNS, applicable au portail captif et à l'interface web d'administration.</p>
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-bullet">1</div>
+              <div class="substep-content">
+                <div class="substep-title">Activer la méthode TOTP</div>
+                <div class="substep-desc">Méthodes disponibles → Activer une méthode → <strong>TOTP (2FA SNS)</strong> — cocher : ☑ Portail captif + ☑ Interface Web d'administration</div>
+                <span class="substep-tag">TOTP (2FA SNS)</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">2</div>
+              <div class="substep-content">
+                <div class="substep-title">Paramètres des codes TOTP</div>
+                <div class="substep-desc">Émetteur : <code>Stormshield Network Security - gc-cicar</code> — Durée de vie : 30s — Taille : 6 chiffres — Algorithme : SHA1 — Codes valides avant/après : 3</div>
+                <span class="substep-tag">RFC 6238 · SHA1</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">3</div>
+              <div class="substep-content">
+                <div class="substep-title">Message d'enrôlement personnalisé</div>
+                <div class="substep-desc"><em>"Please use the Microsoft Authenticator or Google Authenticator app to scan the QR code. If there is a problem, please contact your administrator."</em></div>
+                <span class="substep-tag">Message enrôlement</span>
+              </div>
+            </div>
+          </div>
+          <img src="images_missions/totp.png" class="step-image" alt="Configuration TOTP SNS">
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header-row">
+          <div class="step-number">3</div>
+          <h3>Enrôlement TOTP via Microsoft Authenticator (Chrome)</h3>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Enrôlement du compte <code>Administrateur@gc-cicar.es</code> dans le système TOTP via l'extension <strong>Authenticator</strong> sur Chrome, en scannant le QR code affiché par le SNS.</p>
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-bullet">1</div>
+              <div class="substep-content">
+                <div class="substep-title">Installer l'extension Authenticator</div>
+                <div class="substep-desc">Chrome Web Store → extension "Authenticator" de <code>authenticator.cc</code> — 8 000 000 utilisateurs — déjà installée : bouton "Supprimer de Chrome"</div>
+                <span class="substep-tag">Chrome Web Store</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">2</div>
+              <div class="substep-content">
+                <div class="substep-title">Accéder au portail d'authentification SNS</div>
+                <div class="substep-desc">Naviguer sur <code>https://192.168.53.254/auth/</code> → saisir <code>Administrateur@gc-cicar.es</code> + mot de passe → durée : 4 heures → OK</div>
+                <span class="substep-tag">https://192.168.53.254/auth/</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">3</div>
+              <div class="substep-content">
+                <div class="substep-title">Page d'enrôlement TOTP — Scanner le QR code</div>
+                <div class="substep-desc">La page affiche un QR code → ouvrir l'extension Authenticator → "Scanner le code Q" → confirmation : <strong>"192.168.53.254 indique : Administrateur@gc-cicar.es a été ajouté."</strong></div>
+                <span class="substep-tag">Enrôlement TOTP</span>
+              </div>
+            </div>
+          </div>
+          <img src="images_missions/extension.png" class="step-image" alt="Extension Authenticator Chrome">
+          <img src="images_missions/scan.png" class="step-image" alt="Scan QR Code enrôlement TOTP" style="margin-top:12px">
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header-row">
+          <div class="step-number">4</div>
+          <h3>Test complet — Authentification 2FA réussie</h3>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Validation du flux complet d'authentification 2FA : l'interface SNS demande désormais le <strong>code TOTP à 6 chiffres</strong> en plus des identifiants. Test concluant sur le portail ET l'interface d'administration.</p>
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-bullet">1</div>
+              <div class="substep-content">
+                <div class="substep-title">Portail captif — Code TOTP requis</div>
+                <div class="substep-desc">Connexion sur <code>https://192.168.53.254/auth/</code> → nouveau champ "Code" apparu → code généré par l'extension (<strong>271434</strong>) → saisie → OK</div>
+                <span class="substep-tag">Code TOTP · 30 secondes</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">2</div>
+              <div class="substep-content">
+                <div class="substep-title">Authentification réussie</div>
+                <div class="substep-desc">Message : <strong>"Authentification réussie — Vous êtes connecté"</strong> — redirection automatique vers le tableau de bord SNS</div>
+                <span class="substep-tag">✓ Connexion validée</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">3</div>
+              <div class="substep-content">
+                <div class="substep-title">Interface d'administration SNS — 2FA également actif</div>
+                <div class="substep-desc">Connexion sur <code>https://192.168.53.254/admin/admin.html</code> → champ "Code 2FA" requis → code (<strong>897746</strong>) → accès accordé à la console Stormshield</div>
+                <span class="substep-tag">Interface admin SNS</span>
+              </div>
+            </div>
+          </div>
+          <img src="images_missions/test_connexion.png" class="step-image wide" alt="Connexion 2FA TOTP réussie sur SNS">
+          <img src="images_missions/auth_reussi.png" class="step-image wide" alt="Connexion 2FA TOTP réussie sur SNS">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="highlight">🔐 Le 2FA TOTP est pleinement opérationnel sur le SNS Stormshield — portail captif ET interface d'administration. Le code se renouvelle toutes les 30 secondes. Même en cas de compromission du mot de passe, l'accès reste sécurisé.</div>
+
+    <!-- =========== ACCES DISTANTS =========== -->
+    <h2>Accès distants de l'administrateur</h2>
+ 
+    <div class="steps-wrapper">
+ 
+      <div class="step">
+        <div class="step-header-row">
+          <div class="step-number">5</div>
+          <h3>MobaXterm — Configuration des sessions d'accès distants</h3>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Mise en place des accès distants administrateur via <strong>MobaXterm</strong>. Trois types de sessions ont été créés et sauvegardés : <strong>SSH</strong> vers les serveurs Linux, <strong>RDP</strong> vers les serveurs Windows, et <strong>Browser</strong> pour accéder aux interfaces web d'administration (SNS, GLPI…).</p>
+ 
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-bullet">1</div>
+              <div class="substep-content">
+                <div class="substep-title">Liste des sessions sauvegardées</div>
+                <div class="substep-desc">L'ensemble des équipements du domaine est référencé dans MobaXterm : <code>AD</code>, <code>Centreon</code>, <code>Debian HAProxy</code>, <code>Debian-GC2</code>, <code>Debian-GC3</code>, <code>Debian-Mail</code>, <code>ESX</code>, <code>SNS</code>, <code>Switch</code>, <code>TPLink Wifi</code>, <code>TrueNAS</code>, <code>Zimbra</code> — chaque session est configurée avec le bon protocole et les bons identifiants.</div>
+                <span class="substep-tag">User sessions · MobaXterm</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">2</div>
+              <div class="substep-content">
+                <div class="substep-title">Session SSH — Accès aux serveurs Linux</div>
+                <div class="substep-desc">Type : <strong>SSH</strong> — Remote host : <code>192.168.63.1</code> — Username : <code>adminlocal</code> — Port : <code>22</code> — Options : X11-Forwarding ☑, Compression ☑, SSH-browser type : SFTP protocol — Remote environment : Interactive shell</div>
+                <span class="substep-tag">SSH · Port 22</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">3</div>
+              <div class="substep-content">
+                <div class="substep-title">Session RDP — Accès aux serveurs Windows</div>
+                <div class="substep-desc">Type : <strong>RDP</strong> — Remote host : <code>192.168.53.10</code> — Username : <code>Administrateur</code> — Port : <code>3389</code> — Résolution : Fit to terminal — Redirect clipboard ☑ — Autoscale ☑ — Display settings bar ☑</div>
+                <span class="substep-tag">RDP · Port 3389</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">4</div>
+              <div class="substep-content">
+                <div class="substep-title">Session Browser — Interface web SNS</div>
+                <div class="substep-desc">Type : <strong>Browser</strong> — URL : <code>https://192.168.53.254/admin</code> — Browser engine : Google Chrome (experimental) — Display top bar ☑ — Display address bar ☑ — Permet d'accéder à la console d'administration Stormshield directement depuis MobaXterm</div>
+                <span class="substep-tag">Browser · SNS Admin</span>
+              </div>
+            </div>
+          </div>
+ 
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px">
+            <div>
+              <p style="font-size:0.78rem;color:var(--muted);text-align:center;margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em">Liste des sessions</p>
+              <img src="images_missions/liste_moba.png" style="width:30%;height:auto;border-radius:var(--r-md);border:1px solid var(--border);box-shadow:var(--shadow-sm);cursor:zoom-in;display:block" class="step-image" alt="Liste des sessions MobaXterm">
+            </div>
+            <div>
+              <p style="font-size:0.78rem;color:var(--muted);text-align:center;margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em">Session Browser — SNS</p>
+              <img src="images_missions/moba_internet.png" style="width:100%;height:auto;border-radius:var(--r-md);border:1px solid var(--border);box-shadow:var(--shadow-sm);cursor:zoom-in;display:block" class="step-image" alt="Session Browser MobaXterm — SNS Admin">
+            </div>
+            <div>
+              <p style="font-size:0.78rem;color:var(--muted);text-align:center;margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em">Session SSH</p>
+              <img src="images_missions/moba_ssh.png" style="width:100%;height:auto;border-radius:var(--r-md);border:1px solid var(--border);box-shadow:var(--shadow-sm);cursor:zoom-in;display:block" class="step-image" alt="Session SSH MobaXterm">
+            </div>
+            <div>
+              <p style="font-size:0.78rem;color:var(--muted);text-align:center;margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em">Session RDP — Windows</p>
+              <img src="images_missions/moba_windows.png" style="width:100%;height:auto;border-radius:var(--r-md);border:1px solid var(--border);box-shadow:var(--shadow-sm);cursor:zoom-in;display:block" class="step-image" alt="Session RDP MobaXterm — Windows">
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+    </div>
+ 
+    <div class="highlight">🖥 Les accès distants sont opérationnels : <strong>12 équipements</strong> référencés dans MobaXterm avec SSH, RDP et Browser selon les besoins. L'accès à l'interface d'administration SNS est accessible directement via le type Browser sans quitter MobaXterm.</div>
+    <!-- =========== GLPI INSTALLATION =========== -->
+    <h2>Installation de GLPI</h2>
+
+    <div class="steps-wrapper">
+
+      <div class="step">
+        <div class="step-header-row">
+          <div class="step-number">6</div>
+          <h3>Installation de GLPI en 6 étapes — Serveur 192.168.57.25</h3>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Installation complète de <strong>GLPI</strong> via l'assistant web. La base MariaDB <code>glpi_npt</code> était préexistante — l'assistant effectue la mise à jour de la structure vers la version <strong>11.8.6</strong>.</p>
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-bullet">0</div>
+              <div class="substep-content">
+                <div class="substep-title">Étape 0 — Vérification de compatibilité PHP</div>
+                <div class="substep-desc">Vérification de toutes les extensions PHP requises (Parser PHP, mysqli, curl, gd, intl, mbstring, zlib, bcmath, openssl, ldap, Zend OPcache…) — <strong>tous les prérequis validés ✓</strong></div>
+                <span class="substep-tag">http://192.168.57.25/glpi</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">1</div>
+              <div class="substep-content">
+                <div class="substep-title">Étape 1 — Connexion à la base de données</div>
+                <div class="substep-desc">Serveur SQL : <code>localhost</code> — Utilisateur SQL : <code>Admin</code> — Mot de passe renseigné → Continuer</div>
+                <span class="substep-tag">MariaDB / MySQL</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">2</div>
+              <div class="substep-content">
+                <div class="substep-title">Étape 2 — Sélection de la base</div>
+                <div class="substep-desc">Connexion réussie ✓ → Utiliser une base existante : <code>glpi_npt</code> → Continuer</div>
+                <span class="substep-tag">glpi_npt</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">3</div>
+              <div class="substep-content">
+                <div class="substep-title">Mise à jour vers 11.8.6 — Parfait !</div>
+                <div class="substep-desc">Mise à jour BDD 100% ✓ — Formulaires par défaut créés ✓ — Règles initialisées ✓ — Clefs de sécurité générées ✓ — Mise à jour terminée ✓</div>
+                <span class="substep-tag">v11.8.6 · Parfait !</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">6</div>
+              <div class="substep-content">
+                <div class="substep-title">Étape 6 — Installation terminée</div>
+                <div class="substep-desc">Comptes par défaut : <code>glpi/glpi</code> (admin), <code>tech/tech</code> (technicien), <code>normal/normal</code>, <code>post-only/postonly</code> — cliquer "Utiliser GLPI"</div>
+                <span class="substep-tag">Installation complète</span>
+              </div>
+            </div>
+          </div>
+          <div class="pdf-container">
+            <div class="pdf-label">📄 KBA — Réinitialisation de mot de passe</div>
+            <embed src="images_missions/install_glpi.pdf" type="application/pdf" class="pdf-embed">
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header-row">
+          <div class="step-number">7</div>
+          <h3>Première connexion et tableau de bord GLPI</h3>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Connexion initiale à GLPI sur <code>http://192.168.57.25/glpi/index.php</code> avec le compte administrateur, puis découverte du tableau de bord avec l'inventaire déjà remonté.</p>
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-bullet">1</div>
+              <div class="substep-content">
+                <div class="substep-title">Connexion admin GLPI</div>
+                <div class="substep-desc">Identifiant : <code>glpi</code> — Mot de passe : <code>glpi</code> — Source : Base interne GLPI → Se connecter</div>
+                <span class="substep-tag">http://192.168.57.25/glpi</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">2</div>
+              <div class="substep-content">
+                <div class="substep-title">Tableau de bord GLPI</div>
+                <div class="substep-desc">Accès au tableau de bord — parc, assistance, gestion, administration, configuration. Alerte de sécurité : changer les mots de passe par défaut</div>
+                <span class="substep-tag">Super-Admin · EKBS-Yacine Urbanisation</span>
+              </div>
+            </div>
+          </div>
+          <img src="images_missions/connexion_glpi.png" class="step-image" alt="Page de connexion GLPI">
+          <img src="images_missions/tableau_bord_glpi.png" class="step-image wide" alt="Tableau de bord GLPI" style="margin-top:12px">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- =========== AGENT =========== -->
+    <h2>Déploiement de l'agent GLPI et remontées d'inventaire</h2>
+
+    <div class="steps-wrapper">
+
+      <div class="step">
+        <div class="step-header-row">
+          <div class="step-number">8</div>
+          <h3>GLPI Agent 1.15 — Installation sur les postes clients</h3>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Installation du <strong>GLPI Agent 1.15</strong> sur les postes Windows. L'agent se connecte automatiquement au serveur GLPI sur <code>http://192.168.57.25/glpi/front/inventory.php</code> et remonte l'inventaire selon le planning configuré.</p>
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-bullet">1</div>
+              <div class="substep-content">
+                <div class="substep-title">Interface locale de l'agent</div>
+                <div class="substep-desc">Accès sur <code>http://127.0.0.1:62354</code> → statut : <strong>"The current status is waiting"</strong> — prochain run : Thu Apr 2 11:57:40 2026 — Tâches : Inventory, RemoteInventory</div>
+                <span class="substep-tag">GLPI Agent 1.15</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">2</div>
+              <div class="substep-content">
+                <div class="substep-title">Forcer un inventaire immédiat</div>
+                <div class="substep-desc">Depuis l'interface locale → cliquer <strong>"Force an inventory"</strong> → déclenchement immédiat de la remontée vers le serveur GLPI</div>
+                <span class="substep-tag">Force an inventory</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">3</div>
+              <div class="substep-content">
+                <div class="substep-title">Vérification dans les logs Windows</div>
+                <div class="substep-desc">Fichier log : <code>C:\Programmes\GLPI-Agent\logs\glpi-agent.log</code> — 2 Ko — modifié le 02/04/2026 11:17</div>
+                <span class="substep-tag">glpi-agent.log · 2 Ko</span>
+              </div>
+            </div>
+          </div>
+          <img src="images_missions/inventaire.png" class="step-image" alt="Interface GLPI Agent 1.15">
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header-row">
+          <div class="step-number">9</div>
+          <h3>Analyse des logs — Remontée d'inventaire confirmée</h3>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Lecture du fichier <code>glpi-agent.log</code> confirmant que les inventaires sont bien transmis et acceptés par le serveur GLPI sur <code>192.168.57.25</code>.</p>
+
+          <img src="images_missions/logs_glpi.png" class="step-image wide" alt="Logs GLPI Agent — Inventaire transmis">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="highlight">📦 Remontée d'inventaire confirmée : le poste <strong>PC-Client-GC-2026-04-02</strong> transmet ses données à <code>192.168.57.25/glpi</code>. Le tableau de bord affiche 6 ordinateurs et plus de 1 000 logiciels inventoriés.</div>
+
+    <!-- =========== TICKETS =========== -->
+    <h2>Tests des tickets d'incidents <span class="wip-badge">🔧 En cours</span></h2>
+
+    <div class="steps-wrapper">
+      <div class="step wip">
+        <div class="step-header-row">
+          <div class="step-number wip">10</div>
+          <h3>Cycle de vie complet d'un ticket helpdesk</h3>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Validation du cycle : création par un utilisateur → prise en charge technicien → résolution → clôture avec notification email.</p>
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-bullet">1</div>
+              <div class="substep-content">
+                <div class="substep-title">Créer un ticket utilisateur</div>
+                <div class="substep-desc">Connexion compte utilisateur → Assistance → Créer un ticket → titre, description, catégorie, urgence → Soumettre</div>
+                <span class="substep-tag">Portail utilisateur</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">2</div>
+              <div class="substep-content">
+                <div class="substep-title">Prise en charge technicien</div>
+                <div class="substep-desc">Compte tech → Assistance → Tickets → Assignation + statut "En cours"</div>
+                <span class="substep-tag">Interface technicien</span>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-bullet">3</div>
+              <div class="substep-content">
+                <div class="substep-title">Résolution et clôture</div>
+                <div class="substep-desc">Saisir la solution → Résolu → Clôture → notification email automatique à l'utilisateur</div>
+                <span class="substep-tag">Notification email</span>
+              </div>
+            </div>
+          </div>
+          <p style="margin-top:14px;font-size:0.88rem;color:var(--muted);font-style:italic">📸 Captures d'écran à ajouter à la fin de la mission</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========== PROCEDURE =========== -->
+    <h2>Procédure utilisateur <span class="wip-badge">🔧 En cours</span></h2>
+
+    <div class="steps-wrapper">
+      <div class="step wip">
+        <div class="step-header-row">
+          <div class="step-number wip">11</div>
+          <h3>Rédaction de la procédure helpdesk utilisateur</h3>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Rédaction d'un document de procédure illustré, à destination des utilisateurs finaux, pour créer et suivre leurs tickets d'incidents sur la plateforme GLPI.</p>
+          <p style="margin-top:8px;font-size:0.88rem;color:var(--muted);font-style:italic">📄 Procédure en cours de rédaction — sera intégrée ici à la fin de la mission.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>Marius DUYCK — Econocom / VNF — Mission GLPI Helpdesk & Accès Distants · gc-cicar.es</footer>
+
+  <a class="back-btn" id="back-btn" href="#" title="Retour au site principal">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Retour
+  </a>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lb-close">✕</button>
+    <img id="lb-img" src="" alt="">
+  </div>
+
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbClose = document.getElementById('lb-close');
+    document.querySelectorAll('.step-image').forEach(img => {
+      if (!img.src || img.src.endsWith('#')) return;
+      img.addEventListener('click', () => {
+        lbImg.src = img.src; lbImg.alt = img.alt;
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    function closeLightbox() { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
+    lbClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    const backBtn = document.getElementById('back-btn');
+    backBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      history.back();
+    });
+  </script>
+
+</body>
+</html>
